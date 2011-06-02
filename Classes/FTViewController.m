@@ -1,0 +1,645 @@
+//
+//  FTViewController.m
+//  iDeviant
+//
+//  Created by Ondrej Rafaj on 24.1.11.
+//  Copyright Fuerte Int Ltd. (http://www.fuerteint.com) 2011. All rights reserved.
+//
+
+#import "FTViewController.h"
+#import "IDItemsTableViewCell.h"
+#import "IDCategoriesTableViewCell.h"
+#import "IDAdultCheck.h"
+#import "NSString+HTML.h"
+#import "IDFavouriteItems.h"
+#import "IDImageDetailViewController.h"
+#import "IDDocumentDetailViewController.h"
+#import "IDCategoriesViewController.h"
+#import "IDJustItemsViewController.h"
+#import "FTText.h"
+
+
+// test
+#import "IDDetailTableViewController.h"
+
+
+
+@implementation FTViewController
+
+@synthesize data;
+@synthesize categoriesData;
+@synthesize isLandscape;
+@synthesize soundController;
+@synthesize itemsToDisplay;
+@synthesize isSearchBar;
+
+
+#pragma mark Positioning
+
+- (int)recalculateHeightForStatusBar:(int)height {
+	BOOL status = YES;
+	if (status) {
+		height -= 20;
+	}
+	
+	BOOL navigation = YES;
+	if ([self.navigationController.navigationBar isTranslucent]) navigation = NO;
+	else if ([self.navigationController.navigationBar isHidden]) navigation = NO;
+	if (navigation) {
+		if (isLandscape) height -= 32;
+		else height -= 44;
+	}
+	return height;
+}
+
+- (CGRect)fullScreeniPhoneFrame {
+	if (isLandscape) {
+		return CGRectMake(0, 0, 480, [self recalculateHeightForStatusBar:320]);
+	}
+	else {
+		return CGRectMake(0, 0, 320, [self recalculateHeightForStatusBar:480]);
+	}
+}
+
+- (CGRect)fullScreeniPadFormFrame {
+    return CGRectMake(0, 0, 540, 620);
+}
+
+- (CGRect)fullScreeniPadFrame {
+	if (isLandscape) {
+		return CGRectMake(0, 0, 1024, [self recalculateHeightForStatusBar:768]);
+	}
+	else {
+		return CGRectMake(0, 0, 768, [self recalculateHeightForStatusBar:1024]);
+	}
+}
+
+- (CGRect)fullScreenFrame {
+//	if ([FTSystem isTabletSize]) {
+//		return [self fullScreeniPadFrame];
+//	}
+//	else {
+		return [self fullScreeniPhoneFrame];
+//	}
+}
+
+#pragma mark Parsing
+
+- (void)refresh {
+	[self setTitle:@"refreshing"];
+	[parsedItems removeAllObjects];
+	[feedParser stopParsing];
+	[feedParser parse];
+	[table setUserInteractionEnabled:NO];
+	
+	[UIView beginAnimations:nil context:nil];
+	[table setAlpha:0.3];
+	[UIView commitAnimations];
+}
+
+- (void)enablingTableEdit:(BOOL)edit {
+	
+}
+
+- (void)toggleEditTable {
+	[table setEditing:!table.editing animated:YES];
+	[self enablingTableEdit:table.editing];
+	[self enableEditButton];
+}
+
+- (void)getDataForParams:(NSString *)params {
+	// Creating the URL
+	NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?%@", params] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	
+	// Start download / parse
+	NSURL *feedURL = [NSURL URLWithString:url];
+	feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
+	feedParser.delegate = self;
+	feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
+	feedParser.connectionType = ConnectionTypeAsynchronously;
+	[feedParser parse];
+}
+
+// rss.xml?q=boost:popular+in:photography/architecture/exterior+max_age:8h&type=deviation
+
+- (void)getDataForSearchString:(NSString *)search andCategory:(NSString *)category {
+	// Crazy check :)
+	[IDAdultCheck checkForUnlock:search];
+	
+	// Adding search string if any
+	NSString *searchString = @"";
+	if (search) searchString = [NSString stringWithFormat:@"+%@", search];
+	
+	// Adding category string if any
+	NSString *categoryString = @"";
+	if (category) if (![category isEqualToString:@""]) categoryString = [NSString stringWithFormat:@"+in:%@", category];
+	
+	// Creating the URL (special:newest)
+	NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@%@&type=deviation", categoryString, searchString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	
+	// Start download / parse
+	NSURL *feedURL = [NSURL URLWithString:url];
+	feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
+	[feedParser setDelegate:self];
+	feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
+	feedParser.connectionType = ConnectionTypeAsynchronously;
+	[feedParser parse];
+}
+
+- (void)getDataForCategory:(NSString *)category {
+	[self getDataForSearchString:nil andCategory:category];
+}
+
+- (void)getDataForSearchString:(NSString *)search {
+	[self getDataForSearchString:search andCategory:nil];
+}
+
+- (void)getData {
+	[self getDataForSearchString:nil];
+}
+
+#pragma mark View lifecycle
+
+- (void)doLayoutLocalSubviews {
+	// Layout local elements
+	[UIView beginAnimations:nil context:nil];
+	[backgroundImageView setFrame:[self fullScreenFrame]];
+	[table setFrame:[self fullScreenFrame]];
+	[UIView commitAnimations];
+}
+
+- (void)doLayoutSubviews {
+	
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+	
+	isLandscape = UIInterfaceOrientationIsLandscape([FTSystem interfaceOrientation]);
+	
+	formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateStyle:NSDateFormatterShortStyle];
+	[formatter setTimeStyle:NSDateFormatterShortStyle];
+	
+	parsedItems = [[NSMutableArray alloc] init];
+	
+	[self setData:[NSArray array]];
+	
+	[self enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg.png"]];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
+    
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	isLandscape = UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
+    [self doLayoutSubviews];
+	[self doLayoutLocalSubviews];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	isLandscape = UIInterfaceOrientationIsLandscape([FTSystem interfaceOrientation]);
+	[super viewWillAppear:animated];
+	[self doLayoutSubviews];
+	[self doLayoutLocalSubviews];
+	if (table) [table reloadData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	if (searchBarHeader) {
+		if ([searchBarHeader isFirstResponder]) {
+			[searchBarHeader resignFirstResponder];
+			[searchBarHeader setShowsCancelButton:NO animated:YES];
+		}
+	}
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
+    if ([FTSystem isTabletSize]){
+        return YES;
+    }
+	else {
+        return UIInterfaceOrientationIsLandscape(toInterfaceOrientation) || toInterfaceOrientation == UIInterfaceOrientationPortrait;
+    }
+}
+
+#pragma mark Handler for navigating backwards
+
+- (void)dismissMe:(id)sender {
+    [self goBack];
+}
+
+#pragma mark Managing view controllers
+
+- (void)dismissModalViewController {
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated {
+	[modalViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+	[super presentModalViewController:modalViewController animated:animated];
+}
+
+- (void)goBack {
+	[self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark Sound controller
+
+- (void)playSound:(NSString *)soundName {
+	[soundController playSound:soundName];
+}
+
+#pragma mark Background image
+
+- (void)enableBackgroundWithImage:(UIImage *)image {
+	if (!backgroundImageView) {
+		backgroundImageView = [[UIImageView alloc] initWithFrame:[self fullScreenFrame]];
+		[backgroundImageView setBackgroundColor:[UIColor clearColor]];
+		[self.view addSubview:backgroundImageView];
+		[self.view sendSubviewToBack:backgroundImageView];
+	}
+	[backgroundImageView setImage:image];
+}
+
+#pragma mark Settings
+
+- (void)enableTable {
+	[table setUserInteractionEnabled:YES];
+	[table reloadData];
+	
+	[UIView beginAnimations:nil context:nil];
+	[table setAlpha:1];
+	[UIView commitAnimations];
+}
+
+- (void)createTableViewWithSearchBar:(BOOL)searchBar andStyle:(UITableViewStyle)style {
+	isSearchBar = searchBar;
+	table = [[UITableView alloc] initWithFrame:[self fullScreenFrame] style:style];
+	//[table setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+	[table setDataSource:self];
+	[table setDelegate:self];
+	[table setBackgroundColor:[UIColor clearColor]];
+	[self.view addSubview:table];
+	[table reloadData];
+}
+
+- (void)createTableViewWithSearchBar:(BOOL)searchBar {
+	[self createTableViewWithSearchBar:searchBar andStyle:UITableViewStylePlain];
+}
+
+- (void)createTableView {
+	[self createTableViewWithSearchBar:NO andStyle:UITableViewStylePlain];
+}
+
+- (void)enableRefreshButton {
+	UIBarButtonItem *refresh = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
+	[self.navigationItem setRightBarButtonItem:refresh animated:YES];
+	[refresh release];
+}
+
+- (void)enableEditButton {
+	if (table.editing) {
+		UIBarButtonItem *edit = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(toggleEditTable)];
+		[self.navigationItem setRightBarButtonItem:edit animated:YES];
+		[edit release];
+	}
+	else {
+		UIBarButtonItem *edit = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(toggleEditTable)];
+		[self.navigationItem setRightBarButtonItem:edit animated:YES];
+		[edit release];
+	}
+}
+
+#pragma mark View stuff
+
+- (void)setTitle:(NSString *)newTitle {
+	[super setTitle:[FTLang get:newTitle]];
+	[FlurryAPI logEvent:[NSString stringWithFormat:@"Screen: %@", newTitle]];
+}
+
+#pragma mark Table view data source & delegate methods
+
+//- (void)setData:(NSArray *)newData {
+//	[data release];
+//	data = newData;
+//	[data retain];
+//	[table reloadData];
+//}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	if (isSearchBar) {
+		return 44;
+	}
+	else return 0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+	if (section == 0) {
+		if (isSearchBar) {
+			if (!searchBarHeader) {
+				searchBarHeader = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 44)];
+				[searchBarHeader setTintColor:[UIColor lightGrayColor]];
+				[searchBarHeader setDelegate:self];
+				[searchBarHeader setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+				[searchBarHeader setPlaceholder:[FTLang get:@"searchplaceholder"]];
+			}
+			return searchBarHeader;
+		}
+	}
+	return nil;
+}
+
+- (void)getDataFromBundlePlist:(NSString *)plist {
+	NSString *path = [[NSBundle mainBundle] pathForResource:plist ofType:@""];
+	NSArray *arr = [NSArray arrayWithContentsOfFile:path];
+	[self setData:arr];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [data count];
+}
+
+- (void)configureCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView {
+	
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView itemCellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	static NSString *CellIdentifier = @"ItemCell";
+    IDItemsTableViewCell *cell = (IDItemsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+		NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"IDItemsTableViewCell" owner:nil options:nil];
+        for (id oneObject in nib) {
+            if ([oneObject isKindOfClass:[IDItemsTableViewCell class]]) {
+                cell = (IDItemsTableViewCell *)oneObject;
+                break;
+            }
+        }
+		
+		[cell setSelectionStyle:UITableViewCellSelectionStyleGray];
+		
+		if ([data count] > 0) {
+			// Configure the cell.
+			MWFeedItem *item = [data objectAtIndex:indexPath.row];
+			if (item) {
+				// Process
+				NSString *itemTitle = item.title ? [item.title stringByConvertingHTMLToPlainText] : @"[No Title]";
+				NSString *itemSummary = item.summary ? [item.summary stringByConvertingHTMLToPlainText] : @"[No Summary]";
+				
+				// Set
+				cell.cellTitleLabel.text = itemTitle;
+				[cell.cellTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeueLTPro-LtCn" size:16]];
+				
+				NSMutableString *subtitle = [NSMutableString string];
+				if (item.date) [subtitle appendFormat:@"%@: ", [formatter stringFromDate:item.date]];
+				[subtitle appendString:itemSummary];
+				
+				[cell setDynamicDetailText:subtitle];
+				[cell.cellDetailLabel setFont:[UIFont fontWithName:@"HelveticaNeueLTPro-LtCn" size:12]];
+				
+				BOOL canAccess = YES;
+				if ([item.rating isEqualToString:@"adult"]) {
+					if (![IDAdultCheck canAccessAdultStuff]) {
+						canAccess = NO;
+						[cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-x.png"]];
+					}
+					else {
+						[cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-heart.png"]];
+					}
+				}
+				else {
+					[cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-white.png"]];
+				}
+				if (canAccess) {
+					if ([item.thumbnails count] > 0) {
+						[cell.cellImageView loadImageFromUrl:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]];
+					}
+				}
+				else {
+					[cell.cellImageView setImage:[UIImage imageNamed:@"DA_adult-lock.png"]];
+				}
+			}
+		}
+    }
+	[self configureCell:cell withIndexPath:indexPath forTableView:tableView];
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView categoryCellForRowAtIndexPath:(NSIndexPath *)indexPath withNibFile:(NSString *)nibName {
+	static NSString *CellIdentifier = @"CategoryCell";
+    IDCategoriesTableViewCell *cell = (IDCategoriesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+		NSArray *nib = [[NSBundle mainBundle] loadNibNamed:nibName owner:nil options:nil];
+        for (id oneObject in nib) {
+            if ([oneObject isKindOfClass:[IDCategoriesTableViewCell class]]) {
+                cell = (IDCategoriesTableViewCell *)oneObject;
+                break;
+            }
+        }
+		
+		//[cell.favoritesStarButton setImage:[UIImage imageNamed:@"DA_fav-off.png"] forState:UIControlStateNormal];
+		
+		[cell setSelectionStyle:UITableViewCellSelectionStyleGray];
+		[cell setBackgroundColor:[UIColor whiteColor]];
+		
+		NSDictionary *d = [categoriesData objectAtIndex:indexPath.row];
+		//NSLog(@"Cell data: %@", d);
+		
+		[cell.cellTitleLabel setText:[d objectForKey:@"name"]];
+		
+		[cell.cellTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeueLTPro-LtCn" size:19]];
+    }
+	
+	[self configureCell:cell withIndexPath:indexPath forTableView:tableView];
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView categoryCellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return [self tableView:tableView categoryCellForRowAtIndexPath:indexPath withNibFile:@"IDCategoriesTableViewCell"];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+	[self configureCell:cell withIndexPath:indexPath forTableView:tableView];
+	return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	// Show detail
+	IDDetailTableViewController *detail = [[IDDetailTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+	detail.item = (MWFeedItem *)[data objectAtIndex:indexPath.row];
+	[self.navigationController pushViewController:detail animated:YES];
+	[detail release];
+	
+	// Deselect
+	[table deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark Memory management
+
+- (void)recreateElements {
+	
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+	[self recreateElements];
+}
+
+- (void)viewDidUnload {
+    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
+    // For example: self.myOutlet = nil;
+}
+
+
+- (void)dealloc {
+	[table release];
+	[data release];
+	[categoriesData release];
+	[backgroundImageView release];
+	[formatter release];
+	[parsedItems release];
+	[itemsToDisplay release];
+	[feedParser stopParsing];
+	[feedParser release];
+	[searchBarHeader release];
+    [super dealloc];
+}
+
+#pragma mark Parsing delegate methods (MWFeedParserDelegate)
+
+- (void)feedParserDidStart:(MWFeedParser *)parser {
+	NSLog(@"Started Parsing: %@", parser.url);
+	[parsedItems removeAllObjects];
+	[table setUserInteractionEnabled:NO];
+	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+}
+
+- (void)feedParser:(MWFeedParser *)parser didParseFeedInfo:(MWFeedInfo *)info {
+	NSLog(@"Parsed Feed Info: “%@”", info.title);
+	//[self setTitle:info.title];
+	
+}
+
+- (void)feedParser:(MWFeedParser *)parser didParseFeedItem:(MWFeedItem *)item {
+	//NSLog(@"Parsed Feed Item: “%@”", item.title);
+	if (item) [parsedItems addObject:item];	
+}
+
+- (void)feedParserDidFinish:(MWFeedParser *)parser {
+	NSLog(@"Finished Parsing%@", (parser.stopped ? @" (Stopped)" : @""));
+	
+	NSArray *arr = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
+	[self setData:[parsedItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:arr]]];
+	[arr release];
+	
+	[self enableTable];
+	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+	//[self setData:nil];
+	[table reloadData];
+	
+	[self enableRefreshButton];
+}
+
+- (void)feedParser:(MWFeedParser *)parser didFailWithError:(NSError *)error {
+	NSLog(@"Finished Parsing With Error: %@", error);
+	[self setTitle:@"failed"];
+	[self setData:[NSArray array]];
+	[parsedItems removeAllObjects];
+	
+	[self enableTable];
+	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
+
+#pragma mark Search bar delegate
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+	[searchBarHeader setShowsCancelButton:YES animated:YES];
+	return YES;
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+	[searchBarHeader setShowsCancelButton:NO animated:YES];
+	[searchBarHeader resignFirstResponder];
+	[self getDataForSearchString:[searchBarHeader text] andCategory:nil];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+	[searchBarHeader setShowsCancelButton:NO animated:YES];
+	[searchBarHeader resignFirstResponder];
+}
+
+
+
+
+
+
+- (void)launchCategoryInTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath andCurrentCategoryPath:(NSString *)currentCategoryPath {
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	NSDictionary *d = [categoriesData objectAtIndex:indexPath.row];
+	if ([[d objectForKey:@"subcategories"] count] > 0) {
+		IDCategoriesViewController *c = [[IDCategoriesViewController alloc] init];
+		[c setCurrentCategory:d];
+		[c setCurrentCategoryPath:[currentCategoryPath stringByAppendingPathComponent:[d objectForKey:@"path"]]];
+		[c setTitle:[d objectForKey:@"name"]];
+		[c setCategoriesData:[d objectForKey:@"subcategories"]];
+		[self.navigationController pushViewController:c animated:YES];
+		[c release];
+	}
+	else {
+		IDJustItemsViewController *c = [[IDJustItemsViewController alloc] init];
+		[c setJustCategory:[currentCategoryPath stringByAppendingPathComponent:[d objectForKey:@"path"]]];
+		[c setTitle:[d objectForKey:@"name"]];
+		[self.navigationController pushViewController:c animated:YES];
+		[c release];
+	}
+}
+
+- (void)launchItemInTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath {
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	MWFeedItem *item = [data objectAtIndex:indexPath.row];
+	BOOL canAccess = YES;
+	if ([item.rating isEqualToString:@"adult"]) {
+		if (![IDAdultCheck canAccessAdultStuff]) canAccess = NO;
+	}
+	if (canAccess) {
+		if ([item.contents count] > 0) {
+			if (item.text) {
+				IDDocumentDetailViewController *c = [[IDDocumentDetailViewController alloc] init];
+				NSString *tempPath = [[NSBundle mainBundle] pathForResource:@"document-template" ofType:@"html"];
+				NSString *temp = [NSString stringWithContentsOfFile:tempPath encoding:NSUTF8StringEncoding error:nil];
+				NSDictionary *arr = [NSDictionary dictionaryWithObject:item.text forKey:@"{CONTENT}"];
+				NSString *text = [FTText parseCodes:arr inTemplate:temp];
+				[c setContent:text];
+				[self.navigationController pushViewController:c animated:YES];
+				[c release];
+			}
+			else {
+				IDImageDetailViewController *c = [[IDImageDetailViewController alloc] init];
+				[c setImageUrl:[[item.contents objectAtIndex:0] objectForKey:@"url"]];
+				[self.navigationController pushViewController:c animated:YES];
+				[c release];
+			}
+		}
+	}
+	else {
+		[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	}
+}
+
+
+@end
+
