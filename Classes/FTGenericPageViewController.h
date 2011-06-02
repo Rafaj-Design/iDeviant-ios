@@ -17,7 +17,7 @@
 	
 }
 
-@property (nonatomic, retain) FTDynamicContentView *contentView
+@property (nonatomic, retain) FTDynamicContentView *contentView;
 
 
 @end
