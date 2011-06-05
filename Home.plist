@@ -11,6 +11,8 @@
 		<string>DA_icon4.png</string>
 		<key>name</key>
 		<string>search</string>
+		<key>requiresConnection</key>
+		<true/>
 	</dict>
 	<dict>
 		<key>controller</key>

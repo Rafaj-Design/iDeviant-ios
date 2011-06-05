@@ -304,6 +304,14 @@
 	
 }
 
+- (void)cancelParsing {
+	parsingComplete = YES;
+	[urlConnection cancel];
+	self.urlConnection = nil;
+	self.asyncData = nil;
+	self.asyncTextEncodingName = nil;
+}
+
 // Stop parsing
 - (void)stopParsing {
 	// Only if we're parsing

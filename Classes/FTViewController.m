@@ -23,6 +23,9 @@
 #import "IDDetailTableViewController.h"
 
 
+static FTReachability *internetReachable;
+//static FTReachability *hostReachable;
+
 
 @implementation FTViewController
 
@@ -32,6 +35,8 @@
 @synthesize soundController;
 @synthesize itemsToDisplay;
 @synthesize isSearchBar;
+@synthesize internetActive;
+@synthesize hostActive;
 
 
 #pragma mark Positioning
@@ -175,6 +180,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkNetworkStatus:) name:kReachabilityChangedNotification object:nil];
+	
+	if (!internetReachable) {
+		internetReachable = [[Reachability reachabilityForInternetConnection] retain];
+	}
+	[internetReachable startNotifier];
+	
 	isLandscape = UIInterfaceOrientationIsLandscape([FTSystem interfaceOrientation]);
 	
 	formatter = [[NSDateFormatter alloc] init];
@@ -223,6 +235,37 @@
 	else {
         return UIInterfaceOrientationIsLandscape(toInterfaceOrientation) || toInterfaceOrientation == UIInterfaceOrientationPortrait;
     }
+}
+
+#pragma mark Reachability notification method
+
+- (void)checkNetworkStatus:(NSNotification *)notice {
+	NetworkStatus internetStatus = [internetReachable currentReachabilityStatus];
+	BOOL previousStatus = internetActive;
+	switch (internetStatus)
+	{
+		case NotReachable:
+		{
+			NSLog(@"The internet is down.");
+			internetActive = NO;
+			break;
+		}
+		case ReachableViaWiFi:
+		{
+			NSLog(@"The internet is working via WIFI.");
+			internetActive = YES;
+			break;
+		}
+		case ReachableViaWWAN: 
+		{
+			NSLog(@"The internet is working via WWAN.");
+			internetActive = YES;
+			break;
+		}
+	}
+	if (previousStatus != internetActive) {
+		[table reloadData];
+	}
 }
 
 #pragma mark Handler for navigating backwards
@@ -457,6 +500,9 @@
     }
 	
 	[self configureCell:cell withIndexPath:indexPath forTableView:tableView];
+	if (!internetActive) {
+		[cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-x.png"]];
+	}
     return cell;
 }
 
@@ -500,8 +546,7 @@
 }
 
 - (void)viewDidUnload {
-    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -513,7 +558,7 @@
 	[formatter release];
 	[parsedItems release];
 	[itemsToDisplay release];
-	[feedParser stopParsing];
+	[feedParser cancelParsing];
 	[feedParser release];
 	[searchBarHeader release];
     [super dealloc];

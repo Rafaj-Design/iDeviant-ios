@@ -171,6 +171,7 @@
 		4C98AF1713943CBF00F567C9 /* IDFavoriteCategoriesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C98AF1613943CBF00F567C9 /* IDFavoriteCategoriesTableViewCell.xib */; };
 		4C98AF1D1394570D00F567C9 /* IDDocumentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C98AF1C1394570D00F567C9 /* IDDocumentDetailViewController.m */; };
 		4C98AF201394E16A00F567C9 /* document-template.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C98AF1F1394E16A00F567C9 /* document-template.html */; };
+		4CC15FFB139C0F00000794C1 /* FTReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC15FFA139C0F00000794C1 /* FTReachability.m */; };
 		4CF020301392643E00ED1E47 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF020271392643E00ED1E47 /* Facebook.m */; };
 		4CF020311392643E00ED1E47 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4CF020291392643E00ED1E47 /* FBDialog.bundle */; };
 		4CF020321392643E00ED1E47 /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF0202B1392643E00ED1E47 /* FBDialog.m */; };
@@ -474,6 +475,8 @@
 		4C98AF1B1394570D00F567C9 /* IDDocumentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDDocumentDetailViewController.h; sourceTree = "<group>"; };
 		4C98AF1C1394570D00F567C9 /* IDDocumentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDDocumentDetailViewController.m; sourceTree = "<group>"; };
 		4C98AF1F1394E16A00F567C9 /* document-template.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "document-template.html"; sourceTree = "<group>"; };
+		4CC15FF9139C0F00000794C1 /* FTReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTReachability.h; sourceTree = "<group>"; };
+		4CC15FFA139C0F00000794C1 /* FTReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTReachability.m; sourceTree = "<group>"; };
 		4CF020261392643E00ED1E47 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
 		4CF020271392643E00ED1E47 /* Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Facebook.m; sourceTree = "<group>"; };
 		4CF020281392643E00ED1E47 /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBConnect.h; sourceTree = "<group>"; };
@@ -976,6 +979,7 @@
 		2B9442D41254D82200D41406 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				4CC15FF7139C0EE3000794C1 /* Networking */,
 				4CF020451392EF2900ED1E47 /* Favourites */,
 				2B15D3911381E4BA008FCA2E /* Adult stuff */,
 				2B15D3871381DE70008FCA2E /* Text */,
@@ -1486,6 +1490,15 @@
 			name = "Html templates";
 			sourceTree = "<group>";
 		};
+		4CC15FF7139C0EE3000794C1 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				4CC15FF9139C0F00000794C1 /* FTReachability.h */,
+				4CC15FFA139C0F00000794C1 /* FTReachability.m */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
 		4CF02024139263DA00ED1E47 /* Facebook SDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -1885,6 +1898,7 @@
 				4CF0204B1392EF6B00ED1E47 /* IDFavouriteItems.m in Sources */,
 				4C98AF1D1394570D00F567C9 /* IDDocumentDetailViewController.m in Sources */,
 				4C2B9F081396C5F00001B510 /* FTGenericPageViewController.m in Sources */,
+				4CC15FFB139C0F00000794C1 /* FTReachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

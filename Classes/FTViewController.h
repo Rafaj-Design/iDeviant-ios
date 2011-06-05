@@ -14,6 +14,7 @@
 #import "UIView+Layout.h"
 #import "FTLang.h"
 #import "FlurryAPI.h"
+#import "FTReachability.h"
 
 
 @interface FTViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MWFeedParserDelegate, UISearchBarDelegate> {
@@ -39,6 +40,9 @@
 	BOOL isSearchBar;
 	UISearchBar *searchBarHeader;
 	
+	BOOL internetActive;
+	BOOL hostActive;
+	
 }
 
 @property (nonatomic, retain) NSArray *data;
@@ -51,6 +55,9 @@
 @property (nonatomic, retain) NSArray *itemsToDisplay;
 
 @property (nonatomic) BOOL isSearchBar;
+
+@property (nonatomic, readonly) BOOL internetActive;
+@property (nonatomic, readonly) BOOL hostActive;
 
 
 
