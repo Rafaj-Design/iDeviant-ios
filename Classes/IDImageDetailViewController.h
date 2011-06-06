@@ -23,8 +23,6 @@
 	
 	UIActivityIndicatorView *ai;
 	
-	UILabel *message;
-	
 }
 
 @property (nonatomic, retain) FTImageZoomView *mainView;

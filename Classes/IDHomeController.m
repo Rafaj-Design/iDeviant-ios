@@ -39,6 +39,9 @@
     static NSString *CellIdentifier = @"Cell";
     
     IDHomeTableViewCell *cell = (IDHomeTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	
+	NSDictionary *d = [data objectAtIndex:indexPath.section];
+	
     if (cell == nil) {
         NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"IDHomeTableViewCell" owner:nil options:nil];
         for (id oneObject in nib) {
@@ -47,41 +50,47 @@
                 break;
             }
         }
+		[cell.textLabel setBackgroundColor:[UIColor clearColor]];
+		[cell.cellTitleLabel setText:[FTLang get:[d objectForKey:@"name"]].uppercaseString];
+		[cell.cellTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeueLTPro-LtCn" size:23]];
+		
+		[cell.cellDetailLabel setText:[FTLang get:[d objectForKey:@"description"]].uppercaseString];
+		[cell.cellDetailLabel setFont:[UIFont fontWithName:@"HelveticaNeueLTPro-LtCn" size:14]];
+		
+		[cell.detailTextLabel setBackgroundColor:[UIColor clearColor]];
+		
+		[cell setAccessoryType:UITableViewCellAccessoryNone];
+		
+		[cell.iconImageView setImage:[UIImage imageNamed:[d objectForKey:@"icon"]]];
+		//[cell.imageView setBackgroundColor:[UIColor clearColor]];
+		[cell.imageView.layer setCornerRadius:4];
+		
+		[cell setSelectionStyle:UITableViewCellSelectionStyleGray];
     }
-    
-	NSDictionary *d = [data objectAtIndex:indexPath.section];
-	[cell.textLabel setBackgroundColor:[UIColor clearColor]];
-	[cell.cellTitleLabel setText:[FTLang get:[d objectForKey:@"name"]].uppercaseString];
-	[cell.cellTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeueLTPro-LtCn" size:23]];
-	
-	[cell.cellDetailLabel setText:[FTLang get:[d objectForKey:@"description"]].uppercaseString];
-	[cell.cellDetailLabel setFont:[UIFont fontWithName:@"HelveticaNeueLTPro-LtCn" size:14]];
-	
-	[cell.detailTextLabel setBackgroundColor:[UIColor clearColor]];
-	
-	[cell setAccessoryType:UITableViewCellAccessoryNone];
-	
-	[cell.iconImageView setImage:[UIImage imageNamed:[d objectForKey:@"icon"]]];
-	//[cell.imageView setBackgroundColor:[UIColor clearColor]];
-	[cell.imageView.layer setCornerRadius:4];
-	
-	[cell setSelectionStyle:UITableViewCellSelectionStyleGray];
-	
+	NSLog(@"Data: %@", d);
 	//[cell setBackgroundColor:[UIColor colorWithPatternImage:[[UIImage imageNamed:@"bcg-cell.png"] stretchableImageWithLeftCapWidth:1 topCapHeight:27]]];
-	
+	if ([[d objectForKey:@"requiresConnection"] boolValue] && !internetActive) {
+		[cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-x.png"]];
+	}
+	else {
+		[cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-white.png"]];
+	}
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[table deselectRowAtIndexPath:indexPath animated:YES];
-	
 	NSDictionary *d = [data objectAtIndex:indexPath.section];
-	
-	UIViewController *c = (UIViewController *)[[NSClassFromString([d objectForKey:@"controller"]) alloc] init];
-	if (c) {
-		[c setTitle:[d objectForKey:@"name"]];
-		[self.navigationController pushViewController:c animated:YES];
-		[c release];
+	if ([[d objectForKey:@"requiresConnection"] boolValue] && !internetActive) {
+		[super displayMessage:@"requiresinternetconnection"];
+	}
+	else {
+		UIViewController *c = (UIViewController *)[[NSClassFromString([d objectForKey:@"controller"]) alloc] init];
+		if (c) {
+			[c setTitle:[d objectForKey:@"name"]];
+			[self.navigationController pushViewController:c animated:YES];
+			[c release];
+		}
 	}
 }
 

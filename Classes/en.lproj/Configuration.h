@@ -9,12 +9,11 @@
 
 
 // Development
-
 #define kDebug												YES
+#define kFakeData											YES
 
 
 // System configuration
-
 #define kSystemApplicationId								0
 #define kSystemApplicationAppStoreUrl						@"http://itunes.apple.com/gb/app/ideviant/id355122830?mt=8"
 
@@ -26,13 +25,11 @@
 
 
 // Tracking
-
 #define kSystemTrackingFlurryEnableTracking					YES
 #define kSystemTrackingFlurryAPICode						@"1267caee8ed3726c1683a6323e9d19d5"
 
 
 // Database configuration
-
 #define kSystemFavoritesDbName								@"kSystemFavoritesDbName"
 #define kSystemHistoryDbName								@"kSystemHistoryDbName"
 #define kSystemHomeMenuDbName								@"kSystemHomeMenuDbName"

@@ -40,8 +40,13 @@
 	BOOL isSearchBar;
 	UISearchBar *searchBarHeader;
 	
+	FTReachability *internetReachable;
 	BOOL internetActive;
-	BOOL hostActive;
+	//BOOL hostActive;
+	
+	UIBarButtonItem *refreshButton;
+	
+	UILabel *message;
 	
 }
 
@@ -57,7 +62,9 @@
 @property (nonatomic) BOOL isSearchBar;
 
 @property (nonatomic, readonly) BOOL internetActive;
-@property (nonatomic, readonly) BOOL hostActive;
+//@property (nonatomic, readonly) BOOL hostActive;
+
+@property (nonatomic, retain) UILabel *message;
 
 
 
@@ -68,6 +75,10 @@
 - (CGRect)fullScreeniPadFrame;
 
 - (CGRect)fullScreenFrame;
+
+- (CGRect)frameForMessageLabel;
+
+- (void)displayMessage:(NSString *)text;
 
 - (void)setData:(NSArray *)newData;
 

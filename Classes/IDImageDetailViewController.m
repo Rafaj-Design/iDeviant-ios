@@ -29,18 +29,6 @@
 	return r;
 }
 
-- (CGRect)frameForMessageLabel {
-	CGRect r = [super fullScreenFrame];
-	r.size.height = 16;
-	if (self.navigationController.navigationBar.alpha == 0) {
-		
-	}
-	else {
-		r.origin.y = self.navigationController.navigationBar.frame.size.height;
-	}
-	return r;
-}
-
 #pragma mark Memory management
 
 - (void)dealloc {
@@ -50,35 +38,6 @@
 	[ai release];
 	[message release];
     [super dealloc];
-}
-
-#pragma mark Messages
-
-- (void)displayMessage:(NSString *)text {
-	if ([message isHidden]) {
-		[message setAlpha:0];
-		[message setHidden:NO];
-	}
-	[message setFrame:[self frameForMessageLabel]];
-	[message setText:[FTLang get:text]];
-	
-	[UIView animateWithDuration:0.4
-					 animations:^{
-						 [message setAlpha:1];
-					 }
-					 completion:^(BOOL finished) {
-						 [UIView animateWithDuration:0.8
-											   delay:2
-											 options:UIViewAnimationOptionAllowUserInteraction
-										  animations:^{
-											  [message setAlpha:0];
-										  }
-										  completion:^(BOOL finished) {
-											  [message setHidden:YES];
-										  }
-						  ];
-					 }
-	 ];
 }
 
 #pragma mark Navigation animation
@@ -107,7 +66,7 @@
 	[UIView setAnimationDidStopSelector:@selector(finishNavigationToggle)];
 	[self.navigationController.navigationBar setAlpha:a];
 	[bottomBar setAlpha:a];
-	[message setFrame:[self frameForMessageLabel]];
+	[message setFrame:[super frameForMessageLabel]];
 	[UIView commitAnimations];
 }
 
@@ -153,15 +112,6 @@
 	[ai setHidesWhenStopped:YES];
 	[ai startAnimating];
 	[self.view addSubview:ai];
-	
-	message = [[UILabel alloc] initWithFrame:[self frameForMessageLabel]];
-	[message setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_ok_messagebg.png"]]];
-	[message setTextColor:[UIColor whiteColor]];
-	[message setText:@"Lorem ipsum dolor sit amet"];
-	[message setTextAlignment:UITextAlignmentCenter];
-	[message setFont:[UIFont boldSystemFontOfSize:10]];
-	[self.view addSubview:message];
-	[message setHidden:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -190,7 +140,6 @@
 	[mainView setFrame:[super fullScreenFrame]];
 	[bottomBar setFrame:[self frameForToolbar]];
 	[ai centerInSuperView];
-	[message setFrame:[self frameForMessageLabel]];
 	[UIView commitAnimations];
 }
 

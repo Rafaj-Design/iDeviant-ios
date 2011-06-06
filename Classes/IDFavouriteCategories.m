@@ -44,6 +44,7 @@
 	if (!is) {
 		NSMutableDictionary *insert = [[NSMutableDictionary alloc] initWithDictionary:data];
 		[insert setValue:stringPath forKey:@"fullPath"];
+		[insert setValue:[NSArray array] forKey:@"subcategories"];
 		[d setValue:insert forKey:key];
 		[insert release];
 	}

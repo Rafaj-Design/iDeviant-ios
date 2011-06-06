@@ -17,13 +17,14 @@
 #import "IDCategoriesViewController.h"
 #import "IDJustItemsViewController.h"
 #import "FTText.h"
+#import "Configuration.h"
 
 
 // test
 #import "IDDetailTableViewController.h"
 
 
-static FTReachability *internetReachable;
+//static FTReachability *internetReachable;
 //static FTReachability *hostReachable;
 
 
@@ -36,7 +37,8 @@ static FTReachability *internetReachable;
 @synthesize itemsToDisplay;
 @synthesize isSearchBar;
 @synthesize internetActive;
-@synthesize hostActive;
+//@synthesize hostActive;
+@synthesize message;
 
 
 #pragma mark Positioning
@@ -88,6 +90,54 @@ static FTReachability *internetReachable;
 //	}
 }
 
+- (CGRect)frameForMessageLabel {
+	CGRect r = [self fullScreenFrame];
+	r.size.height = 16;
+	if (self.navigationController.navigationBar.alpha == 0) {
+		
+	}
+	else {
+		//r.origin.y = self.navigationController.navigationBar.frame.size.height;
+	}
+	return r;
+}
+
+#pragma mark Messages
+
+- (void)displayMessage:(NSString *)text {
+	if ([message isHidden]) {
+		[message setAlpha:0];
+		[message setHidden:NO];
+	}
+	else return;
+	[message setFrame:[self frameForMessageLabel]];
+	[message setText:[FTLang get:text]];
+	
+	[UIView animateWithDuration:0.4
+					 animations:^{
+						 [message setAlpha:1];
+						 if (table) {
+							 [table positionAtY:[message height]];
+						 }
+					 }
+					 completion:^(BOOL finished) {
+						 [UIView animateWithDuration:0.8
+											   delay:2
+											 options:UIViewAnimationOptionAllowUserInteraction
+										  animations:^{
+											  if (table) {
+												  [table positionAtY:0];
+											  }
+											  [message setAlpha:0];
+										  }
+										  completion:^(BOOL finished) {
+											  [message setHidden:YES];
+										  }
+						  ];
+					 }
+	 ];
+}
+
 #pragma mark Parsing
 
 - (void)refresh {
@@ -113,42 +163,75 @@ static FTReachability *internetReachable;
 }
 
 - (void)getDataForParams:(NSString *)params {
-	// Creating the URL
-	NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?%@", params] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-	
-	// Start download / parse
-	NSURL *feedURL = [NSURL URLWithString:url];
-	feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
-	feedParser.delegate = self;
-	feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
-	feedParser.connectionType = ConnectionTypeAsynchronously;
-	[feedParser parse];
+	if (internetActive) {
+		// Creating the URL
+		NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?%@", params] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+		
+		// Start download / parse
+		NSURL *feedURL = [NSURL URLWithString:url];
+		feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
+		feedParser.delegate = self;
+		feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
+		feedParser.connectionType = ConnectionTypeAsynchronously;
+		[feedParser parse];
+	}
+	else {
+		if (kFakeData) {
+			[feedParser release];
+			NSString *path = [[NSBundle mainBundle] pathForResource:@"fake-data" ofType:@"xml"];
+			//NSFileManager *fm = [[NSFileManager alloc] init];
+			NSURL *feedURL = [[NSURL alloc] initFileURLWithPath:path];
+			feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
+			[feedURL release];
+			[feedParser setDelegate:self];
+			feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
+			feedParser.connectionType = ConnectionTypeAsynchronously;
+			[feedParser parse];
+		}
+	}
 }
 
 // rss.xml?q=boost:popular+in:photography/architecture/exterior+max_age:8h&type=deviation
 
 - (void)getDataForSearchString:(NSString *)search andCategory:(NSString *)category {
-	// Crazy check :)
-	[IDAdultCheck checkForUnlock:search];
-	
-	// Adding search string if any
-	NSString *searchString = @"";
-	if (search) searchString = [NSString stringWithFormat:@"+%@", search];
-	
-	// Adding category string if any
-	NSString *categoryString = @"";
-	if (category) if (![category isEqualToString:@""]) categoryString = [NSString stringWithFormat:@"+in:%@", category];
-	
-	// Creating the URL (special:newest)
-	NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@%@&type=deviation", categoryString, searchString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-	
-	// Start download / parse
-	NSURL *feedURL = [NSURL URLWithString:url];
-	feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
-	[feedParser setDelegate:self];
-	feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
-	feedParser.connectionType = ConnectionTypeAsynchronously;
-	[feedParser parse];
+	if (internetActive) {
+		// Crazy check :)
+		[IDAdultCheck checkForUnlock:search];
+		
+		// Adding search string if any
+		NSString *searchString = @"";
+		if (search) searchString = [NSString stringWithFormat:@"+%@", search];
+		
+		// Adding category string if any
+		NSString *categoryString = @"";
+		if (category) if (![category isEqualToString:@""]) categoryString = [NSString stringWithFormat:@"+in:%@", category];
+		
+		// Creating the URL (special:newest)
+		NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@%@&type=deviation", categoryString, searchString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+		
+		// Start download / parse
+		NSURL *feedURL = [NSURL URLWithString:url];
+		[feedParser release];
+		feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
+		[feedParser setDelegate:self];
+		feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
+		feedParser.connectionType = ConnectionTypeAsynchronously;
+		[feedParser parse];
+	}
+	else {
+		if (kFakeData) {
+			[feedParser release];
+			NSString *path = [[NSBundle mainBundle] pathForResource:@"fake-data" ofType:@"xml"];
+			//NSFileManager *fm = [[NSFileManager alloc] init];
+			NSURL *feedURL = [[NSURL alloc] initFileURLWithPath:path];
+			feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
+			[feedURL release];
+			[feedParser setDelegate:self];
+			feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
+			feedParser.connectionType = ConnectionTypeAsynchronously;
+			[feedParser parse];
+		}
+	}
 }
 
 - (void)getDataForCategory:(NSString *)category {
@@ -163,6 +246,43 @@ static FTReachability *internetReachable;
 	[self getDataForSearchString:nil];
 }
 
+#pragma mark Reachability notification method
+
+- (void)checkNetworkStatus:(NSNotification *)notice {
+	NetworkStatus internetStatus = [internetReachable currentReachabilityStatus];
+	BOOL previousStatus = internetActive;
+	switch (internetStatus) {
+		case NotReachable: {
+			NSLog(@"The internet is down.");
+			internetActive = NO;
+			break;
+		}
+		case ReachableViaWiFi: {
+			NSLog(@"The internet is working via WIFI.");
+			internetActive = YES;
+			break;
+		}
+		case ReachableViaWWAN: {
+			NSLog(@"The internet is working via WWAN.");
+			internetActive = YES;
+			break;
+		}
+	}
+	if (previousStatus != internetActive) {
+		[table reloadData];
+		if (internetActive) {
+			if (refreshButton) {
+				[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
+			}
+		}
+		else {
+			if (refreshButton) {
+				[self.navigationItem setRightBarButtonItem:nil animated:YES];
+			}
+		}
+	}
+}
+
 #pragma mark View lifecycle
 
 - (void)doLayoutLocalSubviews {
@@ -170,6 +290,7 @@ static FTReachability *internetReachable;
 	[UIView beginAnimations:nil context:nil];
 	[backgroundImageView setFrame:[self fullScreenFrame]];
 	[table setFrame:[self fullScreenFrame]];
+	[message setFrame:[self frameForMessageLabel]];
 	[UIView commitAnimations];
 }
 
@@ -183,7 +304,7 @@ static FTReachability *internetReachable;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkNetworkStatus:) name:kReachabilityChangedNotification object:nil];
 	
 	if (!internetReachable) {
-		internetReachable = [[Reachability reachabilityForInternetConnection] retain];
+		internetReachable = [[Reachability reachabilityWithHostName:@"www.apple.com"] retain];
 	}
 	[internetReachable startNotifier];
 	
@@ -198,6 +319,15 @@ static FTReachability *internetReachable;
 	[self setData:[NSArray array]];
 	
 	[self enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg.png"]];
+	
+	message = [[UILabel alloc] initWithFrame:[self frameForMessageLabel]];
+	[message setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_ok_messagebg.png"]]];
+	[message setTextColor:[UIColor whiteColor]];
+	[message setText:@"Lorem ipsum dolor sit amet"];
+	[message setTextAlignment:UITextAlignmentCenter];
+	[message setFont:[UIFont boldSystemFontOfSize:10]];
+	[self.view addSubview:message];
+	[message setHidden:YES];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
@@ -228,6 +358,11 @@ static FTReachability *internetReachable;
 	}
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	[self checkNetworkStatus:nil];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
     if ([FTSystem isTabletSize]){
         return YES;
@@ -235,37 +370,6 @@ static FTReachability *internetReachable;
 	else {
         return UIInterfaceOrientationIsLandscape(toInterfaceOrientation) || toInterfaceOrientation == UIInterfaceOrientationPortrait;
     }
-}
-
-#pragma mark Reachability notification method
-
-- (void)checkNetworkStatus:(NSNotification *)notice {
-	NetworkStatus internetStatus = [internetReachable currentReachabilityStatus];
-	BOOL previousStatus = internetActive;
-	switch (internetStatus)
-	{
-		case NotReachable:
-		{
-			NSLog(@"The internet is down.");
-			internetActive = NO;
-			break;
-		}
-		case ReachableViaWiFi:
-		{
-			NSLog(@"The internet is working via WIFI.");
-			internetActive = YES;
-			break;
-		}
-		case ReachableViaWWAN: 
-		{
-			NSLog(@"The internet is working via WWAN.");
-			internetActive = YES;
-			break;
-		}
-	}
-	if (previousStatus != internetActive) {
-		[table reloadData];
-	}
 }
 
 #pragma mark Handler for navigating backwards
@@ -338,9 +442,8 @@ static FTReachability *internetReachable;
 }
 
 - (void)enableRefreshButton {
-	UIBarButtonItem *refresh = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
-	[self.navigationItem setRightBarButtonItem:refresh animated:YES];
-	[refresh release];
+	refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
+	[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
 }
 
 - (void)enableEditButton {
@@ -476,6 +579,7 @@ static FTReachability *internetReachable;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView categoryCellForRowAtIndexPath:(NSIndexPath *)indexPath withNibFile:(NSString *)nibName {
 	static NSString *CellIdentifier = @"CategoryCell";
+	NSDictionary *d = [categoriesData objectAtIndex:indexPath.row];
     IDCategoriesTableViewCell *cell = (IDCategoriesTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
 		NSArray *nib = [[NSBundle mainBundle] loadNibNamed:nibName owner:nil options:nil];
@@ -485,23 +589,17 @@ static FTReachability *internetReachable;
                 break;
             }
         }
-		
-		//[cell.favoritesStarButton setImage:[UIImage imageNamed:@"DA_fav-off.png"] forState:UIControlStateNormal];
-		
 		[cell setSelectionStyle:UITableViewCellSelectionStyleGray];
 		[cell setBackgroundColor:[UIColor whiteColor]];
-		
-		NSDictionary *d = [categoriesData objectAtIndex:indexPath.row];
-		//NSLog(@"Cell data: %@", d);
-		
-		[cell.cellTitleLabel setText:[d objectForKey:@"name"]];
-		
+		[cell.cellTitleLabel setText:[d objectForKey:@"name"]];		
 		[cell.cellTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeueLTPro-LtCn" size:19]];
     }
 	
 	[self configureCell:cell withIndexPath:indexPath forTableView:tableView];
-	if (!internetActive) {
-		[cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-x.png"]];
+	if ([[d objectForKey:@"subcategories"] count] == 0) {
+		if (!internetActive) {
+			[cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-x.png"]];
+		}
 	}
     return cell;
 }
@@ -561,6 +659,9 @@ static FTReachability *internetReachable;
 	[feedParser cancelParsing];
 	[feedParser release];
 	[searchBarHeader release];
+	[internetReachable release];
+	[refreshButton release];
+	[message release];
     [super dealloc];
 }
 
@@ -627,11 +728,6 @@ static FTReachability *internetReachable;
 	[searchBarHeader resignFirstResponder];
 }
 
-
-
-
-
-
 - (void)launchCategoryInTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath andCurrentCategoryPath:(NSString *)currentCategoryPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	NSDictionary *d = [categoriesData objectAtIndex:indexPath.row];
@@ -645,11 +741,13 @@ static FTReachability *internetReachable;
 		[c release];
 	}
 	else {
-		IDJustItemsViewController *c = [[IDJustItemsViewController alloc] init];
-		[c setJustCategory:[currentCategoryPath stringByAppendingPathComponent:[d objectForKey:@"path"]]];
-		[c setTitle:[d objectForKey:@"name"]];
-		[self.navigationController pushViewController:c animated:YES];
-		[c release];
+		if (internetActive) {
+			IDJustItemsViewController *c = [[IDJustItemsViewController alloc] init];
+			[c setJustCategory:[currentCategoryPath stringByAppendingPathComponent:[d objectForKey:@"path"]]];
+			[c setTitle:[d objectForKey:@"name"]];
+			[self.navigationController pushViewController:c animated:YES];
+			[c release];
+		}
 	}
 }
 

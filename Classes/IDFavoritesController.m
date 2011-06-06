@@ -83,17 +83,20 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	if (indexPath.section == 0) {
-		[tableView deselectRowAtIndexPath:indexPath animated:YES];
-		NSDictionary *d = [categoriesData objectAtIndex:indexPath.row];
-		
-		IDJustItemsViewController *c = [[IDJustItemsViewController alloc] init];
-		[c setJustCategory:[d objectForKey:@"fullPath"]];
-		[c setTitle:[d objectForKey:@"name"]];
-		[self.navigationController pushViewController:c animated:YES];
-		[c release];
-		
-		[table deselectRowAtIndexPath:indexPath animated:YES];
+		if (internetActive) {
+			[tableView deselectRowAtIndexPath:indexPath animated:YES];
+			NSDictionary *d = [categoriesData objectAtIndex:indexPath.row];
+			IDJustItemsViewController *c = [[IDJustItemsViewController alloc] init];
+			[c setJustCategory:[d objectForKey:@"fullPath"]];
+			[c setTitle:[d objectForKey:@"name"]];
+			[self.navigationController pushViewController:c animated:YES];
+			[c release];
+		}
+		else {
+			[super displayMessage:@"requiresinternetconnection"];
+		}
 	}
 	else {
 		MWFeedItem *item = [data objectAtIndex:indexPath.row];
@@ -111,7 +114,7 @@
 			}
 		}
 		else {
-			[tableView deselectRowAtIndexPath:indexPath animated:YES];
+			
 		}
 	}
 }

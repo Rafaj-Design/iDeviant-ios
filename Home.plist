@@ -43,6 +43,8 @@
 		<string>DA_icon1.png</string>
 		<key>name</key>
 		<string>dailydeviations</string>
+		<key>requiresConnection</key>
+		<true/>
 	</dict>
 	<dict>
 		<key>controller</key>
@@ -53,6 +55,8 @@
 		<string>DA_icon8.png</string>
 		<key>name</key>
 		<string>popular</string>
+		<key>requiresConnection</key>
+		<true/>
 	</dict>
 	<dict>
 		<key>controller</key>
@@ -63,6 +67,8 @@
 		<string>DA_icon5.png</string>
 		<key>name</key>
 		<string>login</string>
+		<key>requiresConnection</key>
+		<true/>
 	</dict>
 	<dict>
 		<key>controller</key>
