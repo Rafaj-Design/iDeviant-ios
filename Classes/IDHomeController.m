@@ -85,7 +85,7 @@
 		[super displayMessage:@"requiresinternetconnection"];
 	}
 	else {
-		UIViewController *c = (UIViewController *)[[NSClassFromString([d objectForKey:@"controller"]) alloc] init];
+		FTViewController *c = (FTViewController *)[[NSClassFromString([d objectForKey:@"controller"]) alloc] init];
 		if (c) {
 			[c setTitle:[d objectForKey:@"name"]];
 			[self.navigationController pushViewController:c animated:YES];

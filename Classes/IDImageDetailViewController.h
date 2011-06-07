@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "FTViewController.h"
-#import "FTPagesScrollView.h"
+#import "FTPageScrollView.h"
 #import "FTImageZoomView.h"
 #import "FTToolbar.h"
 
 
-@interface IDImageDetailViewController : FTViewController <UIActionSheetDelegate, FTImageZoomViewDelegate> {
+@interface IDImageDetailViewController : FTViewController <UIActionSheetDelegate, FTImageZoomViewDelegate, FTPageScrollViewDelegate> {
     
-	FTImageZoomView *mainView;
+	FTPageScrollView *mainView;
 	
 	NSString *imageUrl;
 	
@@ -23,11 +23,15 @@
 	
 	UIActivityIndicatorView *ai;
 	
+	int currentIndex;
+	
 }
 
-@property (nonatomic, retain) FTImageZoomView *mainView;
+@property (nonatomic, retain) FTPageScrollView *mainView;
 
 @property (nonatomic, retain) NSString *imageUrl;
+
+@property (nonatomic) int currentIndex;
 
 
 @end

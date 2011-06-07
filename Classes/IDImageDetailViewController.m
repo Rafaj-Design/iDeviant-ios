@@ -9,6 +9,7 @@
 #import "IDImageDetailViewController.h"
 #import "UIView+Layout.h"
 #import "iDeviantAppDelegate.h"
+#import "FTImagePage.h"
 
 
 #define kIDImageDetailViewControllerMaxAlpha				0.6f
@@ -18,6 +19,7 @@
 
 @synthesize mainView;
 @synthesize imageUrl;
+@synthesize currentIndex;
 
 
 #pragma mark Positioning
@@ -29,6 +31,11 @@
 	return r;
 }
 
+- (CGRect)getFrameForPage {
+	if (isLandscape) return CGRectMake(0, 0, 480, 300);
+	else return CGRectMake(0, 0, 320, 460);
+}
+
 #pragma mark Memory management
 
 - (void)dealloc {
@@ -38,6 +45,18 @@
 	[ai release];
 	[message release];
     [super dealloc];
+}
+
+#pragma mark Generating pages
+
+- (FTPage *)pageForIndex:(int)index {
+	NSString *path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"wallpaper"] ofType:@"jpg"];
+	UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfFile:path]];
+	if (!image) return nil;
+	FTImagePage *page = [[[FTImagePage alloc] initWithFrame:[self getFrameForPage]] autorelease];
+	[page setPageIndex:index];
+	[page.imageView setImage:image];
+	return page;
 }
 
 #pragma mark Navigation animation
@@ -86,10 +105,19 @@
 	[self.navigationItem setRightBarButtonItem:favsButton];
 	[favsButton release];
 	
-	mainView = [[FTImageZoomView alloc] initWithFrame:[super fullScreenFrame]];
+	FTPage *page = [self pageForIndex:0];
+	mainView = [[FTPageScrollView alloc] initWithFrame:[super fullScreenFrame]];
+	[mainView setBackgroundColor:[UIColor redColor]];
+	[mainView setDummyPageImage:[UIImage imageNamed:@"dummy.png"]];
+	[mainView setInitialPage:page withDelegate:self];
+	//[pageScroll setPageScrollDelegate:self];
+	[mainView setPage:page pageCount:0 animate:YES];
 	[self.view addSubview:mainView];
-	[mainView setZoomDelegate:self];
-	[mainView loadImageFromUrl:imageUrl];
+	
+	
+	
+//	[mainView setZoomDelegate:self];
+//	[mainView loadImageFromUrl:imageUrl];
 	
 	UITapGestureRecognizer *doubletap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewTwice:)];
 	[doubletap setNumberOfTapsRequired:2];
@@ -173,8 +201,8 @@
 }
 
 - (void)saveCurrentImageToGallery {
-	UIImage *myImage = mainView.imageView.image;
-	UIImageWriteToSavedPhotosAlbum(myImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+//	UIImage *myImage = mainView.imageView.image;
+//	UIImageWriteToSavedPhotosAlbum(myImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 	[FlurryAPI logEvent:@"Func: Saving image"];
 }
 
@@ -208,6 +236,29 @@
 	else if (buttonIndex == 2) {
 		[self emailCurrentImage];
 	}
+}
+
+#pragma mark Page scroll view delegate & data source methods
+
+- (FTPage *)leftPageForPageScrollView:(FTPageScrollView *)scrollView withTouchCount:(NSInteger)touchCount {
+	return [self pageForIndex:(currentIndex - 1)];
+}
+
+- (FTPage *)rightPageForPageScrollView:(FTPageScrollView *)scrollView withTouchCount:(NSInteger)touchCount {
+	return [self pageForIndex:(currentIndex + 1)];
+}
+
+- (void)pageScrollView:(FTPageScrollView *)scrollView offsetDidChange:(CGPoint)offset {
+	
+}
+
+- (void)dummyScrollInPageScrollViewDidFinish:(FTPageScrollView *)scrollView {
+	NSLog(@"dummyScrollInPageScrollViewDidFinish:");
+}
+
+- (void)pageScrollView:(FTPageScrollView *)scrollView didMakePageCurrent:(FTPage *)page {
+	currentIndex = page.pageIndex;
+	NSLog(@"didMakePageCurrent: %d", currentIndex);
 }
 
 

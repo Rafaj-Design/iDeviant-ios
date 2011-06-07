@@ -156,6 +156,12 @@
 		2BF7D5A3137ED3C1002E9B74 /* DA_topbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF7D591137ED3C1002E9B74 /* DA_topbar@2x.png */; };
 		2BF7D5A6137F09D9002E9B74 /* IDHomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BF7D5A5137F09D9002E9B74 /* IDHomeTableViewCell.xib */; };
 		2BF7D5A8137F1433002E9B74 /* HelveticaNeueLTPro-LtCn.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2BF7D5A7137F1433002E9B74 /* HelveticaNeueLTPro-LtCn.otf */; };
+		4C20129E139E369300E16CD3 /* UIScrollView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C20129D139E369300E16CD3 /* UIScrollView+Layout.m */; };
+		4C2012AD139E36F600E16CD3 /* FTDummyPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2012A2139E36F600E16CD3 /* FTDummyPage.m */; };
+		4C2012AE139E36F600E16CD3 /* FTImagePage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2012A4139E36F600E16CD3 /* FTImagePage.m */; };
+		4C2012AF139E36F600E16CD3 /* FTPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2012A6139E36F600E16CD3 /* FTPage.m */; };
+		4C2012B0139E36F600E16CD3 /* FTPageLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2012A9139E36F600E16CD3 /* FTPageLocation.m */; };
+		4C2012B1139E36F600E16CD3 /* FTPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2012AB139E36F600E16CD3 /* FTPageScrollView.m */; };
 		4C22364B1391673700453A44 /* IDJustItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2236491391673700453A44 /* IDJustItemsViewController.m */; };
 		4C2236551391874100453A44 /* DA_bg-search.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C22364D139186F000453A44 /* DA_bg-search.png */; };
 		4C2236561391874100453A44 /* DA_bg-search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C22364E139186FC00453A44 /* DA_bg-search@2x.png */; };
@@ -456,6 +462,20 @@
 		2BF7D5A5137F09D9002E9B74 /* IDHomeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IDHomeTableViewCell.xib; sourceTree = "<group>"; };
 		2BF7D5A7137F1433002E9B74 /* HelveticaNeueLTPro-LtCn.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "HelveticaNeueLTPro-LtCn.otf"; path = "_orig/HelveticaNeueLTPro-LtCn.otf"; sourceTree = "<group>"; };
 		2BF7D5A9137F16F2002E9B74 /* FTLang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLang.h; sourceTree = "<group>"; };
+		4C20129C139E369300E16CD3 /* UIScrollView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Layout.h"; sourceTree = "<group>"; };
+		4C20129D139E369300E16CD3 /* UIScrollView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+Layout.m"; sourceTree = "<group>"; };
+		4C2012A1139E36F600E16CD3 /* FTDummyPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDummyPage.h; sourceTree = "<group>"; };
+		4C2012A2139E36F600E16CD3 /* FTDummyPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDummyPage.m; sourceTree = "<group>"; };
+		4C2012A3139E36F600E16CD3 /* FTImagePage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTImagePage.h; sourceTree = "<group>"; };
+		4C2012A4139E36F600E16CD3 /* FTImagePage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTImagePage.m; sourceTree = "<group>"; };
+		4C2012A5139E36F600E16CD3 /* FTPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPage.h; sourceTree = "<group>"; };
+		4C2012A6139E36F600E16CD3 /* FTPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPage.m; sourceTree = "<group>"; };
+		4C2012A7139E36F600E16CD3 /* FTPageDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPageDelegate.h; sourceTree = "<group>"; };
+		4C2012A8139E36F600E16CD3 /* FTPageLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPageLocation.h; sourceTree = "<group>"; };
+		4C2012A9139E36F600E16CD3 /* FTPageLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPageLocation.m; sourceTree = "<group>"; };
+		4C2012AA139E36F600E16CD3 /* FTPageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPageScrollView.h; sourceTree = "<group>"; };
+		4C2012AB139E36F600E16CD3 /* FTPageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPageScrollView.m; sourceTree = "<group>"; };
+		4C2012AC139E36F600E16CD3 /* FTPageScrollViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPageScrollViewDelegate.h; sourceTree = "<group>"; };
 		4C2236481391673700453A44 /* IDJustItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDJustItemsViewController.h; sourceTree = "<group>"; };
 		4C2236491391673700453A44 /* IDJustItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDJustItemsViewController.m; sourceTree = "<group>"; };
 		4C22364D139186F000453A44 /* DA_bg-search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DA_bg-search.png"; sourceTree = "<group>"; };
@@ -1167,6 +1187,7 @@
 		2BA761061375CBFD006B1A65 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4C2012A0139E36B500E16CD3 /* Lazy loading */,
 				2BC5E167138E492A00DB931C /* Dynamic page */,
 				4C4A7E31138D183600C8303A /* Remote info view */,
 				2B7F83171386DBE10076A588 /* Table headers */,
@@ -1431,6 +1452,25 @@
 			name = "Info detail";
 			sourceTree = "<group>";
 		};
+		4C2012A0139E36B500E16CD3 /* Lazy loading */ = {
+			isa = PBXGroup;
+			children = (
+				4C2012A1139E36F600E16CD3 /* FTDummyPage.h */,
+				4C2012A2139E36F600E16CD3 /* FTDummyPage.m */,
+				4C2012A3139E36F600E16CD3 /* FTImagePage.h */,
+				4C2012A4139E36F600E16CD3 /* FTImagePage.m */,
+				4C2012A5139E36F600E16CD3 /* FTPage.h */,
+				4C2012A6139E36F600E16CD3 /* FTPage.m */,
+				4C2012A7139E36F600E16CD3 /* FTPageDelegate.h */,
+				4C2012A8139E36F600E16CD3 /* FTPageLocation.h */,
+				4C2012A9139E36F600E16CD3 /* FTPageLocation.m */,
+				4C2012AA139E36F600E16CD3 /* FTPageScrollView.h */,
+				4C2012AB139E36F600E16CD3 /* FTPageScrollView.m */,
+				4C2012AC139E36F600E16CD3 /* FTPageScrollViewDelegate.h */,
+			);
+			name = "Lazy loading";
+			sourceTree = "<group>";
+		};
 		4C2236461391671A00453A44 /* Just items */ = {
 			isa = PBXGroup;
 			children = (
@@ -1567,6 +1607,8 @@
 				C7E02FBD12DF0C4E0098AAE6 /* NSString+Base64Encoding.m */,
 				C7E02FBE12DF0C4E0098AAE6 /* NSString+SHA1.h */,
 				C7E02FBF12DF0C4E0098AAE6 /* NSString+SHA1.m */,
+				4C20129C139E369300E16CD3 /* UIScrollView+Layout.h */,
+				4C20129D139E369300E16CD3 /* UIScrollView+Layout.m */,
 				C7E02FC012DF0C4E0098AAE6 /* UIImage+RoundedCorner.h */,
 				C7E02FC112DF0C4E0098AAE6 /* UIImage+RoundedCorner.m */,
 				C7E02FEC12DF0CC60098AAE6 /* UIImage+Alpha.h */,
@@ -1911,6 +1953,12 @@
 				4C98AF1D1394570D00F567C9 /* IDDocumentDetailViewController.m in Sources */,
 				4C2B9F081396C5F00001B510 /* FTGenericPageViewController.m in Sources */,
 				4CC15FFB139C0F00000794C1 /* FTReachability.m in Sources */,
+				4C20129E139E369300E16CD3 /* UIScrollView+Layout.m in Sources */,
+				4C2012AD139E36F600E16CD3 /* FTDummyPage.m in Sources */,
+				4C2012AE139E36F600E16CD3 /* FTImagePage.m in Sources */,
+				4C2012AF139E36F600E16CD3 /* FTPage.m in Sources */,
+				4C2012B0139E36F600E16CD3 /* FTPageLocation.m in Sources */,
+				4C2012B1139E36F600E16CD3 /* FTPageScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
