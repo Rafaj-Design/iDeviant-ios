@@ -4,6 +4,8 @@
 // No warranty is expressed or implied.
 
 #import "UIImage+Resize.h"
+#import "UIImage+RoundedCorner.h"
+#import "UIImage+Alpha.h"
 
 // Private helper methods
 @interface UIImage ()
@@ -24,6 +26,30 @@
     UIImage *croppedImage = [UIImage imageWithCGImage:imageRef];
     CGImageRelease(imageRef);
     return croppedImage;
+}
+
+// Returns a copy of this image that is squared to the thumbnail size.
+// If transparentBorder is non-zero, a transparent border of the given size will be added around the edges of the thumbnail. (Adding a transparent border of at least one pixel in size has the side-effect of antialiasing the edges of the image when rotating it using Core Animation.)
+- (UIImage *)thumbnailImage:(NSInteger)thumbnailSize
+          transparentBorder:(NSUInteger)borderSize
+               cornerRadius:(NSUInteger)cornerRadius
+       interpolationQuality:(CGInterpolationQuality)quality {
+    UIImage *resizedImage = [self resizedImageWithContentMode:UIViewContentModeScaleAspectFill
+                                                       bounds:CGSizeMake(thumbnailSize, thumbnailSize)
+                                         interpolationQuality:quality];
+    
+    // Crop out any part of the image that's larger than the thumbnail size
+    // The cropped rect must be centered on the resized image
+    // Round the origin points so that the size isn't altered when CGRectIntegral is later invoked
+    CGRect cropRect = CGRectMake(round((resizedImage.size.width - thumbnailSize) / 2),
+                                 round((resizedImage.size.height - thumbnailSize) / 2),
+                                 thumbnailSize,
+                                 thumbnailSize);
+    UIImage *croppedImage = [resizedImage croppedImage:cropRect];
+    
+    UIImage *transparentBorderImage = borderSize ? [croppedImage transparentBorderImage:borderSize] : croppedImage;
+
+    return [transparentBorderImage roundedCornerImage:cornerRadius borderSize:borderSize];
 }
 
 // Returns a rescaled copy of the image, taking into account its orientation
@@ -50,19 +76,28 @@
 }
 
 // Resizes the image according to the given content mode, taking into account the image's orientation
-- (UIImage *)resizedImageWithMaxDimension:(int)maxDimension interpolationQuality:(CGInterpolationQuality)quality {
-	CGSize newSize;
-	
-	if(self.size.width > self.size.height) {
-		double ratio = self.size.height / self.size.width;
-		newSize.width = maxDimension;
-		newSize.height = maxDimension * ratio;
-	} else {
-		double ratio = self.size.width / self.size.height;
-		newSize.height = maxDimension;
-		newSize.width = maxDimension * ratio;	
-	}
-	
+- (UIImage *)resizedImageWithContentMode:(UIViewContentMode)contentMode
+                                  bounds:(CGSize)bounds
+                    interpolationQuality:(CGInterpolationQuality)quality {
+    CGFloat horizontalRatio = bounds.width / self.size.width;
+    CGFloat verticalRatio = bounds.height / self.size.height;
+    CGFloat ratio;
+    
+    switch (contentMode) {
+        case UIViewContentModeScaleAspectFill:
+            ratio = MAX(horizontalRatio, verticalRatio);
+            break;
+            
+        case UIViewContentModeScaleAspectFit:
+            ratio = MIN(horizontalRatio, verticalRatio);
+            break;
+            
+        default:
+            [NSException raise:NSInvalidArgumentException format:@"Unsupported content mode: %d", contentMode];
+    }
+    
+    CGSize newSize = CGSizeMake(self.size.width * ratio, self.size.height * ratio);
+    
     return [self resizedImage:newSize interpolationQuality:quality];
 }
 
@@ -87,7 +122,7 @@
                                                 CGImageGetBitsPerComponent(imageRef),
                                                 0,
                                                 CGImageGetColorSpace(imageRef),
-                                                CGImageGetBitmapInfo(imageRef));
+                                                kCGImageAlphaNoneSkipLast);
     
     // Rotate and/or flip the image if required by its orientation
     CGContextConcatCTM(bitmap, transform);

@@ -20,6 +20,7 @@
 @synthesize mainView;
 @synthesize imageUrl;
 @synthesize currentIndex;
+@synthesize delegate;
 
 
 #pragma mark Positioning
@@ -45,6 +46,13 @@
 	[ai release];
 	[message release];
     [super dealloc];
+}
+
+#pragma Display stuff
+
+- (void)updateTitle {
+	NSString *t = [NSString stringWithFormat:@"%d / %d", (currentIndex + 1), [data count]];
+	[self setTitle:t];
 }
 
 #pragma mark Generating pages
@@ -105,7 +113,7 @@
 	[self.navigationItem setRightBarButtonItem:favsButton];
 	[favsButton release];
 	
-	FTPage *page = [self pageForIndex:0];
+	FTPage *page = [self pageForIndex:currentIndex];
 	mainView = [[FTPageScrollView alloc] initWithFrame:[super fullScreenFrame]];
 	[mainView setBackgroundColor:[UIColor redColor]];
 	[mainView setDummyPageImage:[UIImage imageNamed:@"dummy.png"]];
@@ -150,6 +158,8 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	[super enableBackgroundWithImage:nil];
+	[self updateTitle];
+	//[mainView setPage:[self pageForIndex:currentIndex] pageCount:0 animate:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -259,6 +269,7 @@
 - (void)pageScrollView:(FTPageScrollView *)scrollView didMakePageCurrent:(FTPage *)page {
 	currentIndex = page.pageIndex;
 	NSLog(@"didMakePageCurrent: %d", currentIndex);
+	[self updateTitle];
 }
 
 

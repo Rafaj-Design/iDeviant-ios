@@ -242,7 +242,7 @@
 	[self getDataForSearchString:search andCategory:nil];
 }
 
-- (void)getData {
+- (void)getFeedData {
 	[self getDataForSearchString:nil];
 }
 
@@ -647,7 +647,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-
 - (void)dealloc {
 	[table release];
 	[data release];
@@ -754,6 +753,11 @@
 - (void)launchItemInTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	MWFeedItem *item = [data objectAtIndex:indexPath.row];
+	NSMutableArray *arr = [[NSMutableArray alloc] init];
+	for (MWFeedItem *i in data) {
+		NSLog(@"Title: %@", i.title);
+		[arr addObject:i];
+	}
 	BOOL canAccess = YES;
 	if ([item.rating isEqualToString:@"adult"]) {
 		if (![IDAdultCheck canAccessAdultStuff]) canAccess = NO;
@@ -772,6 +776,9 @@
 			}
 			else {
 				IDImageDetailViewController *c = [[IDImageDetailViewController alloc] init];
+				[c setCurrentIndex:indexPath.row];
+				[c setData:arr];
+				//[c.data retain];
 				[c setImageUrl:[[item.contents objectAtIndex:0] objectForKey:@"url"]];
 				[self.navigationController pushViewController:c animated:YES];
 				[c release];
@@ -781,6 +788,7 @@
 	else {
 		[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	}
+	[arr release];
 }
 
 

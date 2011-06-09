@@ -13,6 +13,15 @@
 #import "FTToolbar.h"
 
 
+@class IDImageDetailViewController;
+
+@protocol IDImageDetailViewControllerDelegate <NSObject>
+
+- (void)imageDetailViewController:(IDImageDetailViewController *)controller didFinishWithItem:(NSDictionary *)item atIndex:(int)index;
+
+@end
+
+
 @interface IDImageDetailViewController : FTViewController <UIActionSheetDelegate, FTImageZoomViewDelegate, FTPageScrollViewDelegate> {
     
 	FTPageScrollView *mainView;
@@ -25,6 +34,8 @@
 	
 	int currentIndex;
 	
+	id <IDImageDetailViewControllerDelegate> delegate;
+	
 }
 
 @property (nonatomic, retain) FTPageScrollView *mainView;
@@ -32,6 +43,8 @@
 @property (nonatomic, retain) NSString *imageUrl;
 
 @property (nonatomic) int currentIndex;
+
+@property (nonatomic, assign) id <IDImageDetailViewControllerDelegate> delegate;
 
 
 @end

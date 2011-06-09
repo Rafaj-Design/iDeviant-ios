@@ -130,7 +130,7 @@
 
 - (void)getDataForSearchString:(NSString *)search;
 
-- (void)getData;
+- (void)getFeedData;
 
 
 
