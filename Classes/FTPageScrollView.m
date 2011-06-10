@@ -212,12 +212,38 @@
 	}
 }
 
-- (FTPage *) currentPage {
+- (FTPage *)currentPage {
 	return centerPage;
 }
 
 - (void)cancelOperation {
 	[self scrollViewDidEndDecelerating:self];
+}
+
+#pragma mark Layout
+
+- (void)layout {
+	//[self setContentWidth:[centerPage width] * [pages count]];		
+	
+	//NSInteger xPosition = 0;
+	NSArray *arr = self.subviews;
+	
+	
+	for(UIView *page in arr) {
+		//[self addSubview:page];
+		//[page positionAtX:xPosition andY:verticalOffset];
+		NSLog(@"Jsem tu");
+		//xPosition += [centerPage width];
+	}
+	//CGPoint offset = self.contentOffset;
+//	if(leftPage) {
+//		//[self setContentOffset:CGPointMake(offset.x + [centerPage width], 0)];
+//	}
+}
+
+- (void)setFrame:(CGRect)frame {
+	[super setFrame:frame];
+	[self layout];
 }
 
 #pragma mark Animation Delegate Methods
@@ -381,6 +407,10 @@
 	[centerPage positionAtX:1];	
 	[self scrollContentToXPosition:1];		
 
+}
+
+- (void)reload {
+	
 }
 
 

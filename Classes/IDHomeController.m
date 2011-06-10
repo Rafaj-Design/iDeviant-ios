@@ -12,6 +12,7 @@
 #import "IDHomeTableViewCell.h"
 #import "FTSimpleDB.h"
 #import "Configuration.h"
+#import "JCO.h"
 
 
 @implementation IDHomeController
@@ -94,6 +95,28 @@
 	}
 }
 
+#pragma mark Jira reporting
+
+- (void)initializeJiraChecks {
+    self.navigationItem.rightBarButtonItem =
+    [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
+                                                   target:self
+                                                   action:@selector(showFeedback)] autorelease];
+    self.navigationItem.leftBarButtonItem =
+    [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize
+                                                   target:self
+                                                   action:@selector(showPastFeedback)] autorelease];
+}
+
+-(void) showFeedback {
+    [self presentModalViewController:[[JCO instance] viewController] animated:YES];
+}
+
+-(void) showPastFeedback {
+    [self presentModalViewController:[[JCO instance] issuesViewController] animated:YES];
+}
+
+
 #pragma mark View delegate methods
 
 - (void)viewDidLoad {
@@ -117,6 +140,8 @@
 	[logo setBackgroundColor:[UIColor clearColor]];
 	[table addSubview:logo];
 	[logo release];
+	
+	[self initializeJiraChecks];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

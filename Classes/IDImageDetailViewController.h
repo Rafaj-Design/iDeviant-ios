@@ -36,6 +36,8 @@
 	
 	id <IDImageDetailViewControllerDelegate> delegate;
 	
+	NSArray *listThroughData;
+	
 }
 
 @property (nonatomic, retain) FTPageScrollView *mainView;
@@ -45,6 +47,9 @@
 @property (nonatomic) int currentIndex;
 
 @property (nonatomic, assign) id <IDImageDetailViewControllerDelegate> delegate;
+
+
+- (void)setListData:(NSArray *)array;
 
 
 @end

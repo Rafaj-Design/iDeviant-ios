@@ -12,6 +12,8 @@
 #define kDebug												YES
 #define kFakeData											YES
 
+#define kDebugCauseCrash									NO
+
 
 // System configuration
 #define kSystemApplicationId								0

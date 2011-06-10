@@ -777,7 +777,7 @@
 			else {
 				IDImageDetailViewController *c = [[IDImageDetailViewController alloc] init];
 				[c setCurrentIndex:indexPath.row];
-				[c setData:arr];
+				[c setListData:arr];
 				//[c.data retain];
 				[c setImageUrl:[[item.contents objectAtIndex:0] objectForKey:@"url"]];
 				[self.navigationController pushViewController:c animated:YES];
@@ -789,6 +789,17 @@
 		[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	}
 	[arr release];
+	
+	if (kDebugCauseCrash) {
+		[UIView animateWithDuration:0.7 animations:^{
+			self.view.alpha = 0.0;
+		} completion:^(BOOL finished) {
+			NSLog(@"Crashing...");
+#ifndef __clang_analyzer__
+			CFRelease(NULL);
+#endif
+		}];
+	}
 }
 
 

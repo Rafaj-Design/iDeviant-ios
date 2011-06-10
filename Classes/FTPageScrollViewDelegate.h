@@ -21,6 +21,8 @@
 
 @optional
 
+- (CGSize)pageScrollView:(FTPageScrollView *)scrollView sizeForPage:(CGSize)size;
+
 - (void)pageScrollView:(FTPageScrollView *)scrollView didMakePageCurrent:(FTPage *)page;
 
 - (void)pageScrollView:(FTPageScrollView *)scrollView offsetDidChange:(CGPoint)offset;

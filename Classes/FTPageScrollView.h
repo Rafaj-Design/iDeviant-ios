@@ -49,5 +49,9 @@
 
 - (void)cancelOperation;
 
+- (void)layout;
+
+- (void)reload;
+
 
 @end

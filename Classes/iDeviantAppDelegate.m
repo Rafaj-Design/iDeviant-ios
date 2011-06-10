@@ -13,6 +13,7 @@
 #import "Appirater.h"
 #import "IGABuildChecks.h"
 #import "ASIDownloadCache.h"
+#import "JCO.h"
 
 
 @implementation iDeviantAppDelegate
@@ -59,6 +60,9 @@
     // Add the navigation controller's view to the window and display.
     [window addSubview:navigationController.view];
     [window makeKeyAndVisible];
+	
+	// Jira bug tracking system
+	[[JCO instance] configureJiraConnect:@"http://jira.fuerteint.com:8080" customDataSource:nil];
 	
 	// Clear cache
 	[[ASIDownloadCache sharedCache] clearCachedResponsesForStoragePolicy:ASICachePermanentlyCacheStoragePolicy];

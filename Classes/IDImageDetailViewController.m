@@ -37,6 +37,13 @@
 	else return CGRectMake(0, 0, 320, 460);
 }
 
+#pragma mark Settings
+
+- (void)setListData:(NSArray *)array {
+	listThroughData = array;
+	[listThroughData retain];
+}
+
 #pragma mark Memory management
 
 - (void)dealloc {
@@ -45,13 +52,14 @@
 	[bottomBar release];
 	[ai release];
 	[message release];
+	[listThroughData release];
     [super dealloc];
 }
 
 #pragma Display stuff
 
 - (void)updateTitle {
-	NSString *t = [NSString stringWithFormat:@"%d / %d", (currentIndex + 1), [data count]];
+	NSString *t = [NSString stringWithFormat:@"%d / %d", (currentIndex + 1), [listThroughData count]];
 	[self setTitle:t];
 }
 
@@ -144,10 +152,10 @@
 	[bottomBar setItems:[NSArray arrayWithObjects:actionButton, nil]];
 	[actionButton release];
 	
-	ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-	[ai setHidesWhenStopped:YES];
-	[ai startAnimating];
-	[self.view addSubview:ai];
+//	ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+//	[ai setHidesWhenStopped:YES];
+//	[ai startAnimating];
+//	[self.view addSubview:ai];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -179,6 +187,8 @@
 	[bottomBar setFrame:[self frameForToolbar]];
 	[ai centerInSuperView];
 	[UIView commitAnimations];
+	
+	[mainView reload];
 }
 
 #pragma mark Gesture recognizers
@@ -260,6 +270,10 @@
 
 - (void)pageScrollView:(FTPageScrollView *)scrollView offsetDidChange:(CGPoint)offset {
 	
+}
+
+- (CGSize)pageScrollView:(FTPageScrollView *)scrollView sizeForPage:(CGSize)size {
+	return [self getFrameForPage].size;
 }
 
 - (void)dummyScrollInPageScrollViewDidFinish:(FTPageScrollView *)scrollView {
