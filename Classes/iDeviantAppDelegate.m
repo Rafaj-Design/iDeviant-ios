@@ -62,7 +62,7 @@
     [window makeKeyAndVisible];
 	
 	// Jira bug tracking system
-	[[JCO instance] configureJiraConnect:@"http://jira.fuerteint.com:8080" customDataSource:nil];
+	[[JCO instance] configureJiraConnect:kSystemJiraErrorReporting customDataSource:nil];
 	
 	// Clear cache
 	[[ASIDownloadCache sharedCache] clearCachedResponsesForStoragePolicy:ASICachePermanentlyCacheStoragePolicy];

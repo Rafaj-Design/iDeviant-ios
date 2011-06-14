@@ -15,6 +15,22 @@
 @synthesize zoomDelegate;
 
 
+#pragma mark Layout
+
+- (void)doZoomLayout {
+	if (imageView.image) {
+		if (maxA == 0) {
+			
+		}
+		if (maxB == 0) {
+			
+		}
+		if (self.zoomScale > 0) {
+			NSLog(@"Zoom apply");
+		}
+	}
+}
+
 #pragma mark Initialization
 
 - (void)doImageZoomViewSetup {
@@ -23,6 +39,7 @@
 	int max = imageWidth / zoomWidth;
 	if (max < [self minimumZoomScale]) max = [self minimumZoomScale];
 	[self setMaximumZoomScale:(max + 10)];
+	[self doZoomLayout];
 }
 
 - (id)initWithView:(UIView *)view andOrigin:(CGPoint)origin {
@@ -30,6 +47,12 @@
 }
 
 - (id)initWithImage:(UIImage *)image andFrame:(CGRect)frame {
+	// Basic margin
+	margin = 10;
+	maxA = 0;
+	maxB = 0;
+	
+	// Creating view
 	FTImageView *v = [[FTImageView alloc] initWithImage:image];
 	[v setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 	[v setContentMode:UIViewContentModeScaleAspectFit];
@@ -88,10 +111,19 @@
 	[self doImageZoomViewSetup];
 }
 
+- (void)setSideMargin:(CGFloat)sideMargin {
+	
+}
+
 #pragma mark Scrollview delegate methods
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-	NSLog(@"Did scroll: %@", NSStringFromCGPoint(scrollView.contentOffset));
+	//NSLog(@"Did scroll: %@", NSStringFromCGPoint(scrollView.contentOffset));
+	[self doZoomLayout];
+}
+
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+	[self doZoomLayout];
 }
 
 #pragma mark Image view delegate
@@ -110,5 +142,6 @@
 	[imageView release];
     [super dealloc];
 }
+
 
 @end

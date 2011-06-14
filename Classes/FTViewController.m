@@ -274,6 +274,9 @@
 			if (refreshButton) {
 				[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
 			}
+			if ([data count] == 0) {
+				[self refresh];
+			}
 		}
 		else {
 			if (refreshButton) {

@@ -5,7 +5,7 @@
 
 @class JCOIssuesViewController, JCOPing, JCONotifier, JCONotifier, JCOCrashSender;
 
-#define kJIRAConnectUUID @"kJIRAConnectUUID"
+#define kJIRAConnectUUID @"kJIRAConnectUUID2"
 #define kJCOReceivedCommentsNotification @"kJCOReceivedCommentsNotification"
 #define kJCOLastSuccessfulPingTime @"kJCOLastSuccessfulPingTime"
 

@@ -223,22 +223,22 @@
 #pragma mark Layout
 
 - (void)layout {
-	//[self setContentWidth:[centerPage width] * [pages count]];		
-	
-	//NSInteger xPosition = 0;
+	// TODO: Position pages without auto-resizing options
 	NSArray *arr = self.subviews;
-	
-	
-	for(UIView *page in arr) {
-		//[self addSubview:page];
-		//[page positionAtX:xPosition andY:verticalOffset];
-		NSLog(@"Jsem tu");
-		//xPosition += [centerPage width];
+	for(FTPage *page in arr) {
+		NSLog(@"Stranka: %@", NSStringFromCGRect(page.frame));
 	}
-	//CGPoint offset = self.contentOffset;
-//	if(leftPage) {
-//		//[self setContentOffset:CGPointMake(offset.x + [centerPage width], 0)];
-//	}
+	
+	CGSize size = self.contentSize;
+	size.width = (self.frame.size.width + 2);
+	size.height = self.frame.size.height;
+	[self setContentSize:size];
+	
+	// TODO: Position page on 1px offset
+	if (self.contentSize.width != 0) {
+		//[self setContentOffset:CGPointMake(10, 0) animated:YES];
+		//[self setContentOffset:CGPointZero animated:YES];
+	}
 }
 
 - (void)setFrame:(CGRect)frame {

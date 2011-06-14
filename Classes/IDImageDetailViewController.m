@@ -10,6 +10,7 @@
 #import "UIView+Layout.h"
 #import "iDeviantAppDelegate.h"
 #import "FTImagePage.h"
+#import "IDAdultCheck.h"
 
 
 #define kIDImageDetailViewControllerMaxAlpha				0.6f
@@ -33,8 +34,8 @@
 }
 
 - (CGRect)getFrameForPage {
-	if (isLandscape) return CGRectMake(0, 0, 480, 300);
-	else return CGRectMake(0, 0, 320, 460);
+	if (isLandscape) return CGRectMake(0, 0, 480, 320);
+	else return CGRectMake(0, 0, 320, 480);
 }
 
 #pragma mark Settings
@@ -66,12 +67,27 @@
 #pragma mark Generating pages
 
 - (FTPage *)pageForIndex:(int)index {
-	NSString *path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"wallpaper"] ofType:@"jpg"];
-	UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfFile:path]];
-	if (!image) return nil;
+	if (currentIndex < 0 || currentIndex >= [listThroughData count]) return nil;
+	MWFeedItem *item = [listThroughData objectAtIndex:currentIndex];
+	
 	FTImagePage *page = [[[FTImagePage alloc] initWithFrame:[self getFrameForPage]] autorelease];
 	[page setPageIndex:index];
-	[page.imageView setImage:image];
+	//[page zoomedImageNamed:@"wallpaper.jpg"];
+	BOOL canAccess = YES;
+	if ([item.rating isEqualToString:@"adult"]) {
+		if (![IDAdultCheck canAccessAdultStuff]) canAccess = NO;
+	}
+	if (canAccess) {
+		if ([item.contents count] > 0) {
+			//[cell.cellImageView loadImageFromUrl:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]];
+			[page zoomedImageWithUrl:[NSURL URLWithString:[[item.contents objectAtIndex:0] objectForKey:@"url"]] andDelegate:self];
+			[page.imageZoomView.imageView enableActivityIndicator:YES];
+			[page.imageZoomView.imageView enableProgressLoadingView:YES];
+		}
+	}
+	else {
+		
+	}
 	return page;
 }
 
@@ -95,6 +111,13 @@
 	}
 	else if (alpha == 1.0) a = 0.0;
 	
+//	if (alpha == 0.0) {
+//		[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+//	}
+//	else {
+//		[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+//	}
+	
 	[UIView beginAnimations:nil context:nil];
 	[UIView setAnimationDuration:0.6];
 	[UIView setAnimationDelegate:self];
@@ -111,6 +134,9 @@
 	[self.view setBackgroundColor:[UIColor blackColor]];
 	
     [super viewDidLoad];
+	
+	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
+	
 	[self.navigationController.navigationBar setTranslucent:YES];
 	
 	[UIView beginAnimations:nil context:nil];
@@ -123,10 +149,9 @@
 	
 	FTPage *page = [self pageForIndex:currentIndex];
 	mainView = [[FTPageScrollView alloc] initWithFrame:[super fullScreenFrame]];
-	[mainView setBackgroundColor:[UIColor redColor]];
 	[mainView setDummyPageImage:[UIImage imageNamed:@"dummy.png"]];
 	[mainView setInitialPage:page withDelegate:self];
-	//[pageScroll setPageScrollDelegate:self];
+	//[mainView setPageScrollDelegate:self];
 	[mainView setPage:page pageCount:0 animate:YES];
 	[self.view addSubview:mainView];
 	
@@ -168,6 +193,7 @@
 	[super enableBackgroundWithImage:nil];
 	[self updateTitle];
 	//[mainView setPage:[self pageForIndex:currentIndex] pageCount:0 animate:YES];
+	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -177,6 +203,7 @@
 	[UIView beginAnimations:nil context:nil];
 	[self.navigationController.navigationBar setAlpha:1.0];
 	[UIView commitAnimations];
+	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
 #pragma mark Layout
@@ -256,6 +283,12 @@
 	else if (buttonIndex == 2) {
 		[self emailCurrentImage];
 	}
+}
+
+#pragma mark Image view delegate & data source methods
+
+- (void)imageView:(FTImageView *)imgView didFinishLoadingImage:(UIImage *)image {
+	
 }
 
 #pragma mark Page scroll view delegate & data source methods

@@ -24,6 +24,8 @@
 	[self setContentSize:self.frame.size];
 	
 	[super setDelegate:self];
+	
+	[self setBackgroundColor:[UIColor clearColor]];
 }
 
 - (id)initWithFrame:(CGRect)frame {

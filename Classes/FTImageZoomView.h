@@ -26,6 +26,11 @@
 	
 	id <FTImageZoomViewDelegate> zoomDelegate;
 	
+	CGFloat margin;
+	
+	CGFloat maxA;
+	CGFloat maxB;
+	
 }
 
 @property (nonatomic, retain) FTImageView *imageView;
@@ -40,6 +45,8 @@
 - (void)setImage:(UIImage *)image;
 
 - (void)loadImageFromUrl:(NSString *)url;
+
+- (void)setSideMargin:(CGFloat)sideMargin;
 
 
 @end

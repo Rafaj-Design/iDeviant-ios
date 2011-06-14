@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ASIHTTPRequest.h"
 
 
 @class FTImageView;
@@ -15,22 +16,40 @@
 
 - (void)imageView:(FTImageView *)imgView didFinishLoadingImage:(UIImage *)image;
 
+- (void)imageViewDidFailLoadingImage:(FTImageView *)imgView withError:(NSError *)error;
+
+- (void)imageViewDidStartLoadingImage:(FTImageView *)imgView;
+
 @end
 
 
-@interface FTImageView : UIImageView {
+@interface FTImageView : UIImageView <ASIHTTPRequestDelegate> {
     
     UIImageView *overlayImage;
 	
 	UIView *flashOverlay;
 	
 	id <FTImageViewDelegate> delegate;
+	
+	UIActivityIndicatorView *activityIndicator;
+	
+	UIProgressView *progressLoadingView;
+	
+	ASIHTTPRequest *imageRequest;
+	
+	BOOL useASIHTTPRequest;
     
 }
 
 @property (nonatomic, retain) UIImageView *overlayImage;
 
 @property (nonatomic, assign) id <FTImageViewDelegate> delegate;
+
+@property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
+
+@property (nonatomic, retain) UIProgressView *progressLoadingView;
+
+@property (nonatomic) BOOL useASIHTTPRequest;
 
 
 - (id)initWithFrameWithRandomColor:(CGRect)frame;
@@ -39,6 +58,10 @@
 - (void)doFlashWithColor:(UIColor *)color;
 
 - (void)loadImageFromUrl:(NSString *)url;
+
+- (void)enableProgressLoadingView:(BOOL)enable;
+
+- (void)enableActivityIndicator:(BOOL)enable;
 
 
 @end

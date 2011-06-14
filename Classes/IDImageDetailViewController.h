@@ -22,7 +22,7 @@
 @end
 
 
-@interface IDImageDetailViewController : FTViewController <UIActionSheetDelegate, FTImageZoomViewDelegate, FTPageScrollViewDelegate> {
+@interface IDImageDetailViewController : FTViewController <UIActionSheetDelegate, FTImageViewDelegate, FTImageZoomViewDelegate, FTPageScrollViewDelegate> {
     
 	FTPageScrollView *mainView;
 	

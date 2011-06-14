@@ -10,9 +10,11 @@
 
 // Development
 #define kDebug												YES
-#define kFakeData											YES
+#define kFakeData											NO
 
-#define kDebugCauseCrash									NO
+#define kDebugCauseCrash									YES
+
+#define kSystemJiraErrorReporting							@"http://jira-mobile.fuerteint.com:8080"
 
 
 // System configuration
