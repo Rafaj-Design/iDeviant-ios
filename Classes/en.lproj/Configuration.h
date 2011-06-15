@@ -12,7 +12,7 @@
 #define kDebug												YES
 #define kFakeData											NO
 
-#define kDebugCauseCrash									YES
+#define kDebugCauseCrash									NO
 
 #define kSystemJiraErrorReporting							@"http://jira-mobile.fuerteint.com:8080"
 

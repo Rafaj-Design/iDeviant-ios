@@ -132,6 +132,8 @@
 
 - (void)getFeedData;
 
+- (void)inheritConnectivity:(BOOL)internet;
+
 
 
 @end

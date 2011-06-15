@@ -38,6 +38,11 @@
 	ASIHTTPRequest *imageRequest;
 	
 	BOOL useASIHTTPRequest;
+	
+	BOOL debugMode;
+	UILabel *debugLabel;
+	
+	NSString *imageUrl;
     
 }
 
@@ -51,6 +56,10 @@
 
 @property (nonatomic) BOOL useASIHTTPRequest;
 
+@property (nonatomic, readonly) BOOL debugMode;
+
+@property (nonatomic, readonly) NSString *imageUrl;
+
 
 - (id)initWithFrameWithRandomColor:(CGRect)frame;
 - (void)setRandomColorBackground;
@@ -62,6 +71,8 @@
 - (void)enableProgressLoadingView:(BOOL)enable;
 
 - (void)enableActivityIndicator:(BOOL)enable;
+
+- (void)enableDebugMode:(BOOL)debugMode;
 
 
 @end

@@ -246,7 +246,11 @@
 	[self getDataForSearchString:nil];
 }
 
-#pragma mark Reachability notification method
+#pragma mark Reachability notification methods & settings
+
+- (void)inheritConnectivity:(BOOL)internet {
+	internetActive = internet;
+}
 
 - (void)checkNetworkStatus:(NSNotification *)notice {
 	NetworkStatus internetStatus = [internetReachable currentReachabilityStatus];
@@ -275,7 +279,7 @@
 				[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
 			}
 			if ([data count] == 0) {
-				[self refresh];
+				//[self refresh];
 			}
 		}
 		else {
@@ -735,6 +739,7 @@
 	NSDictionary *d = [categoriesData objectAtIndex:indexPath.row];
 	if ([[d objectForKey:@"subcategories"] count] > 0) {
 		IDCategoriesViewController *c = [[IDCategoriesViewController alloc] init];
+		[c inheritConnectivity:internetActive];
 		[c setCurrentCategory:d];
 		[c setCurrentCategoryPath:[currentCategoryPath stringByAppendingPathComponent:[d objectForKey:@"path"]]];
 		[c setTitle:[d objectForKey:@"name"]];
@@ -745,6 +750,7 @@
 	else {
 		if (internetActive) {
 			IDJustItemsViewController *c = [[IDJustItemsViewController alloc] init];
+			[c inheritConnectivity:internetActive];
 			[c setJustCategory:[currentCategoryPath stringByAppendingPathComponent:[d objectForKey:@"path"]]];
 			[c setTitle:[d objectForKey:@"name"]];
 			[self.navigationController pushViewController:c animated:YES];
@@ -769,6 +775,7 @@
 		if ([item.contents count] > 0) {
 			if (item.text) {
 				IDDocumentDetailViewController *c = [[IDDocumentDetailViewController alloc] init];
+				[c inheritConnectivity:internetActive];
 				NSString *tempPath = [[NSBundle mainBundle] pathForResource:@"document-template" ofType:@"html"];
 				NSString *temp = [NSString stringWithContentsOfFile:tempPath encoding:NSUTF8StringEncoding error:nil];
 				NSDictionary *arr = [NSDictionary dictionaryWithObject:item.text forKey:@"{CONTENT}"];
@@ -779,6 +786,7 @@
 			}
 			else {
 				IDImageDetailViewController *c = [[IDImageDetailViewController alloc] init];
+				[c inheritConnectivity:internetActive];
 				[c setCurrentIndex:indexPath.row];
 				[c setListData:arr];
 				//[c.data retain];

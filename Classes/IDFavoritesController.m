@@ -89,6 +89,7 @@
 			[tableView deselectRowAtIndexPath:indexPath animated:YES];
 			NSDictionary *d = [categoriesData objectAtIndex:indexPath.row];
 			IDJustItemsViewController *c = [[IDJustItemsViewController alloc] init];
+			[c inheritConnectivity:internetActive];
 			[c setJustCategory:[d objectForKey:@"fullPath"]];
 			[c setTitle:[d objectForKey:@"name"]];
 			[self.navigationController pushViewController:c animated:YES];
@@ -108,6 +109,7 @@
 			if ([item.contents count] > 0) {
 				NSLog(@"Contents: %@", item.contents);
 				IDImageDetailViewController *c = [[IDImageDetailViewController alloc] init];
+				[c inheritConnectivity:internetActive];
 				[c setImageUrl:[[item.contents objectAtIndex:0] objectForKey:@"url"]];
 				[self.navigationController pushViewController:c animated:YES];
 				[c release];

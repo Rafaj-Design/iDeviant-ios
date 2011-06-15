@@ -20,7 +20,20 @@
 @synthesize activityIndicator;
 @synthesize progressLoadingView;
 @synthesize useASIHTTPRequest;
+@synthesize debugMode;
+@synthesize imageUrl;
 
+
+#pragma mark Debug mode methods
+
+- (void)updateDebugInfo:(NSString *)message {
+	if (debugMode) {
+		NSString *t = @"";
+		t = [t stringByAppendingFormat:@"Message: %@\n", message];
+		t = [t stringByAppendingFormat:@"Url: %@\n", imageUrl];
+		[debugLabel setText:t];
+	}
+}
 
 #pragma mark Initilization
 
@@ -29,7 +42,8 @@
 	// Basic self setup
 	[self setContentMode:UIViewContentModeScaleAspectFill];
 	[self setClipsToBounds:YES];
-	[self setUseASIHTTPRequest:YES];
+	[self setUseASIHTTPRequest:NO];
+	debugMode = NO;
 	
 	// Adding overlay image
     overlayImage = [[UIImageView alloc] initWithFrame:self.bounds];
@@ -172,6 +186,7 @@
 
 - (void)loadImage:(NSString *)url {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	
 	NSData *data;
 	NSString *path = [[FTFilesystemPaths getImagesDirectoryPath] stringByAppendingPathComponent:[FTText getSafeText:url]];
 	@synchronized(self) {
@@ -200,11 +215,17 @@
 }
 
 - (void)loadImageFromUrl:(NSString *)url {
+	[imageUrl release];
+	imageUrl = url;
+	[imageUrl retain];
+	
 	NSString *path = [[FTFilesystemPaths getImagesDirectoryPath] stringByAppendingPathComponent:[FTText getSafeText:url]];
 	if ([FTFilesystemIO isFile:path]) {
 		[NSThread detachNewThreadSelector:@selector(loadImageFromUrlOnBackground:) toTarget:self withObject:url];
+		[self updateDebugInfo:@"Loading from cache"];
 		return;
 	}
+	else [self updateDebugInfo:@"Loading url from web"];
 	if (useASIHTTPRequest) {
 		imageRequest = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
 		[imageRequest setNumberOfTimesToRetryOnTimeout:2];
@@ -220,6 +241,7 @@
 #pragma mark ASIHTTPRequest delegate methods
 
 - (void)requestFinished:(ASIHTTPRequest *)request {
+	[self updateDebugInfo:@"Request successful"];
 	[self enableLoadingElements:NO];
 	UIImage *img = [UIImage imageWithData:[request responseData]];
 	[self performSelectorOnMainThread:@selector(setImage:) withObject:img waitUntilDone:NO];
@@ -230,6 +252,7 @@
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request {
+	[self updateDebugInfo:@"Request failed"];
 	[self enableLoadingElements:NO];
 	if ([delegate respondsToSelector:@selector(imageViewDidFailLoadingImage:withError:)]) {
 		[delegate imageViewDidFailLoadingImage:self withError:[request error]];
@@ -237,6 +260,7 @@
 }
 
 - (void)requestStarted:(ASIHTTPRequest *)request {
+	[self updateDebugInfo:@"Request started"];
 	[self enableLoadingElements:YES];
 	if ([delegate respondsToSelector:@selector(imageViewDidStartLoadingImage:)]) {
 		[delegate imageViewDidStartLoadingImage:self];
@@ -251,7 +275,34 @@
 	[progressLoadingView release];
 	if ([imageRequest isExecuting]) [imageRequest cancel];
 	[imageRequest release];
+	[debugLabel release];
+	[imageUrl release];
     [super dealloc];
 }
+
+#pragma mark Debug mode
+
+- (void)enableDebugMode:(BOOL)enable {
+	debugMode = enable;
+	if (enable) {
+		debugLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 180, 180)];
+		[debugLabel setBackgroundColor:[UIColor orangeColor]];
+		[debugLabel setTextColor:[UIColor whiteColor]];
+		[debugLabel setFont:[UIFont systemFontOfSize:11]];
+		[debugLabel setAlpha:0.8];
+		[debugLabel setTextAlignment:UITextAlignmentCenter];
+		[debugLabel setText:@"Debug label"];
+		[debugLabel setNumberOfLines:0];
+		[self addSubview:debugLabel];
+	}
+	else {
+		if (debugLabel) {
+			[debugLabel removeFromSuperview];
+			[debugLabel release];
+			debugLabel = nil;
+		}
+	}
+}
+
 
 @end

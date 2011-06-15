@@ -68,7 +68,7 @@
 		
 		[cell setSelectionStyle:UITableViewCellSelectionStyleGray];
     }
-	NSLog(@"Data: %@", d);
+	//NSLog(@"Data: %@", d);
 	//[cell setBackgroundColor:[UIColor colorWithPatternImage:[[UIImage imageNamed:@"bcg-cell.png"] stretchableImageWithLeftCapWidth:1 topCapHeight:27]]];
 	if ([[d objectForKey:@"requiresConnection"] boolValue] && !internetActive) {
 		[cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-x.png"]];
@@ -88,6 +88,7 @@
 	else {
 		FTViewController *c = (FTViewController *)[[NSClassFromString([d objectForKey:@"controller"]) alloc] init];
 		if (c) {
+			[c inheritConnectivity:internetActive];
 			[c setTitle:[d objectForKey:@"name"]];
 			[self.navigationController pushViewController:c animated:YES];
 			[c release];

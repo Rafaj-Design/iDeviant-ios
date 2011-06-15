@@ -80,6 +80,7 @@
 	if (canAccess) {
 		if ([item.contents count] > 0) {
 			//[cell.cellImageView loadImageFromUrl:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]];
+			[page.imageZoomView.imageView enableDebugMode:YES];
 			[page zoomedImageWithUrl:[NSURL URLWithString:[[item.contents objectAtIndex:0] objectForKey:@"url"]] andDelegate:self];
 			[page.imageZoomView.imageView enableActivityIndicator:YES];
 			[page.imageZoomView.imageView enableProgressLoadingView:YES];
