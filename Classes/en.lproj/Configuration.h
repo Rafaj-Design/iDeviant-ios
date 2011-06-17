@@ -10,7 +10,7 @@
 
 // Development
 #define kDebug												YES
-#define kFakeData											NO
+#define kFakeData											YES
 
 #define kDebugCauseCrash									NO
 

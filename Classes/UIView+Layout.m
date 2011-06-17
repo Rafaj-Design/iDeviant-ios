@@ -118,7 +118,7 @@
 	[self positionAtX:xPos andY:yPos];
 }
 
-- (void)astheticCenterInSuperView {
+- (void)aestheticCenterInSuperView {
 	double xPos = round(([self.superview width] - [self width]) / 2.0);
 	double yPos = round(([self.superview height] - [self height]) / 2.0) - ([self.superview height] / 8.0);
 	[self positionAtX:xPos andY:yPos];	

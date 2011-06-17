@@ -11,6 +11,7 @@
 #import "FTPageScrollView.h"
 #import "FTImageZoomView.h"
 #import "FTToolbar.h"
+#import "IDHorizontalItems.h"
 
 
 @class IDImageDetailViewController;
@@ -37,6 +38,8 @@
 	id <IDImageDetailViewControllerDelegate> delegate;
 	
 	NSArray *listThroughData;
+	
+	IDHorizontalItems *shortcutView;
 	
 }
 

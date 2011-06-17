@@ -265,6 +265,11 @@
 		4CC15FFB139C0F00000794C1 /* FTReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC15FFA139C0F00000794C1 /* FTReachability.m */; };
 		4CC15FFE139CD056000794C1 /* fake-data.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4CC15FFD139CD056000794C1 /* fake-data.xml */; };
 		4CC3F87B139F737300D593EB /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CC3F87A139F737300D593EB /* libz.1.1.3.dylib */; };
+		4CD28A6713AA85EF0023F034 /* FTHorizontalTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD28A5E13AA85EF0023F034 /* FTHorizontalTableFooterView.m */; };
+		4CD28A6813AA85EF0023F034 /* FTHorizontalTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD28A6013AA85EF0023F034 /* FTHorizontalTableHeaderView.m */; };
+		4CD28A6913AA85EF0023F034 /* FTHorizontalTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD28A6213AA85EF0023F034 /* FTHorizontalTableView.m */; };
+		4CD28A6A13AA85EF0023F034 /* FTHorizontalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD28A6413AA85EF0023F034 /* FTHorizontalTableViewCell.m */; };
+		4CD28A7113AA88030023F034 /* IDHorizontalItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD28A7013AA88030023F034 /* IDHorizontalItems.m */; };
 		4CD64E8513A3A60C00DE51A9 /* IDImageZoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD64E8413A3A60C00DE51A9 /* IDImageZoomView.m */; };
 		4CF020301392643E00ED1E47 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF020271392643E00ED1E47 /* Facebook.m */; };
 		4CF020311392643E00ED1E47 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4CF020291392643E00ED1E47 /* FBDialog.bundle */; };
@@ -706,6 +711,18 @@
 		4CC15FFA139C0F00000794C1 /* FTReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTReachability.m; sourceTree = "<group>"; };
 		4CC15FFD139CD056000794C1 /* fake-data.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "fake-data.xml"; sourceTree = "<group>"; };
 		4CC3F87A139F737300D593EB /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
+		4CD28A5D13AA85EF0023F034 /* FTHorizontalTableFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTHorizontalTableFooterView.h; sourceTree = "<group>"; };
+		4CD28A5E13AA85EF0023F034 /* FTHorizontalTableFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTHorizontalTableFooterView.m; sourceTree = "<group>"; };
+		4CD28A5F13AA85EF0023F034 /* FTHorizontalTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTHorizontalTableHeaderView.h; sourceTree = "<group>"; };
+		4CD28A6013AA85EF0023F034 /* FTHorizontalTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTHorizontalTableHeaderView.m; sourceTree = "<group>"; };
+		4CD28A6113AA85EF0023F034 /* FTHorizontalTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTHorizontalTableView.h; sourceTree = "<group>"; };
+		4CD28A6213AA85EF0023F034 /* FTHorizontalTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTHorizontalTableView.m; sourceTree = "<group>"; };
+		4CD28A6313AA85EF0023F034 /* FTHorizontalTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTHorizontalTableViewCell.h; sourceTree = "<group>"; };
+		4CD28A6413AA85EF0023F034 /* FTHorizontalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTHorizontalTableViewCell.m; sourceTree = "<group>"; };
+		4CD28A6513AA85EF0023F034 /* FTHorizontalTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTHorizontalTableViewDataSource.h; sourceTree = "<group>"; };
+		4CD28A6613AA85EF0023F034 /* FTHorizontalTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTHorizontalTableViewDelegate.h; sourceTree = "<group>"; };
+		4CD28A6F13AA88030023F034 /* IDHorizontalItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDHorizontalItems.h; sourceTree = "<group>"; };
+		4CD28A7013AA88030023F034 /* IDHorizontalItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDHorizontalItems.m; sourceTree = "<group>"; };
 		4CD64E8313A3A60C00DE51A9 /* IDImageZoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDImageZoomView.h; sourceTree = "<group>"; };
 		4CD64E8413A3A60C00DE51A9 /* IDImageZoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDImageZoomView.m; sourceTree = "<group>"; };
 		4CF020261392643E00ED1E47 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
@@ -1395,6 +1412,8 @@
 		2BA761061375CBFD006B1A65 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4CD28A5C13AA85C30023F034 /* Vertical scroll view */,
+				4CD28A6E13AA87DE0023F034 /* Horizontal items */,
 				4CA7A61313A0BCA400AAE295 /* Drag & Drop menu */,
 				4C2012A0139E36B500E16CD3 /* Lazy loading */,
 				2BC5E167138E492A00DB931C /* Dynamic page */,
@@ -1923,6 +1942,56 @@
 			name = "Fake data";
 			sourceTree = "<group>";
 		};
+		4CD28A5C13AA85C30023F034 /* Vertical scroll view */ = {
+			isa = PBXGroup;
+			children = (
+				4CD28A6D13AA86370023F034 /* Delegate & Datasource */,
+				4CD28A6C13AA86100023F034 /* Header & Footer */,
+				4CD28A6B13AA860B0023F034 /* Cell */,
+				4CD28A6113AA85EF0023F034 /* FTHorizontalTableView.h */,
+				4CD28A6213AA85EF0023F034 /* FTHorizontalTableView.m */,
+			);
+			name = "Vertical scroll view";
+			sourceTree = "<group>";
+		};
+		4CD28A6B13AA860B0023F034 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				4CD28A6313AA85EF0023F034 /* FTHorizontalTableViewCell.h */,
+				4CD28A6413AA85EF0023F034 /* FTHorizontalTableViewCell.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		4CD28A6C13AA86100023F034 /* Header & Footer */ = {
+			isa = PBXGroup;
+			children = (
+				4CD28A5D13AA85EF0023F034 /* FTHorizontalTableFooterView.h */,
+				4CD28A5E13AA85EF0023F034 /* FTHorizontalTableFooterView.m */,
+				4CD28A5F13AA85EF0023F034 /* FTHorizontalTableHeaderView.h */,
+				4CD28A6013AA85EF0023F034 /* FTHorizontalTableHeaderView.m */,
+			);
+			name = "Header & Footer";
+			sourceTree = "<group>";
+		};
+		4CD28A6D13AA86370023F034 /* Delegate & Datasource */ = {
+			isa = PBXGroup;
+			children = (
+				4CD28A6513AA85EF0023F034 /* FTHorizontalTableViewDataSource.h */,
+				4CD28A6613AA85EF0023F034 /* FTHorizontalTableViewDelegate.h */,
+			);
+			name = "Delegate & Datasource";
+			sourceTree = "<group>";
+		};
+		4CD28A6E13AA87DE0023F034 /* Horizontal items */ = {
+			isa = PBXGroup;
+			children = (
+				4CD28A6F13AA88030023F034 /* IDHorizontalItems.h */,
+				4CD28A7013AA88030023F034 /* IDHorizontalItems.m */,
+			);
+			name = "Horizontal items";
+			sourceTree = "<group>";
+		};
 		4CF02024139263DA00ED1E47 /* Facebook SDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -2419,6 +2488,11 @@
 				4C7B6A2813A12AB800AA5D91 /* UIImage+Resize.m in Sources */,
 				4C7B6A2913A12AB800AA5D91 /* UIImage+RoundedCorner.m in Sources */,
 				4CD64E8513A3A60C00DE51A9 /* IDImageZoomView.m in Sources */,
+				4CD28A6713AA85EF0023F034 /* FTHorizontalTableFooterView.m in Sources */,
+				4CD28A6813AA85EF0023F034 /* FTHorizontalTableHeaderView.m in Sources */,
+				4CD28A6913AA85EF0023F034 /* FTHorizontalTableView.m in Sources */,
+				4CD28A6A13AA85EF0023F034 /* FTHorizontalTableViewCell.m in Sources */,
+				4CD28A7113AA88030023F034 /* IDHorizontalItems.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

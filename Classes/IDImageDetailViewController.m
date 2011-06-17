@@ -13,6 +13,7 @@
 #import "IDAdultCheck.h"
 
 
+
 #define kIDImageDetailViewControllerMaxAlpha				0.6f
 
 
@@ -38,6 +39,11 @@
 	else return CGRectMake(0, 0, 320, 480);
 }
 
+- (CGRect)frameForShortcutView {
+	if (isLandscape) return CGRectMake(0, 100, 480, 74);
+	else return CGRectMake(0, 250, 320, 74);
+}
+
 #pragma mark Settings
 
 - (void)setListData:(NSArray *)array {
@@ -54,6 +60,7 @@
 	[ai release];
 	[message release];
 	[listThroughData release];
+	[shortcutView release];
     [super dealloc];
 }
 
@@ -92,7 +99,7 @@
 	return page;
 }
 
-#pragma mark Navigation animation
+#pragma mark Navigation animations
 
 - (void)finishNavigationToggle {
 	if (bottomBar.alpha == 0) {
@@ -111,22 +118,25 @@
 		[bottomBar setHidden:NO];
 	}
 	else if (alpha == 1.0) a = 0.0;
-	
-//	if (alpha == 0.0) {
-//		[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
-//	}
-//	else {
-//		[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
-//	}
-	
 	[UIView beginAnimations:nil context:nil];
 	[UIView setAnimationDuration:0.6];
 	[UIView setAnimationDelegate:self];
 	[UIView setAnimationDidStopSelector:@selector(finishNavigationToggle)];
+	
 	[self.navigationController.navigationBar setAlpha:a];
 	[bottomBar setAlpha:a];
 	[message setFrame:[super frameForMessageLabel]];
+	
 	[UIView commitAnimations];
+}
+
+- (void)toggleShortcut {
+	int alpha = (shortcutView.alpha == 0) ? 1 : 0;
+	[UIView beginAnimations:nil context:nil];
+	[shortcutView setAlpha:alpha];
+	[UIView commitAnimations];
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:currentIndex inSection:0];
+	[shortcutView.table scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
 }
 
 #pragma mark View lifecycle
@@ -214,6 +224,7 @@
 	[mainView setFrame:[super fullScreenFrame]];
 	[bottomBar setFrame:[self frameForToolbar]];
 	[ai centerInSuperView];
+	[shortcutView centerInSuperView];
 	[UIView commitAnimations];
 	
 	[mainView reload];
@@ -222,10 +233,40 @@
 #pragma mark Gesture recognizers
 
 - (void)didTapViewOnce:(UITapGestureRecognizer *)recognizer {
-	[self toggleNavigationVisibility];
+	if (!shortcutView) [self toggleNavigationVisibility];
+	else {
+		if (shortcutView.alpha == 0) {
+			[self toggleNavigationVisibility];
+		}
+		else {
+			[UIView beginAnimations:nil context:nil];
+			[shortcutView setAlpha:0];
+			[UIView commitAnimations];
+		}
+	}
 }
 
 - (void)didTapViewTwice:(UITapGestureRecognizer *)recognizer {
+	if (!shortcutView) {
+		shortcutView = [[IDHorizontalItems alloc] initWithFrame:[self frameForShortcutView] andData:data];
+		[mainView addSubview:shortcutView];
+		[shortcutView setAlpha:0];
+	}
+	[mainView bringSubviewToFront:shortcutView];
+	float alpha = self.navigationController.navigationBar.alpha;
+	if (alpha == 0.0) {
+		[self toggleShortcut];
+	}
+	else {
+		[UIView animateWithDuration:0.3
+						 animations:^{
+							 [self toggleShortcut];
+						 }
+						 completion:^(BOOL finished) {
+							 [self toggleNavigationVisibility];
+						 }
+		 ];
+	}
 	
 }
 

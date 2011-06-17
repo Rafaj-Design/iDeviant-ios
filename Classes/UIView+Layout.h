@@ -37,7 +37,7 @@
 - (void)removeSubviews;
 
 - (void)centerInSuperView;
-- (void)astheticCenterInSuperView;
+- (void)aestheticCenterInSuperView;
 
 - (void)bringToFront;
 - (void)sendToBack;
