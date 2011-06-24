@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -26,6 +27,12 @@
 
 - (void)dealloc {
     [super dealloc];
+}
+
+#pragma mark Table view delegate & data source methods
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+	return NO;
 }
 
 

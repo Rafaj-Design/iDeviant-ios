@@ -7,51 +7,109 @@
 //
 
 #import "FTAboutCompanyAndAppViewController.h"
+#import "FTAboutHeaderView.h"
+#import "IDHomeTableViewCell.h"
 
 
 @implementation FTAboutCompanyAndAppViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+#pragma mark Memory management
 
-- (void)dealloc
-{
+- (void)dealloc {
     [super dealloc];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
+#pragma mark View lifecycle
 
-#pragma mark - View lifecycle
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+	[super getDataFromBundlePlist:@"About.plist"];
+	[super createTableView];
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+- (void)doLayoutSubviews {
+	[table reloadData];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+#pragma mark Table view delegate methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+	return [data count];
 }
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return 83;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	NSString *imgName = @"";
+	if (isLandscape) imgName = @"";
+	return [[[[FTAboutHeaderView alloc] initWithImage:[UIImage imageNamed:imgName]] autorelease] frame].size.height;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+	if (section != 0 || isLandscape) return nil;
+	NSString *imgName = @"";
+	if (isLandscape) imgName = @"";
+	return [[[FTAboutHeaderView alloc] initWithImage:[UIImage imageNamed:imgName]] autorelease];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *CellIdentifier = @"Cell";
+    
+    IDHomeTableViewCell *cell = (IDHomeTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+	
+	NSDictionary *d = [data objectAtIndex:indexPath.section];
+	
+    if (cell == nil) {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"IDHomeTableViewCell" owner:nil options:nil];
+        for (id oneObject in nib) {
+            if ([oneObject isKindOfClass:[IDHomeTableViewCell class]]) {
+                cell = (IDHomeTableViewCell *)oneObject;
+                break;
+            }
+        }
+		[cell.textLabel setBackgroundColor:[UIColor clearColor]];
+		[cell.cellTitleLabel setText:[FTLang get:[d objectForKey:@"name"]].uppercaseString];
+		[cell.cellTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeueLTPro-LtCn" size:23]];
+		
+		[cell.cellDetailLabel setText:[FTLang get:[d objectForKey:@"description"]].uppercaseString];
+		[cell.cellDetailLabel setFont:[UIFont fontWithName:@"HelveticaNeueLTPro-LtCn" size:14]];
+		
+		[cell.detailTextLabel setBackgroundColor:[UIColor clearColor]];
+		
+		[cell setAccessoryType:UITableViewCellAccessoryNone];
+		
+		[cell.iconImageView setImage:[UIImage imageNamed:[d objectForKey:@"icon"]]];
+		//[cell.imageView setBackgroundColor:[UIColor clearColor]];
+		[cell.imageView.layer setCornerRadius:4];
+		
+		[cell setSelectionStyle:UITableViewCellSelectionStyleGray];
+    }
+	if ([[d objectForKey:@"requiresConnection"] boolValue] && !internetActive) {
+		[cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-x.png"]];
+	}
+	else {
+		[cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-white.png"]];
+	}
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	[table deselectRowAtIndexPath:indexPath animated:YES];
+	NSDictionary *d = [data objectAtIndex:indexPath.section];
+	if ([[d objectForKey:@"requiresConnection"] boolValue] && !internetActive) {
+		[super displayMessage:@"requiresinternetconnection"];
+	}
+	else {
+		
+	}
+}
+
 
 @end

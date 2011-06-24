@@ -148,6 +148,11 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	[self doControllerCheck];
+	
+	if (YES) {
+		[super setData:[FTSimpleDB getItemsFromDb:kSystemHomeMenuDbName]];
+		[table reloadData];
+	}
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {

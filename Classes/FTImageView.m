@@ -162,7 +162,7 @@
 			[activityIndicator setAlpha:0];
 			[activityIndicator startAnimating];
 			[self addSubview:activityIndicator];
-			[activityIndicator astheticCenterInSuperView];
+			[activityIndicator aestheticCenterInSuperView];
 			[self enableLoadingElements:YES];
 		}
 	}

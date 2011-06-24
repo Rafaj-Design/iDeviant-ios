@@ -12,7 +12,7 @@
 		<key>name</key>
 		<string>search</string>
 		<key>requiresConnection</key>
-		<true/>
+		<false/>
 	</dict>
 	<dict>
 		<key>controller</key>
@@ -72,7 +72,7 @@
 	</dict>
 	<dict>
 		<key>controller</key>
-		<string>IDSettingsViewController</string>
+		<string>IDHomeSortingViewController</string>
 		<key>description</key>
 		<string>settingsdesc</string>
 		<key>icon</key>
@@ -82,7 +82,7 @@
 	</dict>
 	<dict>
 		<key>controller</key>
-		<string>IDSettingsViewController</string>
+		<string>FTAboutCompanyAndAppViewController</string>
 		<key>description</key>
 		<string>aboutdesc</string>
 		<key>icon</key>
