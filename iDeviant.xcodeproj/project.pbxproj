@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		103A9B1F13B493AC00D1709C /* DA_logo_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 103A9B1E13B493AC00D1709C /* DA_logo_114.png */; };
+		103A9B2113B493B400D1709C /* DA_logo_72.png in Resources */ = {isa = PBXBuildFile; fileRef = 103A9B2013B493B400D1709C /* DA_logo_72.png */; };
 		1D3623260D0F684500981E51 /* iDeviantAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* iDeviantAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -295,6 +297,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		103A9B1E13B493AC00D1709C /* DA_logo_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DA_logo_114.png; sourceTree = "<group>"; };
+		103A9B2013B493B400D1709C /* DA_logo_72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DA_logo_72.png; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* iDeviantAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iDeviantAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* iDeviantAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iDeviantAppDelegate.m; sourceTree = "<group>"; };
@@ -815,6 +819,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				103A9B2013B493B400D1709C /* DA_logo_72.png */,
+				103A9B1E13B493AC00D1709C /* DA_logo_114.png */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -2262,6 +2268,8 @@
 				4CBB0BEE13B399F800F67E1C /* IDHomeSortCell.xib in Resources */,
 				4CBB0BF113B4879500F67E1C /* DA_sorting-arrows.png in Resources */,
 				4CBB0BF213B4879500F67E1C /* DA_sorting-arrows@2x.png in Resources */,
+				103A9B1F13B493AC00D1709C /* DA_logo_114.png in Resources */,
+				103A9B2113B493B400D1709C /* DA_logo_72.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
