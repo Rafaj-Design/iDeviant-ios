@@ -16,6 +16,7 @@
 	<array>
 		<string>DA_logo_114.png</string>
 		<string>DA_logo_72.png</string>
+		<string>DA_logo_57.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
 	<string>com.xprogress.ideviant</string>
