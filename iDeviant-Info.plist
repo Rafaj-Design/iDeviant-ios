@@ -39,6 +39,8 @@
 	<array>
 		<string>HelveticaNeueLTPro-LtCn.otf</string>
 	</array>
+	<key>UIPrerenderedIcon</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
