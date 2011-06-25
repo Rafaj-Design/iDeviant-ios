@@ -14,11 +14,7 @@
 	<string></string>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>DA_logo@2x.png</string>
-		<string>DA_logo.png</string>
 		<string>DA_logo_114.png</string>
-		<string>DA_logo_114.png</string>
-		<string>DA_logo_72.png</string>
 		<string>DA_logo_72.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
