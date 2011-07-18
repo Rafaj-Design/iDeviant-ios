@@ -74,6 +74,7 @@
 #pragma mark Generating pages
 
 - (FTPage *)pageForIndex:(int)index {
+	NSLog(@"Page index: %d", index);
 	if (currentIndex < 0 || currentIndex >= [listThroughData count]) return nil;
 	MWFeedItem *item = [listThroughData objectAtIndex:currentIndex];
 	
