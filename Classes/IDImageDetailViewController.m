@@ -74,8 +74,9 @@
 #pragma mark Generating pages
 
 - (FTPage *)pageForIndex:(int)index {
-	NSLog(@"Page index: %d", index);
+	//NSLog(@"Page index: %d", index);
 	if (currentIndex < 0 || currentIndex >= [listThroughData count]) return nil;
+	NSLog(@"Page index: %d", index);
 	MWFeedItem *item = [listThroughData objectAtIndex:currentIndex];
 	
 	FTImagePage *page = [[[FTImagePage alloc] initWithFrame:[self getFrameForPage]] autorelease];
@@ -91,7 +92,7 @@
 			[page.imageZoomView.imageView enableDebugMode:YES];
 			[page zoomedImageWithUrl:[NSURL URLWithString:[[item.contents objectAtIndex:0] objectForKey:@"url"]] andDelegate:self];
 			[page.imageZoomView.imageView enableActivityIndicator:YES];
-			[page.imageZoomView.imageView enableProgressLoadingView:YES];
+			//[page.imageZoomView.imageView enableProgressLoadingView:YES];
 		}
 	}
 	else {
@@ -297,8 +298,8 @@
 }
 
 - (void)postCurrentImageOnFacebook {
-	iDeviantAppDelegate *appDelegate = (iDeviantAppDelegate *)[UIApplication sharedApplication].delegate;
-	if (![appDelegate.facebook isSessionValid]) [appDelegate.facebook authorize:nil delegate:appDelegate];
+	//iDeviantAppDelegate *appDelegate = (iDeviantAppDelegate *)[UIApplication sharedApplication].delegate;
+	//if (![appDelegate.facebook isSessionValid]) [appDelegate.facebook authorize:nil delegate:appDelegate];
 	[FlurryAPI logEvent:@"Func: Facebooking image"];
 }
 

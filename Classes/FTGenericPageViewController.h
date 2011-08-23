@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FTViewController.h"
+#import "IDViewController.h"
 #import "FTDynamicContentView.h"
 
 
-@interface FTGenericPageViewController : FTViewController {
+@interface FTGenericPageViewController : IDViewController {
     
 	FTDynamicContentView *contentView;
 	

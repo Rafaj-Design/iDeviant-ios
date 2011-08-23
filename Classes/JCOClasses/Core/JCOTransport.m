@@ -1,6 +1,6 @@
 #import "JCOMacros.h"
 #import "JCOTransport.h"
-#import "JSON.h"
+#import "SBJson.h"
 #import "JCO.h"
 #import "JCOAttachmentItem.h"
 

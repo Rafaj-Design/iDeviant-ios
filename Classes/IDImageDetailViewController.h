@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FTViewController.h"
+#import "IDViewController.h"
 #import "FTPageScrollView.h"
 #import "FTImageZoomView.h"
 #import "FTToolbar.h"
@@ -23,7 +23,7 @@
 @end
 
 
-@interface IDImageDetailViewController : FTViewController <UIActionSheetDelegate, FTImageViewDelegate, FTImageZoomViewDelegate, FTPageScrollViewDelegate> {
+@interface IDImageDetailViewController : IDViewController <UIActionSheetDelegate, FTImageViewDelegate, FTImageZoomViewDelegate, FTPageScrollViewDelegate> {
     
 	FTPageScrollView *mainView;
 	

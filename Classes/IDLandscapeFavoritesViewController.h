@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FTViewController.h"
+#import "IDViewController.h"
 #import "FTPagesScrollView.h"
 
 
-@interface IDLandscapeFavoritesViewController : FTViewController <FTPagesScrollViewDelegate, FTPagesScrollViewDataSource> {
+@interface IDLandscapeFavoritesViewController : IDViewController <FTPagesScrollViewDelegate, FTPagesScrollViewDataSource> {
     
 	FTPagesScrollView *galleryScrollView;
 	

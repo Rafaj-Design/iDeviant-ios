@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FTViewController.h"
+#import "IDViewController.h"
 
 
-@interface FTAboutCompanyAndAppViewController : FTViewController {
+@interface FTAboutCompanyAndAppViewController : IDViewController {
     
 }
 

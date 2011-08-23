@@ -50,7 +50,7 @@
 		[Appirater appLaunched];
 	}
 	
-	facebook = [[Facebook alloc] initWithAppId:@"118349561582677"];
+	facebook = [[Facebook alloc] initWithAppId:@"118349561582677" andDelegate:self];
 	
     // Override point for customization after application launch you bloody maggots.
 	IDHomeController *c = [[IDHomeController alloc] init];

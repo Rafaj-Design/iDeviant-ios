@@ -65,5 +65,9 @@
 	return cell;
 }
 
+- (CGFloat)tableView:(FTHorizontalTableView *)tableView widthForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return 100;
+}
+
 
 @end

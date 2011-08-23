@@ -86,7 +86,7 @@
 		[super displayMessage:@"requiresinternetconnection"];
 	}
 	else {
-		FTViewController *c = (FTViewController *)[[NSClassFromString([d objectForKey:@"controller"]) alloc] init];
+		IDViewController *c = (IDViewController *)[[NSClassFromString([d objectForKey:@"controller"]) alloc] init];
 		if (c) {
 			[c inheritConnectivity:internetActive];
 			[c setTitle:[d objectForKey:@"name"]];

@@ -1,6 +1,6 @@
 
 #import "ASIHTTPRequest.h"
-#import "JSON.h"
+#import "SBJson.h"
 #import "JCOPing.h"
 #import "JCO.h"
 #import "JCOIssueStore.h"

@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FTViewController.h"
+#import "IDViewController.h"
 
 
-@interface IDCategoriesViewController : FTViewController {
+@interface IDCategoriesViewController : IDViewController {
 	
 	NSDictionary *currentCategory;
 	
