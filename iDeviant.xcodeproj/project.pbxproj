@@ -179,6 +179,8 @@
 		4C7B6A5513A12AB800AA5D91 /* icon_send.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7B69F413A12AB800AA5D91 /* icon_send.png */; };
 		4C7B6A5613A12AB800AA5D91 /* icon_send@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7B69F513A12AB800AA5D91 /* icon_send@2x.png */; };
 		4C7B6A5713A12AB800AA5D91 /* writeareply.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C7B69F613A12AB800AA5D91 /* writeareply.png */; };
+		4C8AD5F51404F4280078DE52 /* HomeFull.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C8AD5F41404F4280078DE52 /* HomeFull.plist */; };
+		4C8AD6021404F5470078DE52 /* IDLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8AD6011404F5470078DE52 /* IDLoginViewController.m */; };
 		4C98AF1713943CBF00F567C9 /* IDFavoriteCategoriesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C98AF1613943CBF00F567C9 /* IDFavoriteCategoriesTableViewCell.xib */; };
 		4C98AF1D1394570D00F567C9 /* IDDocumentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C98AF1C1394570D00F567C9 /* IDDocumentDetailViewController.m */; };
 		4C98AF201394E16A00F567C9 /* document-template.html in Resources */ = {isa = PBXBuildFile; fileRef = 4C98AF1F1394E16A00F567C9 /* document-template.html */; };
@@ -483,6 +485,9 @@
 		4C7B69F413A12AB800AA5D91 /* icon_send.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_send.png; sourceTree = "<group>"; };
 		4C7B69F513A12AB800AA5D91 /* icon_send@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_send@2x.png"; sourceTree = "<group>"; };
 		4C7B69F613A12AB800AA5D91 /* writeareply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = writeareply.png; sourceTree = "<group>"; };
+		4C8AD5F41404F4280078DE52 /* HomeFull.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = HomeFull.plist; sourceTree = "<group>"; };
+		4C8AD6001404F5470078DE52 /* IDLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDLoginViewController.h; sourceTree = "<group>"; };
+		4C8AD6011404F5470078DE52 /* IDLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDLoginViewController.m; sourceTree = "<group>"; };
 		4C98AF1613943CBF00F567C9 /* IDFavoriteCategoriesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IDFavoriteCategoriesTableViewCell.xib; sourceTree = "<group>"; };
 		4C98AF1B1394570D00F567C9 /* IDDocumentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDDocumentDetailViewController.h; sourceTree = "<group>"; };
 		4C98AF1C1394570D00F567C9 /* IDDocumentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDDocumentDetailViewController.m; sourceTree = "<group>"; };
@@ -909,6 +914,7 @@
 		2B9442DC1254D82200D41406 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4C8AD5FE1404F5130078DE52 /* Login */,
 				4CBB0BB013B3364D00F67E1C /* Home menu sorting */,
 				4C4A7E30138D182000C8303A /* Company info controller */,
 				2BF232CD137F551B004351D5 /* Details */,
@@ -962,6 +968,7 @@
 		2B9E2D8B12EDF3C500D5C5D1 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				4C8AD5F41404F4280078DE52 /* HomeFull.plist */,
 				2B9E2D8C12EDF3D300D5C5D1 /* Home.plist */,
 			);
 			name = Home;
@@ -1402,6 +1409,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		4C8AD5FE1404F5130078DE52 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				4C8AD6001404F5470078DE52 /* IDLoginViewController.h */,
+				4C8AD6011404F5470078DE52 /* IDLoginViewController.m */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
 		4C98AF19139456D400F567C9 /* Image */ = {
 			isa = PBXGroup;
 			children = (
@@ -1700,6 +1716,7 @@
 				103A9B1F13B493AC00D1709C /* DA_logo_114.png in Resources */,
 				103A9B2113B493B400D1709C /* DA_logo_57.png in Resources */,
 				4CE38E9713B600B600DD2B36 /* DA_logo_72.png in Resources */,
+				4C8AD5F51404F4280078DE52 /* HomeFull.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1791,6 +1808,7 @@
 				4CBB0BB413B3369000F67E1C /* IDHomeSortingViewController.m in Sources */,
 				4CEB1BC814039FF500B70C98 /* UINavigationBar+IDTools.m in Sources */,
 				4CEB1C331403B3F600B70C98 /* FTImagePage.m in Sources */,
+				4C8AD6021404F5470078DE52 /* IDLoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

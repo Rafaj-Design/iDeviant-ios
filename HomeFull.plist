@@ -74,11 +74,21 @@
 		<key>controller</key>
 		<string>IDHomeSortingViewController</string>
 		<key>description</key>
-		<string>homesortingdesc</string>
+		<string>settingsdesc</string>
 		<key>icon</key>
 		<string>DA_icon6.png</string>
 		<key>name</key>
-		<string>homesorting</string>
+		<string>settings</string>
+	</dict>
+	<dict>
+		<key>controller</key>
+		<string>FTAboutCompanyAndAppViewController</string>
+		<key>description</key>
+		<string>aboutdesc</string>
+		<key>icon</key>
+		<string>DA_icon7.png</string>
+		<key>name</key>
+		<string>about</string>
 	</dict>
 </array>
 </plist>

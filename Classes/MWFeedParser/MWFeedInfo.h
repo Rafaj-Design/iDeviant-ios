@@ -31,9 +31,9 @@
 
 @interface MWFeedInfo : NSObject <NSCoding> {
 	
-	NSString *title; // Feed title
-	NSString *link; // Feed link
-	NSString *summary; // Feed summary / description
+	NSString *title;	// Feed title
+	NSString *link;		// Feed link
+	NSString *summary;	// Feed summary / description
 	
 }
 
