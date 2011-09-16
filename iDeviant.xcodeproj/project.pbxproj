@@ -1888,7 +1888,7 @@
 					"\"$(SRCROOT)/DerivedData/RunMe/Build/Products/Debug-iphoneos\"",
 				);
 				PRODUCT_NAME = iDeviant;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A67A9B68-F98F-4B94-AA85-C0758B6E2F39";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EA301D28-9EAE-412C-B0AD-01E09F200C03";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1916,7 +1916,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ondrej rafaj";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1927,6 +1927,7 @@
 					"-all_load",
 				);
 				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EA301D28-9EAE-412C-B0AD-01E09F200C03";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../FTLibrary/**";
 			};

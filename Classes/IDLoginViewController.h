@@ -6,8 +6,8 @@
 //  Copyright (c) 2011 Fuerte International. All rights reserved.
 //
 
+#import "IDViewController.h"
 
-
-@interface IDLoginViewController : STViewController
+@interface IDLoginViewController : IDViewController
 
 @end
