@@ -470,7 +470,7 @@
 
 - (void)setTitle:(NSString *)newTitle {
 	[super setTitle:[FTLang get:newTitle]];
-	[FlurryAPI logEvent:[NSString stringWithFormat:@"Screen: %@", newTitle]];
+	//[FlurryAPI logEvent:[NSString stringWithFormat:@"Screen: %@", newTitle]];
 }
 
 #pragma mark Table view data source & delegate methods

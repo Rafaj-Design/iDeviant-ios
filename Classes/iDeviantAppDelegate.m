@@ -9,17 +9,17 @@
 #import "iDeviantAppDelegate.h"
 #import "IDHomeController.h"
 #import "Configuration.h"
-#import "FlurryAPI.h"
+//#import "FlurryAPI.h"
 #import "Appirater.h"
 #import "IGABuildChecks.h"
 #import "ASIDownloadCache.h"
-#import "JCO.h"
+//#import "JCO.h"
 
 
 @implementation iDeviantAppDelegate
 
 @synthesize window;
-@synthesize facebook;
+//@synthesize facebook;
 
 
 #pragma mark Application lifecycle
@@ -31,26 +31,26 @@
 		[IGABuildChecks perform];
 	}
 	
-	// starting Flurry tracking
-	if (kSystemTrackingFlurryEnableTracking) {
-		if (kDebug && [kSystemTrackingFlurryAPICode isEqualToString:@"app-code-here"]) NSLog(@"Configuration error: Please check Flurry API code!"); 
-		[FlurryAPI startSession:kSystemTrackingFlurryAPICode];
-		
-		// Track information about language
-		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-		NSArray *languages = [defaults objectForKey:@"AppleLanguages"];
-		NSString *currentLanguage = [languages objectAtIndex:0];
-		
-		[FlurryAPI logEvent:[NSString stringWithFormat:@"Locale id: %@", [[NSLocale currentLocale] localeIdentifier]]];
-		[FlurryAPI logEvent:[NSString stringWithFormat:@"Current language: : %@", currentLanguage]];
-	}
+//	// starting Flurry tracking
+//	if (kSystemTrackingFlurryEnableTracking) {
+//		if (kDebug && [kSystemTrackingFlurryAPICode isEqualToString:@"app-code-here"]) NSLog(@"Configuration error: Please check Flurry API code!"); 
+//		[FlurryAPI startSession:kSystemTrackingFlurryAPICode];
+//		
+//		// Track information about language
+//		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//		NSArray *languages = [defaults objectForKey:@"AppleLanguages"];
+//		NSString *currentLanguage = [languages objectAtIndex:0];
+//		
+//		[FlurryAPI logEvent:[NSString stringWithFormat:@"Locale id: %@", [[NSLocale currentLocale] localeIdentifier]]];
+//		[FlurryAPI logEvent:[NSString stringWithFormat:@"Current language: : %@", currentLanguage]];
+//	}
 	
 	// Starting AppiRater
 	if (kSystemApiRaterDebug || kSystemApiRaterEnabled) {
 		[Appirater appLaunched];
 	}
 	
-	facebook = [[Facebook alloc] initWithAppId:@"118349561582677" andDelegate:self];
+	//facebook = [[Facebook alloc] initWithAppId:@"118349561582677" andDelegate:self];
 	
     // Override point for customization after application launch you bloody maggots.
 	IDHomeController *c = [[IDHomeController alloc] init];
@@ -62,7 +62,7 @@
     [window makeKeyAndVisible];
 	
 	// Jira bug tracking system
-	[[JCO instance] configureJiraConnect:kSystemJiraErrorReporting customDataSource:nil];
+	//[[JCO instance] configureJiraConnect:kSystemJiraErrorReporting customDataSource:nil];
 	
 	// Clear cache
 	[[ASIDownloadCache sharedCache] clearCachedResponsesForStoragePolicy:ASICachePermanentlyCacheStoragePolicy];
@@ -70,9 +70,9 @@
     return YES;
 }
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {	
-    return [facebook handleOpenURL:url]; 
-}
+//- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {	
+//    return [facebook handleOpenURL:url]; 
+//}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     /*

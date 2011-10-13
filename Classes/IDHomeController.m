@@ -12,7 +12,7 @@
 #import "IDHomeTableViewCell.h"
 #import "FTSimpleDB.h"
 #import "Configuration.h"
-#import "JCO.h"
+//#import "JCO.h"
 
 
 @implementation IDHomeController
@@ -110,11 +110,11 @@
 }
 
 -(void) showFeedback {
-    [self presentModalViewController:[[JCO instance] viewController] animated:YES];
+    //[self presentModalViewController:[[JCO instance] viewController] animated:YES];
 }
 
 -(void) showPastFeedback {
-    [self presentModalViewController:[[JCO instance] issuesViewController] animated:YES];
+    //[self presentModalViewController:[[JCO instance] issuesViewController] animated:YES];
 }
 
 

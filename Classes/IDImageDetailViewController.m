@@ -294,17 +294,17 @@
 - (void)saveCurrentImageToGallery {
 //	UIImage *myImage = mainView.imageView.image;
 //	UIImageWriteToSavedPhotosAlbum(myImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-	[FlurryAPI logEvent:@"Func: Saving image"];
+	//[FlurryAPI logEvent:@"Func: Saving image"];
 }
 
 - (void)postCurrentImageOnFacebook {
 	//iDeviantAppDelegate *appDelegate = (iDeviantAppDelegate *)[UIApplication sharedApplication].delegate;
 	//if (![appDelegate.facebook isSessionValid]) [appDelegate.facebook authorize:nil delegate:appDelegate];
-	[FlurryAPI logEvent:@"Func: Facebooking image"];
+	//[FlurryAPI logEvent:@"Func: Facebooking image"];
 }
 
 - (void)emailCurrentImage {
-	[FlurryAPI logEvent:@"Func: Emailing image"];
+	//[FlurryAPI logEvent:@"Func: Emailing image"];
 }
 
 #pragma mark Actions

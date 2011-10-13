@@ -8,21 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import "FTNavigationViewController.h"
-#import "FBConnect.h"
+//#import "FBConnect.h"
 
 
-@interface iDeviantAppDelegate : NSObject <UIApplicationDelegate, FBSessionDelegate> {
+@interface iDeviantAppDelegate : NSObject <UIApplicationDelegate> {
     
     UIWindow *window;
     FTNavigationViewController *navigationController;
 	
-	Facebook *facebook;
+	//Facebook *facebook;
 	
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
-@property (nonatomic, retain) Facebook *facebook;
+//@property (nonatomic, retain) Facebook *facebook;
 
 
 - (void)showNetworkActivity:(BOOL)visible sender:(id)sender;
