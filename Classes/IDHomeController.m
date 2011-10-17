@@ -110,7 +110,7 @@
 }
 
 -(void) showFeedback {
-    //[self presentModalViewController:[[JCO instance] viewController] animated:YES];
+    //[self presentModalViewcontroller:[[JCO instance] viewController] animated:YES];
 }
 
 -(void) showPastFeedback {

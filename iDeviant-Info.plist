@@ -17,7 +17,7 @@
 		<string>DA_logo_57.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>com.fuerteint.ideviant</string>
+	<string>cz.fuerte.ideviant</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

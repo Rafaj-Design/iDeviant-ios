@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -34,8 +34,6 @@
 		2B5A8F231378A9A1003FA2CE /* IDCategoriesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A8F221378A9A1003FA2CE /* IDCategoriesTableViewCell.m */; };
 		2B5A8F261378A9AE003FA2CE /* IDItemsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B5A8F251378A9AE003FA2CE /* IDItemsTableViewCell.m */; };
 		2B7BF80A137E9FAB00211D28 /* IDItemsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B7BF809137E9FAA00211D28 /* IDItemsTableViewCell.xib */; };
-		2B7BF82E137EB58400211D28 /* fuerte-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B7BF82C137EB58300211D28 /* fuerte-logo.png */; };
-		2B7BF82F137EB58400211D28 /* fuerte-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B7BF82D137EB58300211D28 /* fuerte-logo@2x.png */; };
 		2B9442DD1254D82200D41406 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9442CF1254D82200D41406 /* Appirater.m */; };
 		2B9442DE1254D82200D41406 /* IGAMemTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9442D71254D82200D41406 /* IGAMemTools.m */; };
 		2B9442DF1254D82200D41406 /* IGABuildChecks.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B9442D91254D82200D41406 /* IGABuildChecks.m */; };
@@ -113,7 +111,6 @@
 		4CD28A7113AA88030023F034 /* IDHorizontalItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD28A7013AA88030023F034 /* IDHorizontalItems.m */; };
 		4CD64E8513A3A60C00DE51A9 /* IDImageZoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD64E8413A3A60C00DE51A9 /* IDImageZoomView.m */; };
 		4CE38E9713B600B600DD2B36 /* DA_logo_72.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CE38E9613B600B600DD2B36 /* DA_logo_72.png */; };
-		4CEB1BC414039E5D00B70C98 /* libFTLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1BC314039E5D00B70C98 /* libFTLibrary.a */; };
 		4CEB1BC814039FF500B70C98 /* UINavigationBar+IDTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB1BC714039FF500B70C98 /* UINavigationBar+IDTools.m */; };
 		4CEB1C191403B37300B70C98 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1C011403B37300B70C98 /* Foundation.framework */; };
 		4CEB1C1A1403B37300B70C98 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1C021403B37300B70C98 /* CoreGraphics.framework */; };
@@ -127,7 +124,6 @@
 		4CEB1C221403B37300B70C98 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1C0A1403B37300B70C98 /* CoreMedia.framework */; };
 		4CEB1C241403B37300B70C98 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1C0C1403B37300B70C98 /* CoreText.framework */; };
 		4CEB1C251403B37300B70C98 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1C0D1403B37300B70C98 /* libxml2.dylib */; };
-		4CEB1C261403B37300B70C98 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1C0E1403B37300B70C98 /* Foundation.framework */; };
 		4CEB1C281403B37300B70C98 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1C101403B37300B70C98 /* libz.dylib */; };
 		4CEB1C291403B37300B70C98 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1C111403B37300B70C98 /* MapKit.framework */; };
 		4CEB1C2A1403B37300B70C98 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1C121403B37300B70C98 /* MediaPlayer.framework */; };
@@ -136,7 +132,6 @@
 		4CEB1C2D1403B37300B70C98 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1C151403B37300B70C98 /* OpenAL.framework */; };
 		4CEB1C2E1403B37300B70C98 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1C161403B37300B70C98 /* QuartzCore.framework */; };
 		4CEB1C2F1403B37300B70C98 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1C171403B37300B70C98 /* SystemConfiguration.framework */; };
-		4CEB1C301403B37300B70C98 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1C181403B37300B70C98 /* CoreGraphics.framework */; };
 		4CEB1C331403B3F600B70C98 /* FTImagePage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB1C321403B3F600B70C98 /* FTImagePage.m */; };
 		4CF0203D139270F700ED1E47 /* DA_icon6.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CF02035139270F700ED1E47 /* DA_icon6.png */; };
 		4CF0203E139270F700ED1E47 /* DA_icon6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CF02036139270F700ED1E47 /* DA_icon6@2x.png */; };
@@ -149,6 +144,9 @@
 		4CF020481392EF5800ED1E47 /* IDFavouriteCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF020471392EF5800ED1E47 /* IDFavouriteCategories.m */; };
 		4CF0204B1392EF6B00ED1E47 /* IDFavouriteItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF0204A1392EF6B00ED1E47 /* IDFavouriteItems.m */; };
 		C7E02E6E12DF03BD0098AAE6 /* FTNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E02E6D12DF03BD0098AAE6 /* FTNavigationViewController.m */; };
+		C84031591448BD6B00D86A99 /* fuerte-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C84031571448BD6B00D86A99 /* fuerte-logo@2x.png */; };
+		C840315A1448BD6B00D86A99 /* fuerte-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = C84031581448BD6B00D86A99 /* fuerte-logo.png */; };
+		C8830CA9144745D400416C81 /* libFTLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C8830CA8144745D400416C81 /* libFTLibrary.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -197,8 +195,6 @@
 		2B5A8F241378A9AE003FA2CE /* IDItemsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDItemsTableViewCell.h; sourceTree = "<group>"; };
 		2B5A8F251378A9AE003FA2CE /* IDItemsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDItemsTableViewCell.m; sourceTree = "<group>"; };
 		2B7BF809137E9FAA00211D28 /* IDItemsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IDItemsTableViewCell.xib; sourceTree = "<group>"; };
-		2B7BF82C137EB58300211D28 /* fuerte-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fuerte-logo.png"; sourceTree = "<group>"; };
-		2B7BF82D137EB58300211D28 /* fuerte-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fuerte-logo@2x.png"; sourceTree = "<group>"; };
 		2B9442CE1254D82200D41406 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		2B9442CF1254D82200D41406 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		2B9442D61254D82200D41406 /* IGAMemTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGAMemTools.h; sourceTree = "<group>"; };
@@ -311,7 +307,6 @@
 		4CD64E8313A3A60C00DE51A9 /* IDImageZoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDImageZoomView.h; sourceTree = "<group>"; };
 		4CD64E8413A3A60C00DE51A9 /* IDImageZoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDImageZoomView.m; sourceTree = "<group>"; };
 		4CE38E9613B600B600DD2B36 /* DA_logo_72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DA_logo_72.png; sourceTree = "<group>"; };
-		4CEB1BC314039E5D00B70C98 /* libFTLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFTLibrary.a; path = "DerivedData/RunMe/Build/Products/Debug-iphoneos/libFTLibrary.a"; sourceTree = "<group>"; };
 		4CEB1BC614039FF500B70C98 /* UINavigationBar+IDTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+IDTools.h"; sourceTree = "<group>"; };
 		4CEB1BC714039FF500B70C98 /* UINavigationBar+IDTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+IDTools.m"; sourceTree = "<group>"; };
 		4CEB1C011403B37300B70C98 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -354,6 +349,9 @@
 		C7E02E6C12DF03BD0098AAE6 /* FTNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTNavigationViewController.h; sourceTree = "<group>"; };
 		C7E02E6D12DF03BD0098AAE6 /* FTNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTNavigationViewController.m; sourceTree = "<group>"; };
 		C7E02EA412DF04DE0098AAE6 /* FTMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMacros.h; sourceTree = "<group>"; };
+		C84031571448BD6B00D86A99 /* fuerte-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fuerte-logo@2x.png"; sourceTree = "<group>"; };
+		C84031581448BD6B00D86A99 /* fuerte-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fuerte-logo.png"; sourceTree = "<group>"; };
+		C8830CA8144745D400416C81 /* libFTLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFTLibrary.a; path = "../../../Library/Developer/Xcode/DerivedData/RunMe-cslzpemdbmqbpkcfxqhbxzlsratz/Build/Products/Debug-iphoneos/libFTLibrary.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -361,7 +359,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4CEB1BC414039E5D00B70C98 /* libFTLibrary.a in Frameworks */,
+				C8830CA9144745D400416C81 /* libFTLibrary.a in Frameworks */,
 				4CEB1C191403B37300B70C98 /* Foundation.framework in Frameworks */,
 				4CEB1C1A1403B37300B70C98 /* CoreGraphics.framework in Frameworks */,
 				4CEB1C1B1403B37300B70C98 /* UIKit.framework in Frameworks */,
@@ -374,7 +372,6 @@
 				4CEB1C221403B37300B70C98 /* CoreMedia.framework in Frameworks */,
 				4CEB1C241403B37300B70C98 /* CoreText.framework in Frameworks */,
 				4CEB1C251403B37300B70C98 /* libxml2.dylib in Frameworks */,
-				4CEB1C261403B37300B70C98 /* Foundation.framework in Frameworks */,
 				4CEB1C281403B37300B70C98 /* libz.dylib in Frameworks */,
 				4CEB1C291403B37300B70C98 /* MapKit.framework in Frameworks */,
 				4CEB1C2A1403B37300B70C98 /* MediaPlayer.framework in Frameworks */,
@@ -383,7 +380,6 @@
 				4CEB1C2D1403B37300B70C98 /* OpenAL.framework in Frameworks */,
 				4CEB1C2E1403B37300B70C98 /* QuartzCore.framework in Frameworks */,
 				4CEB1C2F1403B37300B70C98 /* SystemConfiguration.framework in Frameworks */,
-				4CEB1C301403B37300B70C98 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +451,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C8830CA8144745D400416C81 /* libFTLibrary.a */,
 				4CEB1C011403B37300B70C98 /* Foundation.framework */,
 				4CEB1C021403B37300B70C98 /* CoreGraphics.framework */,
 				4CEB1C031403B37300B70C98 /* UIKit.framework */,
@@ -477,7 +474,6 @@
 				4CEB1C161403B37300B70C98 /* QuartzCore.framework */,
 				4CEB1C171403B37300B70C98 /* SystemConfiguration.framework */,
 				4CEB1C181403B37300B70C98 /* CoreGraphics.framework */,
-				4CEB1BC314039E5D00B70C98 /* libFTLibrary.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -723,7 +719,6 @@
 				2B9E2DB212EDF9E600D5C5D1 /* Favorites */,
 				2B5A8EFF1378969C003FA2CE /* Items */,
 				2B5A8EF713789555003FA2CE /* Settings */,
-				2B5A8EF313788D5C003FA2CE /* Landscape */,
 				2B9E2D7512EDEFC400D5C5D1 /* Basic */,
 				2B9E2D7612EDEFCB00D5C5D1 /* Home */,
 				2B9E2DAD12EDF9A700D5C5D1 /* Categories */,
@@ -1114,6 +1109,7 @@
 			children = (
 				4CBB0BB213B3369000F67E1C /* IDHomeSortingViewController.h */,
 				4CBB0BB313B3369000F67E1C /* IDHomeSortingViewController.m */,
+				2B5A8EF313788D5C003FA2CE /* Landscape */,
 			);
 			name = "Home menu sorting";
 			sourceTree = "<group>";
@@ -1183,9 +1179,9 @@
 		C7E02F7E12DF0ABC0098AAE6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				C84031571448BD6B00D86A99 /* fuerte-logo@2x.png */,
+				C84031581448BD6B00D86A99 /* fuerte-logo.png */,
 				2BF7D57E137ED3C1002E9B74 /* skins */,
-				2B7BF82C137EB58300211D28 /* fuerte-logo.png */,
-				2B7BF82D137EB58300211D28 /* fuerte-logo@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -1216,10 +1212,11 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0410;
 				ORGANIZATIONNAME = "Fuerte International";
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "iDeviant" */;
-			compatibilityVersion = "Xcode 3.1";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -1254,8 +1251,6 @@
 				2BA761881375E0CF006B1A65 /* hydraulic1.mp3 in Resources */,
 				2BA7618B1375E0CF006B1A65 /* page.mp3 in Resources */,
 				2B7BF80A137E9FAB00211D28 /* IDItemsTableViewCell.xib in Resources */,
-				2B7BF82E137EB58400211D28 /* fuerte-logo.png in Resources */,
-				2B7BF82F137EB58400211D28 /* fuerte-logo@2x.png in Resources */,
 				2BF7D592137ED3C1002E9B74 /* DA_arrow-white.png in Resources */,
 				2BF7D593137ED3C1002E9B74 /* DA_arrow-white@2x.png in Resources */,
 				2BF7D594137ED3C1002E9B74 /* DA_icon1.png in Resources */,
@@ -1313,6 +1308,8 @@
 				103A9B2113B493B400D1709C /* DA_logo_57.png in Resources */,
 				4CE38E9713B600B600DD2B36 /* DA_logo_72.png in Resources */,
 				4C8AD5F51404F4280078DE52 /* HomeFull.plist in Resources */,
+				C84031591448BD6B00D86A99 /* fuerte-logo@2x.png in Resources */,
+				C840315A1448BD6B00D86A99 /* fuerte-logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1406,6 +1403,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alex Siddall (383SY3D8S9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alex Siddall (383SY3D8S9)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1415,14 +1414,18 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iDeviant_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "iDeviant-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/DerivedData/RunMe/Build/Products/Debug-iphoneos\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/RunMe-cslzpemdbmqbpkcfxqhbxzlsratz/Build/Products/Debug-iphoneos\"",
 				);
 				PRODUCT_NAME = iDeviant;
+				PROVISIONING_PROFILE = "3D07B7A8-035A-46C4-BE07-E804902C36FB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "55A927DB-FC19-4F7F-A563-8B61552044CE";
 			};
 			name = Debug;
 		};
@@ -1430,7 +1433,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Fuerte Int Ltd";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alex Siddall (383SY3D8S9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alex Siddall (383SY3D8S9)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1438,15 +1442,18 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iDeviant_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "iDeviant-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/DerivedData/RunMe/Build/Products/Debug-iphoneos\"",
+					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/RunMe-cslzpemdbmqbpkcfxqhbxzlsratz/Build/Products/Debug-iphoneos\"",
 				);
 				PRODUCT_NAME = iDeviant;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A7E3CDE4-77D1-4F8E-A828-B6B1A8C485D5";
+				PROVISIONING_PROFILE = "3D07B7A8-035A-46C4-BE07-E804902C36FB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "55A927DB-FC19-4F7F-A563-8B61552044CE";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1460,11 +1467,11 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "../FTLibrary/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
 				);
-				PREBINDING = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../FTLibrary/**";
 			};
@@ -1479,12 +1486,12 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "../FTLibrary/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
 				);
-				PREBINDING = NO;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EA301D28-9EAE-412C-B0AD-01E09F200C03";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../FTLibrary/**";
