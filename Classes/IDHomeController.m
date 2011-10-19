@@ -88,7 +88,7 @@
 	else {
 		IDViewController *c = (IDViewController *)[[NSClassFromString([d objectForKey:@"controller"]) alloc] init];
 		if (c) {
-			[c inheritConnectivity:internetActive];
+			//[c inheritConnectivity:internetActive];
 			[c setTitle:[d objectForKey:@"name"]];
 			[self.navigationController pushViewController:c animated:YES];
 			[c release];

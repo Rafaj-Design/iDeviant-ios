@@ -113,7 +113,6 @@
 		4CE38E9713B600B600DD2B36 /* DA_logo_72.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CE38E9613B600B600DD2B36 /* DA_logo_72.png */; };
 		4CEB1BC814039FF500B70C98 /* UINavigationBar+IDTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEB1BC714039FF500B70C98 /* UINavigationBar+IDTools.m */; };
 		4CEB1C191403B37300B70C98 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1C011403B37300B70C98 /* Foundation.framework */; };
-		4CEB1C1A1403B37300B70C98 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1C021403B37300B70C98 /* CoreGraphics.framework */; };
 		4CEB1C1B1403B37300B70C98 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1C031403B37300B70C98 /* UIKit.framework */; };
 		4CEB1C1C1403B37300B70C98 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1C041403B37300B70C98 /* AddressBook.framework */; };
 		4CEB1C1D1403B37300B70C98 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1C051403B37300B70C98 /* AddressBookUI.framework */; };
@@ -146,6 +145,10 @@
 		C7E02E6E12DF03BD0098AAE6 /* FTNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E02E6D12DF03BD0098AAE6 /* FTNavigationViewController.m */; };
 		C84031591448BD6B00D86A99 /* fuerte-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C84031571448BD6B00D86A99 /* fuerte-logo@2x.png */; };
 		C840315A1448BD6B00D86A99 /* fuerte-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = C84031581448BD6B00D86A99 /* fuerte-logo.png */; };
+		C85DB467144F334E00FC0929 /* IDSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C85DB466144F334E00FC0929 /* IDSettingsViewController.xib */; };
+		C85DB472144F40BA00FC0929 /* IDLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = C85DB470144F40BA00FC0929 /* IDLoginController.m */; };
+		C85DB473144F40BA00FC0929 /* IDLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C85DB471144F40BA00FC0929 /* IDLoginController.xib */; };
+		C85DB478144F587500FC0929 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1C181403B37300B70C98 /* CoreGraphics.framework */; };
 		C8830CA9144745D400416C81 /* libFTLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C8830CA8144745D400416C81 /* libFTLibrary.a */; };
 /* End PBXBuildFile section */
 
@@ -351,6 +354,10 @@
 		C7E02EA412DF04DE0098AAE6 /* FTMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMacros.h; sourceTree = "<group>"; };
 		C84031571448BD6B00D86A99 /* fuerte-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fuerte-logo@2x.png"; sourceTree = "<group>"; };
 		C84031581448BD6B00D86A99 /* fuerte-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fuerte-logo.png"; sourceTree = "<group>"; };
+		C85DB466144F334E00FC0929 /* IDSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IDSettingsViewController.xib; sourceTree = "<group>"; };
+		C85DB46F144F40BA00FC0929 /* IDLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDLoginController.h; sourceTree = "<group>"; };
+		C85DB470144F40BA00FC0929 /* IDLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDLoginController.m; sourceTree = "<group>"; };
+		C85DB471144F40BA00FC0929 /* IDLoginController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IDLoginController.xib; sourceTree = "<group>"; };
 		C8830CA8144745D400416C81 /* libFTLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFTLibrary.a; path = "../../../Library/Developer/Xcode/DerivedData/RunMe-cslzpemdbmqbpkcfxqhbxzlsratz/Build/Products/Debug-iphoneos/libFTLibrary.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -359,9 +366,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C85DB478144F587500FC0929 /* CoreGraphics.framework in Frameworks */,
 				C8830CA9144745D400416C81 /* libFTLibrary.a in Frameworks */,
 				4CEB1C191403B37300B70C98 /* Foundation.framework in Frameworks */,
-				4CEB1C1A1403B37300B70C98 /* CoreGraphics.framework in Frameworks */,
 				4CEB1C1B1403B37300B70C98 /* UIKit.framework in Frameworks */,
 				4CEB1C1C1403B37300B70C98 /* AddressBook.framework in Frameworks */,
 				4CEB1C1D1403B37300B70C98 /* AddressBookUI.framework in Frameworks */,
@@ -563,6 +570,8 @@
 			children = (
 				2B5A8EFC137895A6003FA2CE /* IDSettingsViewController.h */,
 				2B5A8EFD137895A6003FA2CE /* IDSettingsViewController.m */,
+				C85DB466144F334E00FC0929 /* IDSettingsViewController.xib */,
+				C85DB46E144F408400FC0929 /* webView */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -1186,6 +1195,16 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
+		C85DB46E144F408400FC0929 /* webView */ = {
+			isa = PBXGroup;
+			children = (
+				C85DB46F144F40BA00FC0929 /* IDLoginController.h */,
+				C85DB470144F40BA00FC0929 /* IDLoginController.m */,
+				C85DB471144F40BA00FC0929 /* IDLoginController.xib */,
+			);
+			name = webView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1310,6 +1329,8 @@
 				4C8AD5F51404F4280078DE52 /* HomeFull.plist in Resources */,
 				C84031591448BD6B00D86A99 /* fuerte-logo@2x.png in Resources */,
 				C840315A1448BD6B00D86A99 /* fuerte-logo.png in Resources */,
+				C85DB467144F334E00FC0929 /* IDSettingsViewController.xib in Resources */,
+				C85DB473144F40BA00FC0929 /* IDLoginController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1373,6 +1394,7 @@
 				4CEB1BC814039FF500B70C98 /* UINavigationBar+IDTools.m in Sources */,
 				4CEB1C331403B3F600B70C98 /* FTImagePage.m in Sources */,
 				4C8AD6021404F5470078DE52 /* IDLoginViewController.m in Sources */,
+				C85DB472144F40BA00FC0929 /* IDLoginController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
