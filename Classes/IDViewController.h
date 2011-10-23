@@ -47,7 +47,7 @@
 	UIBarButtonItem *refreshButton;
 	
 	UILabel *message;
-	
+	UIActivityIndicatorView *ai;
 }
 
 @property (nonatomic, retain) NSArray *data;
@@ -65,7 +65,6 @@
 //@property (nonatomic, readonly) BOOL hostActive;
 
 @property (nonatomic, retain) UILabel *message;
-
 
 
 - (CGRect)fullScreeniPhoneFrame;

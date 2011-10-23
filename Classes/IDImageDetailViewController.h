@@ -31,7 +31,7 @@
 	
 	FTToolbar *bottomBar;
 	
-	UIActivityIndicatorView *ai;
+	//UIActivityIndicatorView *ai;
 	
 	int currentIndex;
 	

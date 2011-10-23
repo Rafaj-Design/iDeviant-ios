@@ -691,7 +691,7 @@
 
 - (void)feedParserDidFinish:(MWFeedParser *)parser {
 	NSLog(@"Finished Parsing%@", (parser.stopped ? @" (Stopped)" : @""));
-	
+	[ai stopAnimating];
 	NSArray *arr = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
 	[self setData:[parsedItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:arr]]];
 	[arr release];
@@ -724,6 +724,11 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
 	[searchBarHeader setShowsCancelButton:NO animated:YES];
 	[searchBarHeader resignFirstResponder];
+    ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [ai setHidesWhenStopped:YES];
+    [ai startAnimating];
+    [ai setOrigin:CGPointMake(self.view.center.x, self.view.center.y)];
+    [self.view addSubview:ai];
 	[self getDataForSearchString:[searchBarHeader text] andCategory:nil];
 }
 
