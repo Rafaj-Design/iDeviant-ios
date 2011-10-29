@@ -14,7 +14,6 @@
 #import "Configuration.h"
 //#import "JCO.h"
 
-
 @implementation IDHomeController
 
 
@@ -121,6 +120,18 @@
 #pragma mark View delegate methods
 
 - (void)viewDidLoad {
+    
+    //==
+	
+    UIColor *color = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.7];
+	UIImage *img = [UIImage imageNamed:@"DA_topbar.png"];
+	[img drawInRect:CGRectMake(0, 0, 10, 10)];
+    [self.navigationController.navigationBar setBackgroundImage:img forBarMetrics:UIBarMetricsDefault];
+	[self.navigationController.navigationBar setTintColor:color];
+	
+    //==
+    
+    
     [super viewDidLoad];
 	
 	if ([FTSimpleDB getNumberOfItemsInDb:kSystemHomeMenuDbName] == 0) {
@@ -148,8 +159,8 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	[self doControllerCheck];
-	
-	if (YES) {
+    
+    if (YES) {
 		[super setData:[FTSimpleDB getItemsFromDb:kSystemHomeMenuDbName]];
 		[table reloadData];
 	}
