@@ -81,6 +81,8 @@
 	
 	FTImagePage *page = [[[FTImagePage alloc] initWithFrame:[self getFrameForPage]] autorelease];
 	[page setPageIndex:index];
+    
+    //info box on image [loaded from cash/web]
 	//[page zoomedImageNamed:@"wallpaper.jpg"];
 	BOOL canAccess = YES;
 	if ([item.rating isEqualToString:@"adult"]) {
@@ -91,7 +93,7 @@
 			//[cell.cellImageView loadImageFromUrl:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]];
 			[page.imageZoomView.imageView enableDebugMode:YES];
 			[page zoomedImageWithUrl:[NSURL URLWithString:[[item.contents objectAtIndex:0] objectForKey:@"url"]] andDelegate:self];
-			[page.imageZoomView.imageView enableActivityIndicator:YES];
+			//[page.imageZoomView.imageView enableActivityIndicator:YES];
 			//[page.imageZoomView.imageView enableProgressLoadingView:YES];
 		}
 	}
@@ -172,14 +174,15 @@
 	
 //	[mainView setZoomDelegate:self];
 //	[mainView loadImageFromUrl:imageUrl];
-	
+	/*
 	UITapGestureRecognizer *doubletap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewTwice:)];
 	[doubletap setNumberOfTapsRequired:2];
 	[mainView addGestureRecognizer:doubletap];
 	[doubletap release];
-	
+	*/
+    
 	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewOnce:)];
-	[tap requireGestureRecognizerToFail:doubletap];
+	//[tap requireGestureRecognizerToFail:doubletap];
 	[mainView addGestureRecognizer:tap];
 	[tap release];
 	
@@ -190,10 +193,10 @@
 	[bottomBar setItems:[NSArray arrayWithObjects:actionButton, nil]];
 	[actionButton release];
 	
-//	ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-//	[ai setHidesWhenStopped:YES];
-//	[ai startAnimating];
-//	[self.view addSubview:ai];
+	ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	[ai setHidesWhenStopped:YES];
+	[ai startAnimating];
+	[self.view addSubview:ai];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -248,6 +251,7 @@
 	}
 }
 
+/*
 - (void)didTapViewTwice:(UITapGestureRecognizer *)recognizer {
 	if (!shortcutView) {
 		shortcutView = [[IDHorizontalItems alloc] initWithFrame:[self frameForShortcutView] andData:data];
@@ -271,7 +275,7 @@
 	}
 	
 }
-
+*/
 #pragma mark Image loading
 
 - (void)imageZoomViewDidFinishLoadingImage:(FTImageZoomView *)zoomView {
@@ -283,6 +287,7 @@
 						 [ai stopAnimating];
 					 }
 	 ];
+    [ai stopAnimating];
 }
 
 #pragma mark Actions methods
@@ -332,16 +337,18 @@
 #pragma mark Image view delegate & data source methods
 
 - (void)imageView:(FTImageView *)imgView didFinishLoadingImage:(UIImage *)image {
-	
+	[ai stopAnimating];
 }
 
 #pragma mark Page scroll view delegate & data source methods
 
 - (FTPage *)leftPageForPageScrollView:(FTPageScrollView *)scrollView withTouchCount:(NSInteger)touchCount {
-	return [self pageForIndex:(currentIndex - 1)];
+	[ai startAnimating];
+    return [self pageForIndex:(currentIndex - 1)];
 }
 
 - (FTPage *)rightPageForPageScrollView:(FTPageScrollView *)scrollView withTouchCount:(NSInteger)touchCount {
+    [ai startAnimating];
 	return [self pageForIndex:(currentIndex + 1)];
 }
 

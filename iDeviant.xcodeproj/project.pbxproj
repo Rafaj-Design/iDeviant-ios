@@ -1231,7 +1231,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0410;
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "Fuerte International";
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "iDeviant" */;
@@ -1436,7 +1436,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iDeviant_Prefix.pch;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iDeviant-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				LIBRARY_SEARCH_PATHS = (
@@ -1446,8 +1446,8 @@
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/RunMe-cslzpemdbmqbpkcfxqhbxzlsratz/Build/Products/Debug-iphoneos\"",
 				);
 				PRODUCT_NAME = iDeviant;
-				PROVISIONING_PROFILE = "3D07B7A8-035A-46C4-BE07-E804902C36FB";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "55A927DB-FC19-4F7F-A563-8B61552044CE";
+				PROVISIONING_PROFILE = "A014AED8-4BD1-4013-BFB3-C4A213CA2324";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A014AED8-4BD1-4013-BFB3-C4A213CA2324";
 			};
 			name = Debug;
 		};
@@ -1464,7 +1464,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iDeviant_Prefix.pch;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iDeviant-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				LIBRARY_SEARCH_PATHS = (
@@ -1474,8 +1474,8 @@
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/RunMe-cslzpemdbmqbpkcfxqhbxzlsratz/Build/Products/Debug-iphoneos\"",
 				);
 				PRODUCT_NAME = iDeviant;
-				PROVISIONING_PROFILE = "3D07B7A8-035A-46C4-BE07-E804902C36FB";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "55A927DB-FC19-4F7F-A563-8B61552044CE";
+				PROVISIONING_PROFILE = "A014AED8-4BD1-4013-BFB3-C4A213CA2324";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A014AED8-4BD1-4013-BFB3-C4A213CA2324";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
