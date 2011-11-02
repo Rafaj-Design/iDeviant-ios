@@ -25,6 +25,22 @@
         [arr release];
     }
     
+    [self.nick setDelegate:self];
+    [self.nick setReturnKeyType:UIReturnKeyNext];
+    [self.nick addTarget:self
+                  action:@selector(nextTextField)
+        forControlEvents:UIControlEventEditingDidEndOnExit];
+    
+    [self.pass setDelegate:self];
+    [self.pass setReturnKeyType:UIReturnKeyDone];
+    [self.pass addTarget:self
+                       action:@selector(login:)
+             forControlEvents:UIControlEventEditingDidEndOnExit];
+    
+}
+
+-(void)nextTextField{
+    [pass becomeFirstResponder];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -50,7 +66,6 @@
 -(IBAction)login:(id)sender{
     NSString *filePath = [self dataFilePath];
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSError *error = [[NSError alloc] init];
     [fileManager removeItemAtPath:filePath error:nil];
     IDLoginController *webView = [[IDLoginController  alloc] initWithNibName:@"IDLoginController" bundle:nil];
     webView.nick = nick.text;

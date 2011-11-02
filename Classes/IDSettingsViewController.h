@@ -12,7 +12,7 @@
 #define kFileName @"archive"
 #define kDataName @"Data"
 
-@interface IDSettingsViewController : UIViewController {
+@interface IDSettingsViewController : UIViewController <UITextFieldDelegate>{
     UITextField *nick;
     UITextField *pass;
     UIButton *login;
@@ -27,6 +27,6 @@
 -(IBAction)backgroundtap:(id)sender;
 -(IBAction)removeLogin:(id)sender;
 -(NSString *)dataFilePath;
-
+-(void)nextTextField;
 
 @end
