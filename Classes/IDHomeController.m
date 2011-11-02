@@ -147,6 +147,11 @@
 	[super createTableView];
 	[super setTitle:@"appname"];
     
+    UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fuerte-logo.png"]];
+	[logo positionAtX:60 andY:-65];
+	[logo setBackgroundColor:[UIColor clearColor]];
+	[table addSubview:logo];
+	[logo release];
 	
 	[self initializeJiraChecks];
 }
@@ -155,40 +160,10 @@
 	[super viewWillAppear:animated];
 	[self doControllerCheck];
     
-    UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fuerte-logo.png"]];
-	
-    [logo positionAtX:self.view.center.x-100 andY:-65];  
-    
-	[logo setBackgroundColor:[UIColor clearColor]];
-    
-    [table addSubview:logo];
-	[logo release];
-    
     if (YES) {
 		[super setData:[FTSimpleDB getItemsFromDb:kSystemHomeMenuDbName]];
 		[table reloadData];
 	}
-}
-
--(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
-    [table removeSubviews];
-    UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fuerte-logo.png"]];
-	
-    [logo positionAtX:self.view.center.x-100 andY:-65];  
-    
-	[logo setBackgroundColor:[UIColor clearColor]];
-    
-    [table addSubview:logo];
-	[logo release];
-    
-    if (YES) {
-		[super setData:[FTSimpleDB getItemsFromDb:kSystemHomeMenuDbName]];
-		[table reloadData];
-	}
-}
-
--(void)viewWillDisappear:(BOOL)animated{
-    [table removeSubviews];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
