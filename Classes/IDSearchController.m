@@ -39,14 +39,14 @@
 		return [super tableView:tableView heightForRowAtIndexPath:indexPath];
 	}
 	else {
-		if (isLandscape) return 217;
+        if (isLandscape) return 217;
 		else return 372;
 	}
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	int count = [data count];
-	if (count == 0) return 1;
+	//if (count == 0) return 1;
     return count;
 }
 
