@@ -85,7 +85,7 @@
 		
 		[cell setAccessoryType:UITableViewCellAccessoryNone];
 		
-		//[cell.iconImageView setImage:[UIImage imageNamed:[d objectForKey:@"icon"]]];
+		//[cell.imageView setImage:[UIImage imageNamed:[d objectForKey:@"icon"]]];
 		//[cell.imageView.layer setCornerRadius:4];
 		
         

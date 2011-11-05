@@ -46,7 +46,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	int count = [data count];
-	//if (count == 0) return 1;
+	if (count == 0) {
+        [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        [tableView setScrollEnabled:FALSE];
+    }
+    else{
+        [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
+        [tableView setScrollEnabled:TRUE];
+    }
     return count;
 }
 
@@ -60,6 +67,7 @@
 		if (cell == nil) {
 			cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:cellIdentifier] autorelease];
 		}
+        
 		return cell;
 	}
 }
