@@ -25,7 +25,6 @@
 
 -(IBAction)login:(id)sender;
 -(IBAction)backgroundtap:(id)sender;
--(IBAction)removeLogin:(id)sender;
 -(NSString *)dataFilePath;
 -(void)nextTextField;
 

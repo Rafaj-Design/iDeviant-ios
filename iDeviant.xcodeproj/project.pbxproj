@@ -150,6 +150,14 @@
 		C85DB473144F40BA00FC0929 /* IDLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C85DB471144F40BA00FC0929 /* IDLoginController.xib */; };
 		C85DB478144F587500FC0929 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1C181403B37300B70C98 /* CoreGraphics.framework */; };
 		C8830CA9144745D400416C81 /* libFTLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C8830CA8144745D400416C81 /* libFTLibrary.a */; };
+		C8B5DE0C1474352D001061C6 /* DD_login_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C8B5DE041474352D001061C6 /* DD_login_bg.png */; };
+		C8B5DE0D1474352D001061C6 /* DD_login_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C8B5DE051474352D001061C6 /* DD_login_bg@2x.png */; };
+		C8B5DE0E1474352D001061C6 /* DD_login_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = C8B5DE061474352D001061C6 /* DD_login_btn.png */; };
+		C8B5DE0F1474352D001061C6 /* DD_login_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C8B5DE071474352D001061C6 /* DD_login_btn@2x.png */; };
+		C8B5DE101474352D001061C6 /* DD_login_password.png in Resources */ = {isa = PBXBuildFile; fileRef = C8B5DE081474352D001061C6 /* DD_login_password.png */; };
+		C8B5DE111474352D001061C6 /* DD_login_password@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C8B5DE091474352D001061C6 /* DD_login_password@2x.png */; };
+		C8B5DE121474352D001061C6 /* DD_login_username.png in Resources */ = {isa = PBXBuildFile; fileRef = C8B5DE0A1474352D001061C6 /* DD_login_username.png */; };
+		C8B5DE131474352D001061C6 /* DD_login_username@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C8B5DE0B1474352D001061C6 /* DD_login_username@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -359,6 +367,14 @@
 		C85DB470144F40BA00FC0929 /* IDLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDLoginController.m; sourceTree = "<group>"; };
 		C85DB471144F40BA00FC0929 /* IDLoginController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IDLoginController.xib; sourceTree = "<group>"; };
 		C8830CA8144745D400416C81 /* libFTLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFTLibrary.a; path = "../../../Library/Developer/Xcode/DerivedData/RunMe-cslzpemdbmqbpkcfxqhbxzlsratz/Build/Products/Debug-iphoneos/libFTLibrary.a"; sourceTree = "<group>"; };
+		C8B5DE041474352D001061C6 /* DD_login_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DD_login_bg.png; sourceTree = "<group>"; };
+		C8B5DE051474352D001061C6 /* DD_login_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DD_login_bg@2x.png"; sourceTree = "<group>"; };
+		C8B5DE061474352D001061C6 /* DD_login_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DD_login_btn.png; sourceTree = "<group>"; };
+		C8B5DE071474352D001061C6 /* DD_login_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DD_login_btn@2x.png"; sourceTree = "<group>"; };
+		C8B5DE081474352D001061C6 /* DD_login_password.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DD_login_password.png; sourceTree = "<group>"; };
+		C8B5DE091474352D001061C6 /* DD_login_password@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DD_login_password@2x.png"; sourceTree = "<group>"; };
+		C8B5DE0A1474352D001061C6 /* DD_login_username.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DD_login_username.png; sourceTree = "<group>"; };
+		C8B5DE0B1474352D001061C6 /* DD_login_username@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DD_login_username@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -979,6 +995,14 @@
 		2BF7D57F137ED3C1002E9B74 /* gray */ = {
 			isa = PBXGroup;
 			children = (
+				C8B5DE041474352D001061C6 /* DD_login_bg.png */,
+				C8B5DE051474352D001061C6 /* DD_login_bg@2x.png */,
+				C8B5DE061474352D001061C6 /* DD_login_btn.png */,
+				C8B5DE071474352D001061C6 /* DD_login_btn@2x.png */,
+				C8B5DE081474352D001061C6 /* DD_login_password.png */,
+				C8B5DE091474352D001061C6 /* DD_login_password@2x.png */,
+				C8B5DE0A1474352D001061C6 /* DD_login_username.png */,
+				C8B5DE0B1474352D001061C6 /* DD_login_username@2x.png */,
 				4CBB0BEF13B4879500F67E1C /* DA_sorting-arrows.png */,
 				4CBB0BF013B4879500F67E1C /* DA_sorting-arrows@2x.png */,
 				4CF0203B139270F700ED1E47 /* DA_ok_messagebg.png */,
@@ -1331,6 +1355,14 @@
 				C840315A1448BD6B00D86A99 /* fuerte-logo.png in Resources */,
 				C85DB467144F334E00FC0929 /* IDSettingsViewController.xib in Resources */,
 				C85DB473144F40BA00FC0929 /* IDLoginController.xib in Resources */,
+				C8B5DE0C1474352D001061C6 /* DD_login_bg.png in Resources */,
+				C8B5DE0D1474352D001061C6 /* DD_login_bg@2x.png in Resources */,
+				C8B5DE0E1474352D001061C6 /* DD_login_btn.png in Resources */,
+				C8B5DE0F1474352D001061C6 /* DD_login_btn@2x.png in Resources */,
+				C8B5DE101474352D001061C6 /* DD_login_password.png in Resources */,
+				C8B5DE111474352D001061C6 /* DD_login_password@2x.png in Resources */,
+				C8B5DE121474352D001061C6 /* DD_login_username.png in Resources */,
+				C8B5DE131474352D001061C6 /* DD_login_username@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1446,7 +1478,7 @@
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/RunMe-cslzpemdbmqbpkcfxqhbxzlsratz/Build/Products/Debug-iphoneos\"",
 				);
 				PRODUCT_NAME = iDeviant;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2A76BDF1-67E3-4560-A728-1A07485AB66B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7377C183-C68B-400C-B0AF-77EDE188AE7E";
 			};
 			name = Debug;
 		};
@@ -1473,7 +1505,7 @@
 					"\"$(SRCROOT)/../../../Library/Developer/Xcode/DerivedData/RunMe-cslzpemdbmqbpkcfxqhbxzlsratz/Build/Products/Debug-iphoneos\"",
 				);
 				PRODUCT_NAME = iDeviant;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2A76BDF1-67E3-4560-A728-1A07485AB66B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7377C183-C68B-400C-B0AF-77EDE188AE7E";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1493,7 +1525,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2A76BDF1-67E3-4560-A728-1A07485AB66B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7377C183-C68B-400C-B0AF-77EDE188AE7E";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../FTLibrary/**";
 			};
@@ -1515,7 +1547,7 @@
 					"-ObjC",
 					"-all_load",
 				);
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2A76BDF1-67E3-4560-A728-1A07485AB66B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7377C183-C68B-400C-B0AF-77EDE188AE7E";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../FTLibrary/**";
 			};

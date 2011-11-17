@@ -37,6 +37,15 @@
                        action:@selector(login:)
              forControlEvents:UIControlEventEditingDidEndOnExit];
     
+    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 20)];
+    self.pass.leftView = paddingView;
+    self.pass.leftViewMode = UITextFieldViewModeAlways;
+    
+    self.nick.leftView = paddingView;
+    self.nick.leftViewMode = UITextFieldViewModeAlways;
+    
+    UIImage *image = [UIImage imageNamed:@"DD_login_bg"];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:image]];
 }
 
 -(void)nextTextField{
@@ -79,16 +88,6 @@
         [arr writeToFile:[self dataFilePath] atomically:NO];
     }
 
-}
-
--(IBAction)removeLogin:(id)sender{
-    nick.text = @"";
-    pass.text = @"";
-    
-    NSString *filePath = [self dataFilePath];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    [fileManager removeItemAtPath:filePath error:NULL];
-    
 }
 
 //hide keyboard
