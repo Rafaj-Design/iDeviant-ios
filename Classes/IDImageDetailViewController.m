@@ -159,7 +159,7 @@
 	[UIView commitAnimations];
 	
 	UIBarButtonItem *favsButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(didClickActionButton:)];
-	[self.navigationItem setRightBarButtonItem:favsButton];
+	//[self.navigationItem setRightBarButtonItem:favsButton];
 	[favsButton release];
 	
 	FTPage *page = [self pageForIndex:currentIndex];
@@ -315,7 +315,7 @@
 #pragma mark Actions
 
 - (void)didClickActionButton:(UIBarButtonItem *)sender {
-	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:[FTLang get:@"actionswithimagetitle"] delegate:self cancelButtonTitle:[FTLang get:@"cancelbutton"] destructiveButtonTitle:nil otherButtonTitles:[FTLang get:@"savetogalleryit"], [FTLang get:@"facebookit"], [FTLang get:@"emailit"], [FTLang get:@"tweetpicit"], nil];
+	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:[FTLang get:@"actionswithimagetitle"] delegate:self cancelButtonTitle:[FTLang get:@"cancelbutton"] destructiveButtonTitle:nil otherButtonTitles:[FTLang get:@"savetogalleryit"], [FTLang get:@"facebookit"], [FTLang get:@"emailit"], nil];
 	[actionSheet showInView:self.view];
 	[actionSheet release];
 }
