@@ -14,6 +14,7 @@
 #import "Configuration.h"
 //#import "JCO.h"
 
+
 @implementation IDHomeController
 
 
@@ -97,15 +98,16 @@
 
 #pragma mark Jira reporting
 
+
+
 - (void)initializeJiraChecks {
     self.navigationItem.rightBarButtonItem =
-    [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCompose
-                                                   target:self
-                                                   action:@selector(showFeedback)] autorelease];
+    [[[UIBarButtonItem alloc] initWithTitle:FTLangGet(@"About") style:UIBarButtonItemStyleBordered target:self action:@selector(showFeedback)] autorelease];
     self.navigationItem.leftBarButtonItem =
     [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize
                                                    target:self
                                                    action:@selector(showPastFeedback)] autorelease];
+
 }
 
 -(void) showFeedback {
