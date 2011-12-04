@@ -57,6 +57,7 @@
 	[mainView release];
 	[imageUrl release];
 	[bottomBar release];
+    [actionButton release];
 	[ai release];
 	[message release];
 	[listThroughData release];
@@ -189,14 +190,15 @@
 	bottomBar = [[FTToolbar alloc] initWithFrame:[self frameForToolbar]];
 	[self.view addSubview:bottomBar];
 	
-	UIBarButtonItem *actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(didClickActionButton:)];
+	actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(didClickActionButton:)];
 	[bottomBar setItems:[NSArray arrayWithObjects:actionButton, nil]];
-	[actionButton release];
+	//[actionButton release];
 	
 	ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
 	[ai setHidesWhenStopped:YES];
 	[ai startAnimating];
 	[self.view addSubview:ai];
+    actionButton.enabled=false;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -288,6 +290,7 @@
 					 }
 	 ];
     [ai stopAnimating];
+    actionButton.enabled=true;
 }
 
 #pragma mark Actions methods
@@ -338,17 +341,20 @@
 
 - (void)imageView:(FTImageView *)imgView didFinishLoadingImage:(UIImage *)image {
 	[ai stopAnimating];
+    actionButton.enabled=true;
 }
 
 #pragma mark Page scroll view delegate & data source methods
 
 - (FTPage *)leftPageForPageScrollView:(FTPageScrollView *)scrollView withTouchCount:(NSInteger)touchCount {
 	[ai startAnimating];
+    actionButton.enabled=false;
     return [self pageForIndex:(currentIndex - 1)];
 }
 
 - (FTPage *)rightPageForPageScrollView:(FTPageScrollView *)scrollView withTouchCount:(NSInteger)touchCount {
     [ai startAnimating];
+    actionButton.enabled=false;
 	return [self pageForIndex:(currentIndex + 1)];
 }
 

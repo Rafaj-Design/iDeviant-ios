@@ -30,6 +30,8 @@
 	NSString *imageUrl;
 	
 	FTToolbar *bottomBar;
+    
+    UIBarButtonItem *actionButton;
 	
 	//UIActivityIndicatorView *ai;
 	
