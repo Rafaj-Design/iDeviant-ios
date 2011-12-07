@@ -12,6 +12,7 @@
 #import "FTImageZoomView.h"
 #import "FTToolbar.h"
 #import "IDHorizontalItems.h"
+#import "FTShare.h"
 
 
 @class IDImageDetailViewController;
@@ -23,7 +24,7 @@
 @end
 
 
-@interface IDImageDetailViewController : IDViewController <UIActionSheetDelegate, FTImageViewDelegate, FTImageZoomViewDelegate, FTPageScrollViewDelegate> {
+@interface IDImageDetailViewController : IDViewController <UIActionSheetDelegate, FTImageViewDelegate, FTImageZoomViewDelegate, FTPageScrollViewDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate> {
     
 	FTPageScrollView *mainView;
 	
@@ -42,12 +43,16 @@
 	NSArray *listThroughData;
 	
 	IDHorizontalItems *shortcutView;
+    
+    UIImage *currentImage;
 	
 }
 
 @property (nonatomic, retain) FTPageScrollView *mainView;
 
 @property (nonatomic, retain) NSString *imageUrl;
+
+@property (nonatomic, retain) UIImage *currentImage;
 
 @property (nonatomic) int currentIndex;
 

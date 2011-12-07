@@ -13,7 +13,6 @@
 #import "IDAdultCheck.h"
 
 
-
 #define kIDImageDetailViewControllerMaxAlpha				0.6f
 
 
@@ -23,6 +22,7 @@
 @synthesize imageUrl;
 @synthesize currentIndex;
 @synthesize delegate;
+@synthesize currentImage;
 
 
 #pragma mark Positioning
@@ -159,9 +159,9 @@
 	[self.navigationController.navigationBar setAlpha:kIDImageDetailViewControllerMaxAlpha];
 	[UIView commitAnimations];
 	
-	UIBarButtonItem *favsButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(didClickActionButton:)];
+	//UIBarButtonItem *favsButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(didClickActionButton:)];
 	//[self.navigationItem setRightBarButtonItem:favsButton];
-	[favsButton release];
+	//[favsButton release];
 	
 	FTPage *page = [self pageForIndex:currentIndex];
 	mainView = [[FTPageScrollView alloc] initWithFrame:[super fullScreenFrame]];
@@ -291,17 +291,19 @@
 	 ];
     [ai stopAnimating];
     actionButton.enabled=true;
+    
 }
 
 #pragma mark Actions methods
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(NSDictionary *)info {
 	[self displayMessage:@"imagesavedtothegallery"];
+
 }
 
 - (void)saveCurrentImageToGallery {
-//	UIImage *myImage = mainView.imageView.image;
-//	UIImageWriteToSavedPhotosAlbum(myImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+
+	UIImageWriteToSavedPhotosAlbum(self.currentImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 	//[FlurryAPI logEvent:@"Func: Saving image"];
 }
 
@@ -313,6 +315,60 @@
 
 - (void)emailCurrentImage {
 	//[FlurryAPI logEvent:@"Func: Emailing image"];
+    /*
+    FTShareMailData *mailData = [[FTShareMailData alloc] init];
+
+    //[mailData addAttachmentWithObject:self.currentImage type:@"jpg" andName:@"iDVimg"];
+    [mailData setSubject:@"iDeviant"];
+    [mailData setPlainBody:@"iDeviant"];
+    
+    [[FTShare alloc] shareViaMail:mailData];
+    */
+    
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    [mc setMailComposeDelegate:self];
+    [mc setSubject:[NSString stringWithFormat:@"iDeviant"]];
+    [mc setMessageBody:@"\n\n\n\nStickerTag app by Fuerte International UK - http://www.fuerteint.com/" isHTML:NO];
+    [mc setMessageBody:@"</br></br></br></br>iDeviant app by <a href='http://www.fuerteint.com/'>Fuerte International UK</a>" isHTML:YES];
+    //[mc addAttachmentData:self.currentImage mimeType:@"image/png" fileName:[NSString stringWithFormat:@"%@.png", self.navigationController.title]];
+    self.currentImage = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"logo" ofType:@"png"]];
+    //[mc addAttachmentData:self.currentImage mimeType:@"image/png" fileName:@"Fuerte_International_UK.png"];
+    [mc setModalPresentationStyle:UIModalPresentationPageSheet];
+    [self presentModalViewController:mc animated:YES];
+
+}
+
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    
+    // switchng the result
+    switch (result) {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail send canceled.");
+            //[FTTracking logEvent:@"Mail: Mail canceled"];
+            break;
+        case MFMailComposeResultSaved:
+            //[UIAlertView showMessage:FTLangGet(@"Your email has been saved") withTitle:FTLangGet(@"Email")];
+            
+            //[FTTracking logEvent:@"Mail: Mail saved"];
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent.");
+            //[FTTracking logEvent:@"Mail: Mail sent"];
+            //[UIAlertView showMessage:FTLangGet(@"Your email has been sent") withTitle:FTLangGet(@"Email")];
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail send error: %@.", [error localizedDescription]);
+            //[UIAlertView showMessage:[error localizedDescription] withTitle:FTLangGet(@"Error")];
+            //[FlurryAnalytics logError:@"Mail" message:@"Mail send failed" error:error];
+            break;
+        default:
+            break;
+    }
+    // hide the modal view controller
+    [self dismissModalViewControllerAnimated:YES];
+    //[self toggleBottomBar];
+    [self toggleShortcut];
 }
 
 #pragma mark Actions
@@ -341,6 +397,7 @@
 
 - (void)imageView:(FTImageView *)imgView didFinishLoadingImage:(UIImage *)image {
 	[ai stopAnimating];
+    self.currentImage = image;
     actionButton.enabled=true;
 }
 
