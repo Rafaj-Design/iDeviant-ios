@@ -18,7 +18,7 @@
 }
 
 + (void)logMemoryInFunction:(id)function {
-	NSLog(@"Memory log: %s - %d", function, [self getAvailableMemory]);
+	NSLog(@"Memory log: %s - %d", (char *)function, [self getAvailableMemory]);
 }
 
 + (natural_t)getAvailableMemory {
