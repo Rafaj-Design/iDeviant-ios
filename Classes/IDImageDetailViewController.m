@@ -330,8 +330,9 @@
     [mc setSubject:[NSString stringWithFormat:@"iDeviant"]];
     [mc setMessageBody:@"\n\n\n\nStickerTag app by Fuerte International UK - http://www.fuerteint.com/" isHTML:NO];
     [mc setMessageBody:@"</br></br></br></br>iDeviant app by <a href='http://www.fuerteint.com/'>Fuerte International UK</a>" isHTML:YES];
+    [mc addAttachmentData:UIImagePNGRepresentation(self.currentImage) mimeType:@"jpeg/png" fileName:[NSString stringWithFormat:@"%@.png", self.navigationController.title]];
     //[mc addAttachmentData:self.currentImage mimeType:@"image/png" fileName:[NSString stringWithFormat:@"%@.png", self.navigationController.title]];
-    self.currentImage = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"logo" ofType:@"png"]];
+    //self.currentImage = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"logo" ofType:@"png"]];
     //[mc addAttachmentData:self.currentImage mimeType:@"image/png" fileName:@"Fuerte_International_UK.png"];
     [mc setModalPresentationStyle:UIModalPresentationPageSheet];
     [self presentModalViewController:mc animated:YES];
@@ -365,10 +366,11 @@
         default:
             break;
     }
+    //[self toggleBottomBar];
     // hide the modal view controller
     [self dismissModalViewControllerAnimated:YES];
-    //[self toggleBottomBar];
-    [self toggleShortcut];
+    
+
 }
 
 #pragma mark Actions
