@@ -37,12 +37,14 @@
                        action:@selector(login:)
              forControlEvents:UIControlEventEditingDidEndOnExit];
     
-    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 20)];
-    self.pass.leftView = paddingView;
-    self.pass.leftViewMode = UITextFieldViewModeAlways;
     
+    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 20)];
     self.nick.leftView = paddingView;
     self.nick.leftViewMode = UITextFieldViewModeAlways;
+    
+    UIView *paddingViewpas = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 20)];
+    self.pass.leftView = paddingViewpas;
+    self.pass.leftViewMode = UITextFieldViewModeAlways;
     
     UIImage *image = [UIImage imageNamed:@"DD_login_bg"];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:image]];
