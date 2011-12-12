@@ -22,6 +22,7 @@
 #pragma mark Data
 
 - (void)fillWithData {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 	if ([categoriesData count] == 0) {
 		[super getDataFromBundlePlist:@"Categories.plist"];
 		categoriesData = [[NSArray alloc] initWithArray:data];
@@ -73,7 +74,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return 2;
+	//return 2;
 	if ([data count] > 0) return 2;
 	else return 1;
 }
