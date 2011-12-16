@@ -25,6 +25,8 @@
 		<string>categories</string>
 	</dict>
 	<dict>
+		<key>FVRT</key>
+		<true/>
 		<key>controller</key>
 		<string>IDFavoritesController</string>
 		<key>description</key>

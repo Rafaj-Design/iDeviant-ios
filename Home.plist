@@ -27,6 +27,8 @@
 	<dict>
 		<key>controller</key>
 		<string>IDFavoritesController</string>
+		<key>FVRT</key>
+		<true/>
 		<key>description</key>
 		<string>favoritesdesc</string>
 		<key>icon</key>

@@ -12,6 +12,7 @@
 #import "IDHomeTableViewCell.h"
 #import "FTSimpleDB.h"
 #import "Configuration.h"
+#import "IDFavouriteCategories.h"
 //#import "JCO.h"
 
 
@@ -76,6 +77,11 @@
 	else {
 		[cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-white.png"]];
 	}
+    NSLog(@"%@", [d objectForKey:@"FVRT"]);
+    if (([[d objectForKey:@"FVRT"] boolValue]) && [[IDFavouriteCategories dataForFavorites]count]==0){
+        [cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-x.png"]];
+    }
+    
     return cell;
 }
 
@@ -85,7 +91,9 @@
 	if ([[d objectForKey:@"requiresConnection"] boolValue] && !internetActive) {
 		[super displayMessage:@"requiresinternetconnection"];
 	}
-	else {
+	else if (([[d objectForKey:@"FVRT"] boolValue]) && [[IDFavouriteCategories dataForFavorites]count]==0) {
+        [super displayMessage:@"nonefavourites"];
+    }else{
 		IDViewController *c = (IDViewController *)[[NSClassFromString([d objectForKey:@"controller"]) alloc] init];
 		if (c) {
 			//[c inheritConnectivity:internetActive];
