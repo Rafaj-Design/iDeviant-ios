@@ -687,6 +687,7 @@
 - (void)feedParser:(MWFeedParser *)parser didParseFeedItem:(MWFeedItem *)item {
 	//NSLog(@"Parsed Feed Item: “%@”", item.title);
 	if (item) [parsedItems addObject:item];	
+    NSLog(@"parsed item: %@", item);
 }
 
 - (void)feedParserDidFinish:(MWFeedParser *)parser {
@@ -724,7 +725,7 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
 	[searchBarHeader setShowsCancelButton:NO animated:YES];
 	[searchBarHeader resignFirstResponder];
-    ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [ai setHidesWhenStopped:YES];
     [ai startAnimating];
     [ai setOrigin:CGPointMake(self.view.center.x, self.view.center.y)];

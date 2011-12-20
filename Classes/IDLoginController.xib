@@ -55,14 +55,14 @@
 					<object class="IBUIActivityIndicatorView" id="637115014">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{142, 211}, {37, 37}}</string>
+						<string key="NSFrame">{{151, 219}, {20, 20}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:1030</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<int key="IBUIContentMode">1</int>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<int key="IBUIStyle">0</int>
+						<int key="IBUIStyle">2</int>
 						<object class="NSColor" key="IBUIColor">
 							<int key="NSColorSpace">2</int>
 							<bytes key="NSRGB">MCAwLjAwNzg0MzEzNzcxOSAwLjAxMTc2NDcwNzA0AA</bytes>
