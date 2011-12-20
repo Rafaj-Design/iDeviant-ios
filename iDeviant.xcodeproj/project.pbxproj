@@ -158,6 +158,8 @@
 		C8B5DE111474352D001061C6 /* DD_login_password@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C8B5DE091474352D001061C6 /* DD_login_password@2x.png */; };
 		C8B5DE121474352D001061C6 /* DD_login_username.png in Resources */ = {isa = PBXBuildFile; fileRef = C8B5DE0A1474352D001061C6 /* DD_login_username.png */; };
 		C8B5DE131474352D001061C6 /* DD_login_username@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C8B5DE0B1474352D001061C6 /* DD_login_username@2x.png */; };
+		C8D6345314A0E75100005730 /* DD_grandma.png in Resources */ = {isa = PBXBuildFile; fileRef = C8D6345114A0E75000005730 /* DD_grandma.png */; };
+		C8D6345414A0E75100005730 /* DD_grandma@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C8D6345214A0E75000005730 /* DD_grandma@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -375,6 +377,8 @@
 		C8B5DE091474352D001061C6 /* DD_login_password@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DD_login_password@2x.png"; sourceTree = "<group>"; };
 		C8B5DE0A1474352D001061C6 /* DD_login_username.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DD_login_username.png; sourceTree = "<group>"; };
 		C8B5DE0B1474352D001061C6 /* DD_login_username@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DD_login_username@2x.png"; sourceTree = "<group>"; };
+		C8D6345114A0E75000005730 /* DD_grandma.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DD_grandma.png; sourceTree = "<group>"; };
+		C8D6345214A0E75000005730 /* DD_grandma@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DD_grandma@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -995,6 +999,8 @@
 		2BF7D57F137ED3C1002E9B74 /* gray */ = {
 			isa = PBXGroup;
 			children = (
+				C8D6345114A0E75000005730 /* DD_grandma.png */,
+				C8D6345214A0E75000005730 /* DD_grandma@2x.png */,
 				C8B5DE041474352D001061C6 /* DD_login_bg.png */,
 				C8B5DE051474352D001061C6 /* DD_login_bg@2x.png */,
 				C8B5DE061474352D001061C6 /* DD_login_btn.png */,
@@ -1363,6 +1369,8 @@
 				C8B5DE111474352D001061C6 /* DD_login_password@2x.png in Resources */,
 				C8B5DE121474352D001061C6 /* DD_login_username.png in Resources */,
 				C8B5DE131474352D001061C6 /* DD_login_username@2x.png in Resources */,
+				C8D6345314A0E75100005730 /* DD_grandma.png in Resources */,
+				C8D6345414A0E75100005730 /* DD_grandma@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
