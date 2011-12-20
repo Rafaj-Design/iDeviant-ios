@@ -32,7 +32,7 @@
         forControlEvents:UIControlEventEditingDidEndOnExit];
     
     [self.pass setDelegate:self];
-    [self.pass setReturnKeyType:UIReturnKeyDone];
+    [self.pass setReturnKeyType:UIReturnKeyGo];
     [self.pass addTarget:self
                        action:@selector(login:)
              forControlEvents:UIControlEventEditingDidEndOnExit];
