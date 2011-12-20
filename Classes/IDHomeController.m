@@ -13,6 +13,7 @@
 #import "FTSimpleDB.h"
 #import "Configuration.h"
 #import "IDFavouriteCategories.h"
+#import "aboutPage.h"
 //#import "JCO.h"
 
 
@@ -119,7 +120,9 @@
 }
 
 -(void) showFeedback {
-    //[self presentModalViewcontroller:[[JCO instance] viewController] animated:YES];
+    aboutPage *AC = [[aboutPage alloc] initWithNibName:@"aboutPage" bundle:nil];
+    [self.navigationController pushViewController:AC animated:YES];
+    [AC release];
 }
 
 -(void) showPastFeedback {

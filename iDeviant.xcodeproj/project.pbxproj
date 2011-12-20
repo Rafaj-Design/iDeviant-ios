@@ -160,6 +160,8 @@
 		C8B5DE131474352D001061C6 /* DD_login_username@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C8B5DE0B1474352D001061C6 /* DD_login_username@2x.png */; };
 		C8D6345314A0E75100005730 /* DD_grandma.png in Resources */ = {isa = PBXBuildFile; fileRef = C8D6345114A0E75000005730 /* DD_grandma.png */; };
 		C8D6345414A0E75100005730 /* DD_grandma@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C8D6345214A0E75000005730 /* DD_grandma@2x.png */; };
+		C8D6345914A10BA800005730 /* aboutPage.m in Sources */ = {isa = PBXBuildFile; fileRef = C8D6345714A10BA600005730 /* aboutPage.m */; };
+		C8D6345A14A10BA800005730 /* aboutPage.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8D6345814A10BA600005730 /* aboutPage.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -379,6 +381,9 @@
 		C8B5DE0B1474352D001061C6 /* DD_login_username@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DD_login_username@2x.png"; sourceTree = "<group>"; };
 		C8D6345114A0E75000005730 /* DD_grandma.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DD_grandma.png; sourceTree = "<group>"; };
 		C8D6345214A0E75000005730 /* DD_grandma@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DD_grandma@2x.png"; sourceTree = "<group>"; };
+		C8D6345614A10BA400005730 /* aboutPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aboutPage.h; sourceTree = "<group>"; };
+		C8D6345714A10BA600005730 /* aboutPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aboutPage.m; sourceTree = "<group>"; };
+		C8D6345814A10BA600005730 /* aboutPage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = aboutPage.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -772,6 +777,7 @@
 			children = (
 				2B9E2D7E12EDF04C00D5C5D1 /* IDHomeController.h */,
 				2B9E2D7F12EDF04C00D5C5D1 /* IDHomeController.m */,
+				C8D6345B14A10BB900005730 /* about */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -1235,6 +1241,16 @@
 			name = webView;
 			sourceTree = "<group>";
 		};
+		C8D6345B14A10BB900005730 /* about */ = {
+			isa = PBXGroup;
+			children = (
+				C8D6345614A10BA400005730 /* aboutPage.h */,
+				C8D6345714A10BA600005730 /* aboutPage.m */,
+				C8D6345814A10BA600005730 /* aboutPage.xib */,
+			);
+			name = about;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1371,6 +1387,7 @@
 				C8B5DE131474352D001061C6 /* DD_login_username@2x.png in Resources */,
 				C8D6345314A0E75100005730 /* DD_grandma.png in Resources */,
 				C8D6345414A0E75100005730 /* DD_grandma@2x.png in Resources */,
+				C8D6345A14A10BA800005730 /* aboutPage.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1435,6 +1452,7 @@
 				4CEB1C331403B3F600B70C98 /* FTImagePage.m in Sources */,
 				4C8AD6021404F5470078DE52 /* IDLoginViewController.m in Sources */,
 				C85DB472144F40BA00FC0929 /* IDLoginController.m in Sources */,
+				C8D6345914A10BA800005730 /* aboutPage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
