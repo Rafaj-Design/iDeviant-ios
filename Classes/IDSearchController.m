@@ -7,7 +7,7 @@
 //
 
 #import "IDSearchController.h"
-
+#import "FTLang.h"
 
 @implementation IDSearchController
 
@@ -19,13 +19,19 @@
 	
 	[super setIsSearchBar:YES];
 	
-	[self setTitle:@"search"];
+	[self setTitle:[FTLang get:@"search"]];
 	
 	//[super enableRefreshButton];
 	//[super getDataForSearchString:@"poem"];
 	
 	//[super setData:[NSArray arrayWithObject:@""]];
-	[super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-search.png"]];
+    
+    //if (internetActive) {
+        [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-search.png"]];
+    //}
+    //else{
+    //    [super enableBackgroundWithImage:[UIImage imageNamed:@"DD_grandma@2x.png"]];
+    //}
 }
 
 - (void)viewDidAppear:(BOOL)animated {
