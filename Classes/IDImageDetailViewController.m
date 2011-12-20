@@ -297,13 +297,19 @@
 #pragma mark Actions methods
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(NSDictionary *)info {
-	[self displayMessage:@"imagesavedtothegallery"];
+	
 
 }
 
 - (void)saveCurrentImageToGallery {
 
 	UIImageWriteToSavedPhotosAlbum(self.currentImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"image saved" message:nil
+												   delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+	[alert show];
+    
+	[alert release];
 	//[FlurryAPI logEvent:@"Func: Saving image"];
 }
 
