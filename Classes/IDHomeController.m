@@ -77,7 +77,6 @@
 	else {
 		[cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-white.png"]];
 	}
-    NSLog(@"%@", [d objectForKey:@"FVRT"]);
     if (([[d objectForKey:@"FVRT"] boolValue]) && [[IDFavouriteCategories dataForFavorites]count]==0){
         [cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-x.png"]];
     }
@@ -156,7 +155,7 @@
 	}
 	
 	[super createTableView];
-	[super setTitle:@"appname"];
+	[super setTitle:@"iDeviant"];
     
 	
 	[self initializeJiraChecks];
