@@ -11,7 +11,7 @@
 #import "iDeviantAppDelegate.h"
 #import "FTImagePage.h"
 #import "IDAdultCheck.h"
-
+#import "FTLang.h"
 
 #define kIDImageDetailViewControllerMaxAlpha				0.6f
 
@@ -305,7 +305,7 @@
 
 	UIImageWriteToSavedPhotosAlbum(self.currentImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"image saved" message:nil
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[FTLang get:@"imagesaved"] message:nil
 												   delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 	[alert show];
     
@@ -334,7 +334,7 @@
     MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
     [mc setMailComposeDelegate:self];
     [mc setSubject:[NSString stringWithFormat:@"iDeviant"]];
-    [mc setMessageBody:@"\n\n\n\nStickerTag app by Fuerte International UK - http://www.fuerteint.com/" isHTML:NO];
+    [mc setMessageBody:@"\n\n\n\niDeviant app by Fuerte International UK - http://www.fuerteint.com/" isHTML:NO];
     [mc setMessageBody:@"</br></br></br></br>iDeviant app by <a href='http://www.fuerteint.com/'>Fuerte International UK</a>" isHTML:YES];
     if (self.currentImage) {
         [mc addAttachmentData:UIImagePNGRepresentation(self.currentImage) mimeType:@"jpeg/png" fileName:[NSString stringWithFormat:@"%@.png", self.navigationController.title]];
