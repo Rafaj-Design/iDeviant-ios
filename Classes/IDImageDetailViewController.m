@@ -306,7 +306,7 @@
 	UIImageWriteToSavedPhotosAlbum(self.currentImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[FTLang get:@"imagesaved"] message:nil
-												   delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+												   delegate:self cancelButtonTitle:[FTLang get:@"OK"] otherButtonTitles:nil, nil];
 	[alert show];
     
 	[alert release];
