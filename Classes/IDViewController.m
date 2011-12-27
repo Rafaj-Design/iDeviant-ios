@@ -693,6 +693,7 @@
 - (void)feedParserDidFinish:(MWFeedParser *)parser {
 	NSLog(@"Finished Parsing%@", (parser.stopped ? @" (Stopped)" : @""));
 	[ai stopAnimating];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	NSArray *arr = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
 	[self setData:[parsedItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:arr]]];
 	[arr release];
@@ -728,6 +729,7 @@
     ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [ai setHidesWhenStopped:YES];
     [ai startAnimating];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [ai setOrigin:CGPointMake(self.view.center.x, self.view.center.y)];
     [self.view addSubview:ai];
 	[self getDataForSearchString:[searchBarHeader text] andCategory:nil];

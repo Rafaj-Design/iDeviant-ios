@@ -197,6 +197,7 @@
 	ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
 	[ai setHidesWhenStopped:YES];
 	[ai startAnimating];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	[self.view addSubview:ai];
     actionButton.enabled=false;
 }
@@ -290,6 +291,7 @@
 					 }
 	 ];
     [ai stopAnimating];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     actionButton.enabled=true;
     
 }
@@ -409,18 +411,21 @@
 	[ai stopAnimating];
     self.currentImage = image;
     actionButton.enabled=true;
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 #pragma mark Page scroll view delegate & data source methods
 
 - (FTPage *)leftPageForPageScrollView:(FTPageScrollView *)scrollView withTouchCount:(NSInteger)touchCount {
 	[ai startAnimating];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     actionButton.enabled=false;
     return [self pageForIndex:(currentIndex - 1)];
 }
 
 - (FTPage *)rightPageForPageScrollView:(FTPageScrollView *)scrollView withTouchCount:(NSInteger)touchCount {
     [ai startAnimating];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     actionButton.enabled=false;
 	return [self pageForIndex:(currentIndex + 1)];
 }

@@ -147,6 +147,7 @@
 	else {
 		[super launchItemInTableView:tableView withIndexPath:indexPath];
 	}
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
 

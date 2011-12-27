@@ -49,10 +49,12 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [activInd stopAnimating];  
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView {     
+- (void)webViewDidStartLoad:(UIWebView *)webView {   
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [activInd startAnimating];     
 }
 
