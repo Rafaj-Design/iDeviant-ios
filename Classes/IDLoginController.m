@@ -45,8 +45,10 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
+
+
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -56,6 +58,10 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView {   
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [activInd startAnimating];     
+}
+
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+    [activInd setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
 }
 
 -(void)viewDidAppear:(BOOL)animated{

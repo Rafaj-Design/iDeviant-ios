@@ -15,6 +15,7 @@
 #pragma mark View delegate methods
 
 - (void)viewDidLoad {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [super viewDidLoad];
     //load nick and password to field
 	NSString *filePath = [self dataFilePath];
@@ -65,7 +66,11 @@
     [super dealloc];
 }
 
-
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
 
 -(NSString *)dataFilePath{
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

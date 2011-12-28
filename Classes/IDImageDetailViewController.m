@@ -195,6 +195,7 @@
 	//[actionButton release];
 	
 	ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
 	[ai setHidesWhenStopped:YES];
 	[ai startAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -415,6 +416,11 @@
 }
 
 #pragma mark Page scroll view delegate & data source methods
+
+
+-(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
+    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
+}
 
 - (FTPage *)leftPageForPageScrollView:(FTPageScrollView *)scrollView withTouchCount:(NSInteger)touchCount {
 	[ai startAnimating];

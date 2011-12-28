@@ -24,6 +24,8 @@
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    
     [super viewDidLoad];
 	
 	[super setData:[FTSimpleDB getItemsFromDb:kSystemHomeMenuDbName]];

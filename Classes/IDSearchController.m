@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	[super setIsSearchBar:YES];
 	
 	[self setTitle:[FTLang get:@"search"]];
@@ -33,6 +33,12 @@
     //    [super enableBackgroundWithImage:[UIImage imageNamed:@"DD_grandma@2x.png"]];
     //}
 }
+
+
+-(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
+    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
+}
+
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
