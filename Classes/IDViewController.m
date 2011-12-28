@@ -141,7 +141,16 @@
 #pragma mark Parsing
 
 - (void)refresh {
-	[self setTitle:@"refreshing"];
+	//[self setTitle:@"refreshing"];
+    
+    //loader when push refresh button
+    ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
+	[ai setHidesWhenStopped:YES];
+	[ai startAnimating];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+	[self.view addSubview:ai];
+    
 	[parsedItems removeAllObjects];
 	[feedParser stopParsing];
 	[feedParser parse];
