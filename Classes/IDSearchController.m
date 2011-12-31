@@ -15,6 +15,7 @@
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
+    [self internetActive];
     [super viewDidLoad];
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	[super setIsSearchBar:YES];
@@ -25,24 +26,56 @@
 	//[super getDataForSearchString:@"poem"];
 	
 	//[super setData:[NSArray arrayWithObject:@""]];
-    
-    //if (internetActive) {
+    if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
         [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-search.png"]];
-    //}
-    //else{
-    //    [super enableBackgroundWithImage:[UIImage imageNamed:@"DD_grandma@2x.png"]];
-    //}
+    }
+    else{
+        [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-search.png"]];
+    }
+    
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [NSTimer scheduledTimerWithTimeInterval:0.2
+                                     target:self
+                                   selector:@selector(backgroundImage)
+                                   userInfo:nil
+                                    repeats:NO];
+    [super viewDidAppear:animated];
+}
+
+-(void)backgroundImage{
+    if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
+        if (internetActive) {
+            [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-search.png"]];
+        } 
+        else{
+            [super enableBackgroundWithImage:[UIImage imageNamed:@"DD_grandma@2x.png"]];
+        }
+    }
+    else{
+        if (internetActive) {
+            [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-search.png"]];
+        }
+        else{
+            [super enableBackgroundWithImage:[UIImage imageNamed:@"DD_grandma@2x.png"]];
+        }
+    }
 }
 
 
 -(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
     [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
+    
+    [self backgroundImage];
 }
 
 
-- (void)viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-}
 
 #pragma mark Table delegates
 
