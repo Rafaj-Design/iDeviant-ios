@@ -110,7 +110,7 @@
 		static NSString *cellIdentifier = @"EmptyCell";
 		UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 		if (cell == nil) {
-			cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:cellIdentifier] autorelease];
+            cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero] autorelease];
 		}
         
 		return cell;
