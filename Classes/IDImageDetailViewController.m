@@ -169,21 +169,24 @@
 	[mainView setInitialPage:page withDelegate:self];
 	//[mainView setPageScrollDelegate:self];
 	[mainView setPage:page pageCount:0 animate:YES];
+    [mainView setBouncesZoom:YES];
+    [mainView setMaximumZoomScale:1];
+    [mainView setMinimumZoomScale:0.3];
 	[self.view addSubview:mainView];
 	
 	
 	
-//	[mainView setZoomDelegate:self];
-//	[mainView loadImageFromUrl:imageUrl];
-	/*
+	
+	//[mainView loadImageFromUrl:imageUrl];
+	
 	UITapGestureRecognizer *doubletap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewTwice:)];
 	[doubletap setNumberOfTapsRequired:2];
 	[mainView addGestureRecognizer:doubletap];
 	[doubletap release];
-	*/
+	
     
 	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewOnce:)];
-	//[tap requireGestureRecognizerToFail:doubletap];
+	[tap requireGestureRecognizerToFail:doubletap];
 	[mainView addGestureRecognizer:tap];
 	[tap release];
 	
@@ -197,10 +200,9 @@
 	ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
 	[ai setHidesWhenStopped:YES];
-	[ai startAnimating];
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	[self.view addSubview:ai];
     actionButton.enabled=false;
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -255,10 +257,10 @@
 	}
 }
 
-/*
+
 - (void)didTapViewTwice:(UITapGestureRecognizer *)recognizer {
-	if (!shortcutView) {
-		shortcutView = [[IDHorizontalItems alloc] initWithFrame:[self frameForShortcutView] andData:data];
+	/*if (!shortcutView) {
+		shortcutView = [[IDHorizontalItems alloc] initWithFram%f[self frameForShortcutView] andData:data];
 		[mainView addSubview:shortcutView];
 		[shortcutView setAlpha:0];
 	}
@@ -277,9 +279,26 @@
 						 }
 		 ];
 	}
-	
+	*/
+    if (mainView.zoomScale==1) {
+        [mainView setZoomScale:0.5 animated:YES];
+    }
+    else{
+        [mainView setZoomScale:1 animated:YES];
+    }
+    
 }
-*/
+          
+
+
+
+
+-(void)imageViewDidStartLoadingImage:(FTImageView *)imgView{
+    [ai startAnimating];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+}
+
 #pragma mark Image loading
 
 - (void)imageZoomViewDidFinishLoadingImage:(FTImageZoomView *)zoomView {
@@ -294,15 +313,17 @@
     [ai stopAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     actionButton.enabled=true;
-    
+
 }
+
+
 
 #pragma mark Actions methods
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(NSDictionary *)info {
-	
-
+	NSLog(@"%@", info);
 }
+
 
 - (void)saveCurrentImageToGallery {
 
@@ -435,6 +456,7 @@
     actionButton.enabled=false;
 	return [self pageForIndex:(currentIndex + 1)];
 }
+
 
 - (void)pageScrollView:(FTPageScrollView *)scrollView offsetDidChange:(CGPoint)offset {
 	
