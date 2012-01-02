@@ -97,10 +97,12 @@
 		IDViewController *c = (IDViewController *)[[NSClassFromString([d objectForKey:@"controller"]) alloc] init];
 		if (c) {
 			//[c inheritConnectivity:internetActive];
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 			[c setTitle:[d objectForKey:@"name"]];
-			[self.navigationController pushViewController:c animated:YES];
+            [self.navigationController pushViewController:c animated:YES];
 			[c release];
+            if ([[d objectForKey:@"requiresConnection"] boolValue]){
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+            }
 		}
 	}
 }
