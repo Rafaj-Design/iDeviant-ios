@@ -33,7 +33,7 @@
         [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-search.png"]];
     }
     
-    
+    [ai setCenter:CGPointMake(self.view.center.x-50, self.view.center.y-50)];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -70,7 +70,7 @@
 
 
 -(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
-    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
+    [ai setCenter:CGPointMake(self.view.center.x-10, self.view.center.y-10)];
     
     [self backgroundImage];
 }

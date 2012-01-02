@@ -681,6 +681,7 @@
 #pragma mark Parsing delegate methods (MWFeedParserDelegate)
 
 - (void)feedParserDidStart:(MWFeedParser *)parser {
+    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
 	NSLog(@"Started Parsing: %@", parser.url);
 	[parsedItems removeAllObjects];
 	[table setUserInteractionEnabled:NO];
@@ -736,10 +737,11 @@
 	[searchBarHeader setShowsCancelButton:NO animated:YES];
 	[searchBarHeader resignFirstResponder];
     ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
     [ai setHidesWhenStopped:YES];
     [ai startAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    [ai setOrigin:CGPointMake(self.view.center.x, self.view.center.y)];
+    //[ai setOrigin:CGPointMake(self.view.center.x, self.view.center.y)];
     [self.view addSubview:ai];
 	[self getDataForSearchString:[searchBarHeader text] andCategory:nil];
 }
