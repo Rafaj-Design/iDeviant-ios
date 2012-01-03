@@ -163,10 +163,10 @@
 	//[self.navigationItem setRightBarButtonItem:favsButton];
 	//[favsButton release];
 	
-	FTPage *page = [self pageForIndex:currentIndex];
-	mainView = [[FTPageScrollView alloc] initWithFrame:[super fullScreenFrame]];
-	[mainView setDummyPageImage:[UIImage imageNamed:@"dummy.png"]];
-	[mainView setInitialPage:page withDelegate:self];
+    FTPage *page = [self pageForIndex:currentIndex];
+    mainView = [[FTPageScrollView alloc] initWithFrame:[super fullScreenFrame]];
+    [mainView setDummyPageImage:[UIImage imageNamed:@"dummy.png"]];
+    [mainView setInitialPage:page withDelegate:self];
 	//[mainView setPageScrollDelegate:self];
 	[mainView setPage:page pageCount:0 animate:YES];
     [mainView setBouncesZoom:YES];
@@ -200,14 +200,17 @@
 	ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
 	[ai setHidesWhenStopped:YES];
+    [ai startAnimating];
 	[self.view addSubview:ai];
-    actionButton.enabled=false;
+    //actionButton.enabled=false;
     
 }
+
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[self toggleNavigationVisibility];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -216,6 +219,15 @@
 	[self updateTitle];
 	//[mainView setPage:[self pageForIndex:currentIndex] pageCount:0 animate:YES];
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
+	
+	[self.navigationController.navigationBar setTranslucent:YES];
+	
+	[UIView beginAnimations:nil context:nil];
+	[self.navigationController.navigationBar setAlpha:kIDImageDetailViewControllerMaxAlpha];
+	[UIView commitAnimations];
+	
+    [mainView setFrame:[super fullScreenFrame]];
+    [bottomBar setFrame:[self frameForToolbar]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -238,7 +250,7 @@
 	[shortcutView centerInSuperView];
 	[UIView commitAnimations];
 	
-	[mainView reload];
+    [mainView reload];
 }
 
 #pragma mark Gesture recognizers
@@ -280,12 +292,7 @@
 		 ];
 	}
 	*/
-    if (mainView.zoomScale==1) {
-        [mainView setZoomScale:0.5 animated:YES];
-    }
-    else{
-        [mainView setZoomScale:1 animated:YES];
-    }
+    
     
 }
           
@@ -325,6 +332,7 @@
 }
 
 
+
 - (void)saveCurrentImageToGallery {
 
 	UIImageWriteToSavedPhotosAlbum(self.currentImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
@@ -345,15 +353,7 @@
 
 - (void)emailCurrentImage {
 	//[FlurryAPI logEvent:@"Func: Emailing image"];
-    /*
-    FTShareMailData *mailData = [[FTShareMailData alloc] init];
-
-    //[mailData addAttachmentWithObject:self.currentImage type:@"jpg" andName:@"iDVimg"];
-    [mailData setSubject:@"iDeviant"];
-    [mailData setPlainBody:@"iDeviant"];
-    
-    [[FTShare alloc] shareViaMail:mailData];
-    */
+   
     
     MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
     [mc setMailComposeDelegate:self];
@@ -368,7 +368,7 @@
     //[mc addAttachmentData:self.currentImage mimeType:@"image/png" fileName:@"Fuerte_International_UK.png"];
     [mc setModalPresentationStyle:UIModalPresentationPageSheet];
     [self presentModalViewController:mc animated:YES];
-
+    
 }
 
 
@@ -399,6 +399,8 @@
             break;
     }
     //[self toggleBottomBar];
+    
+    //[self doLayoutSubviews];
     // hide the modal view controller
     [self dismissModalViewControllerAnimated:YES];
     
@@ -436,6 +438,7 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
+
 #pragma mark Page scroll view delegate & data source methods
 
 
@@ -464,6 +467,7 @@
 
 - (CGSize)pageScrollView:(FTPageScrollView *)scrollView sizeForPage:(CGSize)size {
 	return [self getFrameForPage].size;
+    [ai stopAnimating];
 }
 
 - (void)dummyScrollInPageScrollViewDidFinish:(FTPageScrollView *)scrollView {
@@ -474,6 +478,7 @@
 	currentIndex = page.pageIndex;
 	NSLog(@"didMakePageCurrent: %d", currentIndex);
 	[self updateTitle];
+    
 }
 
 
