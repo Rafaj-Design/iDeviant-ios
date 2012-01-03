@@ -147,6 +147,11 @@
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
+    ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
+	[ai setHidesWhenStopped:YES];
+    [ai startAnimating];
+	[self.view addSubview:ai];
 	[self.view setBackgroundColor:[UIColor blackColor]];
 	
     [super viewDidLoad];
@@ -197,11 +202,7 @@
 	[bottomBar setItems:[NSArray arrayWithObjects:actionButton, nil]];
 	//[actionButton release];
 	
-	ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
-	[ai setHidesWhenStopped:YES];
-    [ai startAnimating];
-	[self.view addSubview:ai];
+	
     //actionButton.enabled=false;
     
 }
@@ -233,7 +234,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 	[self.navigationController.navigationBar setTranslucent:NO];
-	
+	[ai stopAnimating];
 	[UIView beginAnimations:nil context:nil];
 	[self.navigationController.navigationBar setAlpha:1.0];
 	[UIView commitAnimations];
@@ -300,11 +301,7 @@
 
 
 
--(void)imageViewDidStartLoadingImage:(FTImageView *)imgView{
-    [ai startAnimating];
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    
-}
+
 
 #pragma mark Image loading
 
@@ -431,6 +428,12 @@
 
 #pragma mark Image view delegate & data source methods
 
+-(void)imageViewDidStartLoadingImage:(FTImageView *)imgView{
+    [ai startAnimating];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+}
+
 - (void)imageView:(FTImageView *)imgView didFinishLoadingImage:(UIImage *)image {
 	[ai stopAnimating];
     self.currentImage = image;
@@ -447,14 +450,14 @@
 }
 
 - (FTPage *)leftPageForPageScrollView:(FTPageScrollView *)scrollView withTouchCount:(NSInteger)touchCount {
-	[ai startAnimating];
+	//[ai startAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     actionButton.enabled=false;
     return [self pageForIndex:(currentIndex - 1)];
 }
 
 - (FTPage *)rightPageForPageScrollView:(FTPageScrollView *)scrollView withTouchCount:(NSInteger)touchCount {
-    [ai startAnimating];
+    //[ai startAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     actionButton.enabled=false;
 	return [self pageForIndex:(currentIndex + 1)];
@@ -467,7 +470,7 @@
 
 - (CGSize)pageScrollView:(FTPageScrollView *)scrollView sizeForPage:(CGSize)size {
 	return [self getFrameForPage].size;
-    [ai stopAnimating];
+    //[ai stopAnimating];
 }
 
 - (void)dummyScrollInPageScrollViewDidFinish:(FTPageScrollView *)scrollView {
