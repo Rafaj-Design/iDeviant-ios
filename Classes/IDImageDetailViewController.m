@@ -176,6 +176,7 @@
 	[mainView setPage:page pageCount:0 animate:YES];
     [mainView setScrollEnabled:NO];
     [mainView setBouncesZoom:YES];
+    [mainView setPagingEnabled:YES];
 	[self.view addSubview:mainView];
 	
 	
@@ -294,6 +295,7 @@
 	*/
     
     
+    
 }
           
 
@@ -310,12 +312,13 @@
 						 [ai setAlpha:0];
 					 }
 					 completion:^(BOOL finished) {
-						 [ai stopAnimating];
+						 self.currentImage=zoomView.imageView.image;
+                         [ai stopAnimating];
+                         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                         actionButton.enabled=true;
 					 }
 	 ];
-    [ai stopAnimating];
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    actionButton.enabled=true;
+    
 
 }
 

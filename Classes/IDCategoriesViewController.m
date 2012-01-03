@@ -50,6 +50,27 @@
 	[table reloadData];
 }
 
+-(void)sendToHome{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    /*
+    NSString *tit = self.navigationItem.title;
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = CGRectMake(0, 0, 150, 20);
+    [btn setTitle:tit forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(sendToHome) forControlEvents:UIControlEventAllEvents];
+    [tit release];
+    
+    //have error with navigation controller
+    //self.navigationItem.titleView = btn;
+    
+    [btn release];
+     */
+}
+
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 }
