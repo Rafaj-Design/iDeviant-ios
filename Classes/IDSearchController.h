@@ -11,7 +11,7 @@
 
 
 @interface IDSearchController : IDItemsViewController {
-
+    NSTimer *background;
 }
 
 -(void)backgroundImage;

@@ -15,7 +15,7 @@
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
-    [self internetActive];
+    
     [super viewDidLoad];
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	[super setIsSearchBar:YES];
@@ -37,19 +37,26 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    
+    background = [NSTimer scheduledTimerWithTimeInterval:0.2
+                                                  target:self
+                                                selector:@selector(backgroundImage)
+                                                userInfo:nil
+                                                 repeats:NO];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    //[background invalidate];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    [NSTimer scheduledTimerWithTimeInterval:0.2
-                                     target:self
-                                   selector:@selector(backgroundImage)
-                                   userInfo:nil
-                                    repeats:NO];
+    
+    
     [super viewDidAppear:animated];
 }
 
 -(void)backgroundImage{
+    NSLog(@"set background image");
+    [self internetActive];
     if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
         if (internetActive) {
             [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-search.png"]];
