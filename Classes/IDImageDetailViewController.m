@@ -174,9 +174,8 @@
     [mainView setInitialPage:page withDelegate:self];
 	//[mainView setPageScrollDelegate:self];
 	[mainView setPage:page pageCount:0 animate:YES];
+    [mainView setScrollEnabled:NO];
     [mainView setBouncesZoom:YES];
-    [mainView setMaximumZoomScale:1];
-    [mainView setMinimumZoomScale:0.3];
 	[self.view addSubview:mainView];
 	
 	
@@ -448,7 +447,7 @@
 -(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
     [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
 }
-
+/*
 - (FTPage *)leftPageForPageScrollView:(FTPageScrollView *)scrollView withTouchCount:(NSInteger)touchCount {
 	//[ai startAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -462,7 +461,7 @@
     actionButton.enabled=false;
 	return [self pageForIndex:(currentIndex + 1)];
 }
-
+*/
 
 - (void)pageScrollView:(FTPageScrollView *)scrollView offsetDidChange:(CGPoint)offset {
 	
