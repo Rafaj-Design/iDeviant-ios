@@ -203,7 +203,8 @@
 // rss.xml?q=boost:popular+in:photography/architecture/exterior+max_age:8h&type=deviation
 
 - (void)getDataForSearchString:(NSString *)search andCategory:(NSString *)category {
-	if (internetActive) {
+	//[self internetActive];
+    //if (internetActive) {
 		// Crazy check :)
 		[IDAdultCheck checkForUnlock:search];
 		
@@ -217,7 +218,6 @@
 		
 		// Creating the URL (special:newest)
 		NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@%@&type=deviation", categoryString, searchString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-		
 		// Start download / parse
 		NSURL *feedURL = [NSURL URLWithString:url];
 		[feedParser release];
@@ -226,7 +226,7 @@
 		feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
 		feedParser.connectionType = ConnectionTypeAsynchronously;
 		[feedParser parse];
-	}
+	/*}
 	else {
 		if (kFakeData) {
 			[feedParser release];
@@ -240,7 +240,7 @@
 			feedParser.connectionType = ConnectionTypeAsynchronously;
 			[feedParser parse];
 		}
-	}
+	}*/
 }
 
 - (void)getDataForCategory:(NSString *)category {
