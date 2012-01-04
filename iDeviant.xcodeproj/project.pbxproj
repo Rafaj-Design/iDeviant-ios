@@ -178,7 +178,6 @@
 		2B0720DF138325A2008A4094 /* IDCategoriesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IDCategoriesTableViewCell.xib; sourceTree = "<group>"; };
 		2B15D3681381C615008FCA2E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2B15D36D1381C61E008FCA2E /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = en; path = en.lproj/Configuration.h; sourceTree = "<group>"; };
-		2B15D36F1381C62C008FCA2E /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2B15D3841381D8C2008FCA2E /* FTToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTToolbar.h; sourceTree = "<group>"; };
 		2B15D3851381D8C2008FCA2E /* FTToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTToolbar.m; sourceTree = "<group>"; };
 		2B15D3921381E4DA008FCA2E /* IDAdultCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDAdultCheck.h; sourceTree = "<group>"; };
@@ -1463,7 +1462,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				2B15D3681381C615008FCA2E /* en */,
-				2B15D36F1381C62C008FCA2E /* cs */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
