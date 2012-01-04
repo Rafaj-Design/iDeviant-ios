@@ -212,6 +212,7 @@
 		NSString *searchString = @"";
 		if (search) searchString = [NSString stringWithFormat:@"+%@", search];
 		
+    
 		// Adding category string if any
 		NSString *categoryString = @"";
 		if (category) if (![category isEqualToString:@""]) categoryString = [NSString stringWithFormat:@"+in:%@", category];
@@ -743,7 +744,8 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     //[ai setOrigin:CGPointMake(self.view.center.x, self.view.center.y)];
     [self.view addSubview:ai];
-	[self getDataForSearchString:[searchBarHeader text] andCategory:nil];
+    NSString *searchinpopular = [NSString stringWithFormat:@"boost:popular%@",[searchBarHeader text]]; 
+	[self getDataForSearchString:searchinpopular andCategory:nil];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
