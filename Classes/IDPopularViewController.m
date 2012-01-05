@@ -22,7 +22,8 @@
 	[self setTitle:@"popular"];
 	
 	[super enableRefreshButton];
-	[super getDataForSearchString:@"boost%3Apopular+meta%3Aall+max_age%3A8h&type=deviation"];
+	[super getDataForSearchString:@"special%3Apopular&type=deviation"];
+    //boost%3Apopular+meta%3Aall+max_age%3A8h&type=deviation
 }
 
 - (void)viewDidAppear:(BOOL)animated {
