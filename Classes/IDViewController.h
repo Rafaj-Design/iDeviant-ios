@@ -40,7 +40,9 @@
 	BOOL isSearchBar;
 	UISearchBar *searchBarHeader;
 	
-	FTReachability *internetReachable;
+//	FTReachability *internetReachable;
+	Reachability *internetReachable;
+	
 	BOOL internetActive;
 	//BOOL hostActive;
 	

@@ -705,9 +705,10 @@
 	NSLog(@"Finished Parsing%@", (parser.stopped ? @" (Stopped)" : @""));
 	[ai stopAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-	NSArray *arr = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
-	[self setData:[parsedItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:arr]]];
-	[arr release];
+//	NSArray *arr = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
+	[self setData:[parsedItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]]];
+	[sortDescriptor release];
 	
 	[self enableTable];
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
