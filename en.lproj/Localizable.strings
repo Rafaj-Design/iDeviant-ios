@@ -6,4 +6,30 @@
   Copyright 2011 Fuerte International. All rights reserved.
 */
 
+"dailydeviations"="daily deviations";
+"homesorting"="home sorting";
 
+"searchdesc"="Search for Deviations";
+"categoriesdesc"="Dig in DeviantArt";
+"favoritesdesc"="Your Favourites Collection";
+"dailydeviationsdesc"="Newest Deviations";
+"populardesc"="Top Rated Deviations";
+"logindesc"="Access to your Account";
+"homesortingdesc"="homesortingdesc";
+
+"requiresinternetconnection"="requires internet connection";
+"nonefavorites" = "none favorites";
+"imagesaved" = "image saved";
+
+"actionswithimagetitle"="action with image";
+"savetogalleryit"="save to galery";
+"facebookit"="facebook";
+"emailit"="email";
+"cancelbutton"="cancel";
+
+"searchplaceholder"="Search iDeviant";
+"subcategoriesinmaincat"="categories in main";
+"itemsinmaincat"="items in main";
+"subcategoriesincat"="subcategories in ";
+"subcategories "="subcategories";
+"itemsincategory"="items in ";
