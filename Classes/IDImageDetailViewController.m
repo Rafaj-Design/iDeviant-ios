@@ -179,21 +179,7 @@
     [mainView setPagingEnabled:YES];
 	[self.view addSubview:mainView];
 	
-	
-	
-	
 	//[mainView loadImageFromUrl:imageUrl];
-	
-	UITapGestureRecognizer *doubletap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewTwice:)];
-	[doubletap setNumberOfTapsRequired:2];
-	[mainView addGestureRecognizer:doubletap];
-	[doubletap release];
-	
-    
-	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewOnce:)];
-	[tap requireGestureRecognizerToFail:doubletap];
-	[mainView addGestureRecognizer:tap];
-	[tap release];
 	
 	bottomBar = [[FTToolbar alloc] initWithFrame:[self frameForToolbar]];
 	[self.view addSubview:bottomBar];
@@ -202,16 +188,13 @@
 	[bottomBar setItems:[NSArray arrayWithObjects:actionButton, nil]];
 	//[actionButton release];
 	
-	
     //actionButton.enabled=false;
-    
 }
 
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[self toggleNavigationVisibility];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -257,6 +240,7 @@
 #pragma mark Gesture recognizers
 
 - (void)didTapViewOnce:(UITapGestureRecognizer *)recognizer {
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 	if (!shortcutView) [self toggleNavigationVisibility];
 	else {
 		if (shortcutView.alpha == 0) {
@@ -272,37 +256,23 @@
 
 
 - (void)didTapViewTwice:(UITapGestureRecognizer *)recognizer {
-	/*if (!shortcutView) {
-		shortcutView = [[IDHorizontalItems alloc] initWithFram%f[self frameForShortcutView] andData:data];
-		[mainView addSubview:shortcutView];
-		[shortcutView setAlpha:0];
-	}
-	[mainView bringSubviewToFront:shortcutView];
-	float alpha = self.navigationController.navigationBar.alpha;
-	if (alpha == 0.0) {
-		[self toggleShortcut];
-	}
-	else {
-		[UIView animateWithDuration:0.3
-						 animations:^{
-							 [self toggleShortcut];
-						 }
-						 completion:^(BOOL finished) {
-							 [self toggleNavigationVisibility];
-						 }
-		 ];
-	}
-	*/
-    
-    
-    
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+	
+	float scale = [[(FTImagePage *)[recognizer view] imageZoomView] zoomScale];
+	if (scale != 1.0)
+		scale = 1.0;
+	else
+		scale = 1.5;
+	
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationBeginsFromCurrentState:YES];
+	[UIView setAnimationDuration:0.3];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+	
+	[[(FTImagePage *)[recognizer view] imageZoomView] setZoomScale:scale];
+	
+	[UIView commitAnimations];    
 }
-          
-
-
-
-
-
 
 #pragma mark Image loading
 
@@ -409,12 +379,14 @@
 #pragma mark Actions
 
 - (void)didClickActionButton:(UIBarButtonItem *)sender {
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:[FTLang get:@"actionswithimagetitle"] delegate:self cancelButtonTitle:[FTLang get:@"cancelbutton"] destructiveButtonTitle:nil otherButtonTitles:[FTLang get:@"savetogalleryit"], [FTLang get:@"facebookit"], [FTLang get:@"emailit"], nil];
 	[actionSheet showInView:self.view];
 	[actionSheet release];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 	NSLog(@"Did click button at index: %d", buttonIndex);
 	if (buttonIndex == 0) {
 		// Save to gallery
@@ -431,12 +403,14 @@
 #pragma mark Image view delegate & data source methods
 
 -(void)imageViewDidStartLoadingImage:(FTImageView *)imgView{
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
     [ai startAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
 }
 
 - (void)imageView:(FTImageView *)imgView didFinishLoadingImage:(UIImage *)image {
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 	[ai stopAnimating];
     self.currentImage = image;
     actionButton.enabled=true;
@@ -479,7 +453,31 @@
 	NSLog(@"dummyScrollInPageScrollViewDidFinish:");
 }
 
-- (void)pageScrollView:(FTPageScrollView *)scrollView didMakePageCurrent:(FTPage *)page {
+
+- (void)selektor:(FTImagePage *)page {
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationBeginsFromCurrentState:YES];
+	[UIView setAnimationDuration:1.0];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+
+	[page.imageZoomView setZoomScale:1.5];
+	
+	[UIView commitAnimations];
+}
+
+- (void)pageScrollView:(FTPageScrollView *)scrollView didMakePageCurrent:(FTImagePage *)page {
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+	
+	UITapGestureRecognizer *doubletap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewTwice:)];
+	[doubletap setNumberOfTapsRequired:2];
+	[page addGestureRecognizer:doubletap];
+	[doubletap release];
+	
+	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewOnce:)];
+	[tap requireGestureRecognizerToFail:doubletap];
+	[mainView addGestureRecognizer:tap];
+	[tap release];
+		
 	currentIndex = page.pageIndex;
 	NSLog(@"didMakePageCurrent: %d", currentIndex);
 	[self updateTitle];
