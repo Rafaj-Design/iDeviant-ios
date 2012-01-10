@@ -50,6 +50,7 @@
 	
 	UILabel *message;
 	UIActivityIndicatorView *ai;
+    UIImageView* imageView;
 }
 
 @property (nonatomic, retain) NSArray *data;

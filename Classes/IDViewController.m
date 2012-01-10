@@ -210,7 +210,7 @@
 		
 		// Adding search string if any
 		NSString *searchString = @"";
-		if (search) searchString = [NSString stringWithFormat:@"+%@", search];
+		if (search) searchString = [NSString stringWithFormat:@"%@", search];
 		
     
 		// Adding category string if any
@@ -714,7 +714,8 @@
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 	//[self setData:nil];
 	[table reloadData];
-	
+	[imageView stopAnimating];
+    [imageView setHidden:YES];
 	[self enableRefreshButton];
 }
 
@@ -741,12 +742,36 @@
     ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
     [ai setHidesWhenStopped:YES];
-    [ai startAnimating];
+    //[ai startAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     //[ai setOrigin:CGPointMake(self.view.center.x, self.view.center.y)];
     [self.view addSubview:ai];
-    NSString *searchinpopular = [NSString stringWithFormat:@"boost:popular%@",[searchBarHeader text]]; 
+    
+    
+    int i;
+    NSMutableArray *imgs = [[NSMutableArray alloc] init];
+    for (i=1; i<=40; i++) {
+        NSString *str = [NSString stringWithFormat:@"search_anim_%i@2x.png", i];
+        UIImage* img = [UIImage imageNamed:str];
+        [imgs addObject:img];
+    }
+    NSArray *images = [NSArray arrayWithArray:imgs];
+    [imgs release];
+    
+//    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
+//    imageView.center = self.view.center;
+	[imageView setHidden:NO];
+    [imageView setAnimationImages:images];
+    [imageView startAnimating];
+    //[self.view addSubview:imageView];
+    
+    
+
+    NSString *searchinpopular = [NSString stringWithFormat:@"boost:popular+%@",[searchBarHeader text]]; 
 	[self getDataForSearchString:searchinpopular andCategory:nil];
+    
+    
+    
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {

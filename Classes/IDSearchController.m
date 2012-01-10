@@ -27,13 +27,17 @@
 	
 	//[super setData:[NSArray arrayWithObject:@""]];
     if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
-        [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-search.png"]];
+        [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-empty-p@2x.png"]];
     }
     else{
-        [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-search.png"]];
+        [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-empty-l@2x.png"]];
     }
+    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
+    imageView.center = CGPointMake(self.view.center.x, self.view.center.y-30);
+    [imageView setImage:[UIImage imageNamed:@"search_anim_1@2x.png"]];
+    [self.view addSubview:imageView];
     
-    [ai setCenter:CGPointMake(self.view.center.x-50, self.view.center.y-50)];
+    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y-50)];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -42,6 +46,8 @@
                                                 selector:@selector(backgroundImage)
                                                 userInfo:nil
                                                  repeats:NO];
+    [imageView setCenter:self.view.center];
+   
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -49,6 +55,7 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    
     
     
     [super viewDidAppear:animated];
@@ -59,26 +66,30 @@
     [self internetActive];
     if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
         if (internetActive) {
-            [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-search.png"]];
+            [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-empty-p@2x.png"]];
+            
         } 
         else{
             [super enableBackgroundWithImage:[UIImage imageNamed:@"DD_grandma@2x.png"]];
+            
         }
     }
     else{
         if (internetActive) {
-            [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-search.png"]];
+            [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-empty-l@2x.png"]];
+            
         }
         else{
             [super enableBackgroundWithImage:[UIImage imageNamed:@"DD_grandma@2x.png"]];
+            
         }
     }
 }
 
 
 -(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
-    [ai setCenter:CGPointMake(self.view.center.x-10, self.view.center.y-10)];
-    
+    [ai setCenter:self.view.center];
+    [imageView setCenter:self.view.center];
     [self backgroundImage];
 }
 
@@ -101,10 +112,12 @@
 	if (count == 0) {
         [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [tableView setScrollEnabled:FALSE];
+        [imageView setHidden:NO];
     }
     else{
         [tableView setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
         [tableView setScrollEnabled:TRUE];
+        [imageView setHidden:YES];
     }
     return count;
 }
