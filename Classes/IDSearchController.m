@@ -71,7 +71,7 @@
         } 
         else{
             [super enableBackgroundWithImage:[UIImage imageNamed:@"DD_grandma@2x.png"]];
-            
+            [imageView setHidden:YES];
         }
     }
     else{
@@ -81,11 +81,17 @@
         }
         else{
             [super enableBackgroundWithImage:[UIImage imageNamed:@"DD_grandma@2x.png"]];
-            
+            [imageView setHidden:YES];
         }
     }
 }
 
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    if (!internetActive) {return (interfaceOrientation == UIDeviceOrientationPortrait);}
+    else{
+        return YES;
+    }
+}
 
 -(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
     [ai setCenter:self.view.center];
