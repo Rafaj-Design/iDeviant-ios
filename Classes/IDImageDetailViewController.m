@@ -15,7 +15,6 @@
 
 #define kIDImageDetailViewControllerMaxAlpha				0.6f
 
-
 @implementation IDImageDetailViewController
 
 @synthesize mainView;
@@ -218,9 +217,13 @@
 	[super viewWillDisappear:animated];
 	[self.navigationController.navigationBar setTranslucent:NO];
 	[ai stopAnimating];
+	
 	[UIView beginAnimations:nil context:nil];
+	
 	[self.navigationController.navigationBar setAlpha:1.0];
+	
 	[UIView commitAnimations];
+	
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 }
 
@@ -228,10 +231,12 @@
 
 - (void)doLayoutSubviews {
 	[UIView beginAnimations:nil context:nil];
+	
 	[mainView setFrame:[super fullScreenFrame]];
 	[bottomBar setFrame:[self frameForToolbar]];
 	[ai centerInSuperView];
 	[shortcutView centerInSuperView];
+	
 	[UIView commitAnimations];
 	
     [mainView reload];
@@ -248,7 +253,9 @@
 		}
 		else {
 			[UIView beginAnimations:nil context:nil];
+			
 			[shortcutView setAlpha:0];
+			
 			[UIView commitAnimations];
 		}
 	}
@@ -276,7 +283,16 @@
 
 #pragma mark Image loading
 
+- (void)imageViewDidFailLoadingImage:(FTImageView *)imgView withError:(NSError *)error {
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+}
+
+- (void)imageView:(FTImageView *)imgView didFinishLoadingImageFromInternet:(UIImage *)image {
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+}
+
 - (void)imageZoomViewDidFinishLoadingImage:(FTImageZoomView *)zoomView {
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 	[UIView animateWithDuration:0.6
 					 animations:^{
 						 [ai setAlpha:0];
@@ -292,11 +308,10 @@
 
 }
 
-
-
 #pragma mark Actions methods
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(NSDictionary *)info {
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 	NSLog(@"%@", info);
 }
 
@@ -314,15 +329,8 @@
 	//[FlurryAPI logEvent:@"Func: Saving image"];
 }
 
-- (void)postCurrentImageOnFacebook {
-	//iDeviantAppDelegate *appDelegate = (iDeviantAppDelegate *)[UIApplication sharedApplication].delegate;
-	//if (![appDelegate.facebook isSessionValid]) [appDelegate.facebook authorize:nil delegate:appDelegate];
-	//[FlurryAPI logEvent:@"Func: Facebooking image"];
-}
-
 - (void)emailCurrentImage {
 	//[FlurryAPI logEvent:@"Func: Emailing image"];
-   
     
     MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
     [mc setMailComposeDelegate:self];
@@ -393,7 +401,9 @@
 		[self saveCurrentImageToGallery];
 	}
 	else if (buttonIndex == 1) {
-		[self postCurrentImageOnFacebook];
+//		[self postCurrentImageOnFacebook];
+		iDeviantAppDelegate *appDelegate = [(iDeviantAppDelegate *)[UIApplication sharedApplication] delegate];
+		[appDelegate postFbMessageWithObject];
 	}
 	else if (buttonIndex == 2) {
 		[self emailCurrentImage];
@@ -498,6 +508,20 @@
 
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
 	
+}
+
+#pragma mark FTShareFacebookDelegate
+
+- (void)facebookDidPost:(NSError *)error {
+	NSString *messageString;
+	if (error)
+		messageString = [NSString stringWithFormat:@"Error occured while posting image on Facebook: %@", [error localizedDescription]];
+	else
+		messageString = @"Your photo has been successfuly posted";
+
+	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Facebook" message:messageString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+	[alertView show];
+	[alertView release];
 }
 
 

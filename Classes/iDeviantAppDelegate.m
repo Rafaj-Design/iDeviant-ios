@@ -15,12 +15,16 @@
 #import "ASIDownloadCache.h"
 //#import "JCO.h"
 
+#import "FBConnect.h"
+
+static NSString* kAppId = @"118349561582677";
 
 @implementation iDeviantAppDelegate
 
 @synthesize window;
-//@synthesize facebook;
 
+@synthesize facebook;
+@synthesize fbParams;
 
 #pragma mark Application lifecycle
 
@@ -50,8 +54,9 @@
 		[Appirater appLaunched];
 	}
 	
-	//facebook = [[Facebook alloc] initWithAppId:@"118349561582677" andDelegate:self];
-	
+	facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:(id<FBSessionDelegate>)self];
+	fbParams = [[NSMutableDictionary alloc] init];
+		
     // Override point for customization after application launch you bloody maggots.
 	IDHomeController *c = [[IDHomeController alloc] init];
 	navigationController = [[FTNavigationViewController alloc] initWithRootViewController:c];
@@ -141,6 +146,68 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:(processCount > 0)];
 }
 
+#pragma mark - Facebook
+
+#pragma mark FBSessionDelegate
+
+//NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+//                               @"Share on Facebook",  @"user_message_prompt",
+//                               actionLinksStr, @"action_links",
+//                               attachmentStr, @"attachment",
+//                               message,@"message",
+//                               nil];
+//
+//
+//[_facebook dialog:@"feed"
+//        andParams:params
+//      andDelegate:self];
+
+- (void)postFbMessageWithObject {
+    [fbParams removeAllObjects];
+	
+	facebook.accessToken    = [[NSUserDefaults standardUserDefaults] stringForKey:@"FBAccessToken"];
+	facebook.expirationDate = (NSDate *) [[NSUserDefaults standardUserDefaults] objectForKey:@"FBExpirationDate"];
+	
+	if (![facebook isSessionValid]) {
+		NSArray *permissions = [NSArray arrayWithObjects:@"offline_access", @"publish_stream", nil];
+		[facebook authorize:permissions];            
+	}
+	else {
+//		[facebook dialog:@"feed" andParams:fbParams andDelegate:self];
+	}
+}
+
+- (void)dialogDidComplete:(FBDialog *)dialog {
+	
+}
+
+- (void)fbDidLogin {	
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[facebook accessToken] forKey:@"FBAccessTokenKey"];
+    [defaults setObject:[facebook expirationDate] forKey:@"FBExpirationDateKey"];
+    [defaults synchronize];	
+	
+	[fbParams setObject:@"Glamour Fast Beauty App" forKey:@"name"];
+	[fbParams setObject:@"http://itunes.apple.com/gb/app/glamour-fast-beauty/id457514970?ls=1&mt=8" forKey:@"link"];
+	[fbParams setObject:@"http://a1.mzstatic.com/us/r1000/087/Purple/d7/ee/6c/mzl.jkcpambo.175x175-75.jpg" forKey:@"picture"];
+	[fbParams setObject:@"Download the Glamour Fast Beauty App" forKey:@"caption"];
+
+    if (fbParams) {
+        [facebook dialog:@"feed" andParams:fbParams andDelegate:self];
+    }
+    else {
+        NSLog(@"No params");
+    }
+    
+}
+
+-(void)fbDidNotLogin:(BOOL)cancelled {
+    
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {	
+    return [facebook handleOpenURL:url]; 
+}
 
 @end
 
