@@ -144,13 +144,13 @@
 	//[self setTitle:@"refreshing"];
     
     //loader when push refresh button
-//    ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
-//	[ai setHidesWhenStopped:YES];
-//	[ai startAnimating];
+
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-//	[self.view addSubview:ai];
     
+	
+	
+	
+	
 	[parsedItems removeAllObjects];
 	[feedParser stopParsing];
 	[feedParser parse];
@@ -210,7 +210,7 @@
 		
 		// Adding search string if any
 		NSString *searchString = @"";
-		if (search) searchString = [NSString stringWithFormat:@"+%@", search];
+		if (search) searchString = [NSString stringWithFormat:@"%@", search];
 		
 
 		// Adding category string if any
@@ -718,7 +718,6 @@
 #pragma mark Parsing delegate methods (MWFeedParserDelegate)
 
 - (void)feedParserDidStart:(MWFeedParser *)parser {
-//    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
 	NSLog(@"Started Parsing: %@", parser.url);
 	[parsedItems removeAllObjects];
 	[table setUserInteractionEnabled:NO];
@@ -739,7 +738,6 @@
 
 - (void)feedParserDidFinish:(MWFeedParser *)parser {
 	NSLog(@"Finished Parsing%@", (parser.stopped ? @" (Stopped)" : @""));
-//	[ai stopAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	NSArray *arr = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
 	[self setData:[parsedItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:arr]]];
@@ -749,7 +747,8 @@
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 	//[self setData:nil];
 	[table reloadData];
-	
+	[imageView stopAnimating];
+    [imageView setHidden:YES];
 	[self enableRefreshButton];
 }
 
@@ -773,14 +772,24 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
 	[searchBarHeader setShowsCancelButton:NO animated:YES];
 	[searchBarHeader resignFirstResponder];
-//    ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
-//    [ai setHidesWhenStopped:YES];
-//    [ai startAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    //[ai setOrigin:CGPointMake(self.view.center.x, self.view.center.y)];
-//    [self.view addSubview:ai];
-    NSString *searchinpopular = [NSString stringWithFormat:@"boost:popular%@",[searchBarHeader text]]; 
+
+    int i;
+    NSMutableArray *imgs = [[NSMutableArray alloc] init];
+    for (i=1; i<=40; i++) {
+        NSString *str = [NSString stringWithFormat:@"search_anim_%i@2x.png", i];
+        UIImage* img = [UIImage imageNamed:str];
+        [imgs addObject:img];
+    }
+    NSArray *images = [NSArray arrayWithArray:imgs];
+    [imgs release];
+    
+	[imageView setHidden:NO];
+    [imageView setAnimationImages:images];
+    [imageView startAnimating];
+  
+
+    NSString *searchinpopular = [NSString stringWithFormat:@"boost:popular+%@",[searchBarHeader text]]; 
 	[self getDataForSearchString:searchinpopular andCategory:nil];
 }
 
