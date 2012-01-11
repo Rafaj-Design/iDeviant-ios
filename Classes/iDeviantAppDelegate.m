@@ -17,6 +17,9 @@
 
 #import "FBConnect.h"
 
+#import <objc/runtime.h> 
+#import <objc/message.h>
+
 static NSString* kAppId = @"118349561582677";
 
 @implementation iDeviantAppDelegate
@@ -162,15 +165,48 @@ static NSString* kAppId = @"118349561582677";
 //        andParams:params
 //      andDelegate:self];
 
+//- (void)authorize:(NSArray *)permissions
+//  urlSchemeSuffix:(NSString *)urlSchemeSuffix {
+//	self.urlSchemeSuffix = urlSchemeSuffix;
+//	self.permissions = permissions;
+//	
+//	[self authorizeWithFBAppAuth:YES safariAuth:YES];
+//}
+
+void Swizzle(Class c, SEL orig, SEL new)
+{
+    Method origMethod = class_getInstanceMethod(c, orig);
+    Method newMethod = class_getInstanceMethod(c, new);
+    if(class_addMethod(c, orig, method_getImplementation(newMethod), method_getTypeEncoding(newMethod)))
+        class_replaceMethod(c, new, method_getImplementation(origMethod), method_getTypeEncoding(origMethod));
+    else
+		method_exchangeImplementations(origMethod, newMethod);
+}
+
+void function (id self, SEL _cmd, id arg) {
+	NSLog(@"FUCK");
+	[self setPermissions:[NSArray arrayWithObjects:@"offline_access", @"publish_stream", nil]];
+	[self setUrlSchemeSuffix:nil];
+	[self authorizeWithFBAppAuth:NO safariAuth:NO];
+}
+
 - (void)postFbMessageWithObject {
     [fbParams removeAllObjects];
+	
+	
+	
+//	Swizzle([Facebook class], <#SEL orig#>, <#SEL new#>)
+	IMP original = class_replaceMethod([Facebook class], @selector(authorize:urlSchemeSuffix:), (IMP)function, "v@:");
+	
+//	class_addMethod([Facebook class], @selector(anotherMethod:), original, "v@:");
+	
 	
 	facebook.accessToken    = [[NSUserDefaults standardUserDefaults] stringForKey:@"FBAccessToken"];
 	facebook.expirationDate = (NSDate *) [[NSUserDefaults standardUserDefaults] objectForKey:@"FBExpirationDate"];
 	
 	if (![facebook isSessionValid]) {
 		NSArray *permissions = [NSArray arrayWithObjects:@"offline_access", @"publish_stream", nil];
-		[facebook authorize:permissions];            
+		[facebook authorize:permissions];
 	}
 	else {
 //		[facebook dialog:@"feed" andParams:fbParams andDelegate:self];

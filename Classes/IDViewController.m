@@ -319,6 +319,33 @@
 	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+    // Disallow recognition of tap gestures in the segmented control.
+//    if ((touch.view == yourButton)) {//change it to your condition
+//        return NO;
+//    }
+	CGPoint location = [touch locationInView:self.navigationController.navigationBar];
+	
+	CGRect titleFrame;
+	
+	for (UIView *view in [[[self navigationController] navigationBar] subviews]) {
+		if ([NSStringFromClass([view class]) isEqualToString:@"UINavigationItemView"]) {
+			titleFrame = [view frame];
+		}
+	}
+	
+	if ((location.x >= CGRectGetMinX(titleFrame)) && (location.x <= CGRectGetMaxX(titleFrame))) {
+		if ((location.y >= CGRectGetMinY(titleFrame)) && (location.y <= CGRectGetMaxY(titleFrame))) {
+			NSLog(@"within");
+			[self.navigationController popToRootViewControllerAnimated:YES];
+			return YES;
+		}
+	}
+	
+    return NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
@@ -351,6 +378,7 @@
 	[message setHidden:YES];
 		
 	UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHideNavbar:)];
+	[tapGesture setDelegate:(id<UIGestureRecognizerDelegate>)self];
 	[self.navigationController.navigationBar addGestureRecognizer:tapGesture];
 	[tapGesture release];
 }

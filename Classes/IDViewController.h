@@ -17,7 +17,7 @@
 #import "FTReachability.h"
 
 
-@interface IDViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MWFeedParserDelegate, UISearchBarDelegate> {
+@interface IDViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MWFeedParserDelegate, UISearchBarDelegate, UIGestureRecognizerDelegate> {
 	
 	NSArray *data;
 	NSArray *categoriesData;
