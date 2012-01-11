@@ -141,15 +141,73 @@
 #pragma mark Parsing
 
 - (void)refresh {
-	//[self setTitle:@"refreshing"];
+//	[self setTitle:@"refreshing"];
+	
+	if (ai) {
+		[ai removeFromSuperview];
+		ai = nil;
+	}
     
     //loader when push refresh button
     ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
+//    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
+    [ai setCenter:CGPointMake(254, 26)];
 	[ai setHidesWhenStopped:YES];
 	[ai startAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-	[self.view addSubview:ai];
+//	[self.view addSubview:ai];
+	
+	[self.navigationController.navigationBar addSubview:ai];
+	
+	//
+	//
+	//
+	
+//	UIView *v= [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 30, 30)];
+//	[v addSubview:ai];
+//	UIBarButtonItem *activity = [[UIBarButtonItem alloc] initWithCustomView:v];
+//	
+//	UIBarButtonItem *refresh = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
+//	
+//	// create a toolbar to have two buttons in the right
+////	UIToolbar* tools = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 20, 44.01)];
+//	UIToolbar* tools = [[UIToolbar alloc] init];
+//	[tools setBackgroundColor:[UIColor clearColor]];
+//	[tools setOpaque:NO];
+//	
+//	// create the array to hold the buttons, which then gets added to the toolbar
+//	NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:3];
+//	
+//	
+//	// create a standard "refresh" button
+//	[buttons addObject:refresh];
+//	[refresh release];
+//	
+//	// create a spacer
+//	UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+//	[buttons addObject:spacer];
+//	[spacer release];
+//	
+//	// create a standard "add" button
+//	[buttons addObject:activity];
+//	[activity release];
+//	
+//
+//	
+//	
+//	
+//	// stick the buttons in the toolbar
+//	[tools setItems:buttons animated:YES];
+//	
+//	[buttons release];
+//	
+//	// and put the toolbar in the nav bar
+//	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:tools];
+//	[tools release];
+//	
+	//
+	//
+	//
     
 	[parsedItems removeAllObjects];
 	[feedParser stopParsing];
@@ -315,6 +373,10 @@
 	
 }
 
+-(void) showHideNavbar:(id)sender {
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
@@ -345,6 +407,10 @@
 	[message setFont:[UIFont boldSystemFontOfSize:10]];
 	[self.view addSubview:message];
 	[message setHidden:YES];
+	
+	UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHideNavbar:)];
+	[self.navigationController.navigationBar addGestureRecognizer:tapGesture];
+	[tapGesture release];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
@@ -682,7 +748,8 @@
 #pragma mark Parsing delegate methods (MWFeedParserDelegate)
 
 - (void)feedParserDidStart:(MWFeedParser *)parser {
-    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
+//    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
+    [ai setCenter:CGPointMake(254, 26)];
 	NSLog(@"Started Parsing: %@", parser.url);
 	[parsedItems removeAllObjects];
 	[table setUserInteractionEnabled:NO];
@@ -738,13 +805,22 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
 	[searchBarHeader setShowsCancelButton:NO animated:YES];
 	[searchBarHeader resignFirstResponder];
+	
+	
+	if (ai) {
+		[ai removeFromSuperview];
+		ai = nil;
+	}
+	
     ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
+//    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
+	[ai setCenter:CGPointMake(254, 26)];
     [ai setHidesWhenStopped:YES];
     [ai startAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     //[ai setOrigin:CGPointMake(self.view.center.x, self.view.center.y)];
-    [self.view addSubview:ai];
+//    [self.view addSubview:ai];
+	[self.navigationController.navigationBar addSubview:ai];
     NSString *searchinpopular = [NSString stringWithFormat:@"boost:popular%@",[searchBarHeader text]]; 
 	[self getDataForSearchString:searchinpopular andCategory:nil];
 }
