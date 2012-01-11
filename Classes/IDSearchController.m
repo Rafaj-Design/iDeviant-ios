@@ -45,13 +45,13 @@
                                                   target:self
                                                 selector:@selector(backgroundImage)
                                                 userInfo:nil
-                                                 repeats:NO];
+                                                 repeats:YES];
     [imageView setCenter:self.view.center];
    
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
-    //[background invalidate];
+    [background invalidate];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -62,36 +62,38 @@
 }
 
 -(void)backgroundImage{
-    NSLog(@"set background image");
+    [self internetActive];
+    [imageView setFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
     [self internetActive];
     if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
-        if (internetActive) {
-            [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-empty-p@2x.png"]];
-            
-        } 
-        else{
-            [super enableBackgroundWithImage:[UIImage imageNamed:@"DD_grandma@2x.png"]];
-            [imageView setHidden:YES];
-        }
+        [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-empty-p@2x.png"]];
     }
     else{
-        if (internetActive) {
-            [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-empty-l@2x.png"]];
-            
-        }
-        else{
-            [super enableBackgroundWithImage:[UIImage imageNamed:@"DD_grandma@2x.png"]];
-            [imageView setHidden:YES];
-        }
+        [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-empty-l@2x.png"]];
     }
+    
+    
+    if (!internetActive) {
+        [imageView setImage:[UIImage imageNamed:@"DD_grandma@2x.png"]];
+        [imageView setFrame: CGRectMake(0.0, 0.0, 200.0, 250.0)];
+    }else{
+        [imageView setImage:[UIImage imageNamed:@"search_anim_1@2x.png"]];
+    }
+    
+    [imageView setCenter:self.view.center];
+    
+    //[super enableBackgroundWithImage:[UIImage imageNamed:@"DD_grandma@2x.png"]];
 }
 
--(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    if (!internetActive) {return (interfaceOrientation == UIDeviceOrientationPortrait);}
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
+    if (!internetActive) {
+        return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
+    }
     else{
         return YES;
     }
 }
+
 
 -(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
     [ai setCenter:self.view.center];
