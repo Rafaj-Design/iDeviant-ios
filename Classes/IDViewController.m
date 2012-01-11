@@ -769,8 +769,6 @@
 	return YES;
 }
 
-<<<<<<< HEAD
-=======
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
 	[searchBarHeader setShowsCancelButton:NO animated:YES];
 	[searchBarHeader resignFirstResponder];
@@ -809,7 +807,6 @@
     
 }
 
->>>>>>> 65113e113a4c853c3c1d7c3787796489250e18b5
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
 	[searchBarHeader setShowsCancelButton:NO animated:YES];
 	[searchBarHeader resignFirstResponder];
