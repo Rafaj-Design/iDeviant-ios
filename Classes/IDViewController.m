@@ -772,14 +772,8 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
 	[searchBarHeader setShowsCancelButton:NO animated:YES];
 	[searchBarHeader resignFirstResponder];
-    ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
-    [ai setHidesWhenStopped:YES];
-    //[ai startAnimating];
+
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    //[ai setOrigin:CGPointMake(self.view.center.x, self.view.center.y)];
-    [self.view addSubview:ai];
-    
     
     int i;
     NSMutableArray *imgs = [[NSMutableArray alloc] init];
@@ -791,20 +785,12 @@
     NSArray *images = [NSArray arrayWithArray:imgs];
     [imgs release];
     
-//    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
-//    imageView.center = self.view.center;
 	[imageView setHidden:NO];
     [imageView setAnimationImages:images];
     [imageView startAnimating];
-    //[self.view addSubview:imageView];
-    
-    
 
     NSString *searchinpopular = [NSString stringWithFormat:@"boost:popular+%@",[searchBarHeader text]]; 
 	[self getDataForSearchString:searchinpopular andCategory:nil];
-    
-    
-    
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
