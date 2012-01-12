@@ -318,34 +318,32 @@
 
 -(void) showHideNavbar:(id)sender {
 	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+	[self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-    // Disallow recognition of tap gestures in the segmented control.
-//    if ((touch.view == yourButton)) {//change it to your condition
-//        return NO;
-//    }
-	CGPoint location = [touch locationInView:self.navigationController.navigationBar];
-	
-	CGRect titleFrame;
-	
-	for (UIView *view in [[[self navigationController] navigationBar] subviews]) {
-		if ([NSStringFromClass([view class]) isEqualToString:@"UINavigationItemView"]) {
-			titleFrame = [view frame];
-		}
-	}
-	
-	if ((location.x >= CGRectGetMinX(titleFrame)) && (location.x <= CGRectGetMaxX(titleFrame))) {
-		if ((location.y >= CGRectGetMinY(titleFrame)) && (location.y <= CGRectGetMaxY(titleFrame))) {
-			NSLog(@"within");
-			[self.navigationController popToRootViewControllerAnimated:YES];
-			return YES;
-		}
-	}
-	
-    return NO;
-}
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+//	return NO;
+//
+//	CGPoint location = [touch locationInView:self.navigationController.navigationBar];
+//	NSLog(@"location: %@", NSStringFromCGPoint(location));
+//	for (UIView *view in [[[self navigationController] navigationBar] subviews]) {
+//		if ([NSStringFromClass([view class]) isEqualToString:@"UINavigationItemView"]) {
+//			CGRect titleFrame = [view frame];
+//			NSLog(@"titleFrame: %@", NSStringFromCGRect(titleFrame));
+//			if ((location.x >= CGRectGetMinX(titleFrame)) && (location.x <= CGRectGetMaxX(titleFrame))) {
+//				if ((location.y >= CGRectGetMinY(titleFrame)) && (location.y <= CGRectGetMaxY(titleFrame))) {
+//					NSLog(@"=> Inside.");
+//					[self.navigationController popToRootViewControllerAnimated:YES];
+//					return YES;
+//				}
+//			}
+//		}
+//	}
+//	NSLog(@"=> Not inside.");
+//    return NO;
+//}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -377,10 +375,20 @@
 	[message setFont:[UIFont boldSystemFontOfSize:10]];
 	[self.view addSubview:message];
 	[message setHidden:YES];
+	
+	UIView *view = [[UIView alloc] init];
+	
+	for (UIView *v in [[[self navigationController] navigationBar] subviews]) {
+		if ([NSStringFromClass([v class]) isEqualToString:@"UINavigationItemView"]) {
+			[view setFrame:[v frame]];
+			[self.navigationController.navigationBar addSubview:view];
+			NSLog(@"titleFrame: %@", NSStringFromCGRect([v frame]));
+		}
+	}
 		
 	UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHideNavbar:)];
 	[tapGesture setDelegate:(id<UIGestureRecognizerDelegate>)self];
-	[self.navigationController.navigationBar addGestureRecognizer:tapGesture];
+	[view addGestureRecognizer:tapGesture];
 	[tapGesture release];
 }
 

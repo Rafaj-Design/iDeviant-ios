@@ -41,10 +41,12 @@
     
     UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 20)];
     self.nick.leftView = paddingView;
+	[paddingView release];
     self.nick.leftViewMode = UITextFieldViewModeAlways;
     
     UIView *paddingViewpas = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 20)];
     self.pass.leftView = paddingViewpas;
+	[paddingViewpas release];
     self.pass.leftViewMode = UITextFieldViewModeAlways;
     
     UIImage *image = [UIImage imageNamed:@"DD_login_bg"];

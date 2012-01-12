@@ -122,6 +122,10 @@
      */
 }
 
+- (void)showHideNavbar:(id)sender {
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+}
+
 -(void) showFeedback {
     aboutPage *AC = [[aboutPage alloc] initWithNibName:@"aboutPage" bundle:nil];
     [self.navigationController pushViewController:AC animated:YES];

@@ -222,7 +222,8 @@ void function (id self, SEL _cmd, id arg) {
 	[fbParams setObject:[item summary] forKey:@"description"];
 	
 //	Swizzle([Facebook class], <#SEL orig#>, <#SEL new#>)
-	IMP original = class_replaceMethod([Facebook class], @selector(authorize:urlSchemeSuffix:), (IMP)function, "v@:");
+//	IMP original = class_replaceMethod([Facebook class], @selector(authorize:urlSchemeSuffix:), (IMP)function, "v@:");
+	class_replaceMethod([Facebook class], @selector(authorize:urlSchemeSuffix:), (IMP)function, "v@:");
 	
 //	class_addMethod([Facebook class], @selector(anotherMethod:), original, "v@:");
 	

@@ -79,6 +79,7 @@
     
     //Load the request in the UIWebView.
     [webView loadRequest:request];
+	[request release];
 }
 
 @end

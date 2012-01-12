@@ -51,7 +51,7 @@
 #pragma mark Gallery data source & delegate methods
 
 - (UIView *)galleryScrollView:(FTPagesScrollView *)gallery requestsPageAtIndex:(int)index {
-	FTImageView *v = [[FTImageView alloc] initWithFrame:gallery.bounds];
+	FTImageView *v = [[[FTImageView alloc] initWithFrame:gallery.bounds] autorelease];
 	[v setImage:[UIImage imageNamed:[NSString stringWithFormat:@"t%d.jpg", index]]];
 	//[v setBackgroundColor:[UIColor clearColor]];
 	
@@ -62,6 +62,7 @@
 	[label setFont:[UIFont boldSystemFontOfSize:50]];
 	[label setText:[NSString stringWithFormat:@"t%d.jpg", index]];
 	[v addSubview:label];
+	[label release];
 	
 	return v;
 }
