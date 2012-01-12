@@ -112,8 +112,8 @@
 
 
 - (void)initializeJiraChecks {
-
-    self.navigationItem.rightBarButtonItem =  [[[UIBarButtonItem alloc] initWithTitle:[FTLang get:@"About"] style:UIBarButtonItemStyleBordered target:self action:@selector(showFeedback)] autorelease];
+    //show about page
+    //self.navigationItem.rightBarButtonItem =  [[[UIBarButtonItem alloc] initWithTitle:[FTLang get:@"About"] style:UIBarButtonItemStyleBordered target:self action:@selector(showFeedback)] autorelease];
     
     
     /*
