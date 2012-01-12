@@ -14,6 +14,8 @@
 #import "IDHorizontalItems.h"
 #import "FTShare.h"
 
+#import "FTImagePage.h"
+
 
 @class IDImageDetailViewController;
 
@@ -46,6 +48,8 @@
     
     UIImage *currentImage;
 	
+	FTImagePage *page;
+	
 }
 
 @property (nonatomic, retain) FTPageScrollView *mainView;
@@ -57,6 +61,8 @@
 @property (nonatomic) int currentIndex;
 
 @property (nonatomic, assign) id <IDImageDetailViewControllerDelegate> delegate;
+
+@property (nonatomic, retain) FTImagePage *page;
 
 
 - (void)setListData:(NSArray *)array;

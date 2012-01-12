@@ -61,23 +61,26 @@ static NSString* kAppId = @"118349561582677";
 		[Appirater appLaunched];
 	}
 	
-	NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-	NSString *languagesPath = [[NSBundle mainBundle] pathForResource:@"languages" ofType:@"json"];
+//	NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//	NSString *languagesPath = [[NSBundle mainBundle] pathForResource:@"languages" ofType:@"json"];
 	
-	documentsPath = [documentsPath stringByAppendingPathComponent:@"languages.json"];
 	
-	NSLog(@"Source Path: %@, Documents Path: %@", languagesPath, documentsPath);
+//	NSLog(@"%@", NSLocalizedString(@"search", @""));
+//	
+//	documentsPath = [documentsPath stringByAppendingPathComponent:@"languages.json"];
+//	
+//	NSLog(@"Source Path: %@, Documents Path: %@", languagesPath, documentsPath);
+//	
+//	NSError *err = nil;
+//	if([[NSFileManager defaultManager] fileExistsAtPath:documentsPath])
+//		NSLog(@"exists");
+//	
+//	[[NSFileManager defaultManager] copyItemAtPath:languagesPath toPath:documentsPath error:&err];
+//	
+//	NSLog(@"Error description-%@ \n", [err localizedDescription]);
+//	NSLog(@"Error reason-%@", [err localizedFailureReason]);
 	
-	NSError *err = nil;
-	if([[NSFileManager defaultManager] fileExistsAtPath:documentsPath])
-		NSLog(@"exists");
-	
-	[[NSFileManager defaultManager] copyItemAtPath:languagesPath toPath:documentsPath error:&err];
-	
-	NSLog(@"Error description-%@ \n", [err localizedDescription]);
-	NSLog(@"Error reason-%@", [err localizedFailureReason]);
-	
-	[FTLanguageManager initializeWithLocalURL:@"languages.json" remoteURL:nil andDefaultLanguage:@"ENG"];
+//	[FTLanguageManager initializeWithLocalURL:@"languages.json" remoteURL:nil andDefaultLanguage:@"ENG"];
 	
 	facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:(id<FBSessionDelegate>)self];
 	fbParams = [[NSMutableDictionary alloc] init];

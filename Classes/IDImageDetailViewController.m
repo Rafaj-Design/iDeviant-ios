@@ -12,6 +12,7 @@
 #import "FTImagePage.h"
 #import "IDAdultCheck.h"
 //#import "FTLang.h"
+#import "FTImagePage.h"
 
 #define kIDImageDetailViewControllerMaxAlpha				0.6f
 
@@ -53,6 +54,7 @@
 #pragma mark Memory management
 
 - (void)dealloc {
+	[page release];
 	[mainView release];
 	[imageUrl release];
 	[bottomBar release];
@@ -79,7 +81,7 @@
 	NSLog(@"Page index: %d", index);
 	MWFeedItem *item = [listThroughData objectAtIndex:currentIndex];
 	
-	FTImagePage *page = [[[FTImagePage alloc] initWithFrame:[self getFrameForPage]] autorelease];
+	page = [[FTImagePage alloc] initWithFrame:[self getFrameForPage]];
 	[page setPageIndex:index];
     
     //info box on image [loaded from cash/web]
@@ -225,6 +227,12 @@
 	[UIView commitAnimations];
 	
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+}
+
+- (void)viewDidUnload {
+	[super viewDidUnload];
+	
+	page = nil;
 }
 
 #pragma mark Layout
