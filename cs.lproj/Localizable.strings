@@ -6,48 +6,48 @@
   Copyright 2011 Fuerte International. All rights reserved.
 */
 
-"search"="search";
-"searchdesc"="search for deviations";
+"search"="vyhledávání";
+"searchdesc"="vyhledávání v deviant art";
 
-"categories"="categories";
-"categoriesdesc"="dig in deviantart";
+"categories"="kategorie";
+"categoriesdesc"="kategorie deviant art";
 
-"favorites"="favorites";
-"favoritesdesc"="your favourites collection";
+"favorites"="moje oblíbené";
+"favoritesdesc"="oblíbené kategorie";
 
-"dailydeviations"="daily deviations";
-"dailydeviationsdesc"="newest deviations";
+"dailydeviations"="nejnovější";
+"dailydeviationsdesc"="nejnovější deviace";
 
-"popular"="popular";
-"populardesc"="top rated deviations";
+"popular"="nejoblíbenější";
+"populardesc"="nejoblíbenější deviace";
 
-"login"="LOGIN";
-"logindesc"="access to your account";
+"login"="přihlášení";
+"logindesc"="přihlášení";
 
 "settings"="settings";
 "settingsdesc"="settingsdesc";
 
-"homesorting"="home sorting";
-"homesortingdesc"="sort homescreent";
+"homesorting"="nastavení";
+"homesortingdesc"="nastavení aplikace";
 
-"requiresinternetconnection"="requires internet connection";
-"nonefavorites"="none favorites";
-"imagesaved"="image saved";
+"requiresinternetconnection"="vyžaduje připojení k internetu";
+"nonefavorites"="žádné oblíbené";
+"imagesaved"="deviace uložena";
 "actionswithimagetitle"="action with image";
-"savetogalleryit"="save to galery";
+"savetogalleryit"="uložit do galerie";
 "facebookit"="facebook";
 "emailit"="email";
-"cancelbutton"="cancel";
-"search"="Search";
-"searchplaceholder"="Search iDeviant";
-"subcategoriesinmaincat"="categories in main";
-"subcategoriesincat"="subcategories in ";
-"subcategories "="subcategories";
-"itemsinmaincat"="items in main";
-"itemsincategory"="items in ";
-"myfavoritecategories"="my favorite categories";
-"myfavoriteitems"="my favorite items";
-"About"="About";
-"name"="name";
-"description"="description";
+"cancelbutton"="zrušit";
+"search"="vyhledat";
+"searchplaceholder"="hledat v iDeviant";
+"subcategoriesinmaincat"="kategorie v hlavní sekci";
+"subcategoriesincat"="podkategorie v ";
+"subcategories "="podkategorie";
+"itemsinmaincat"="položky v hlavní sekci";
+"itemsincategory"="položky v ";
+"myfavoritecategories"="moje oblíbené kategorie";
+"myfavoriteitems"="moje oblíbené položky";
+"About"="o aplikaci";
+"name"="jméno";
+"description"="popis";
 "OK"="OK";
