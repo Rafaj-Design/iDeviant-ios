@@ -51,6 +51,6 @@
 "name"="name";
 "description"="description";
 "OK"="OK";
-
-
-
+"nicknull"="Please enter nick";
+"passwordnull"="Please enter password";
+"rememberme"="Remember me";
