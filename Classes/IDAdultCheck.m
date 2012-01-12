@@ -16,8 +16,13 @@
 	if ([unlockString isEqualToString:@"ineedthisplease"]) {
 		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ineedthisplease"];
 		[[NSUserDefaults standardUserDefaults] synchronize];
-	}
-	else if ([unlockString isEqualToString:@"ihadenough"]) {
+	} else if ([unlockString isEqualToString:@"boost:popular+ineedthisplease"]) {
+		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ineedthisplease"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+	} else if ([unlockString isEqualToString:@"ihadenough"]) {
+		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ineedthisplease"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
+	} else if ([unlockString isEqualToString:@"boost:popular+ihadenough"]) {
 		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ineedthisplease"];
 		[[NSUserDefaults standardUserDefaults] synchronize];
 	}
