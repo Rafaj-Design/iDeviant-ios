@@ -11,6 +11,8 @@
 
 #include "FBConnect.h"
 
+@class MWFeedItem;
+
 @interface iDeviantAppDelegate : NSObject <UIApplicationDelegate, FBSessionDelegate, FBDialogDelegate> {
     UIWindow *window;
     FTNavigationViewController *navigationController;
@@ -25,6 +27,6 @@
 @property (nonatomic, strong) NSMutableDictionary *fbParams;
 
 - (void)showNetworkActivity:(BOOL)visible sender:(id)sender;
-- (void)postFbMessageWithObject;
+- (void)postFbMessageWithObject:(MWFeedItem *)item;
 @end
 

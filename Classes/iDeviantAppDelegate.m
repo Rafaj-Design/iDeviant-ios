@@ -20,6 +20,10 @@
 #import <objc/runtime.h> 
 #import <objc/message.h>
 
+#import "FTLanguageManager.h"
+
+#import "MWFeedItem.h"
+
 static NSString* kAppId = @"118349561582677";
 
 @implementation iDeviantAppDelegate
@@ -56,6 +60,24 @@ static NSString* kAppId = @"118349561582677";
 	if (kSystemApiRaterDebug || kSystemApiRaterEnabled) {
 		[Appirater appLaunched];
 	}
+	
+	NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+	NSString *languagesPath = [[NSBundle mainBundle] pathForResource:@"languages" ofType:@"json"];
+	
+	documentsPath = [documentsPath stringByAppendingPathComponent:@"languages.json"];
+	
+	NSLog(@"Source Path: %@, Documents Path: %@", languagesPath, documentsPath);
+	
+	NSError *err = nil;
+	if([[NSFileManager defaultManager] fileExistsAtPath:documentsPath])
+		NSLog(@"exists");
+	
+	[[NSFileManager defaultManager] copyItemAtPath:languagesPath toPath:documentsPath error:&err];
+	
+	NSLog(@"Error description-%@ \n", [err localizedDescription]);
+	NSLog(@"Error reason-%@", [err localizedFailureReason]);
+	
+	[FTLanguageManager initializeWithLocalURL:@"languages.json" remoteURL:nil andDefaultLanguage:@"ENG"];
 	
 	facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:(id<FBSessionDelegate>)self];
 	fbParams = [[NSMutableDictionary alloc] init];
@@ -190,10 +212,14 @@ void function (id self, SEL _cmd, id arg) {
 	[self authorizeWithFBAppAuth:NO safariAuth:NO];
 }
 
-- (void)postFbMessageWithObject {
+- (void)postFbMessageWithObject:(MWFeedItem *)item {
     [fbParams removeAllObjects];
 	
-	
+	[fbParams setObject:[item title] forKey:@"name"];
+	[fbParams setObject:[[[item contents] objectAtIndex:0] objectForKey:@"url"] forKey:@"picture"];
+	[fbParams setObject:[item link] forKey:@"link"];
+	[fbParams setObject:[[item copyright] objectForKey:@"name"] forKey:@"caption"];
+	[fbParams setObject:[item summary] forKey:@"description"];
 	
 //	Swizzle([Facebook class], <#SEL orig#>, <#SEL new#>)
 	IMP original = class_replaceMethod([Facebook class], @selector(authorize:urlSchemeSuffix:), (IMP)function, "v@:");
@@ -223,10 +249,10 @@ void function (id self, SEL _cmd, id arg) {
     [defaults setObject:[facebook expirationDate] forKey:@"FBExpirationDateKey"];
     [defaults synchronize];	
 	
-	[fbParams setObject:@"Glamour Fast Beauty App" forKey:@"name"];
-	[fbParams setObject:@"http://itunes.apple.com/gb/app/glamour-fast-beauty/id457514970?ls=1&mt=8" forKey:@"link"];
-	[fbParams setObject:@"http://a1.mzstatic.com/us/r1000/087/Purple/d7/ee/6c/mzl.jkcpambo.175x175-75.jpg" forKey:@"picture"];
-	[fbParams setObject:@"Download the Glamour Fast Beauty App" forKey:@"caption"];
+//	[fbParams setObject:@"Glamour Fast Beauty App" forKey:@"name"];
+//	[fbParams setObject:@"http://itunes.apple.com/gb/app/glamour-fast-beauty/id457514970?ls=1&mt=8" forKey:@"link"];
+//	[fbParams setObject:@"http://a1.mzstatic.com/us/r1000/087/Purple/d7/ee/6c/mzl.jkcpambo.175x175-75.jpg" forKey:@"picture"];
+//	[fbParams setObject:@"Download the Glamour Fast Beauty App" forKey:@"caption"];
 
     if (fbParams) {
         [facebook dialog:@"feed" andParams:fbParams andDelegate:self];

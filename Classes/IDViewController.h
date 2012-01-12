@@ -12,7 +12,7 @@
 #import "MWFeedParser.h"
 #import "UINavigationBar+IDTools.h"
 #import "UIView+Layout.h"
-#import "FTLang.h"
+//#import "FTLang.h"
 //#import "FlurryAPI.h"
 #import "FTReachability.h"
 

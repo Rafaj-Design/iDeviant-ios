@@ -7,7 +7,7 @@
 //
 
 #import "IDSearchController.h"
-#import "FTLang.h"
+//#import "FTLang.h"
 
 @implementation IDSearchController
 

@@ -112,6 +112,7 @@
 	else return;
 	[message setFrame:[self frameForMessageLabel]];
 	[message setText:[FTLang get:text]];
+	[message setText:FTLangGet(text)];
 	
 	[UIView animateWithDuration:0.4
 					 animations:^{

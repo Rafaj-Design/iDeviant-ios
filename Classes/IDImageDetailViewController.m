@@ -11,7 +11,7 @@
 #import "iDeviantAppDelegate.h"
 #import "FTImagePage.h"
 #import "IDAdultCheck.h"
-#import "FTLang.h"
+//#import "FTLang.h"
 
 #define kIDImageDetailViewControllerMaxAlpha				0.6f
 
@@ -331,15 +331,23 @@
 
 - (void)emailCurrentImage {
 	//[FlurryAPI logEvent:@"Func: Emailing image"];
+	
+	MWFeedItem *item = [listThroughData objectAtIndex:currentIndex];
     
     MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
     [mc setMailComposeDelegate:self];
-    [mc setSubject:[NSString stringWithFormat:@"iDeviant"]];
-    [mc setMessageBody:@"\n\n\n\niDeviant app by Fuerte International UK - http://www.fuerteint.com/" isHTML:NO];
-    [mc setMessageBody:@"</br></br></br></br>iDeviant app by <a href='http://www.fuerteint.com/'>Fuerte International UK</a>" isHTML:YES];
-    if (self.currentImage) {
-        [mc addAttachmentData:UIImagePNGRepresentation(self.currentImage) mimeType:@"jpeg/png" fileName:[NSString stringWithFormat:@"%@.png", self.navigationController.title]];
-    }
+    [mc setSubject:[NSString stringWithFormat:@"%@ by iDeviant", [item title]]];
+	
+//	NSString *plainBody = [NSString stringWithFormat:@"\n\n\%@n\niDeviant app by Fuerte International UK - http://www.fuerteint.com/", [item link]];
+//	[mc setMessageBody:plainBody isHTML:NO];
+	
+	NSString *htmlBody = [NSString stringWithFormat:@"</br></br><a href=\"%@\"><img src=\"%@\" /></a></br></br>iDeviant app by <a href='http://www.fuerteint.com/'>Fuerte International UK</a>", [item link], [[[item contents] objectAtIndex:0] objectForKey:@"url"]];
+    [mc setMessageBody:htmlBody isHTML:YES];
+	
+//	mc 
+//    if (self.currentImage) {
+//        [mc addAttachmentData:UIImagePNGRepresentation(self.currentImage) mimeType:@"jpeg/png" fileName:[NSString stringWithFormat:@"%@.png", self.navigationController.title]];
+//    }
     //[mc addAttachmentData:self.currentImage mimeType:@"image/png" fileName:[NSString stringWithFormat:@"%@.png", self.navigationController.title]];
     //self.currentImage = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"logo" ofType:@"png"]];
     //[mc addAttachmentData:self.currentImage mimeType:@"image/png" fileName:@"Fuerte_International_UK.png"];
@@ -403,7 +411,9 @@
 	else if (buttonIndex == 1) {
 //		[self postCurrentImageOnFacebook];
 		iDeviantAppDelegate *appDelegate = [(iDeviantAppDelegate *)[UIApplication sharedApplication] delegate];
-		[appDelegate postFbMessageWithObject];
+		
+		MWFeedItem *item = [listThroughData objectAtIndex:currentIndex];
+		[appDelegate postFbMessageWithObject:item];
 	}
 	else if (buttonIndex == 2) {
 		[self emailCurrentImage];

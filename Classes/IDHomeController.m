@@ -92,7 +92,7 @@
 		[super displayMessage:@"requiresinternetconnection"];
 	}
 	else if (([[d objectForKey:@"FVRT"] boolValue]) && [[IDFavouriteCategories dataForFavorites]count]==0) {
-        [super displayMessage:@"nonefavorites"];
+        [super displayMessage:FTLangGet(@"nonefavorites")];
     }else{
 		IDViewController *c = (IDViewController *)[[NSClassFromString([d objectForKey:@"controller"]) alloc] init];
 		if (c) {
