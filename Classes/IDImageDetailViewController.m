@@ -110,26 +110,48 @@
 - (void)finishNavigationToggle {
 	if (bottomBar.alpha == 0) {
 		[self.navigationController.navigationBar setHidden:YES];
+//		[[UIApplication sharedApplication] setStatusBarHidden:YES];
 		[bottomBar setHidden:YES];
+	} 
+	else {
+//		[[UIApplication sharedApplication] setStatusBarHidden:NO];
 	}
+	
+	NSLog(@"bounds: %@", NSStringFromCGRect(self.view.bounds));
+	NSLog(@"frame: %@", NSStringFromCGRect(self.view.frame));
 }
 
 - (void)toggleNavigationVisibility {
 	float a = 0.0;
 	float alpha = self.navigationController.navigationBar.alpha;
+	
+	BOOL hide = NO;
+
 	if (alpha == 0.0) {
 		a = kIDImageDetailViewControllerMaxAlpha;
 		
 		[self.navigationController.navigationBar setHidden:NO];
+		self.view.frame = self.view.bounds;
 		[bottomBar setHidden:NO];
+		hide = NO;
 	}
-	else if (alpha == 1.0) a = 0.0;
+	else if (alpha == 1.0) {
+		a = 0.0;
+		hide = YES;
+	} else if (alpha == kIDImageDetailViewControllerMaxAlpha) {
+		hide = YES;
+	}
+
 	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:0.6];
+	[UIView setAnimationDuration:0.3];
 	[UIView setAnimationDelegate:self];
 	[UIView setAnimationDidStopSelector:@selector(finishNavigationToggle)];
-	
+
+	[[UIApplication sharedApplication] setStatusBarHidden:hide];
 	[self.navigationController.navigationBar setAlpha:a];
+	
+//	self.view.frame = self.view.bounds;
+	
 	[bottomBar setAlpha:a];
 	[message setFrame:[super frameForMessageLabel]];
 	
@@ -227,10 +249,13 @@
 	[UIView commitAnimations];
 	
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+	[[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
 
 - (void)viewDidUnload {
 	[super viewDidUnload];
+	
+//	[[UIApplication sharedApplication] setStatusBarHidden:NO];
 	
 	page = nil;
 }
@@ -254,12 +279,14 @@
 
 - (void)didTapViewOnce:(UITapGestureRecognizer *)recognizer {
 	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-	if (!shortcutView) [self toggleNavigationVisibility];
+	NSLog(@"bounds: %@", NSStringFromCGRect(self.view.bounds));
+	NSLog(@"frame: %@", NSStringFromCGRect(self.view.frame));
+	if (!shortcutView) 
+		[self toggleNavigationVisibility];
 	else {
 		if (shortcutView.alpha == 0) {
 			[self toggleNavigationVisibility];
-		}
-		else {
+		} else {
 			[UIView beginAnimations:nil context:nil];
 			
 			[shortcutView setAlpha:0];
@@ -304,6 +331,8 @@
 	[UIView animateWithDuration:0.6
 					 animations:^{
 						 [ai setAlpha:0];
+//						 [[UIApplication sharedApplication] setStatusBarHidden:YES];
+//						 self.view.frame = self.view.bounds;
 					 }
 					 completion:^(BOOL finished) {
 						 self.currentImage=zoomView.imageView.image;

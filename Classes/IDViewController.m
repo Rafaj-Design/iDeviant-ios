@@ -147,10 +147,6 @@
     //loader when push refresh button
 
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    
-	
-	
-	
 	
 	[parsedItems removeAllObjects];
 	[feedParser stopParsing];
@@ -173,76 +169,46 @@
 }
 
 - (void)getDataForParams:(NSString *)params {
-	if (internetActive) {
-		// Creating the URL
-		NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?%@", params] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+		NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@", params] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 		
-		// Start download / parse
 		NSURL *feedURL = [NSURL URLWithString:url];
 		feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
 		feedParser.delegate = self;
 		feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
 		feedParser.connectionType = ConnectionTypeAsynchronously;
 		[feedParser parse];
-	}
-	else {
-		if (kFakeData) {
-			[feedParser release];
-			NSString *path = [[NSBundle mainBundle] pathForResource:@"fake-data" ofType:@"xml"];
-			//NSFileManager *fm = [[NSFileManager alloc] init];
-			NSURL *feedURL = [[NSURL alloc] initFileURLWithPath:path];
-			feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
-			[feedURL release];
-			[feedParser setDelegate:self];
-			feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
-			feedParser.connectionType = ConnectionTypeAsynchronously;
-			[feedParser parse];
-		}
-	}
 }
 
-// rss.xml?q=boost:popular+in:photography/architecture/exterior+max_age:8h&type=deviation
+- (void)getDataForSearchString:(NSString *)search andCategory:(NSString *)category {	
 
-- (void)getDataForSearchString:(NSString *)search andCategory:(NSString *)category {
-	//[self internetActive];
-    //if (internetActive) {
-		// Crazy check :)
-		[IDAdultCheck checkForUnlock:search];
+	[IDAdultCheck checkForUnlock:search];
 		
-		// Adding search string if any
-		NSString *searchString = @"";
-		if (search) searchString = [NSString stringWithFormat:@"%@", search];
-		
+	NSString *searchString = @"";
+	
+	if (search)
+		searchString = [NSString stringWithFormat:@"+%@", search];
 
-		// Adding category string if any
-		NSString *categoryString = @"";
-		if (category) if (![category isEqualToString:@""]) categoryString = [NSString stringWithFormat:@"+in:%@", category];
-		
-		// Creating the URL (special:newest)
-		NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@%@&type=deviation", categoryString, searchString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-		// Start download / parse
-		NSURL *feedURL = [NSURL URLWithString:url];
-		[feedParser release];
-		feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
-		[feedParser setDelegate:self];
-		feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
-		feedParser.connectionType = ConnectionTypeAsynchronously;
-		[feedParser parse];
-		/*}
-		 else {
-		 if (kFakeData) {
-		 [feedParser release];
-		 NSString *path = [[NSBundle mainBundle] pathForResource:@"fake-data" ofType:@"xml"];
-		 //NSFileManager *fm = [[NSFileManager alloc] init];
-		 NSURL *feedURL = [[NSURL alloc] initFileURLWithPath:path];
-		 feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
-		 [feedURL release];
-		 [feedParser setDelegate:self];
-		 feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
-		 feedParser.connectionType = ConnectionTypeAsynchronously;
-		 [feedParser parse];
-		 }
-		 }*/
+	NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=boost:popular%@", searchString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+
+	NSString *categoryString = @"";
+	
+	if (category) 
+	if (![category isEqualToString:@""]) {
+//		categoryString = [categoryString stringByAppendingString:@"%@+sort:time"];
+		categoryString = [NSString stringWithFormat:@"+in:%@+sort:time", category];
+		url = [url stringByAppendingString:categoryString];
+	}
+	
+	NSLog(@"URL: %@", url);
+	
+	NSURL *feedURL = [NSURL URLWithString:url];
+	[feedParser release];
+	feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
+	[feedParser setDelegate:self];
+	feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
+	feedParser.connectionType = ConnectionTypeAsynchronously;
+	[feedParser parse];
 }
 
 - (void)getDataForCategory:(NSString *)category {
@@ -320,29 +286,6 @@
 	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 	[self.navigationController popToRootViewControllerAnimated:YES];
 }
-
-//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-//	return NO;
-//
-//	CGPoint location = [touch locationInView:self.navigationController.navigationBar];
-//	NSLog(@"location: %@", NSStringFromCGPoint(location));
-//	for (UIView *view in [[[self navigationController] navigationBar] subviews]) {
-//		if ([NSStringFromClass([view class]) isEqualToString:@"UINavigationItemView"]) {
-//			CGRect titleFrame = [view frame];
-//			NSLog(@"titleFrame: %@", NSStringFromCGRect(titleFrame));
-//			if ((location.x >= CGRectGetMinX(titleFrame)) && (location.x <= CGRectGetMaxX(titleFrame))) {
-//				if ((location.y >= CGRectGetMinY(titleFrame)) && (location.y <= CGRectGetMaxY(titleFrame))) {
-//					NSLog(@"=> Inside.");
-//					[self.navigationController popToRootViewControllerAnimated:YES];
-//					return YES;
-//				}
-//			}
-//		}
-//	}
-//	NSLog(@"=> Not inside.");
-//    return NO;
-//}
 
 
 - (void)viewDidLoad {
@@ -800,8 +743,10 @@
     [imageView setAnimationImages:images];
     [imageView startAnimating];
 
-    NSString *searchinpopular = [NSString stringWithFormat:@"boost:popular+%@",[searchBarHeader text]]; 
-	[self getDataForSearchString:searchinpopular andCategory:nil];
+//    NSString *searchinpopular = [NSString stringWithFormat:@"boost:popular+%@",[searchBarHeader text]]; 
+//	[self getDataForSearchString:searchinpopular andCategory:nil];
+	
+	[self getDataForSearchString:[searchBarHeader text] andCategory:nil];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {

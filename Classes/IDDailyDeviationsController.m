@@ -22,7 +22,8 @@
 //	[self setTitle:@"loading"];
 	
 	[super enableRefreshButton];
-	[super getDataForSearchString:@"icons"];
+//	[super getDataForSearchString:@"icons"];
+	[super getDataForParams:@"special:dd"];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

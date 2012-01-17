@@ -11,22 +11,18 @@
 
 
 @interface IDItemsViewController : IDViewController {
-    
+
 	NSString *predefinedSearchTerm;
-	
 	NSString *predefinedCategory;
-	
 }
 
-- (id)initWithSearch:(NSString *)search andCategory:(NSString *)category;
-
-- (id)initWithSearch:(NSString *)search;
-
-- (id)initWithCategory:(NSString *)category;
-
 @property (nonatomic, retain) NSString *predefinedSearchTerm;
-
 @property (nonatomic, retain) NSString *predefinedCategory;
 
+- (id)initWithSearch:(NSString *)search andCategory:(NSString *)category;
+- (id)initWithSearch:(NSString *)search;
+- (id)initWithCategory:(NSString *)category;
+
+- (void)getDataForParams:(NSString *)params;
 
 @end

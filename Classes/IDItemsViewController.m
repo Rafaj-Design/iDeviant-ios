@@ -1,4 +1,4 @@
-//
+	//
 //  IDItemsViewController.m
 //  iDeviant
 //
@@ -16,6 +16,18 @@
 
 @synthesize predefinedSearchTerm;
 @synthesize predefinedCategory;
+
+- (void)getDataForParams:(NSString *)params {
+
+		NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@", params] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+		NSURL *feedURL = [NSURL URLWithString:url];
+	
+		feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
+		feedParser.delegate = self;
+		feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
+		feedParser.connectionType = ConnectionTypeAsynchronously;
+		[feedParser parse];
+}
 
 
 #pragma mark Initialization
@@ -95,6 +107,12 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
+}
+
+- (void)viewDidUnload {
+	[super viewDidUnload];
+	
+	[[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
 
 #pragma mark Memory management

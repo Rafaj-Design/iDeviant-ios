@@ -45,6 +45,8 @@ static NSString* kAppId = @"118349561582677";
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
+	
+	[self.window setBackgroundColor:[UIColor blackColor]];
 
     // Build checks
 	if (kDebug) {
