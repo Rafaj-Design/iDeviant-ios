@@ -142,6 +142,7 @@
 		4CF02044139270F700ED1E47 /* DA_ok_messagebg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CF0203C139270F700ED1E47 /* DA_ok_messagebg@2x.png */; };
 		4CF020481392EF5800ED1E47 /* IDFavouriteCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF020471392EF5800ED1E47 /* IDFavouriteCategories.m */; };
 		4CF0204B1392EF6B00ED1E47 /* IDFavouriteItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF0204A1392EF6B00ED1E47 /* IDFavouriteItems.m */; };
+		66CD733514C5D2C900DB0E02 /* IDLang.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CD733414C5D2C900DB0E02 /* IDLang.m */; };
 		C7E02E6E12DF03BD0098AAE6 /* FTNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E02E6D12DF03BD0098AAE6 /* FTNavigationViewController.m */; };
 		C84031591448BD6B00D86A99 /* fuerte-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C84031571448BD6B00D86A99 /* fuerte-logo@2x.png */; };
 		C840315A1448BD6B00D86A99 /* fuerte-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = C84031581448BD6B00D86A99 /* fuerte-logo.png */; };
@@ -403,6 +404,8 @@
 		4CF020471392EF5800ED1E47 /* IDFavouriteCategories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDFavouriteCategories.m; sourceTree = "<group>"; };
 		4CF020491392EF6B00ED1E47 /* IDFavouriteItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDFavouriteItems.h; sourceTree = "<group>"; };
 		4CF0204A1392EF6B00ED1E47 /* IDFavouriteItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDFavouriteItems.m; sourceTree = "<group>"; };
+		66CD733314C5D2C900DB0E02 /* IDLang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDLang.h; sourceTree = "<group>"; };
+		66CD733414C5D2C900DB0E02 /* IDLang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDLang.m; sourceTree = "<group>"; };
 		66EAE67914BF133600DE3A2A /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* iDeviant-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iDeviant-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		C7E02E6C12DF03BD0098AAE6 /* FTNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTNavigationViewController.h; sourceTree = "<group>"; };
@@ -1292,6 +1295,8 @@
 			children = (
 				4CEB1BC614039FF500B70C98 /* UINavigationBar+IDTools.h */,
 				4CEB1BC714039FF500B70C98 /* UINavigationBar+IDTools.m */,
+				66CD733314C5D2C900DB0E02 /* IDLang.h */,
+				66CD733414C5D2C900DB0E02 /* IDLang.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -1637,6 +1642,7 @@
 				4C8AD6021404F5470078DE52 /* IDLoginViewController.m in Sources */,
 				C85DB472144F40BA00FC0929 /* IDLoginController.m in Sources */,
 				C8D6345914A10BA800005730 /* aboutPage.m in Sources */,
+				66CD733514C5D2C900DB0E02 /* IDLang.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
