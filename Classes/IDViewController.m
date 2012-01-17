@@ -423,6 +423,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[self checkNetworkStatus:nil];
+	
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
@@ -563,6 +564,7 @@
 - (void)getDataFromBundlePlist:(NSString *)plist {
 	NSString *path = [[NSBundle mainBundle] pathForResource:plist ofType:@""];
 	NSArray *arr = [NSArray arrayWithContentsOfFile:path];
+	NSLog(@"%@", arr);
 	[self setData:arr];
 }
 
@@ -763,7 +765,7 @@
 
 - (void)feedParser:(MWFeedParser *)parser didFailWithError:(NSError *)error {
 	NSLog(@"Finished Parsing With Error: %@", error);
-	[self setTitle:@"failed"];
+//	[self setTitle:@"failed"];
 	[self setData:[NSArray array]];
 	[parsedItems removeAllObjects];
 	

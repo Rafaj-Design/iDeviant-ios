@@ -23,6 +23,8 @@
 		<string>DA_icon3.png</string>
 		<key>name</key>
 		<string>categories</string>
+		<key>requiresConnection</key>
+		<true/>
 	</dict>
 	<dict>
 		<key>FVRT</key>

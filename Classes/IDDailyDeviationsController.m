@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	[self setTitle:@"loading"];
+//	[self setTitle:@"loading"];
 	
 	[super enableRefreshButton];
 	[super getDataForSearchString:@"icons"];

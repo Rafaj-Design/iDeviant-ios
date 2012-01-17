@@ -12,6 +12,10 @@
 #import "IDCategoriesTableViewCell.h"
 #import "IDFavouriteCategories.h"
 
+#import "FTFilesystemIO.h"
+#import "FTFilesystemPaths.h"
+
+#import "FTDataJson.h"
 
 @implementation IDCategoriesViewController
 
@@ -21,12 +25,27 @@
 
 #pragma mark Data
 
+// filth with data
 - (void)fillWithData {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 	if ([categoriesData count] == 0) {
-		[super getDataFromBundlePlist:@"Categories.plist"];
-		categoriesData = [[NSArray alloc] initWithArray:data];
-		[super setData:nil];
+		
+		NSString *path = [FTFilesystemPaths getDocumentsDirectoryPath];
+		path = [path stringByAppendingPathComponent:@"categories.json"];
+		
+		if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+			NSError *err = nil;
+			NSString *jsonString = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&err];
+			
+			id jsonContent = [FTDataJson jsonDataFromString:jsonString];
+			NSArray *jsonData = (NSArray*)jsonContent;
+
+			categoriesData = [[NSArray alloc] initWithArray:jsonData];
+		} else {
+			[super getDataFromBundlePlist:@"Categories.plist"];
+			categoriesData = [[NSArray alloc] initWithArray:data];
+			[super setData:nil];
+		}
 		
 		[super setIsSearchBar:NO];
 		

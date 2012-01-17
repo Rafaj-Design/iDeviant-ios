@@ -108,7 +108,7 @@
 
 - (void)feedParser:(MWFeedParser *)parser didFailWithError:(NSError *)error {
 	NSLog(@"Finished Parsing With Error: %@", error);
-	self.title = @"Failed";
+//	self.title = @"Failed";
 	self.itemsToDisplay = [NSArray array];
 	[parsedItems removeAllObjects];
 	self.tableView.userInteractionEnabled = YES;

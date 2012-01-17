@@ -87,6 +87,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[table deselectRowAtIndexPath:indexPath animated:YES];
+	
+	
+	
+	
 	NSDictionary *d = [data objectAtIndex:indexPath.section];
 	if ([[d objectForKey:@"requiresConnection"] boolValue] && !internetActive) {
 		[super displayMessage:@"requiresinternetconnection"];
@@ -97,6 +101,15 @@
 		IDViewController *c = (IDViewController *)[[NSClassFromString([d objectForKey:@"controller"]) alloc] init];
 		if (c) {
 			//[c inheritConnectivity:internetActive];
+			
+			if ([[d objectForKey:@"controller"] isEqualToString:@"IDCategoriesController"]) {
+				if (!internetActive) {
+					UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Internet offline" message:@"For browsing through images please turn internet on." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+					[alertView show];
+					[alertView release];
+				}
+			}
+			
 			[c setTitle:[d objectForKey:@"name"]];
             [self.navigationController pushViewController:c animated:YES];
 			[c release];

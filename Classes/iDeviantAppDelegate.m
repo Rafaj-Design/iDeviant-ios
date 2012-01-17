@@ -24,6 +24,12 @@
 
 #import "MWFeedItem.h"
 
+#import "FTDataJson.h"
+#import "FTDownload.h"
+
+#import "FTFilesystemIO.h"
+#import "FTFilesystemPaths.h"
+
 static NSString* kAppId = @"118349561582677";
 
 @implementation iDeviantAppDelegate
@@ -33,6 +39,9 @@ static NSString* kAppId = @"118349561582677";
 @synthesize facebook;
 @synthesize fbParams;
 
+@synthesize timestamp, categories;
+@synthesize version;
+
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
@@ -41,6 +50,28 @@ static NSString* kAppId = @"118349561582677";
 	if (kDebug) {
 		[IGABuildChecks perform];
 	}
+	
+	NSString *path = [FTFilesystemPaths getDocumentsDirectoryPath];
+	path = [path stringByAppendingPathComponent:@"timestamp.txt"];
+	
+	if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+		NSError *err = nil;
+		version = [[NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&err] integerValue];
+	}
+	
+	timestamp = [[FTDownload alloc] initWithPath:@"http://staging.fuerteint.com/projects/ideviant/timestamp.php"];
+//	[timestamp setDownloadToFilePath:path];
+	[timestamp setDelegate:(id<FTDownloadDelegate>)self];
+	[timestamp startDownload];
+	
+	path = [path stringByDeletingLastPathComponent];
+	
+	path = [path stringByAppendingPathComponent:@"categories.json"];
+
+	categories = [[FTDownload alloc] initWithPath:@"http://staging.fuerteint.com/projects/ideviant/categories.txt"];
+	[categories setDownloadToFilePath:path];
+	[categories setDelegate:(id<FTDownloadDelegate>)self];
+	
 	
 //	// starting Flurry tracking
 //	if (kSystemTrackingFlurryEnableTracking) {
@@ -60,28 +91,7 @@ static NSString* kAppId = @"118349561582677";
 	if (kSystemApiRaterDebug || kSystemApiRaterEnabled) {
 		[Appirater appLaunched];
 	}
-	
-//	NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-//	NSString *languagesPath = [[NSBundle mainBundle] pathForResource:@"languages" ofType:@"json"];
-	
-	
-//	NSLog(@"%@", NSLocalizedString(@"search", @""));
-//	
-//	documentsPath = [documentsPath stringByAppendingPathComponent:@"languages.json"];
-//	
-//	NSLog(@"Source Path: %@, Documents Path: %@", languagesPath, documentsPath);
-//	
-//	NSError *err = nil;
-//	if([[NSFileManager defaultManager] fileExistsAtPath:documentsPath])
-//		NSLog(@"exists");
-//	
-//	[[NSFileManager defaultManager] copyItemAtPath:languagesPath toPath:documentsPath error:&err];
-//	
-//	NSLog(@"Error description-%@ \n", [err localizedDescription]);
-//	NSLog(@"Error reason-%@", [err localizedFailureReason]);
-	
-//	[FTLanguageManager initializeWithLocalURL:@"languages.json" remoteURL:nil andDefaultLanguage:@"ENG"];
-	
+		
 	facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:(id<FBSessionDelegate>)self];
 	fbParams = [[NSMutableDictionary alloc] init];
 		
@@ -253,11 +263,6 @@ void function (id self, SEL _cmd, id arg) {
     [defaults setObject:[facebook expirationDate] forKey:@"FBExpirationDateKey"];
     [defaults synchronize];	
 	
-//	[fbParams setObject:@"Glamour Fast Beauty App" forKey:@"name"];
-//	[fbParams setObject:@"http://itunes.apple.com/gb/app/glamour-fast-beauty/id457514970?ls=1&mt=8" forKey:@"link"];
-//	[fbParams setObject:@"http://a1.mzstatic.com/us/r1000/087/Purple/d7/ee/6c/mzl.jkcpambo.175x175-75.jpg" forKey:@"picture"];
-//	[fbParams setObject:@"Download the Glamour Fast Beauty App" forKey:@"caption"];
-
     if (fbParams) {
         [facebook dialog:@"feed" andParams:fbParams andDelegate:self];
     }
@@ -273,6 +278,31 @@ void function (id self, SEL _cmd, id arg) {
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {	
     return [facebook handleOpenURL:url]; 
+}
+
+# pragma mark - FTDownloadDelegate
+
+- (void)downloadStatusChanged:(FTDownloadStatus)downloadStatus forObject:(FTDownload *)object {
+	if (FTDownloadStatusSuccessful == downloadStatus) {
+		NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+		
+		if (object == timestamp) {
+			NSInteger newVersion = object.downloadRequest.responseString.integerValue;
+			
+			if (newVersion > version) {
+				[categories startDownload];
+			}
+		}
+		if (object == categories) {
+			NSString *path = [FTFilesystemPaths getDocumentsDirectoryPath];
+			path = [path stringByAppendingPathComponent:@"timestamp.txt"];
+			
+			FTDownload *download = [[FTDownload alloc] initWithPath:@"http://staging.fuerteint.com/projects/ideviant/timestamp.php"];
+			[download setDownloadToFilePath:path];
+			[download setDelegate:(id<FTDownloadDelegate>)self];
+			[download startDownload];
+		}
+	}
 }
 
 @end

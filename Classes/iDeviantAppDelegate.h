@@ -11,20 +11,28 @@
 
 #include "FBConnect.h"
 
+#include "FTDownload.h"
+
 @class MWFeedItem;
 
-@interface iDeviantAppDelegate : NSObject <UIApplicationDelegate, FBSessionDelegate, FBDialogDelegate> {
+@interface iDeviantAppDelegate : NSObject <UIApplicationDelegate, FBSessionDelegate, FBDialogDelegate, FTDownloadDelegate> {
     UIWindow *window;
     FTNavigationViewController *navigationController;
 	
 	Facebook *facebook;
 	NSMutableDictionary *fbParams;
+	
+	FTDownload *timestamp, *categories;
+	NSInteger version;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
 @property (nonatomic, strong) Facebook *facebook;
 @property (nonatomic, strong) NSMutableDictionary *fbParams;
+
+@property (nonatomic, strong) FTDownload *timestamp, *categories;
+@property (nonatomic) NSInteger version;
 
 - (void)showNetworkActivity:(BOOL)visible sender:(id)sender;
 - (void)postFbMessageWithObject:(MWFeedItem *)item;
