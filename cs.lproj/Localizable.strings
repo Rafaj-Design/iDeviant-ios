@@ -51,3 +51,6 @@
 "name"="jméno";
 "description"="popis";
 "OK"="OK";
+"nicknull"="Vložte jméno";
+"passwordnull"="Vložte heslo";
+"rememberme"="Zapamatovat si mě";

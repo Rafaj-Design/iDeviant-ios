@@ -17,12 +17,13 @@
     UITextField *pass;
     UIButton *login;
     UISwitch *remember;
+    UILabel *rememberme;
 }
 
 @property (nonatomic, retain) IBOutlet UITextField *nick;
 @property (nonatomic, retain) IBOutlet UITextField *pass;
 @property (nonatomic, retain) IBOutlet UISwitch *remember;
-
+@property (nonatomic, retain) IBOutlet UILabel *rememberme;
 -(IBAction)login:(id)sender;
 -(IBAction)backgroundtap:(id)sender;
 -(NSString *)dataFilePath;

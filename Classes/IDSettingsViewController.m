@@ -10,11 +10,14 @@
 #import "IDLoginController.h"
 
 @implementation IDSettingsViewController
-@synthesize nick, pass, remember;
+@synthesize nick, pass, remember, rememberme;
 
 #pragma mark View delegate methods
 
 - (void)viewDidLoad {
+    [self.nick setPlaceholder:[FTLang get:@"nick"]];
+    [self.pass setPlaceholder:[FTLang get:@"password"]];
+    [self.rememberme setText:[FTLang get:@"rememberme"]];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [super viewDidLoad];
     //load nick and password to field
@@ -82,6 +85,20 @@
 }
 
 -(IBAction)login:(id)sender{
+    if ([self.nick.text length]==0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[FTLang get:@"nicknull"] message:nil
+                                                       delegate:self cancelButtonTitle:[FTLang get:@"OK"] otherButtonTitles:nil, nil];
+        [alert show];
+        
+        [alert release];
+    } else if ([self.pass.text length]==0){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[FTLang get:@"passwordnull"] message:nil
+                                                       delegate:self cancelButtonTitle:[FTLang get:@"OK"] otherButtonTitles:nil, nil];
+        [alert show];
+        
+        [alert release];
+    }
+    else{
     NSString *filePath = [self dataFilePath];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [fileManager removeItemAtPath:filePath error:nil];
@@ -96,7 +113,7 @@
         NSArray *arr = [NSArray arrayWithObjects:nick.text, pass.text, nil];
         [arr writeToFile:[self dataFilePath] atomically:NO];
     }
-
+    }
 }
 
 //hide keyboard
