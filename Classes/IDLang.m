@@ -10,4 +10,8 @@
 
 @implementation IDLang
 
++ (NSString *)get:(NSString *)key {
+    return NSLocalizedString(key, @"");
+}
+
 @end

@@ -54,10 +54,10 @@
             }
         }
 		[cell.textLabel setBackgroundColor:[UIColor clearColor]];
-		[cell.cellTitleLabel setText:[FTLang get:[d objectForKey:@"name"]].uppercaseString];
+		[cell.cellTitleLabel setText:[IDLang get:[d objectForKey:@"name"]].uppercaseString];
 		[cell.cellTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeueLTPro-LtCn" size:23]];
 		
-		[cell.cellDetailLabel setText:[FTLang get:[d objectForKey:@"description"]].uppercaseString];
+		[cell.cellDetailLabel setText:[IDLang get:[d objectForKey:@"description"]].uppercaseString];
 		[cell.cellDetailLabel setFont:[UIFont fontWithName:@"HelveticaNeueLTPro-LtCn" size:14]];
 		
 		[cell.detailTextLabel setBackgroundColor:[UIColor clearColor]];
@@ -96,7 +96,7 @@
 		[super displayMessage:@"requiresinternetconnection"];
 	}
 	else if (([[d objectForKey:@"FVRT"] boolValue]) && [[IDFavouriteCategories dataForFavorites]count]==0) {
-        [super displayMessage:FTLangGet(@"nonefavorites")];
+        [super displayMessage:IDLangGet(@"nonefavorites")];
     }else{
 		IDViewController *c = (IDViewController *)[[NSClassFromString([d objectForKey:@"controller"]) alloc] init];
 		if (c) {
@@ -126,7 +126,7 @@
 
 - (void)initializeJiraChecks {
     //show about page
-    //self.navigationItem.rightBarButtonItem =  [[[UIBarButtonItem alloc] initWithTitle:[FTLang get:@"About"] style:UIBarButtonItemStyleBordered target:self action:@selector(showFeedback)] autorelease];
+    //self.navigationItem.rightBarButtonItem =  [[[UIBarButtonItem alloc] initWithTitle:[IDLang get:@"About"] style:UIBarButtonItemStyleBordered target:self action:@selector(showFeedback)] autorelease];
     
     
     /*

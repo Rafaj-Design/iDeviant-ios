@@ -7,7 +7,7 @@
 //
 
 #import "IDSearchController.h"
-//#import "FTLang.h"
+//#import "IDLang.h"
 
 @implementation IDSearchController
 
@@ -20,7 +20,7 @@
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	[super setIsSearchBar:YES];
 	
-	[self setTitle:[FTLang get:@"search"]];
+	[self setTitle:[IDLang get:@"search"]];
 	
 	//[super enableRefreshButton];
 	//[super getDataForSearchString:@"poem"];

@@ -57,10 +57,10 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	if (section == 0) {
-		if ([categoriesData count] > 0) return [FTLang get:@"myfavoritecategories"];
+		if ([categoriesData count] > 0) return [IDLang get:@"myfavoritecategories"];
 	}
 	else {
-		if ([data count] > 0) return [FTLang get:@"myfavoriteitems"];
+		if ([data count] > 0) return [IDLang get:@"myfavoriteitems"];
 	}
 	return nil;
 }

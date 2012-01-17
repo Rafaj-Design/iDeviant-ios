@@ -111,8 +111,8 @@
 	}
 	else return;
 	[message setFrame:[self frameForMessageLabel]];
-	[message setText:[FTLang get:text]];
-	[message setText:FTLangGet(text)];
+	[message setText:[IDLang get:text]];
+	[message setText:IDLangGet(text)];
 	
 	[UIView animateWithDuration:0.4
 					 animations:^{
@@ -468,7 +468,7 @@
 #pragma mark View stuff
 
 - (void)setTitle:(NSString *)newTitle {
-	[super setTitle:[FTLang get:newTitle]];
+	[super setTitle:[IDLang get:newTitle]];
 	//[FlurryAPI logEvent:[NSString stringWithFormat:@"Screen: %@", newTitle]];
 }
 
@@ -496,7 +496,7 @@
 				[searchBarHeader setTintColor:[UIColor lightGrayColor]];
 				[searchBarHeader setDelegate:self];
 				[searchBarHeader setAutocapitalizationType:UITextAutocapitalizationTypeNone];
-				[searchBarHeader setPlaceholder:[FTLang get:@"searchplaceholder"]];
+				[searchBarHeader setPlaceholder:[IDLang get:@"searchplaceholder"]];
 			}
 			return searchBarHeader;
 		}

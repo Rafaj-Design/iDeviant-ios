@@ -11,7 +11,7 @@
 #import "iDeviantAppDelegate.h"
 #import "FTImagePage.h"
 #import "IDAdultCheck.h"
-//#import "FTLang.h"
+//#import "IDLang.h"
 #import "FTImagePage.h"
 
 #define kIDImageDetailViewControllerMaxAlpha				0.6f
@@ -358,8 +358,8 @@
 
 	UIImageWriteToSavedPhotosAlbum(self.currentImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[FTLang get:@"imagesaved"] message:nil
-												   delegate:self cancelButtonTitle:[FTLang get:@"OK"] otherButtonTitles:nil, nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[IDLang get:@"imagesaved"] message:nil
+												   delegate:self cancelButtonTitle:[IDLang get:@"OK"] otherButtonTitles:nil, nil];
 	[alert show];
     
 	[alert release];
@@ -403,18 +403,18 @@
             //[FTTracking logEvent:@"Mail: Mail canceled"];
             break;
         case MFMailComposeResultSaved:
-            //[UIAlertView showMessage:FTLangGet(@"Your email has been saved") withTitle:FTLangGet(@"Email")];
+            //[UIAlertView showMessage:IDLangGet(@"Your email has been saved") withTitle:IDLangGet(@"Email")];
             
             //[FTTracking logEvent:@"Mail: Mail saved"];
             break;
         case MFMailComposeResultSent:
             NSLog(@"Mail sent.");
             //[FTTracking logEvent:@"Mail: Mail sent"];
-            //[UIAlertView showMessage:FTLangGet(@"Your email has been sent") withTitle:FTLangGet(@"Email")];
+            //[UIAlertView showMessage:IDLangGet(@"Your email has been sent") withTitle:IDLangGet(@"Email")];
             break;
         case MFMailComposeResultFailed:
             NSLog(@"Mail send error: %@.", [error localizedDescription]);
-            //[UIAlertView showMessage:[error localizedDescription] withTitle:FTLangGet(@"Error")];
+            //[UIAlertView showMessage:[error localizedDescription] withTitle:IDLangGet(@"Error")];
             //[FlurryAnalytics logError:@"Mail" message:@"Mail send failed" error:error];
             break;
         default:
@@ -433,7 +433,7 @@
 
 - (void)didClickActionButton:(UIBarButtonItem *)sender {
 	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:[FTLang get:@"actionswithimagetitle"] delegate:self cancelButtonTitle:[FTLang get:@"cancelbutton"] destructiveButtonTitle:nil otherButtonTitles:[FTLang get:@"savetogalleryit"], [FTLang get:@"facebookit"], [FTLang get:@"emailit"], nil];
+	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:[IDLang get:@"actionswithimagetitle"] delegate:self cancelButtonTitle:[IDLang get:@"cancelbutton"] destructiveButtonTitle:nil otherButtonTitles:[IDLang get:@"savetogalleryit"], [IDLang get:@"facebookit"], [IDLang get:@"emailit"], nil];
 	[actionSheet showInView:self.view];
 	[actionSheet release];
 }

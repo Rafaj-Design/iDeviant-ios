@@ -124,20 +124,20 @@
 	NSString *catName = [currentCategory objectForKey:@"name"];
 	if (section == 0) {
 		if (catName) {
-			catName = [NSString stringWithFormat:@"%@%@", [FTLang get:@"subcategoriesincat"], catName];
+			catName = [NSString stringWithFormat:@"%@%@", [IDLang get:@"subcategoriesincat"], catName];
 		}
 		else {
-			catName = [FTLang get:@"subcategoriesinmaincat"];
+			catName = [IDLang get:@"subcategoriesinmaincat"];
 		}
 		return catName;
 	}
 	else {
 		NSString *itemsName;
 		if (catName) {
-			itemsName = [NSString stringWithFormat:@"%@%@", [FTLang get:@"itemsincategory"], catName];
+			itemsName = [NSString stringWithFormat:@"%@%@", [IDLang get:@"itemsincategory"], catName];
 		}
 		else {
-			itemsName = [FTLang get:@"itemsinmaincat"];
+			itemsName = [IDLang get:@"itemsinmaincat"];
 		}
 		return itemsName;
 	}

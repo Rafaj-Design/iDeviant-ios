@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	[self setTitle:FTLangGet(@"popular")];
+	[self setTitle:IDLangGet(@"popular")];
 	
 	[super enableRefreshButton];
 	[super getDataForSearchString:@"special%3Apopular&type=deviation"];

@@ -15,9 +15,9 @@
 #pragma mark View delegate methods
 
 - (void)viewDidLoad {
-    [self.nick setPlaceholder:[FTLang get:@"nick"]];
-    [self.pass setPlaceholder:[FTLang get:@"password"]];
-    [self.rememberme setText:[FTLang get:@"rememberme"]];
+    [self.nick setPlaceholder:[IDLang get:@"nick"]];
+    [self.pass setPlaceholder:[IDLang get:@"password"]];
+    [self.rememberme setText:[IDLang get:@"rememberme"]];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [super viewDidLoad];
     //load nick and password to field
@@ -86,14 +86,14 @@
 
 -(IBAction)login:(id)sender{
     if ([self.nick.text length]==0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[FTLang get:@"nicknull"] message:nil
-                                                       delegate:self cancelButtonTitle:[FTLang get:@"OK"] otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[IDLang get:@"nicknull"] message:nil
+                                                       delegate:self cancelButtonTitle:[IDLang get:@"OK"] otherButtonTitles:nil, nil];
         [alert show];
         
         [alert release];
     } else if ([self.pass.text length]==0){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[FTLang get:@"passwordnull"] message:nil
-                                                       delegate:self cancelButtonTitle:[FTLang get:@"OK"] otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[IDLang get:@"passwordnull"] message:nil
+                                                       delegate:self cancelButtonTitle:[IDLang get:@"OK"] otherButtonTitles:nil, nil];
         [alert show];
         
         [alert release];

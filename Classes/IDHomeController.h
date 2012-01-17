@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "IDViewController.h"
-#import "FTLanguageManager.h"
 
 @interface IDHomeController : IDViewController {
 	

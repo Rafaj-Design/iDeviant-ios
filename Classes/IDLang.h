@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FTLang.h"
 
-@interface IDLang : NSObject
+#define IDLangGet(key) [IDLang get:(key)] 
+
+@interface IDLang : FTLang
+
++ (NSString *)get:(NSString *)key;
 
 @end

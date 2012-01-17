@@ -20,8 +20,6 @@
 #import <objc/runtime.h> 
 #import <objc/message.h>
 
-#import "FTLanguageManager.h"
-
 #import "MWFeedItem.h"
 
 #import "FTDataJson.h"
@@ -131,7 +129,7 @@ static NSString* kAppId = @"118349561582677";
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, called instead of applicationWillTerminate: when the user quits.
      */
-	//[FTLang printLanguageDebug];
+	//[IDLang printLanguageDebug];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -153,7 +151,7 @@ static NSString* kAppId = @"118349561582677";
      Called when the application is about to terminate.
      See also applicationDidEnterBackground:.
      */
-	//[FTLang printLanguageDebug];
+	//[IDLang printLanguageDebug];
 }
 
 #pragma mark Memory management
