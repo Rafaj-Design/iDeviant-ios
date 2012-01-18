@@ -53,6 +53,9 @@
     UIImageView* imageView;
 	
 	BOOL popping;
+	
+	UIView *gestureView;
+	UITapGestureRecognizer *tapGesture;
 }
 
 @property (nonatomic, retain) NSArray *data;
@@ -72,6 +75,9 @@
 @property (nonatomic, retain) UILabel *message;
 
 @property (nonatomic) BOOL popping;
+
+@property (nonatomic, retain) UIView *gestureView;
+@property (nonatomic, retain) UITapGestureRecognizer *tapGesture;
 
 
 - (CGRect)fullScreeniPhoneFrame;

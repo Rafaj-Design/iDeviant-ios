@@ -41,6 +41,8 @@
 @synthesize message;
 
 @synthesize popping;
+@synthesize gestureView;
+@synthesize tapGesture;
 
 
 #pragma mark Positioning
@@ -288,6 +290,8 @@
 	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 	if (!popping)
 		[self.navigationController popToRootViewControllerAnimated:YES];
+	
+	[self.gestureView removeGestureRecognizer:tapGesture];
 	popping = YES;
 }
 
@@ -323,20 +327,20 @@
 	[self.view addSubview:message];
 	[message setHidden:YES];
 	
-	UIView *view = [[UIView alloc] init];
+	gestureView = [[UIView alloc] init];
 	
 	for (UIView *v in [[[self navigationController] navigationBar] subviews]) {
 		if ([NSStringFromClass([v class]) isEqualToString:@"UINavigationItemView"]) {
-			[view setFrame:[v frame]];
-			[self.navigationController.navigationBar addSubview:view];
+			[gestureView setFrame:[v frame]];
+			[self.navigationController.navigationBar addSubview:gestureView];
 			NSLog(@"titleFrame: %@", NSStringFromCGRect([v frame]));
 		}
 	}
 		
-	UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHideNavbar:)];
+	tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHideNavbar:)];
 	popping = NO;
 	[tapGesture setDelegate:(id<UIGestureRecognizerDelegate>)self];
-	[view addGestureRecognizer:tapGesture];
+	[gestureView addGestureRecognizer:tapGesture];
 	[tapGesture release];
 }
 
