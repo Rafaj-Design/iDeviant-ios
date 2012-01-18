@@ -340,7 +340,11 @@
 	tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHideNavbar:)];
 	popping = NO;
 	[tapGesture setDelegate:(id<UIGestureRecognizerDelegate>)self];
-	[gestureView addGestureRecognizer:tapGesture];
+	
+	if (![NSStringFromClass(self.class) isEqualToString:@"IDHomeController"]) {
+		[gestureView addGestureRecognizer:tapGesture];
+	}
+
 	[tapGesture release];
 }
 
