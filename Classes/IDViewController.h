@@ -51,6 +51,8 @@
 	UILabel *message;
 	UIActivityIndicatorView *ai;
     UIImageView* imageView;
+	
+	BOOL popping;
 }
 
 @property (nonatomic, retain) NSArray *data;
@@ -68,6 +70,8 @@
 //@property (nonatomic, readonly) BOOL hostActive;
 
 @property (nonatomic, retain) UILabel *message;
+
+@property (nonatomic) BOOL popping;
 
 
 - (CGRect)fullScreeniPhoneFrame;

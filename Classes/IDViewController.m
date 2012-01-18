@@ -40,6 +40,8 @@
 //@synthesize hostActive;
 @synthesize message;
 
+@synthesize popping;
+
 
 #pragma mark Positioning
 
@@ -284,7 +286,9 @@
 
 -(void) showHideNavbar:(id)sender {
 	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-	[self.navigationController popToRootViewControllerAnimated:YES];
+	if (!popping)
+		[self.navigationController popToRootViewControllerAnimated:YES];
+	popping = YES;
 }
 
 
@@ -330,6 +334,7 @@
 	}
 		
 	UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHideNavbar:)];
+	popping = NO;
 	[tapGesture setDelegate:(id<UIGestureRecognizerDelegate>)self];
 	[view addGestureRecognizer:tapGesture];
 	[tapGesture release];
