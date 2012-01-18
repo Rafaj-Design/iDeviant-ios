@@ -229,7 +229,7 @@ void function (id self, SEL _cmd, id arg) {
     [fbParams removeAllObjects];
 	
 	[fbParams setObject:[item title] forKey:@"name"];
-	[fbParams setObject:[[[item contents] objectAtIndex:0] objectForKey:@"url"] forKey:@"picture"];
+	[fbParams setObject:[[[item thumbnails] objectAtIndex:0] objectForKey:@"url"] forKey:@"picture"];
 	[fbParams setObject:[item link] forKey:@"link"];
 	[fbParams setObject:[[item copyright] objectForKey:@"name"] forKey:@"caption"];
 	[fbParams setObject:[item summary] forKey:@"description"];

@@ -110,7 +110,7 @@
 				NSLog(@"Contents: %@", item.contents);
 				IDImageDetailViewController *c = [[IDImageDetailViewController alloc] init];
 				[c inheritConnectivity:internetActive];
-				[c setImageUrl:[[item.contents objectAtIndex:0] objectForKey:@"url"]];
+				[c setImageUrl:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]];
 				[self.navigationController pushViewController:c animated:YES];
 				[c release];
 			}

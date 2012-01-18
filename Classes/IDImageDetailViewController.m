@@ -378,7 +378,7 @@
 //	NSString *plainBody = [NSString stringWithFormat:@"\n\n\%@n\niDeviant app by Fuerte International UK - http://www.fuerteint.com/", [item link]];
 //	[mc setMessageBody:plainBody isHTML:NO];
 	
-	NSString *htmlBody = [NSString stringWithFormat:@"</br></br><a href=\"%@\"><img src=\"%@\" /></a></br></br>iDeviant app by <a href='http://www.fuerteint.com/'>Fuerte International UK</a>", [item link], [[[item contents] objectAtIndex:0] objectForKey:@"url"]];
+	NSString *htmlBody = [NSString stringWithFormat:@"</br></br><a href=\"%@\"><img src=\"%@\" /></a></br></br>iDeviant app by <a href='http://www.fuerteint.com/'>Fuerte International UK</a>", [item link], [[[item thumbnails] objectAtIndex:0] objectForKey:@"url"]];
     [mc setMessageBody:htmlBody isHTML:YES];
 	
 //	mc 

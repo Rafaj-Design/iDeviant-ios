@@ -828,7 +828,7 @@
 				[c setCurrentIndex:indexPath.row];
 				[c setListData:arr];
 				//[c.data retain];
-				[c setImageUrl:[[item.contents objectAtIndex:0] objectForKey:@"url"]];
+				[c setImageUrl:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]];
 				[self.navigationController pushViewController:c animated:YES];
 				[c release];
 			}
