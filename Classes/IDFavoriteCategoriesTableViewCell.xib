@@ -45,24 +45,12 @@
 						<int key="NSvFlags">256</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIImageView" id="741243069">
-								<reference key="NSNextResponder" ref="410252601"/>
-								<int key="NSvFlags">274</int>
-								<string key="NSFrameSize">{320, 67}</string>
-								<reference key="NSSuperview" ref="410252601"/>
-								<reference key="NSNextKeyView" ref="210215140"/>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<object class="NSCustomResource" key="IBUIImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">DA_shade.png</string>
-								</object>
-							</object>
 							<object class="IBUIImageView" id="724970424">
 								<reference key="NSNextResponder" ref="410252601"/>
 								<int key="NSvFlags">273</int>
 								<string key="NSFrame">{{283, 0}, {37, 67}}</string>
 								<reference key="NSSuperview" ref="410252601"/>
+								<reference key="NSWindow"/>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
@@ -75,6 +63,7 @@
 								<int key="NSvFlags">274</int>
 								<string key="NSFrame">{{20, 13}, {250, 54}}</string>
 								<reference key="NSSuperview" ref="410252601"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="724970424"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -104,7 +93,8 @@
 						</object>
 						<string key="NSFrameSize">{320, 67}</string>
 						<reference key="NSSuperview" ref="855867712"/>
-						<reference key="NSNextKeyView" ref="741243069"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
@@ -118,6 +108,7 @@
 				</object>
 				<string key="NSFrameSize">{320, 68}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="410252601"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<reference key="IBUIContentView" ref="410252601"/>
@@ -172,7 +163,6 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="724970424"/>
 							<reference ref="210215140"/>
-							<reference ref="741243069"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -184,11 +174,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">4</int>
 						<reference key="object" ref="210215140"/>
-						<reference key="parent" ref="855867712"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">5</int>
-						<reference key="object" ref="741243069"/>
 						<reference key="parent" ref="855867712"/>
 					</object>
 				</object>
@@ -204,7 +189,6 @@
 					<string>2.IBPluginDependency</string>
 					<string>3.IBPluginDependency</string>
 					<string>4.IBPluginDependency</string>
-					<string>5.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -212,7 +196,6 @@
 					<string>UIResponder</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>IDCategoriesTableViewCell</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -399,17 +382,8 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<bool key="EncodedWithXMLCoder">YES</bool>
-			<object class="NSArray" key="dict.sortedKeys">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>DA_arrow-white.png</string>
-				<string>DA_shade.png</string>
-			</object>
-			<object class="NSMutableArray" key="dict.values">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{41, 83}</string>
-				<string>{191, 30}</string>
-			</object>
+			<string key="NS.key.0">DA_arrow-white.png</string>
+			<string key="NS.object.0">{41, 83}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>

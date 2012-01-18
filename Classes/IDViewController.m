@@ -608,6 +608,11 @@
 			[cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-x.png"]];
 		}
 	}
+	
+	if ([nibName isEqualToString:@"IDFavoriteCategoriesTableViewCell"]) {
+		[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
+	}
+	
     return cell;
 }
 
