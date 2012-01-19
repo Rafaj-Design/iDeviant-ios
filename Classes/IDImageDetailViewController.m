@@ -13,6 +13,8 @@
 #import "IDAdultCheck.h"
 //#import "IDLang.h"
 #import "FTImagePage.h"
+//#import "FTPageScrollViewDelegate.h"
+#import "FTPageScrollView.h"
 
 #define kIDImageDetailViewControllerMaxAlpha				0.6f
 
@@ -23,6 +25,7 @@
 @synthesize currentIndex;
 @synthesize delegate;
 @synthesize currentImage;
+@synthesize tap;
 
 
 #pragma mark Positioning
@@ -76,32 +79,45 @@
 #pragma mark Generating pages
 
 - (FTPage *)pageForIndex:(int)index {
-	//NSLog(@"Page index: %d", index);
-	if (currentIndex < 0 || currentIndex >= [listThroughData count]) return nil;
-	NSLog(@"Page index: %d", index);
-	MWFeedItem *item = [listThroughData objectAtIndex:currentIndex];
+	NSLog(@"index: %d, currentIndex: %d, [listThroughData count]: %d", index, currentIndex, [listThroughData count]);
+
+	if (index < 0 || index >= [listThroughData count]) 
+			return nil;
+
+	MWFeedItem *item = [listThroughData objectAtIndex:index];
 	
 	page = [[FTImagePage alloc] initWithFrame:[self getFrameForPage]];
-	[page setPageIndex:index];
-    
-    //info box on image [loaded from cash/web]
-	//[page zoomedImageNamed:@"wallpaper.jpg"];
+	
 	BOOL canAccess = YES;
 	if ([item.rating isEqualToString:@"adult"]) {
 		if (![IDAdultCheck canAccessAdultStuff]) canAccess = NO;
 	}
+
 	if (canAccess) {
-		if ([item.contents count] > 0) {
-			//[cell.cellImageView loadImageFromUrl:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]];
+		if ([item.thumbnails count] > 0) {
 			[page.imageZoomView.imageView enableDebugMode:YES];
 			[page zoomedImageWithUrl:[NSURL URLWithString:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]] andDelegate:self];
-			//[page.imageZoomView.imageView enableActivityIndicator:YES];
-			//[page.imageZoomView.imageView enableProgressLoadingView:YES];
+		} else {
+			if (currentIndex < index) {
+//				currentIndex ++;
+				return [self pageForIndex:(index + 1)];
+			} else {
+//				currentIndex --;
+				return [self pageForIndex:(index - 1)];
+			}
 		}
 	}
 	else {
-		
+		if (currentIndex < index) {
+//			currentIndex ++;
+			return [self pageForIndex:(index + 1)];
+		} else {
+//			currentIndex --;
+			return [self pageForIndex:(index - 1)];
+		}
 	}
+	[page setPageIndex:index];
+	
 	return page;
 }
 
@@ -110,15 +126,8 @@
 - (void)finishNavigationToggle {
 	if (bottomBar.alpha == 0) {
 		[self.navigationController.navigationBar setHidden:YES];
-//		[[UIApplication sharedApplication] setStatusBarHidden:YES];
 		[bottomBar setHidden:YES];
-	} 
-	else {
-//		[[UIApplication sharedApplication] setStatusBarHidden:NO];
 	}
-	
-	NSLog(@"bounds: %@", NSStringFromCGRect(self.view.bounds));
-	NSLog(@"frame: %@", NSStringFromCGRect(self.view.frame));
 }
 
 - (void)toggleNavigationVisibility {
@@ -149,8 +158,6 @@
 
 	[[UIApplication sharedApplication] setStatusBarHidden:hide];
 	[self.navigationController.navigationBar setAlpha:a];
-	
-//	self.view.frame = self.view.bounds;
 	
 	[bottomBar setAlpha:a];
 	[message setFrame:[super frameForMessageLabel]];
@@ -187,31 +194,33 @@
 	[self.navigationController.navigationBar setAlpha:kIDImageDetailViewControllerMaxAlpha];
 	[UIView commitAnimations];
 	
-	//UIBarButtonItem *favsButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(didClickActionButton:)];
-	//[self.navigationItem setRightBarButtonItem:favsButton];
-	//[favsButton release];
-	
     FTPage *page = [self pageForIndex:currentIndex];
     mainView = [[FTPageScrollView alloc] initWithFrame:[super fullScreenFrame]];
     [mainView setDummyPageImage:[UIImage imageNamed:@"dummy.png"]];
-    [mainView setInitialPage:page withDelegate:self];
-	//[mainView setPageScrollDelegate:self];
-	[mainView setPage:page pageCount:0 animate:YES];
-    [mainView setScrollEnabled:NO];
+    [mainView setInitialPage:page withDelegate:(id<FTPageScrollViewDelegate>)self];
+	[mainView setPage:page pageCount:[listThroughData count] animate:YES];
+	
+	FTPage *rPage = [self pageForIndex:(currentIndex + 1)];
+	FTPage *lPage = [self pageForIndex:(currentIndex - 1)];
+	
+//	mainView performSelector:@selector(setRightPage:nil)
+	
+	[mainView performSelector:@selector(setRightPage:) withObject:rPage];
+	[mainView performSelector:@selector(setLeftPage:) withObject:lPage];
+	
+    [mainView setScrollEnabled:YES];
     [mainView setBouncesZoom:YES];
     [mainView setPagingEnabled:YES];
-	[self.view addSubview:mainView];
 	
-	//[mainView loadImageFromUrl:imageUrl];
+
+	
+	[self.view addSubview:mainView];
 	
 	bottomBar = [[FTToolbar alloc] initWithFrame:[self frameForToolbar]];
 	[self.view addSubview:bottomBar];
 	
 	actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(didClickActionButton:)];
 	[bottomBar setItems:[NSArray arrayWithObjects:actionButton, nil]];
-	//[actionButton release];
-	
-    //actionButton.enabled=false;
 }
 
 
@@ -224,7 +233,7 @@
 	[super viewWillAppear:animated];
 	[super enableBackgroundWithImage:nil];
 	[self updateTitle];
-	//[mainView setPage:[self pageForIndex:currentIndex] pageCount:0 animate:YES];
+	
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
 	
 	[self.navigationController.navigationBar setTranslucent:YES];
@@ -279,8 +288,6 @@
 
 - (void)didTapViewOnce:(UITapGestureRecognizer *)recognizer {
 	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-	NSLog(@"bounds: %@", NSStringFromCGRect(self.view.bounds));
-	NSLog(@"frame: %@", NSStringFromCGRect(self.view.frame));
 	if (!shortcutView) 
 		[self toggleNavigationVisibility];
 	else {
@@ -331,8 +338,6 @@
 	[UIView animateWithDuration:0.6
 					 animations:^{
 						 [ai setAlpha:0];
-//						 [[UIApplication sharedApplication] setStatusBarHidden:YES];
-//						 self.view.frame = self.view.bounds;
 					 }
 					 completion:^(BOOL finished) {
 						 self.currentImage=zoomView.imageView.image;
@@ -374,21 +379,10 @@
     MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
     [mc setMailComposeDelegate:self];
     [mc setSubject:[NSString stringWithFormat:@"%@ by iDeviant", [item title]]];
-	
-//	NSString *plainBody = [NSString stringWithFormat:@"\n\n\%@n\niDeviant app by Fuerte International UK - http://www.fuerteint.com/", [item link]];
-//	[mc setMessageBody:plainBody isHTML:NO];
-	
+		
 	NSString *htmlBody = [NSString stringWithFormat:@"</br></br><a href=\"%@\"><img src=\"%@\" /></a></br></br>iDeviant app by <a href='http://www.fuerteint.com/'>Fuerte International UK</a>", [item link], [[[item thumbnails] objectAtIndex:0] objectForKey:@"url"]];
     [mc setMessageBody:htmlBody isHTML:YES];
-	
-//	mc 
-//    if (self.currentImage) {
-//        [mc addAttachmentData:UIImagePNGRepresentation(self.currentImage) mimeType:@"jpeg/png" fileName:[NSString stringWithFormat:@"%@.png", self.navigationController.title]];
-//    }
-    //[mc addAttachmentData:self.currentImage mimeType:@"image/png" fileName:[NSString stringWithFormat:@"%@.png", self.navigationController.title]];
-    //self.currentImage = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"logo" ofType:@"png"]];
-    //[mc addAttachmentData:self.currentImage mimeType:@"image/png" fileName:@"Fuerte_International_UK.png"];
-    [mc setModalPresentationStyle:UIModalPresentationPageSheet];
+	[mc setModalPresentationStyle:UIModalPresentationPageSheet];
     [self presentModalViewController:mc animated:YES];
     
 }
@@ -446,7 +440,6 @@
 		[self saveCurrentImageToGallery];
 	}
 	else if (buttonIndex == 1) {
-//		[self postCurrentImageOnFacebook];
 		iDeviantAppDelegate *appDelegate = [(iDeviantAppDelegate *)[UIApplication sharedApplication] delegate];
 		
 		MWFeedItem *item = [listThroughData objectAtIndex:currentIndex];
@@ -460,14 +453,14 @@
 #pragma mark Image view delegate & data source methods
 
 -(void)imageViewDidStartLoadingImage:(FTImageView *)imgView{
-	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
     [ai startAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
 }
 
 - (void)imageView:(FTImageView *)imgView didFinishLoadingImage:(UIImage *)image {
-	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 	[ai stopAnimating];
     self.currentImage = image;
     actionButton.enabled=true;
@@ -481,21 +474,35 @@
 -(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
     [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
 }
-/*
+
 - (FTPage *)leftPageForPageScrollView:(FTPageScrollView *)scrollView withTouchCount:(NSInteger)touchCount {
+//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+//	NSLog(@"currentIndex - 1: %d", currentIndex - 1);
+	
 	//[ai startAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     actionButton.enabled=false;
-    return [self pageForIndex:(currentIndex - 1)];
+	if (currentIndex > 0)
+		return [self pageForIndex:(currentIndex - 1)];
+	else
+		return nil;
 }
 
 - (FTPage *)rightPageForPageScrollView:(FTPageScrollView *)scrollView withTouchCount:(NSInteger)touchCount {
+//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+//	NSLog(@"currentIndex + 1: %d", currentIndex + 1);
+	
     //[ai startAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     actionButton.enabled=false;
 	return [self pageForIndex:(currentIndex + 1)];
+	
+	if (currentIndex < [listThroughData count])
+		return [self pageForIndex:(currentIndex + 1)];
+	else
+		return nil;
 }
-*/
+
 
 - (void)pageScrollView:(FTPageScrollView *)scrollView offsetDidChange:(CGPoint)offset {
 	
@@ -523,32 +530,24 @@
 }
 
 - (void)pageScrollView:(FTPageScrollView *)scrollView didMakePageCurrent:(FTImagePage *)page {
-	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 	
 	UITapGestureRecognizer *doubletap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewTwice:)];
 	[doubletap setNumberOfTapsRequired:2];
 	[page addGestureRecognizer:doubletap];
 	[doubletap release];
 	
-	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewOnce:)];
+	if (!tap) {
+		tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewOnce:)];
+		[mainView addGestureRecognizer:tap];
+		[tap release];
+	}
 	[tap requireGestureRecognizerToFail:doubletap];
-	[mainView addGestureRecognizer:tap];
-	[tap release];
+	
 		
 	currentIndex = page.pageIndex;
 	NSLog(@"didMakePageCurrent: %d", currentIndex);
 	[self updateTitle];
-    
-}
-
-#pragma mark - FTPageScrollViewDelegate
-
-- (FTPage *)rightPageForPageScrollView:(FTPageScrollView *)scrollView withTouchCount:(NSInteger)touchCount {
-	return nil;
-}
-
-- (FTPage *)leftPageForPageScrollView:(FTPageScrollView *)scrollView withTouchCount:(NSInteger)touchCount {
-	return nil;
 }
 
 #pragma mark - MFMessageComposeViewControllerDelegate

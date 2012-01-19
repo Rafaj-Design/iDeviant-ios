@@ -50,6 +50,8 @@
 	
 	FTImagePage *page;
 	
+	UITapGestureRecognizer *tap;
+	
 }
 
 @property (nonatomic, retain) FTPageScrollView *mainView;
@@ -63,6 +65,8 @@
 @property (nonatomic, assign) id <IDImageDetailViewControllerDelegate> delegate;
 
 @property (nonatomic, retain) FTImagePage *page;
+
+@property (nonatomic, retain) UITapGestureRecognizer *tap;
 
 
 - (void)setListData:(NSArray *)array;
