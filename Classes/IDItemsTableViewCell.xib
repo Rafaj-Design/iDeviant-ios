@@ -45,20 +45,6 @@
 						<int key="NSvFlags">256</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIImageView" id="874701238">
-								<reference key="NSNextResponder" ref="79068602"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrameSize">{320, 84}</string>
-								<reference key="NSSuperview" ref="79068602"/>
-								<reference key="NSNextKeyView" ref="394113691"/>
-								<int key="IBUIContentMode">9</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<object class="NSCustomResource" key="IBUIImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">DA_shade.png</string>
-								</object>
-							</object>
 							<object class="IBUILabel" id="394113691">
 								<reference key="NSNextResponder" ref="79068602"/>
 								<int key="NSvFlags">290</int>
@@ -131,7 +117,7 @@
 						</object>
 						<string key="NSFrameSize">{320, 82}</string>
 						<reference key="NSSuperview" ref="692051223"/>
-						<reference key="NSNextKeyView" ref="874701238"/>
+						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
@@ -212,7 +198,6 @@
 							<reference ref="394113691"/>
 							<reference ref="677781680"/>
 							<reference ref="265180120"/>
-							<reference ref="874701238"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -231,11 +216,6 @@
 						<reference key="object" ref="677781680"/>
 						<reference key="parent" ref="692051223"/>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">11</int>
-						<reference key="object" ref="874701238"/>
-						<reference key="parent" ref="692051223"/>
-					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -246,7 +226,6 @@
 					<string>-2.CustomClassName</string>
 					<string>-2.IBPluginDependency</string>
 					<string>10.IBPluginDependency</string>
-					<string>11.IBPluginDependency</string>
 					<string>2.CustomClassName</string>
 					<string>2.IBPluginDependency</string>
 					<string>3.IBPluginDependency</string>
@@ -256,7 +235,6 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>IDItemsTableViewCell</string>
@@ -293,17 +271,8 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<bool key="EncodedWithXMLCoder">YES</bool>
-			<object class="NSArray" key="dict.sortedKeys">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>DA_arrow-white.png</string>
-				<string>DA_shade.png</string>
-			</object>
-			<object class="NSMutableArray" key="dict.values">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{41, 83}</string>
-				<string>{191, 30}</string>
-			</object>
+			<string key="NS.key.0">DA_arrow-white.png</string>
+			<string key="NS.object.0">{41, 83}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>

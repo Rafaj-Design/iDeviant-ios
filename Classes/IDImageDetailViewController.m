@@ -79,6 +79,18 @@
 
 #pragma mark Generating pages
 
+- (NSString *)urlForItem:(MWFeedItem *)item {
+	
+	NSString *contentUrl = [[item.contents objectAtIndex:0] objectForKey:@"url"];
+	NSString *extension = [[contentUrl pathExtension] lowercaseString];
+	
+	if ([extension isEqualToString:@"png"] || [extension isEqualToString:@"jpeg"] || [extension isEqualToString:@"jpg"]) {
+		return [[item.contents objectAtIndex:0] objectForKey:@"url"];
+	} else {
+		return [[item.thumbnails objectAtIndex:0] objectForKey:@"url"];
+	}
+}
+
 - (FTPage *)pageForIndex:(int)index {
 	NSLog(@"index: %d, currentIndex: %d, [listThroughData count]: %d", index, currentIndex, [listThroughData count]);
 
@@ -97,7 +109,7 @@
 	if (canAccess) {
 		if ([item.thumbnails count] > 0) {
 			[page.imageZoomView.imageView enableDebugMode:YES];
-			[page zoomedImageWithUrl:[NSURL URLWithString:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]] andDelegate:self];
+			[page zoomedImageWithUrl:[NSURL URLWithString:[self urlForItem:item]] andDelegate:self];
 		} else {
 			if (currentIndex < index) {
 //				currentIndex ++;
@@ -393,7 +405,7 @@
     [mc setMailComposeDelegate:self];
     [mc setSubject:[NSString stringWithFormat:@"%@ by iDeviant", [item title]]];
 		
-	NSString *htmlBody = [NSString stringWithFormat:@"</br></br><a href=\"%@\"><img src=\"%@\" /></a></br></br>iDeviant app by <a href='http://www.fuerteint.com/'>Fuerte International UK</a>", [item link], [[[item thumbnails] objectAtIndex:0] objectForKey:@"url"]];
+	NSString *htmlBody = [NSString stringWithFormat:@"</br></br><a href=\"%@\"><img src=\"%@\" /></a></br></br>iDeviant app by <a href='http://www.fuerteint.com/'>Fuerte International UK</a>", [item link], [self urlForItem:item]];
     [mc setMessageBody:htmlBody isHTML:YES];
 	[mc setModalPresentationStyle:UIModalPresentationPageSheet];
     [self presentModalViewController:mc animated:YES];

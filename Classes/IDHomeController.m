@@ -69,9 +69,7 @@
 		[cell.imageView.layer setCornerRadius:4];
     }
 	//NSLog(@"Data: %@", d);
-	
-	[cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
-	
+
 	[cell setBackgroundColor:[UIColor clearColor]];
 	
 	//[cell setBackgroundColor:[UIColor colorWithPatternImage:[[UIImage imageNamed:@"bcg-cell.png"] stretchableImageWithLeftCapWidth:1 topCapHeight:27]]];
@@ -84,7 +82,10 @@
     if (([[d objectForKey:@"FVRT"] boolValue]) && [[IDFavouriteCategories dataForFavorites]count]==0){
         [cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-x.png"]];
     }
-    
+	
+//	[tableView setAllowsSelection:YES];
+	[cell setSelectionStyle:UITableViewCellSelectionStyleGray];
+	[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
     return cell;
 }
 

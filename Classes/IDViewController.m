@@ -595,6 +595,7 @@
 		}
     }
 	[self configureCell:cell withIndexPath:indexPath forTableView:tableView];
+	[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
     return cell;
 }
 
@@ -624,9 +625,11 @@
 		}
 	}
 	
-	if ([nibName isEqualToString:@"IDFavoriteCategoriesTableViewCell"]) {
-		[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
-	}
+//	if ([nibName isEqualToString:@"IDFavoriteCategoriesTableViewCell"]) {
+//		[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
+//	}
+	
+	[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
 	
     return cell;
 }

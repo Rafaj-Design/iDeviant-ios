@@ -225,11 +225,23 @@ void function (id self, SEL _cmd, id arg) {
 	[self authorizeWithFBAppAuth:NO safariAuth:NO];
 }
 
+- (NSString *)urlForItem:(MWFeedItem *)item {
+	
+	NSString *contentUrl = [[item.contents objectAtIndex:0] objectForKey:@"url"];
+	NSString *extension = [[contentUrl pathExtension] lowercaseString];
+	
+	if ([extension isEqualToString:@"png"] || [extension isEqualToString:@"jpeg"] || [extension isEqualToString:@"jpg"]) {
+		return [[item.contents objectAtIndex:0] objectForKey:@"url"];
+	} else {
+		return [[item.thumbnails objectAtIndex:0] objectForKey:@"url"];
+	}
+}
+
 - (void)postFbMessageWithObject:(MWFeedItem *)item {
     [fbParams removeAllObjects];
 	
 	[fbParams setObject:[item title] forKey:@"name"];
-	[fbParams setObject:[[[item thumbnails] objectAtIndex:0] objectForKey:@"url"] forKey:@"picture"];
+	[fbParams setObject:[self urlForItem:item] forKey:@"picture"];
 	[fbParams setObject:[item link] forKey:@"link"];
 	[fbParams setObject:[[item copyright] objectForKey:@"name"] forKey:@"caption"];
 	[fbParams setObject:[item summary] forKey:@"description"];
