@@ -26,6 +26,7 @@
 @synthesize delegate;
 @synthesize currentImage;
 @synthesize tap;
+@synthesize isOverlayShowing;
 
 
 #pragma mark Positioning
@@ -131,6 +132,11 @@
 }
 
 - (void)toggleNavigationVisibility {
+	if (isOverlayShowing)
+		isOverlayShowing = NO;
+	else
+		isOverlayShowing = YES;
+
 	float a = 0.0;
 	float alpha = self.navigationController.navigationBar.alpha;
 	
@@ -140,7 +146,8 @@
 		a = kIDImageDetailViewControllerMaxAlpha;
 		
 		[self.navigationController.navigationBar setHidden:NO];
-		self.view.frame = self.view.bounds;
+//		self.view.frame = self.view.bounds;
+		
 		[bottomBar setHidden:NO];
 		hide = NO;
 	}
@@ -150,13 +157,14 @@
 	} else if (alpha == kIDImageDetailViewControllerMaxAlpha) {
 		hide = YES;
 	}
+	
+	[[UIApplication sharedApplication] setStatusBarHidden:hide];
 
 	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:0.3];
+	[UIView setAnimationDuration:0.1];
 	[UIView setAnimationDelegate:self];
 	[UIView setAnimationDidStopSelector:@selector(finishNavigationToggle)];
 
-	[[UIApplication sharedApplication] setStatusBarHidden:hide];
 	[self.navigationController.navigationBar setAlpha:a];
 	
 	[bottomBar setAlpha:a];
@@ -194,6 +202,8 @@
 	[self.navigationController.navigationBar setAlpha:kIDImageDetailViewControllerMaxAlpha];
 	[UIView commitAnimations];
 	
+	isOverlayShowing = YES;
+	
     FTPage *page = [self pageForIndex:currentIndex];
     mainView = [[FTPageScrollView alloc] initWithFrame:[super fullScreenFrame]];
     [mainView setDummyPageImage:[UIImage imageNamed:@"dummy.png"]];
@@ -221,6 +231,11 @@
 	
 	actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(didClickActionButton:)];
 	[bottomBar setItems:[NSArray arrayWithObjects:actionButton, nil]];
+	
+	
+//	[self.view setAutoresizesSubviews:YES];
+//	[self.view setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin];
+//	[self.navigationController.navigationBar setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth];
 }
 
 
@@ -346,8 +361,6 @@
                          actionButton.enabled=true;
 					 }
 	 ];
-    
-
 }
 
 #pragma mark Actions methods
@@ -470,11 +483,6 @@
 
 #pragma mark Page scroll view delegate & data source methods
 
-
--(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
-    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
-}
-
 - (FTPage *)leftPageForPageScrollView:(FTPageScrollView *)scrollView withTouchCount:(NSInteger)touchCount {
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 //	NSLog(@"currentIndex - 1: %d", currentIndex - 1);
@@ -570,5 +578,23 @@
 	[alertView release];
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    if (!isOverlayShowing)
+    {
+        [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    }
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    if (!isOverlayShowing)
+    {
+        [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    }
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	[ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
+}
 
 @end

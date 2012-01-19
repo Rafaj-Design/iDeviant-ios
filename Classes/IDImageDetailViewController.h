@@ -52,6 +52,7 @@
 	
 	UITapGestureRecognizer *tap;
 	
+	BOOL isOverlayShowing;
 }
 
 @property (nonatomic, retain) FTPageScrollView *mainView;
@@ -67,6 +68,8 @@
 @property (nonatomic, retain) FTImagePage *page;
 
 @property (nonatomic, retain) UITapGestureRecognizer *tap;
+
+@property (nonatomic) BOOL isOverlayShowing;
 
 
 - (void)setListData:(NSArray *)array;

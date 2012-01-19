@@ -67,10 +67,13 @@
 		[cell.iconImageView setImage:[UIImage imageNamed:[d objectForKey:@"icon"]]];
 		//[cell.imageView setBackgroundColor:[UIColor clearColor]];
 		[cell.imageView.layer setCornerRadius:4];
-		
-		[cell setSelectionStyle:UITableViewCellSelectionStyleGray];
     }
 	//NSLog(@"Data: %@", d);
+	
+	[cell setSelectionStyle:UITableViewCellSelectionStyleBlue];
+	
+	[cell setBackgroundColor:[UIColor clearColor]];
+	
 	//[cell setBackgroundColor:[UIColor colorWithPatternImage:[[UIImage imageNamed:@"bcg-cell.png"] stretchableImageWithLeftCapWidth:1 topCapHeight:27]]];
 	if ([[d objectForKey:@"requiresConnection"] boolValue] && !internetActive) {
 		[cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-x.png"]];
@@ -180,6 +183,8 @@
 	[super createTableView];
 	[super setTitle:@"iDeviant"];
     
+//	[super.table setAllowsSelection:YES];
+	
 	
 	[self initializeJiraChecks];
 }

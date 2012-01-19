@@ -448,6 +448,7 @@
 	[table setDataSource:self];
 	[table setDelegate:self];
 	[table setBackgroundColor:[UIColor clearColor]];
+	[table setAllowsSelection:YES];
 	[self.view addSubview:table];
 	[table reloadData];
 }
@@ -610,7 +611,8 @@
             }
         }
 		[cell setSelectionStyle:UITableViewCellSelectionStyleGray];
-		[cell setBackgroundColor:[UIColor whiteColor]];
+//		[cell setBackgroundColor:[UIColor whiteColor]];
+		[cell setBackgroundColor:[UIColor clearColor]];
 		[cell.cellTitleLabel setText:[d objectForKey:@"name"]];		
 		[cell.cellTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeueLTPro-LtCn" size:19]];
     }
@@ -652,7 +654,7 @@
 	[detail release];
 	
 	// Deselect
-	[table deselectRowAtIndexPath:indexPath animated:YES];
+//	[table deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark Memory management

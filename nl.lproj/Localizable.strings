@@ -6,29 +6,29 @@
  Copyright 2011 Fuerte International. All rights reserved.
  */
 
-"search"="Vyhledávání";
-"searchdesc"="Vyhledávání v DeviantArt";
+"search"="Zoek";
+"searchdesc"="Zoek Afwijkingen";
 
-"categories"="Kategorie";
-"categoriesdesc"="Kategorie DeviantArt";
+"categories"="Categorien";
+"categoriesdesc"="dig in deviantart";
 
-"favorites"="Moje oblíbené";
-"favoritesdesc"="Oblíbené kategorie";
+"favorites"="Favourieten";
+"favoritesdesc"="Je Favourite Verzameling";
 
-"dailydeviations"="Nejnovější";
-"dailydeviationsdesc"="Nejnovější deviace";
+"dailydeviations"="Dagelijkse Afwijkingen";
+"dailydeviationsdesc"="Het Beste van Vandaag";
 
-"popular"="Nejoblíbenější<";
-"populardesc"="Nejoblíbenější deviace<";
+"popular"="Populair";
+"populardesc"="Hoogst Gewaardeerde Afwijkingen";
 
-"login"="Přihlášení";
-"logindesc"="Přihlášení na web DeviantArtu";
+"login"="LOGIN";
+"logindesc"="Toegang Mijn Account";
 
 "settings"="settings";
 "settingsdesc"="settingsdesc";
 
-"homesorting"="Nastavení";
-"homesortingdesc"="Řazení hlavního menu";
+"homesorting"="Home sorterin";
+"homesortingdesc"="Sorteer Home Scherm";
 
 "requiresinternetconnection"="requires internet connection";
 "nonefavorites"="none favorites";

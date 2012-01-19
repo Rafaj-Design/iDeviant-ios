@@ -22,7 +22,7 @@
     self = [super initWithCoder:coder];
     if (self) {
         [super enableBackgroundWithImage:nil];
-		[background setBackgroundColor:[UIColor whiteColor]];
+		[background setBackgroundColor:[UIColor clearColor]];
     }
     return self;
 }
@@ -31,7 +31,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
 		[super enableBackgroundWithImage:nil];
-		[background setBackgroundColor:[UIColor whiteColor]];
+		[background setBackgroundColor:[UIColor clearColor]];
     }
     return self;
 }
