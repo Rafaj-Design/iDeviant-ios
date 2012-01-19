@@ -1718,8 +1718,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alex Siddall (383SY3D8S9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Adam Horacek (H965LZ6656)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Adam Horacek (H965LZ6656)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1732,7 +1732,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = iDeviant;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7377C183-C68B-400C-B0AF-77EDE188AE7E";
+				PROVISIONING_PROFILE = "E45D0694-7F8C-4AF7-B8B1-927F8506161E";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F0BED3CD-A9D5-4FFF-910A-DE29276F15E4";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

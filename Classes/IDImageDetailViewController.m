@@ -85,8 +85,10 @@
 	NSString *extension = [[contentUrl pathExtension] lowercaseString];
 	
 	if ([extension isEqualToString:@"png"] || [extension isEqualToString:@"jpeg"] || [extension isEqualToString:@"jpg"]) {
+		NSLog(@"url: %@, ext: %@",[[item.contents objectAtIndex:0] objectForKey:@"url"], extension);
 		return [[item.contents objectAtIndex:0] objectForKey:@"url"];
 	} else {
+		NSLog(@"url: %@, ext: %@",[[item.thumbnails objectAtIndex:0] objectForKey:@"url"], extension);
 		return [[item.thumbnails objectAtIndex:0] objectForKey:@"url"];
 	}
 }
@@ -197,11 +199,6 @@
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
-    ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
-	[ai setHidesWhenStopped:YES];
-    [ai startAnimating];
-	[self.view addSubview:ai];
 	[self.view setBackgroundColor:[UIColor blackColor]];
 	
     [super viewDidLoad];
@@ -238,6 +235,7 @@
 	
 	[self.view addSubview:mainView];
 	
+	
 	bottomBar = [[FTToolbar alloc] initWithFrame:[self frameForToolbar]];
 	[self.view addSubview:bottomBar];
 	
@@ -245,9 +243,12 @@
 	[bottomBar setItems:[NSArray arrayWithObjects:actionButton, nil]];
 	
 	
-//	[self.view setAutoresizesSubviews:YES];
-//	[self.view setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin];
-//	[self.navigationController.navigationBar setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth];
+	ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
+	[ai setHidesWhenStopped:YES];
+//	[ai setBackgroundColor:[UIColor redColor]];
+    [ai startAnimating];
+	[self.view addSubview:ai];	
 }
 
 
@@ -362,17 +363,17 @@
 
 - (void)imageZoomViewDidFinishLoadingImage:(FTImageZoomView *)zoomView {
 	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-	[UIView animateWithDuration:0.6
-					 animations:^{
-						 [ai setAlpha:0];
-					 }
-					 completion:^(BOOL finished) {
-						 self.currentImage=zoomView.imageView.image;
-                         [ai stopAnimating];
-                         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-                         actionButton.enabled=true;
-					 }
-	 ];
+//	[UIView animateWithDuration:0.6
+//					 animations:^{
+//						 [ai setAlpha:0];
+//					 }
+//					 completion:^(BOOL finished) {
+//						 self.currentImage=zoomView.imageView.image;
+//                         [ai stopAnimating];
+//                         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+//                         actionButton.enabled=true;
+//					 }
+//	 ];
 }
 
 #pragma mark Actions methods
@@ -480,6 +481,7 @@
 -(void)imageViewDidStartLoadingImage:(FTImageView *)imgView{
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
     [ai startAnimating];
+	[ai setAlpha:1.0];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
 }
@@ -499,7 +501,7 @@
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 //	NSLog(@"currentIndex - 1: %d", currentIndex - 1);
 	
-	//[ai startAnimating];
+	[ai startAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     actionButton.enabled=false;
 	if (currentIndex > 0)
@@ -512,7 +514,7 @@
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 //	NSLog(@"currentIndex + 1: %d", currentIndex + 1);
 	
-    //[ai startAnimating];
+    [ai startAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     actionButton.enabled=false;
 	return [self pageForIndex:(currentIndex + 1)];
