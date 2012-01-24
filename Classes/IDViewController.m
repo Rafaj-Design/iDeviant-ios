@@ -595,7 +595,14 @@
 		}
     }
 	[self configureCell:cell withIndexPath:indexPath forTableView:tableView];
-	[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
+//	[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
+
+	if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
+		[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade-land"]]];
+	else {
+		[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
+	}
+	
     return cell;
 }
 
@@ -629,7 +636,13 @@
 //		[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
 //	}
 	
-	[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
+//	[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
+	
+	if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
+		[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade-land"]]];
+	else {
+		[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
+	}
 	
     return cell;
 }
@@ -856,5 +869,32 @@
 	}
 }
 
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+	NSMutableArray *cells = [[NSMutableArray alloc] init];
+	for (NSInteger j = 0; j < [table numberOfSections]; ++j)
+	{
+		for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i)
+		{
+			if ([table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]] != nil)
+				[cells addObject:[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]]];
+		}
+	}
+	
+	if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || 
+        ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight)) 
+	{       
+		
+	} else {
+		
+	}
+	
+	for (IDCategoriesTableViewCell *cell in cells) {
+		if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
+			[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade-land"]]];
+		else {
+			[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
+		}
+	}
+}
 
 @end

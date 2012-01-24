@@ -85,7 +85,13 @@
 	
 //	[tableView setAllowsSelection:YES];
 	[cell setSelectionStyle:UITableViewCellSelectionStyleGray];
-	[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
+	
+	if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
+		[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade-land"]]];
+	else {
+		[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
+	}
+	
     return cell;
 }
 
@@ -227,12 +233,25 @@
 	{
 		for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i)
 		{
-			[cells addObject:[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]]];
+			if ([table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]] != nil)
+				[cells addObject:[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]]];
 		}
 	}
 	
+	if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || 
+        ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight)) 
+	{       
+		
+	} else {
+		
+	}
+	
 	for (IDHomeTableViewCell *cell in cells) {
-		[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade-land"]]];
+		if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
+			[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade-land"]]];
+		else {
+			[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
+		}
 	}
 }
 
