@@ -20,14 +20,17 @@
 
 @implementation IDImageDetailViewController
 
-@synthesize mainView;
-@synthesize imageUrl;
-@synthesize currentIndex;
 @synthesize delegate;
+@synthesize mainView;
+@synthesize imagePages;
+@synthesize imageUrl;
+@synthesize actionButton;
+@synthesize currentIndex;
+@synthesize listThroughData;
+@synthesize shortcutView;
 @synthesize currentImage;
-@synthesize tap;
 @synthesize isOverlayShowing;
-
+@synthesize tap, doubletap;
 
 #pragma mark Positioning
 
@@ -55,20 +58,7 @@
 	[listThroughData retain];
 }
 
-#pragma mark Memory management
 
-- (void)dealloc {
-	[page release];
-	[mainView release];
-	[imageUrl release];
-	[bottomBar release];
-    [actionButton release];
-	[ai release];
-	[message release];
-	[listThroughData release];
-	[shortcutView release];
-    [super dealloc];
-}
 
 #pragma Display stuff
 
@@ -78,6 +68,8 @@
 }
 
 #pragma mark Generating pages
+
+
 
 - (NSString *)urlForItem:(MWFeedItem *)item {
 	
@@ -93,7 +85,7 @@
 	}
 }
 
-- (FTPage *)pageForIndex:(int)index {
+- (FTImagePage *)pageForIndex:(int)index {
 	NSLog(@"index: %d, currentIndex: %d, [listThroughData count]: %d", index, currentIndex, [listThroughData count]);
 
 	if (index < 0 || index >= [listThroughData count]) 
@@ -101,7 +93,7 @@
 
 	MWFeedItem *item = [listThroughData objectAtIndex:index];
 	
-	page = [[FTImagePage alloc] initWithFrame:[self getFrameForPage]];
+	FTImagePage *imagePage = [[FTImagePage alloc] initWithFrame:[self getFrameForPage]];
 	
 	BOOL canAccess = YES;
 	if ([item.rating isEqualToString:@"adult"]) {
@@ -110,30 +102,32 @@
 
 	if (canAccess) {
 		if ([item.thumbnails count] > 0) {
-			[page.imageZoomView.imageView enableDebugMode:YES];
-			[page zoomedImageWithUrl:[NSURL URLWithString:[self urlForItem:item]] andDelegate:self];
+			[imagePage.imageZoomView.imageView enableDebugMode:YES];
+			[imagePage.imageZoomView.imageView setDelegate:(id<FTImageViewDelegate>)self];
+			
+			[imagePage zoomedImageWithUrl:[NSURL URLWithString:[self urlForItem:item]] andDelegate:self];
 		} else {
 			if (currentIndex < index) {
-//				currentIndex ++;
 				return [self pageForIndex:(index + 1)];
 			} else {
-//				currentIndex --;
 				return [self pageForIndex:(index - 1)];
 			}
 		}
 	}
 	else {
 		if (currentIndex < index) {
-//			currentIndex ++;
 			return [self pageForIndex:(index + 1)];
 		} else {
-//			currentIndex --;
 			return [self pageForIndex:(index - 1)];
 		}
 	}
-	[page setPageIndex:index];
+	[imagePage setPageIndex:index];
 	
-	return page;
+	[imagePages addObject:imagePage];
+	[imagePage release];
+	
+	NSLog(@"%@", imagePages);
+	return imagePage;
 }
 
 #pragma mark Navigation animations
@@ -213,11 +207,23 @@
 	
 	isOverlayShowing = YES;
 	
-    FTPage *page = [self pageForIndex:currentIndex];
+	imagePages = [[NSMutableArray alloc] init];
+	
+    FTImagePage *imagePage = [self pageForIndex:currentIndex];
+	
+	NSLog(@"%@", imagePages);
+	
+	ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
+	[ai setHidesWhenStopped:YES];
+	//	[ai setBackgroundColor:[UIColor redColor]];
+    [ai startAnimating];
+	[self.view addSubview:ai];
+	
     mainView = [[FTPageScrollView alloc] initWithFrame:[super fullScreenFrame]];
     [mainView setDummyPageImage:[UIImage imageNamed:@"dummy.png"]];
-    [mainView setInitialPage:page withDelegate:(id<FTPageScrollViewDelegate>)self];
-	[mainView setPage:page pageCount:[listThroughData count] animate:YES];
+    [mainView setInitialPage:imagePage withDelegate:(id<FTPageScrollViewDelegate>)self];
+	[mainView setPage:imagePage pageCount:[listThroughData count] animate:YES];
 	
 	FTPage *rPage = [self pageForIndex:(currentIndex + 1)];
 	FTPage *lPage = [self pageForIndex:(currentIndex - 1)];
@@ -234,6 +240,7 @@
 
 	
 	[self.view addSubview:mainView];
+//	[mainView release];
 	
 	
 	bottomBar = [[FTToolbar alloc] initWithFrame:[self frameForToolbar]];
@@ -241,14 +248,7 @@
 	
 	actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(didClickActionButton:)];
 	[bottomBar setItems:[NSArray arrayWithObjects:actionButton, nil]];
-	
-	
-	ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
-	[ai setHidesWhenStopped:YES];
-//	[ai setBackgroundColor:[UIColor redColor]];
-    [ai startAnimating];
-	[self.view addSubview:ai];	
+
 }
 
 
@@ -294,7 +294,13 @@
 	
 //	[[UIApplication sharedApplication] setStatusBarHidden:NO];
 	
-	page = nil;
+//	page = nil;
+//	for (FTPage *p in imagePages) {
+//		[p release];
+//	}
+//	
+//	mainView = nil;
+//	imagePages = nil;
 }
 
 #pragma mark Layout
@@ -363,27 +369,13 @@
 
 - (void)imageZoomViewDidFinishLoadingImage:(FTImageZoomView *)zoomView {
 	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-//	[UIView animateWithDuration:0.6
-//					 animations:^{
-//						 [ai setAlpha:0];
-//					 }
-//					 completion:^(BOOL finished) {
-//						 self.currentImage=zoomView.imageView.image;
-//                         [ai stopAnimating];
-//                         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-//                         actionButton.enabled=true;
-//					 }
-//	 ];
 }
 
 #pragma mark Actions methods
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(NSDictionary *)info {
 	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-	NSLog(@"%@", info);
 }
-
-
 
 - (void)saveCurrentImageToGallery {
 
@@ -392,7 +384,6 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[IDLang get:@"imagesaved"] message:nil
 												   delegate:self cancelButtonTitle:[IDLang get:@"OK"] otherButtonTitles:nil, nil];
 	[alert show];
-    
 	[alert release];
 	//[FlurryAPI logEvent:@"Func: Saving image"];
 }
@@ -480,15 +471,30 @@
 
 -(void)imageViewDidStartLoadingImage:(FTImageView *)imgView{
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-    [ai startAnimating];
+	NSLog(@"start: imgView.imageUrl: %@", imgView.imageUrl);
+	NSString *url = [self urlForItem:[listThroughData objectAtIndex:currentIndex]];
+	
+	if ([imgView.imageUrl isEqualToString:url]) {
+		[ai startAnimating];
+	}
+	
 	[ai setAlpha:1.0];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    
 }
 
 - (void)imageView:(FTImageView *)imgView didFinishLoadingImage:(UIImage *)image {
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-	[ai stopAnimating];
+
+	NSString *url = [self urlForItem:[listThroughData objectAtIndex:currentIndex]];
+	
+	NSLog(@"finish: imgView.imageUrl: %@, url: %@", imgView.imageUrl, url);
+	
+	
+	
+	if ([imgView.imageUrl isEqualToString:url]) {
+		[ai stopAnimating];
+	}
+	
     self.currentImage = image;
     actionButton.enabled=true;
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -540,42 +546,69 @@
 }
 
 
-- (void)selektor:(FTImagePage *)page {
+- (void)selektor:(FTImagePage *)imagePage {
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationBeginsFromCurrentState:YES];
 	[UIView setAnimationDuration:1.0];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 
-	[page.imageZoomView setZoomScale:1.5];
+	[imagePage.imageZoomView setZoomScale:1.5];
 	
 	[UIView commitAnimations];
 }
 
-- (void)pageScrollView:(FTPageScrollView *)scrollView didMakePageCurrent:(FTImagePage *)page {
+- (void)maintainPages {
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+	NSLog(@"imagePages.count: %d", imagePages.count);
+	NSInteger count = [imagePages count];
+	
+	if (count > 3) {
+		for (NSInteger i = 0; i < (count - 3); i++) {
+			[imagePages removeObjectAtIndex:i];
+		}
+	}
+}
+
+- (void)pageScrollView:(FTPageScrollView *)scrollView didMakePageCurrent:(FTImagePage *)imagePage {
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 	
-	UITapGestureRecognizer *doubletap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewTwice:)];
-	[doubletap setNumberOfTapsRequired:2];
-	[page addGestureRecognizer:doubletap];
-	[doubletap release];
 	
-	if (!tap) {
+	if (![[imagePage gestureRecognizers] containsObject:doubletap]) {
+		if (doubletap) {
+			doubletap = nil;
+			[doubletap release];
+		}
+		doubletap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewTwice:)];
+		[doubletap setNumberOfTapsRequired:2];
+		[imagePage addGestureRecognizer:doubletap];
+		[doubletap release];
+	}
+	
+	if (![[mainView gestureRecognizers] containsObject:tap]) {
+		if (tap) {
+			tap = nil;
+			[tap release];
+		}
 		tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewOnce:)];
+		[tap requireGestureRecognizerToFail:doubletap];
 		[mainView addGestureRecognizer:tap];
 		[tap release];
-	}
-	[tap requireGestureRecognizerToFail:doubletap];
-	
+	}	
 		
-	currentIndex = page.pageIndex;
+	currentIndex = imagePage.pageIndex;
 	NSLog(@"didMakePageCurrent: %d", currentIndex);
 	[self updateTitle];
+	[self maintainPages];
 }
 
 #pragma mark - MFMessageComposeViewControllerDelegate
 
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
 	
+}
+
+- (void)showHideNavbar:(id)sender {
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 }
 
 #pragma mark FTShareFacebookDelegate
@@ -609,6 +642,23 @@
     }
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 	[ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
+}
+
+#pragma mark Memory management
+
+- (void)dealloc {
+	[mainView release];
+	[imagePages release];
+	[imageUrl release];
+	[bottomBar release];
+    [actionButton release];
+	[ai release];
+	[message release];
+	[listThroughData release];
+	[shortcutView release];
+	[currentImage release];
+	
+    [super dealloc];
 }
 
 @end

@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
-	[self setTitle:@"categories"];
+	[self setTitle:@"Categories"];
 }
 
 #pragma mark Memory management

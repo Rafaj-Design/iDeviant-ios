@@ -253,6 +253,8 @@
 			[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
 		}
 	}
+	
+	[cells release];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{

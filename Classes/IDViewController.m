@@ -329,6 +329,16 @@
 	
 	gestureView = [[UIView alloc] init];
 	
+	if (![NSStringFromClass(self.class) isEqualToString:@"IDHomeController"] && ![NSStringFromClass(self.class) isEqualToString:@"IDImageDetailViewController"] && ![NSStringFromClass(self.class) isEqualToString:@"IDDocumentDetailViewController"]) {
+		
+		tapGesture = [[UITapGestureRecognizer alloc] init];
+		
+		[tapGesture setDelegate:(id<UIGestureRecognizerDelegate>)self];
+		[tapGesture addTarget:self action:@selector(showHideNavbar:)];
+		
+		[gestureView addGestureRecognizer:tapGesture];
+	}
+	
 	for (UIView *v in [[[self navigationController] navigationBar] subviews]) {
 		if ([NSStringFromClass([v class]) isEqualToString:@"UINavigationItemView"]) {
 			[gestureView setFrame:[v frame]];
@@ -336,16 +346,8 @@
 			NSLog(@"titleFrame: %@", NSStringFromCGRect([v frame]));
 		}
 	}
-		
-	tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showHideNavbar:)];
-	popping = NO;
-	[tapGesture setDelegate:(id<UIGestureRecognizerDelegate>)self];
 	
-	if (![NSStringFromClass(self.class) isEqualToString:@"IDHomeController"]) {
-		[gestureView addGestureRecognizer:tapGesture];
-	}
-
-	[tapGesture release];
+	popping = NO;
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
@@ -363,7 +365,8 @@
 	[super viewWillAppear:animated];
 	[self doLayoutSubviews];
 	[self doLayoutLocalSubviews];
-	if (table) [table reloadData];
+	if (table) 
+		[table reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -379,7 +382,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[self checkNetworkStatus:nil];
-	
+	NSLog(@"gestureView.recog: %@", gestureView.gestureRecognizers);
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
@@ -487,13 +490,6 @@
 }
 
 #pragma mark Table view data source & delegate methods
-
-//- (void)setData:(NSArray *)newData {
-//	[data release];
-//	data = newData;
-//	[data retain];
-//	[table reloadData];
-//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 	if (isSearchBar) {
@@ -686,6 +682,7 @@
 
 - (void)viewDidUnload {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+	[gestureView removeFromSuperview];
 }
 
 - (void)dealloc {
@@ -702,6 +699,8 @@
 	[internetReachable release];
 	[refreshButton release];
 	[message release];
+	[gestureView release];
+	[tapGesture release];
     [super dealloc];
 }
 
@@ -895,6 +894,7 @@
 			[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
 		}
 	}
+	[cells release];
 }
 
 @end

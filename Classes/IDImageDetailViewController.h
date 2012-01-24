@@ -13,9 +13,7 @@
 #import "FTToolbar.h"
 #import "IDHorizontalItems.h"
 #import "FTShare.h"
-
 #import "FTImagePage.h"
-
 
 @class IDImageDetailViewController;
 
@@ -25,54 +23,50 @@
 
 @end
 
-
 @interface IDImageDetailViewController : IDViewController <UIActionSheetDelegate, FTImageViewDelegate, FTImageZoomViewDelegate, FTPageScrollViewDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate> {
-    
-	FTPageScrollView *mainView;
-	
-	NSString *imageUrl;
-	
-	FTToolbar *bottomBar;
-    
-    UIBarButtonItem *actionButton;
-	
-	//UIActivityIndicatorView *ai;
-	
-	int currentIndex;
 	
 	id <IDImageDetailViewControllerDelegate> delegate;
 	
+	FTPageScrollView *mainView;
+	FTToolbar *bottomBar;
+	
+	NSMutableArray *imagePages;
+	
+	NSString *imageUrl;
+	
+    UIBarButtonItem *actionButton;
+	NSInteger currentIndex;
+	
 	NSArray *listThroughData;
-	
 	IDHorizontalItems *shortcutView;
-    
     UIImage *currentImage;
-	
-	FTImagePage *page;
-	
-	UITapGestureRecognizer *tap;
-	
+
 	BOOL isOverlayShowing;
+	
+	UITapGestureRecognizer *tap, *doubletap;
 }
-
-@property (nonatomic, retain) FTPageScrollView *mainView;
-
-@property (nonatomic, retain) NSString *imageUrl;
-
-@property (nonatomic, retain) UIImage *currentImage;
-
-@property (nonatomic) int currentIndex;
 
 @property (nonatomic, assign) id <IDImageDetailViewControllerDelegate> delegate;
 
-@property (nonatomic, retain) FTImagePage *page;
+@property (nonatomic, retain) FTPageScrollView *mainView;
+@property (nonatomic, retain) FTToolbar *bottomBar;
 
-@property (nonatomic, retain) UITapGestureRecognizer *tap;
+@property (nonatomic, retain) NSMutableArray *imagePages;
+
+@property (nonatomic, retain) NSString *imageUrl;
+
+@property (nonatomic, retain) UIBarButtonItem *actionButton;
+@property (nonatomic) NSInteger currentIndex;
+
+@property (nonatomic, retain) NSArray *listThroughData;
+@property (nonatomic, retain) IDHorizontalItems *shortcutView;
+@property (nonatomic, retain) UIImage *currentImage;
 
 @property (nonatomic) BOOL isOverlayShowing;
 
+@property (nonatomic, retain) UITapGestureRecognizer *tap, *doubletap;
 
 - (void)setListData:(NSArray *)array;
-
+- (void)maintainPages;
 
 @end
