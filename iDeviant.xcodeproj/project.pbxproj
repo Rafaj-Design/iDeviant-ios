@@ -143,6 +143,8 @@
 		4CF020481392EF5800ED1E47 /* IDFavouriteCategories.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF020471392EF5800ED1E47 /* IDFavouriteCategories.m */; };
 		4CF0204B1392EF6B00ED1E47 /* IDFavouriteItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF0204A1392EF6B00ED1E47 /* IDFavouriteItems.m */; };
 		66CD733514C5D2C900DB0E02 /* IDLang.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CD733414C5D2C900DB0E02 /* IDLang.m */; };
+		66FDBC3814CEAA9900AB2A40 /* DA_shade-land.png in Resources */ = {isa = PBXBuildFile; fileRef = 66FDBC3714CEAA9900AB2A40 /* DA_shade-land.png */; };
+		66FDBC3B14CEAAA200AB2A40 /* DA_shade-land@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 66FDBC3A14CEAAA200AB2A40 /* DA_shade-land@2x.png */; };
 		C7E02E6E12DF03BD0098AAE6 /* FTNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E02E6D12DF03BD0098AAE6 /* FTNavigationViewController.m */; };
 		C84031591448BD6B00D86A99 /* fuerte-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C84031571448BD6B00D86A99 /* fuerte-logo@2x.png */; };
 		C840315A1448BD6B00D86A99 /* fuerte-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = C84031581448BD6B00D86A99 /* fuerte-logo.png */; };
@@ -414,6 +416,8 @@
 		66CD733314C5D2C900DB0E02 /* IDLang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDLang.h; sourceTree = "<group>"; };
 		66CD733414C5D2C900DB0E02 /* IDLang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDLang.m; sourceTree = "<group>"; };
 		66EAE67914BF133600DE3A2A /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
+		66FDBC3714CEAA9900AB2A40 /* DA_shade-land.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DA_shade-land.png"; sourceTree = "<group>"; };
+		66FDBC3A14CEAAA200AB2A40 /* DA_shade-land@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DA_shade-land@2x.png"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* iDeviant-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iDeviant-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		C7E02E6C12DF03BD0098AAE6 /* FTNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTNavigationViewController.h; sourceTree = "<group>"; };
 		C7E02E6D12DF03BD0098AAE6 /* FTNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTNavigationViewController.m; sourceTree = "<group>"; };
@@ -1103,6 +1107,8 @@
 		2BF7D57F137ED3C1002E9B74 /* gray */ = {
 			isa = PBXGroup;
 			children = (
+				66FDBC3714CEAA9900AB2A40 /* DA_shade-land.png */,
+				66FDBC3A14CEAAA200AB2A40 /* DA_shade-land@2x.png */,
 				C8F86E6E14BCB33100B18F9E /* search_anim_all */,
 				C8F86E9614BCB33100B18F9E /* DA_bg-empty-l.png */,
 				C8F86E9714BCB33100B18F9E /* DA_bg-empty-l@2x.png */,
@@ -1590,6 +1596,8 @@
 				C8F86EC414BCB33100B18F9E /* DA_bg-empty-p.png in Resources */,
 				C8F86EC514BCB33100B18F9E /* DA_bg-empty-p@2x.png in Resources */,
 				C8F86EC614BCB33100B18F9E /* search_anim_1@2x.png in Resources */,
+				66FDBC3814CEAA9900AB2A40 /* DA_shade-land.png in Resources */,
+				66FDBC3B14CEAAA200AB2A40 /* DA_shade-land@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

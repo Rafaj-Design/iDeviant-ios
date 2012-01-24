@@ -92,9 +92,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[table deselectRowAtIndexPath:indexPath animated:YES];
 	
-	
-	
-	
 	NSDictionary *d = [data objectAtIndex:indexPath.section];
 	if ([[d objectForKey:@"requiresConnection"] boolValue] && !internetActive) {
 		[super displayMessage:@"requiresinternetconnection"];
@@ -224,6 +221,19 @@
 		[super setData:[FTSimpleDB getItemsFromDb:kSystemHomeMenuDbName]];
 		[table reloadData];
 	}
+	
+	NSMutableArray *cells = [[NSMutableArray alloc] init];
+	for (NSInteger j = 0; j < [table numberOfSections]; ++j)
+	{
+		for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i)
+		{
+			[cells addObject:[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]]];
+		}
+	}
+	
+	for (IDHomeTableViewCell *cell in cells) {
+		[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade-land"]]];
+	}
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -264,6 +274,5 @@
 - (void)dealloc {
     [super dealloc];
 }
-
 
 @end
