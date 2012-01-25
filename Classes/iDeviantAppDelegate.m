@@ -219,7 +219,6 @@ void Swizzle(Class c, SEL orig, SEL new)
 }
 
 void function (id self, SEL _cmd, id arg) {
-	NSLog(@"FUCK");
 	[self setPermissions:[NSArray arrayWithObjects:@"offline_access", @"publish_stream", nil]];
 	[self setUrlSchemeSuffix:nil];
 	[self authorizeWithFBAppAuth:NO safariAuth:NO];

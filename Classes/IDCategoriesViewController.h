@@ -9,22 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "IDViewController.h"
 
-
 @interface IDCategoriesViewController : IDViewController {
 	
 	NSDictionary *currentCategory;
-	
 	NSString *currentCategoryPath;
 	
 }
 
 @property (nonatomic, retain) NSDictionary *currentCategory;
-
 @property (nonatomic, retain) NSString *currentCategoryPath;
 
-
 - (void)fillWithData;
-
 -(void)sendToHome;
 
 @end

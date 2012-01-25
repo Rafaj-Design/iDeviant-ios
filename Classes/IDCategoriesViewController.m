@@ -52,9 +52,7 @@
 		currentCategoryPath = @"";
 	}
 	else [super setIsSearchBar:YES];
-	
-	
-	
+
 	[super getDataForCategory:currentCategoryPath];
 }
 
@@ -74,31 +72,14 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    /*
-    NSString *tit = self.navigationItem.title;
-    
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(0, 0, 150, 20);
-    [btn setTitle:tit forState:UIControlStateNormal];
-    [btn addTarget:self action:@selector(sendToHome) forControlEvents:UIControlEventAllEvents];
-    [tit release];
-    
-    //have error with navigation controller
-    //self.navigationItem.titleView = btn;
-    
-    [btn release];
-     */
+	[backgroundImageView setFrame:[super fullScreenFrame]];
+	[table setFrame:self.view.bounds];
+	
+	[self doLayoutSubviews];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-}
-
-#pragma mark Memory management
-
-- (void)dealloc {
-	[currentCategory release];
-    [super dealloc];
 }
 
 #pragma mark Table view
@@ -114,37 +95,39 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	//return 2;
-	if ([data count] > 0) return 2;
-	else return 1;
+	if ([data count] > 0) 
+		return 2;
+	else
+		return 1;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	if (section == 1 && [data count] == 0) return nil;
+	if (section == 1 && [data count] == 0) 
+		return nil;
+	
 	NSString *catName = [currentCategory objectForKey:@"name"];
+	
 	if (section == 0) {
-		if (catName) {
+		if (catName)
 			catName = [NSString stringWithFormat:@"%@%@", [IDLang get:@"subcategoriesincat"], catName];
-		}
-		else {
+		else
 			catName = [IDLang get:@"subcategoriesinmaincat"];
-		}
+		
 		return catName;
-	}
-	else {
+	} else {
 		NSString *itemsName;
-		if (catName) {
+		
+		if (catName)
 			itemsName = [NSString stringWithFormat:@"%@%@", [IDLang get:@"itemsincategory"], catName];
-		}
-		else {
+		else
 			itemsName = [IDLang get:@"itemsinmaincat"];
-		}
+		
 		return itemsName;
 	}
 }
 
 - (void)enablingTableEdit:(BOOL)edit {
-	//[table reloadData];
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -161,34 +144,41 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	//return [categoriesData count];
-	if (section == 0) return [categoriesData count];
-	else return [data count];
+	if (section == 0)
+		return [categoriesData count];
+	else
+		return [data count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == 0) return 68;
-	else return 83;
+	if (indexPath.section == 0)
+		return 68;
+	else
+		return 83;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == 0) {
+	if (indexPath.section == 0)
 		return [super tableView:tableView categoryCellForRowAtIndexPath:indexPath];
-	}
-	else {
+	else
 		return [super tableView:tableView itemCellForRowAtIndexPath:indexPath];
-	}
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == 0) {
+	if (indexPath.section == 0)
 		[super launchCategoryInTableView:tableView withIndexPath:indexPath andCurrentCategoryPath:currentCategoryPath];
-	}
-	else {
+	else
 		[super launchItemInTableView:tableView withIndexPath:indexPath];
-	}
+
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
+#pragma mark Memory management
+
+- (void)dealloc {
+	[currentCategory release];
+	
+    [super dealloc];
+}
 
 @end

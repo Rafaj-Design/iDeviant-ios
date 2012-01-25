@@ -99,10 +99,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	
+
 	[self createTableView];
 	
-	if (predefinedSearchTerm) [super getDataForSearchString:predefinedSearchTerm];
+	if (predefinedSearchTerm)
+		[super getDataForSearchString:predefinedSearchTerm];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -120,6 +121,7 @@
 - (void)dealloc {
 	[predefinedSearchTerm release];
 	[predefinedCategory release];
+	
     [super dealloc];
 }
 

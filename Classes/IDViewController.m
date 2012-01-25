@@ -18,9 +18,6 @@
 #import "IDJustItemsViewController.h"
 #import "FTText.h"
 #import "Configuration.h"
-
-
-// test
 #import "IDDetailTableViewController.h"
 
 
@@ -37,39 +34,43 @@
 @synthesize itemsToDisplay;
 @synthesize isSearchBar;
 @synthesize internetActive;
-//@synthesize hostActive;
 @synthesize message;
 
 @synthesize popping;
 @synthesize gestureView;
 @synthesize tapGesture;
 
+@synthesize internetReachable;
 
 #pragma mark Positioning
 
 - (int)recalculateHeightForStatusBar:(int)height {
 	BOOL status = YES;
-	if (status) {
+	
+	if (status)
 		height -= 20;
-	}
 	
 	BOOL navigation = YES;
-	if ([self.navigationController.navigationBar isTranslucent]) navigation = NO;
-	else if ([self.navigationController.navigationBar isHidden]) navigation = NO;
-	if (navigation) {
-		if (isLandscape) height -= 32;
-		else height -= 44;
-	}
+	
+	if ([self.navigationController.navigationBar isTranslucent])
+		navigation = NO;
+	else if 
+		([self.navigationController.navigationBar isHidden]) navigation = NO;
+	
+	if (navigation)
+		if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
+			height -= 32;
+		else 
+			height -= 44;
+	
 	return height;
 }
 
 - (CGRect)fullScreeniPhoneFrame {
-	if (isLandscape) {
+	if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
 		return CGRectMake(0, 0, 480, [self recalculateHeightForStatusBar:320]);
-	}
-	else {
+	else
 		return CGRectMake(0, 0, 320, [self recalculateHeightForStatusBar:480]);
-	}
 }
 
 - (CGRect)fullScreeniPadFormFrame {
@@ -77,32 +78,26 @@
 }
 
 - (CGRect)fullScreeniPadFrame {
-	if (isLandscape) {
+	if (isLandscape)
 		return CGRectMake(0, 0, 1024, [self recalculateHeightForStatusBar:768]);
-	}
-	else {
+	else
 		return CGRectMake(0, 0, 768, [self recalculateHeightForStatusBar:1024]);
-	}
 }
 
 - (CGRect)fullScreenFrame {
-	//	if ([FTSystem isTabletSize]) {
-	//		return [self fullScreeniPadFrame];
-	//	}
-	//	else {
 	return [self fullScreeniPhoneFrame];
-	//	}
 }
 
 - (CGRect)frameForMessageLabel {
 	CGRect r = [self fullScreenFrame];
 	r.size.height = 16;
+
 	if (self.navigationController.navigationBar.alpha == 0) {
 		
-	}
-	else {
+	} else {
 		//r.origin.y = self.navigationController.navigationBar.frame.size.height;
 	}
+	
 	return r;
 }
 
@@ -112,8 +107,9 @@
 	if ([message isHidden]) {
 		[message setAlpha:0];
 		[message setHidden:NO];
-	}
-	else return;
+	} else
+		return;
+	
 	[message setFrame:[self frameForMessageLabel]];
 	[message setText:[IDLang get:text]];
 	[message setText:IDLangGet(text)];
@@ -146,10 +142,6 @@
 #pragma mark Parsing
 
 - (void)refresh {
-	//[self setTitle:@"refreshing"];
-    
-    //loader when push refresh button
-
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	
 	[parsedItems removeAllObjects];
@@ -199,7 +191,6 @@
 	
 	if (category) 
 	if (![category isEqualToString:@""]) {
-//		categoryString = [categoryString stringByAppendingString:@"%@+sort:time"];
 		categoryString = [NSString stringWithFormat:@"+in:%@+sort:time", category];
 		url = [url stringByAppendingString:categoryString];
 	}
@@ -274,16 +265,33 @@
 #pragma mark View lifecycle
 
 - (void)doLayoutLocalSubviews {
-	// Layout local elements
 	[UIView beginAnimations:nil context:nil];
 	[backgroundImageView setFrame:[self fullScreenFrame]];
-	[table setFrame:[self fullScreenFrame]];
+	[table setFrame:self.view.bounds];
 	[message setFrame:[self frameForMessageLabel]];
 	[UIView commitAnimations];
 }
 
 - (void)doLayoutSubviews {
-	
+	if (table) {
+		NSMutableArray *cells = [[NSMutableArray alloc] init];
+		for (NSInteger j = 0; j < [table numberOfSections]; ++j)
+		{
+			for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i)
+			{
+				if ([table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]] != nil)
+					[cells addObject:[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]]];
+			}
+		}
+		
+		for (IDTableViewCell *cell in cells) {
+			if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
+				[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade-land"]]];
+			else
+				[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
+		}
+		[cells release];
+	}
 }
 
 -(void) showHideNavbar:(id)sender {
@@ -327,26 +335,6 @@
 	[self.view addSubview:message];
 	[message setHidden:YES];
 	
-	gestureView = [[UIView alloc] init];
-	
-	if (![NSStringFromClass(self.class) isEqualToString:@"IDHomeController"] && ![NSStringFromClass(self.class) isEqualToString:@"IDImageDetailViewController"] && ![NSStringFromClass(self.class) isEqualToString:@"IDDocumentDetailViewController"]) {
-		
-		tapGesture = [[UITapGestureRecognizer alloc] init];
-		
-		[tapGesture setDelegate:(id<UIGestureRecognizerDelegate>)self];
-		[tapGesture addTarget:self action:@selector(showHideNavbar:)];
-		
-		[gestureView addGestureRecognizer:tapGesture];
-	}
-	
-	for (UIView *v in [[[self navigationController] navigationBar] subviews]) {
-		if ([NSStringFromClass([v class]) isEqualToString:@"UINavigationItemView"]) {
-			[gestureView setFrame:[v frame]];
-			[self.navigationController.navigationBar addSubview:gestureView];
-			NSLog(@"titleFrame: %@", NSStringFromCGRect([v frame]));
-		}
-	}
-	
 	popping = NO;
 }
 
@@ -361,12 +349,37 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-	isLandscape = UIInterfaceOrientationIsLandscape([FTSystem interfaceOrientation]);
 	[super viewWillAppear:animated];
+	
+	isLandscape = UIInterfaceOrientationIsLandscape([FTSystem interfaceOrientation]);
+	
 	[self doLayoutSubviews];
 	[self doLayoutLocalSubviews];
+	
 	if (table) 
 		[table reloadData];
+	
+	if (![NSStringFromClass(self.class) isEqualToString:@"IDHomeController"] && ![NSStringFromClass(self.class) isEqualToString:@"IDImageDetailViewController"] && ![NSStringFromClass(self.class) isEqualToString:@"IDDocumentDetailViewController"]) {
+		
+		gestureView = [[UIView alloc] init];
+		
+		tapGesture = [[UITapGestureRecognizer alloc] init];
+		
+		[tapGesture setDelegate:(id<UIGestureRecognizerDelegate>)self];
+		[tapGesture addTarget:self action:@selector(showHideNavbar:)];
+		
+		[gestureView addGestureRecognizer:tapGesture];
+		
+		for (UIView *v in [[[self navigationController] navigationBar] subviews]) {
+			if ([NSStringFromClass([v class]) isEqualToString:@"UINavigationItemView"]) {
+				[gestureView setFrame:[v frame]];
+				[self.navigationController.navigationBar addSubview:gestureView];
+				NSLog(@"titleFrame: %@", NSStringFromCGRect([v frame]));
+			}
+		}
+	}
+	
+	[self doLayoutSubviews];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -377,21 +390,27 @@
 			[searchBarHeader setShowsCancelButton:NO animated:YES];
 		}
 	}
+	if (![NSStringFromClass(self.class) isEqualToString:@"IDHomeController"] && ![NSStringFromClass(self.class) isEqualToString:@"IDImageDetailViewController"] && ![NSStringFromClass(self.class) isEqualToString:@"IDDocumentDetailViewController"]) {
+		[gestureView removeGestureRecognizer:tapGesture];
+		[gestureView removeFromSuperview];
+		gestureView = nil;
+		
+		[tapGesture removeTarget:nil action:NULL];
+		[tapGesture setDelegate:nil];
+		tapGesture = nil;
+	}
 }
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	[self checkNetworkStatus:nil];
-	NSLog(@"gestureView.recog: %@", gestureView.gestureRecognizers);
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
-    if ([FTSystem isTabletSize]){
+    if ([FTSystem isTabletSize])
         return YES;
-    }
-	else {
+	else
         return UIInterfaceOrientationIsLandscape(toInterfaceOrientation) || toInterfaceOrientation == UIInterfaceOrientationPortrait;
-    }
 }
 
 #pragma mark Handler for navigating backwards
@@ -425,12 +444,13 @@
 
 - (void)enableBackgroundWithImage:(UIImage *)image {
 	if (!backgroundImageView) {
-		backgroundImageView = [[UIImageView alloc] initWithFrame:[self fullScreenFrame]];
+		backgroundImageView = [[UIImageView alloc] init];
 		[backgroundImageView setBackgroundColor:[UIColor clearColor]];
 		[self.view addSubview:backgroundImageView];
 		[self.view sendSubviewToBack:backgroundImageView];
 	}
 	[backgroundImageView setImage:image];
+	[backgroundImageView setFrame:[self fullScreenFrame]];
 }
 
 #pragma mark Settings
@@ -447,7 +467,8 @@
 - (void)createTableViewWithSearchBar:(BOOL)searchBar andStyle:(UITableViewStyle)style {
 	isSearchBar = searchBar;
 	table = [[UITableView alloc] initWithFrame:[self fullScreenFrame] style:style];
-	//[table setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+	[table setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+	[table setAutoresizesSubviews:YES];
 	[table setDataSource:self];
 	[table setDelegate:self];
 	[table setBackgroundColor:[UIColor clearColor]];
@@ -474,8 +495,7 @@
 		UIBarButtonItem *edit = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(toggleEditTable)];
 		[self.navigationItem setRightBarButtonItem:edit animated:YES];
 		[edit release];
-	}
-	else {
+	} else {
 		UIBarButtonItem *edit = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(toggleEditTable)];
 		[self.navigationItem setRightBarButtonItem:edit animated:YES];
 		[edit release];
@@ -492,14 +512,14 @@
 #pragma mark Table view data source & delegate methods
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-	if (isSearchBar) {
+	if (isSearchBar)
 		return 44;
-	}
-	else return 0;
+	else
+		return 0;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-	if (section == 0) {
+	if (section == 0)
 		if (isSearchBar) {
 			if (!searchBarHeader) {
 				searchBarHeader = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 44)];
@@ -510,7 +530,7 @@
 			}
 			return searchBarHeader;
 		}
-	}
+
 	return nil;
 }
 
@@ -529,8 +549,11 @@
     return [data count];
 }
 
-- (void)configureCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView {
-	
+- (void)configureCell:(IDTableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView {
+	if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
+		[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade-land"]]];
+	else
+		[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView itemCellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -581,7 +604,8 @@
 				}
 				if (canAccess) {
 					if ([item.thumbnails count] > 0) {
-						[cell.cellImageView loadImageFromUrl:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]];
+						if (([[[item.thumbnails objectAtIndex:0] objectForKey:@"width"] intValue] <= 200) || ([[[item.thumbnails objectAtIndex:0] objectForKey:@"height"] intValue] <= 200))
+							[cell.cellImageView loadImageFromUrl:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]];
 					}
 				}
 				else {
@@ -591,13 +615,6 @@
 		}
     }
 	[self configureCell:cell withIndexPath:indexPath forTableView:tableView];
-//	[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
-
-	if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
-		[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade-land"]]];
-	else {
-		[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
-	}
 	
     return cell;
 }
@@ -615,30 +632,15 @@
             }
         }
 		[cell setSelectionStyle:UITableViewCellSelectionStyleGray];
-//		[cell setBackgroundColor:[UIColor whiteColor]];
 		[cell setBackgroundColor:[UIColor clearColor]];
 		[cell.cellTitleLabel setText:[d objectForKey:@"name"]];		
 		[cell.cellTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeueLTPro-LtCn" size:19]];
     }
 	
 	[self configureCell:cell withIndexPath:indexPath forTableView:tableView];
-	if ([[d objectForKey:@"subcategories"] count] == 0) {
-		if (!internetActive) {
+	if ([[d objectForKey:@"subcategories"] count] == 0)
+		if (!internetActive)
 			[cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-x.png"]];
-		}
-	}
-	
-//	if ([nibName isEqualToString:@"IDFavoriteCategoriesTableViewCell"]) {
-//		[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
-//	}
-	
-//	[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
-	
-	if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
-		[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade-land"]]];
-	else {
-		[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
-	}
 	
     return cell;
 }
@@ -659,7 +661,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	// Show detail
 	IDDetailTableViewController *detail = [[IDDetailTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	detail.item = (MWFeedItem *)[data objectAtIndex:indexPath.row];
 	[self.navigationController pushViewController:detail animated:YES];
@@ -685,25 +686,6 @@
 	[gestureView removeFromSuperview];
 }
 
-- (void)dealloc {
-	[table release];
-	[data release];
-	[categoriesData release];
-	[backgroundImageView release];
-	[formatter release];
-	[parsedItems release];
-	[itemsToDisplay release];
-	[feedParser cancelParsing];
-	[feedParser release];
-	[searchBarHeader release];
-	[internetReachable release];
-	[refreshButton release];
-	[message release];
-	[gestureView release];
-	[tapGesture release];
-    [super dealloc];
-}
-
 #pragma mark Parsing delegate methods (MWFeedParserDelegate)
 
 - (void)feedParserDidStart:(MWFeedParser *)parser {
@@ -715,13 +697,11 @@
 
 - (void)feedParser:(MWFeedParser *)parser didParseFeedInfo:(MWFeedInfo *)info {
 	NSLog(@"Parsed Feed Info: “%@”", info.title);
-	//[self setTitle:info.title];
-	
 }
 
 - (void)feedParser:(MWFeedParser *)parser didParseFeedItem:(MWFeedItem *)item {
-	//NSLog(@"Parsed Feed Item: “%@”", item.title);
-	if (item) [parsedItems addObject:item];	
+	if (item) 
+		[parsedItems addObject:item];	
     NSLog(@"parsed item: %@", item);
 }
 
@@ -734,7 +714,6 @@
 	
 	[self enableTable];
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-	//[self setData:nil];
 	[table reloadData];
 	[imageView stopAnimating];
     [imageView setHidden:YES];
@@ -743,7 +722,6 @@
 
 - (void)feedParser:(MWFeedParser *)parser didFailWithError:(NSError *)error {
 	NSLog(@"Finished Parsing With Error: %@", error);
-//	[self setTitle:@"failed"];
 	[self setData:[NSArray array]];
 	[parsedItems removeAllObjects];
 	
@@ -778,9 +756,6 @@
     [imageView setAnimationImages:images];
     [imageView startAnimating];
 
-//    NSString *searchinpopular = [NSString stringWithFormat:@"boost:popular+%@",[searchBarHeader text]]; 
-//	[self getDataForSearchString:searchinpopular andCategory:nil];
-	
 	[self getDataForSearchString:[searchBarHeader text] andCategory:nil];
 }
 
@@ -792,6 +767,7 @@
 - (void)launchCategoryInTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath andCurrentCategoryPath:(NSString *)currentCategoryPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	NSDictionary *d = [categoriesData objectAtIndex:indexPath.row];
+	
 	if ([[d objectForKey:@"subcategories"] count] > 0) {
 		IDCategoriesViewController *c = [[IDCategoriesViewController alloc] init];
 		[c inheritConnectivity:internetActive];
@@ -801,8 +777,7 @@
 		[c setCategoriesData:[d objectForKey:@"subcategories"]];
 		[self.navigationController pushViewController:c animated:YES];
 		[c release];
-	}
-	else {
+	} else {
 		if (internetActive) {
 			IDJustItemsViewController *c = [[IDJustItemsViewController alloc] init];
 			[c inheritConnectivity:internetActive];
@@ -818,14 +793,18 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	MWFeedItem *item = [data objectAtIndex:indexPath.row];
 	NSMutableArray *arr = [[NSMutableArray alloc] init];
+	
 	for (MWFeedItem *i in data) {
 		NSLog(@"Title: %@", i.title);
 		[arr addObject:i];
 	}
+	
 	BOOL canAccess = YES;
-	if ([item.rating isEqualToString:@"adult"]) {
-		if (![IDAdultCheck canAccessAdultStuff]) canAccess = NO;
-	}
+	
+	if ([item.rating isEqualToString:@"adult"])
+		if (![IDAdultCheck canAccessAdultStuff]) 
+			canAccess = NO;
+	
 	if (canAccess) {
 		if ([item.contents count] > 0) {
 			if (item.text) {
@@ -838,8 +817,7 @@
 				[c setContent:text];
 				[self.navigationController pushViewController:c animated:YES];
 				[c release];
-			}
-			else {
+			} else {
 				IDImageDetailViewController *c = [[IDImageDetailViewController alloc] init];
 				[c inheritConnectivity:internetActive];
 				[c setCurrentIndex:indexPath.row];
@@ -850,10 +828,10 @@
 				[c release];
 			}
 		}
-	}
-	else {
+	} else {
 		[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	}
+	
 	[arr release];
 	
 	if (kDebugCauseCrash) {
@@ -869,32 +847,29 @@
 }
 
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
-	NSMutableArray *cells = [[NSMutableArray alloc] init];
-	for (NSInteger j = 0; j < [table numberOfSections]; ++j)
-	{
-		for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i)
-		{
-			if ([table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]] != nil)
-				[cells addObject:[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]]];
-		}
-	}
+
+}
+
+#pragma mark - Memory management
+
+- (void)dealloc {
+	[table release];
+	[data release];
+	[categoriesData release];
+	[backgroundImageView release];
+	[formatter release];
+	[parsedItems release];
+	[itemsToDisplay release];
+	[feedParser cancelParsing];
+	[feedParser release];
+	[searchBarHeader release];
+	[internetReachable release];
+	[refreshButton release];
+	[message release];
+	[gestureView release];
+	[tapGesture release];
 	
-	if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || 
-        ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight)) 
-	{       
-		
-	} else {
-		
-	}
-	
-	for (IDCategoriesTableViewCell *cell in cells) {
-		if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
-			[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade-land"]]];
-		else {
-			[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
-		}
-	}
-	[cells release];
+    [super dealloc];
 }
 
 @end

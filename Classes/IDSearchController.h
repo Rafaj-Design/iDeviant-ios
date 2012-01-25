@@ -10,9 +10,7 @@
 #import "IDItemsViewController.h"
 
 
-@interface IDSearchController : IDItemsViewController {
-    NSTimer *background;
-}
+@interface IDSearchController : IDItemsViewController 
 
 -(void)backgroundImage;
 

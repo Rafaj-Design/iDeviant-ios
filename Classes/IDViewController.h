@@ -78,6 +78,7 @@
 
 @property (nonatomic, retain) UIView *gestureView;
 @property (nonatomic, retain) UITapGestureRecognizer *tapGesture;
+@property (nonatomic, retain) Reachability *internetReachable;
 
 
 - (CGRect)fullScreeniPhoneFrame;
