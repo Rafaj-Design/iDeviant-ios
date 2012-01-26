@@ -107,6 +107,7 @@
 			
 			[imagePage zoomedImageWithUrl:[NSURL URLWithString:[self urlForItem:item]] andDelegate:self];
 		} else {
+			[imagePage release];
 			if (currentIndex < index) {
 				return [self pageForIndex:(index + 1)];
 			} else {
