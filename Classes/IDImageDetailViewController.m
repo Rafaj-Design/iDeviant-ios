@@ -11,9 +11,7 @@
 #import "iDeviantAppDelegate.h"
 #import "FTImagePage.h"
 #import "IDAdultCheck.h"
-//#import "IDLang.h"
 #import "FTImagePage.h"
-//#import "FTPageScrollViewDelegate.h"
 #import "FTPageScrollView.h"
 
 #define kIDImageDetailViewControllerMaxAlpha				0.6f
@@ -156,7 +154,6 @@
 		a = kIDImageDetailViewControllerMaxAlpha;
 		
 		[self.navigationController.navigationBar setHidden:NO];
-//		self.view.frame = self.view.bounds;
 		
 		[bottomBar setHidden:NO];
 		hide = NO;
@@ -223,8 +220,6 @@
 	FTPage *rPage = [self pageForIndex:(currentIndex + 1)];
 	FTPage *lPage = [self pageForIndex:(currentIndex - 1)];
 	
-//	mainView performSelector:@selector(setRightPage:nil)
-	
 	[mainView performSelector:@selector(setRightPage:) withObject:rPage];
 	[mainView performSelector:@selector(setLeftPage:) withObject:lPage];
 	
@@ -233,13 +228,6 @@
     [mainView setPagingEnabled:YES];
 		
 	[self.view addSubview:mainView];
-	
-//	ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-//    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
-//	[ai setHidesWhenStopped:YES];
-//	//	[ai setBackgroundColor:[UIColor redColor]];
-////    [ai startAnimating];
-//	[self.view addSubview:ai];	
 	
 	bottomBar = [[FTToolbar alloc] initWithFrame:[self frameForToolbar]];
 	[self.view addSubview:bottomBar];
@@ -275,7 +263,6 @@
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 	[self.navigationController.navigationBar setTranslucent:NO];
-//	[ai stopAnimating];
 	
 	[UIView beginAnimations:nil context:nil];
 	
@@ -289,16 +276,6 @@
 
 - (void)viewDidUnload {
 	[super viewDidUnload];
-	
-//	[[UIApplication sharedApplication] setStatusBarHidden:NO];
-	
-//	page = nil;
-//	for (FTPage *p in imagePages) {
-//		[p release];
-//	}
-//	
-//	mainView = nil;
-//	imagePages = nil;
 }
 
 #pragma mark Layout
@@ -308,7 +285,6 @@
 	
 	[mainView setFrame:[super fullScreenFrame]];
 	[bottomBar setFrame:[self frameForToolbar]];
-	[ai centerInSuperView];
 	[shortcutView centerInSuperView];
 	
 	[UIView commitAnimations];
@@ -469,36 +445,17 @@
 
 -(void)imageViewDidStartLoadingImage:(FTImageView *)imgView{
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-
-	NSString *url = [self urlForItem:[listThroughData objectAtIndex:currentIndex]];
 	
-	NSLog(@"start: imgView.imageUrl: %@, url: %@", imgView.imageUrl, url);
-	
-	if ([imgView.imageUrl isEqualToString:url]) {
-		NSLog(@"START ANIMATING");
-//		[ai startAnimating];
-	}
-	
-	[ai setAlpha:1.0];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
 - (void)imageView:(FTImageView *)imgView didFinishLoadingImage:(UIImage *)image {
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 
-	NSString *url = [self urlForItem:[listThroughData objectAtIndex:currentIndex]];
-
-	NSLog(@"finish: imgView.imageUrl: %@, url: %@", imgView.imageUrl, url);
-	
-	if ([imgView.imageUrl isEqualToString:url]) {
-		NSLog(@"STOP ANIMATING");
-//		[ai stopAnimating];
-	}
-	
+	NSString *url = [self urlForItem:[listThroughData objectAtIndex:currentIndex]];	
 
 	for (FTImagePage *p in imagePages) {
 		if ([p.imageView.imageUrl isEqualToString:url]){
-			NSLog(@"STOP ANIMATING");
 			[p.activityIndicator stopAnimating];
 		}
 	}
@@ -513,9 +470,7 @@
 
 - (FTPage *)leftPageForPageScrollView:(FTPageScrollView *)scrollView withTouchCount:(NSInteger)touchCount {
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-//	NSLog(@"currentIndex - 1: %d", currentIndex - 1);
-	
-//	[ai startAnimating];
+
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     actionButton.enabled=false;
 	if (currentIndex > 0)
@@ -526,9 +481,7 @@
 
 - (FTPage *)rightPageForPageScrollView:(FTPageScrollView *)scrollView withTouchCount:(NSInteger)touchCount {
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-//	NSLog(@"currentIndex + 1: %d", currentIndex + 1);
-	
-//    [ai startAnimating];
+
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     actionButton.enabled=false;
 	return [self pageForIndex:(currentIndex + 1)];
@@ -541,16 +494,15 @@
 
 
 - (void)pageScrollView:(FTPageScrollView *)scrollView offsetDidChange:(CGPoint)offset {
-	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 }
 
 - (CGSize)pageScrollView:(FTPageScrollView *)scrollView sizeForPage:(CGSize)size {
 	return [self getFrameForPage].size;
-    //[ai stopAnimating];
 }
 
 - (void)dummyScrollInPageScrollViewDidFinish:(FTPageScrollView *)scrollView {
-	NSLog(@"dummyScrollInPageScrollViewDidFinish:");
+//	NSLog(@"dummyScrollInPageScrollViewDidFinish:");
 }
 
 
@@ -567,7 +519,6 @@
 
 - (void)maintainPages {
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-//	NSLog(@"imagePages.count: %d", imagePages.count);
 	NSInteger count = [imagePages count];
 	
 	if (count > 3) {
@@ -579,7 +530,6 @@
 
 - (void)pageScrollView:(FTPageScrollView *)scrollView didMakePageCurrent:(FTImagePage *)imagePage {
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-	
 	
 	if (![[imagePage gestureRecognizers] containsObject:doubletap]) {
 		if (doubletap) {
@@ -606,11 +556,6 @@
 	currentIndex = imagePage.pageIndex;
 	NSLog(@"didMakePageCurrent: %d", currentIndex);
 	
-	if (imagePage.imageView.image != nil) {
-		NSLog(@"imagePage.imageView.image != nil");
-//		[ai stopAnimating];
-	}
-	
 	[self updateTitle];
 	[self maintainPages];
 }
@@ -622,7 +567,7 @@
 }
 
 - (void)showHideNavbar:(id)sender {
-	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 }
 
 #pragma mark FTShareFacebookDelegate
@@ -655,7 +600,6 @@
         [[UIApplication sharedApplication] setStatusBarHidden:YES];
     }
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-	[ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
 }
 
 #pragma mark Memory management
@@ -666,7 +610,6 @@
 	[imageUrl release];
 	[bottomBar release];
     [actionButton release];
-	[ai release];
 	[message release];
 	[listThroughData release];
 	[shortcutView release];
