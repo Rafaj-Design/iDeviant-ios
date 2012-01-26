@@ -70,9 +70,9 @@
 }
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
-    if (!internetActive)
-        return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
-    else
+//    if (!internetActive)
+//        return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
+//    else
         return YES;
 }
 

@@ -398,13 +398,12 @@
     [mc setMailComposeDelegate:self];
     [mc setSubject:[NSString stringWithFormat:@"%@ by iDeviant", [item title]]];
 		
-	NSString *htmlBody = [NSString stringWithFormat:@"</br></br><a href=\"%@\"><img src=\"%@\" /></a></br></br>iDeviant app by <a href='http://www.fuerteint.com/'>Fuerte International UK</a>", [item link], [self urlForItem:item]];
+	NSString *htmlBody = [NSString stringWithFormat:@"</br></br><a href=\"%@\"><img src=\"%@\" /></a></br></br>Copyright <a href=\"%@\">%@</a></br>iDeviant app by <a href=\"http://www.fuerteint.com/\">Fuerte International UK</a>", [item link], [self urlForItem:item], [item link], [[item credits] objectAtIndex:0]];
     [mc setMessageBody:htmlBody isHTML:YES];
 	[mc setModalPresentationStyle:UIModalPresentationPageSheet];
     [self presentModalViewController:mc animated:YES];
     
 }
-
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     

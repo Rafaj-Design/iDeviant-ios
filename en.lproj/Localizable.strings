@@ -6,28 +6,28 @@
  Copyright 2011 Fuerte International. All rights reserved.
  */
 
-"search"="search";
+"search"="Search";
 "searchdesc"="Search for Deviations";
 
-"categories"="categories";
+"categories"="Categories";
 "categoriesdesc"="Dig in Deviantart";
 
-"favorites"="favorites";
+"favorites"="Favorites";
 "favoritesdesc"="Your Favourites Collection";
 
-"dailydeviations"="daily deviations";
+"dailydeviations"="Daily deviations";
 "dailydeviationsdesc"="Newest Deviations";
 
-"popular"="popular";
+"popular"="Popular";
 "populardesc"="Top Rated Deviations";
 
-"login"="login";
+"login"="Login";
 "logindesc"="Access to Your Account";
 
-"settings"="settings";
-"settingsdesc"="settingsdesc";
+"settings"="Settings";
+"settingsdesc"="Set your things";
 
-"homesorting"="home sorting";
+"homesorting"="Home sorting";
 "homesortingdesc"="Sort Homescreen";
 
 "requiresinternetconnection"="Requires Internet Connection";
