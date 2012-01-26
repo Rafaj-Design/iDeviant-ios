@@ -75,16 +75,16 @@
 	NSString *extension = [[contentUrl pathExtension] lowercaseString];
 	
 	if ([extension isEqualToString:@"png"] || [extension isEqualToString:@"jpeg"] || [extension isEqualToString:@"jpg"]) {
-		NSLog(@"url: %@, ext: %@",[[item.contents objectAtIndex:0] objectForKey:@"url"], extension);
+//		NSLog(@"url: %@, ext: %@",[[item.contents objectAtIndex:0] objectForKey:@"url"], extension);
 		return [[item.contents objectAtIndex:0] objectForKey:@"url"];
 	} else {
-		NSLog(@"url: %@, ext: %@",[[item.thumbnails objectAtIndex:0] objectForKey:@"url"], extension);
+//		NSLog(@"url: %@, ext: %@",[[item.thumbnails objectAtIndex:0] objectForKey:@"url"], extension);
 		return [[item.thumbnails objectAtIndex:0] objectForKey:@"url"];
 	}
 }
 
 - (FTImagePage *)pageForIndex:(int)index {
-	NSLog(@"index: %d, currentIndex: %d, [listThroughData count]: %d", index, currentIndex, [listThroughData count]);
+//	NSLog(@"index: %d, currentIndex: %d, [listThroughData count]: %d", index, currentIndex, [listThroughData count]);
 
 	if (index < 0 || index >= [listThroughData count]) 
 			return nil;
