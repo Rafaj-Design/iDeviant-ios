@@ -18,11 +18,15 @@
 	
 	FTImageZoomView *imageZoomView;
 	
+	UIActivityIndicatorView *activityIndicator;
+	
 }
 
 @property (nonatomic, retain) FTImageView *imageView;
 
 @property (nonatomic, retain) FTImageZoomView *imageZoomView;
+
+@property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
 
 
 - (void)imageWithContentsOfFile:(NSString *)path;

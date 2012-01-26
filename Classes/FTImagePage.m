@@ -13,14 +13,17 @@
 
 @synthesize imageView;
 @synthesize imageZoomView;
-
+@synthesize activityIndicator;
 
 #pragma mark Initialization
 
 - (id)initWithFrame:(CGRect)frame {
 	self = [super initWithFrame:frame];
 	if (self) {
-		
+		activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+		[activityIndicator centerInSuperView];
+		[activityIndicator startAnimating];
+		[self addSubview:activityIndicator];
 	}
 	return self;
 }

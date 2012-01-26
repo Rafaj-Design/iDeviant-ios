@@ -94,6 +94,7 @@
 	MWFeedItem *item = [listThroughData objectAtIndex:index];
 	
 	FTImagePage *imagePage = [[FTImagePage alloc] initWithFrame:[self getFrameForPage]];
+	[imagePage.activityIndicator centerInSuperView];
 	
 	BOOL canAccess = YES;
 	if ([item.rating isEqualToString:@"adult"]) {
@@ -214,13 +215,6 @@
 	
 	NSLog(@"%@", imagePages);
 	
-	ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
-	[ai setHidesWhenStopped:YES];
-	//	[ai setBackgroundColor:[UIColor redColor]];
-    [ai startAnimating];
-	[self.view addSubview:ai];
-	
     mainView = [[FTPageScrollView alloc] initWithFrame:[super fullScreenFrame]];
     [mainView setDummyPageImage:[UIImage imageNamed:@"dummy.png"]];
     [mainView setInitialPage:imagePage withDelegate:(id<FTPageScrollViewDelegate>)self];
@@ -237,12 +231,15 @@
     [mainView setScrollEnabled:YES];
     [mainView setBouncesZoom:YES];
     [mainView setPagingEnabled:YES];
-	
-
-	
+		
 	[self.view addSubview:mainView];
-//	[mainView release];
 	
+//	ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+//    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y)];
+//	[ai setHidesWhenStopped:YES];
+//	//	[ai setBackgroundColor:[UIColor redColor]];
+////    [ai startAnimating];
+//	[self.view addSubview:ai];	
 	
 	bottomBar = [[FTToolbar alloc] initWithFrame:[self frameForToolbar]];
 	[self.view addSubview:bottomBar];
@@ -278,7 +275,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
 	[self.navigationController.navigationBar setTranslucent:NO];
-	[ai stopAnimating];
+//	[ai stopAnimating];
 	
 	[UIView beginAnimations:nil context:nil];
 	
@@ -361,21 +358,22 @@
 #pragma mark Image loading
 
 - (void)imageViewDidFailLoadingImage:(FTImageView *)imgView withError:(NSError *)error {
-	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 }
 
 - (void)imageView:(FTImageView *)imgView didFinishLoadingImageFromInternet:(UIImage *)image {
-	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+	
 }
 
 - (void)imageZoomViewDidFinishLoadingImage:(FTImageZoomView *)zoomView {
-	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 }
 
 #pragma mark Actions methods
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(NSDictionary *)info {
-	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 }
 
 - (void)saveCurrentImageToGallery {
@@ -471,11 +469,14 @@
 
 -(void)imageViewDidStartLoadingImage:(FTImageView *)imgView{
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-	NSLog(@"start: imgView.imageUrl: %@", imgView.imageUrl);
+
 	NSString *url = [self urlForItem:[listThroughData objectAtIndex:currentIndex]];
 	
+	NSLog(@"start: imgView.imageUrl: %@, url: %@", imgView.imageUrl, url);
+	
 	if ([imgView.imageUrl isEqualToString:url]) {
-		[ai startAnimating];
+		NSLog(@"START ANIMATING");
+//		[ai startAnimating];
 	}
 	
 	[ai setAlpha:1.0];
@@ -486,13 +487,20 @@
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 
 	NSString *url = [self urlForItem:[listThroughData objectAtIndex:currentIndex]];
-	
+
 	NSLog(@"finish: imgView.imageUrl: %@, url: %@", imgView.imageUrl, url);
 	
-	
-	
 	if ([imgView.imageUrl isEqualToString:url]) {
-		[ai stopAnimating];
+		NSLog(@"STOP ANIMATING");
+//		[ai stopAnimating];
+	}
+	
+
+	for (FTImagePage *p in imagePages) {
+		if ([p.imageView.imageUrl isEqualToString:url]){
+			NSLog(@"STOP ANIMATING");
+			[p.activityIndicator stopAnimating];
+		}
 	}
 	
     self.currentImage = image;
@@ -507,7 +515,7 @@
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 //	NSLog(@"currentIndex - 1: %d", currentIndex - 1);
 	
-	[ai startAnimating];
+//	[ai startAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     actionButton.enabled=false;
 	if (currentIndex > 0)
@@ -520,7 +528,7 @@
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 //	NSLog(@"currentIndex + 1: %d", currentIndex + 1);
 	
-    [ai startAnimating];
+//    [ai startAnimating];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     actionButton.enabled=false;
 	return [self pageForIndex:(currentIndex + 1)];
@@ -533,7 +541,7 @@
 
 
 - (void)pageScrollView:(FTPageScrollView *)scrollView offsetDidChange:(CGPoint)offset {
-	
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 }
 
 - (CGSize)pageScrollView:(FTPageScrollView *)scrollView sizeForPage:(CGSize)size {
@@ -558,8 +566,8 @@
 }
 
 - (void)maintainPages {
-	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-	NSLog(@"imagePages.count: %d", imagePages.count);
+//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+//	NSLog(@"imagePages.count: %d", imagePages.count);
 	NSInteger count = [imagePages count];
 	
 	if (count > 3) {
@@ -597,6 +605,12 @@
 		
 	currentIndex = imagePage.pageIndex;
 	NSLog(@"didMakePageCurrent: %d", currentIndex);
+	
+	if (imagePage.imageView.image != nil) {
+		NSLog(@"imagePage.imageView.image != nil");
+//		[ai stopAnimating];
+	}
+	
 	[self updateTitle];
 	[self maintainPages];
 }
