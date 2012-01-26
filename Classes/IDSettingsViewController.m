@@ -15,7 +15,7 @@
 #pragma mark View delegate methods
 
 - (void)viewDidLoad {
-    [self.nick setPlaceholder:[IDLang get:@"nick"]];
+    [self.nick setPlaceholder:[IDLang get:@"nickname"]];
     [self.pass setPlaceholder:[IDLang get:@"password"]];
     [self.rememberme setText:[IDLang get:@"rememberme"]];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
