@@ -8,6 +8,7 @@
 
 #import "IDSearchController.h"
 #import "Reachability.h"
+#import "IDViewController.h"
 
 @implementation IDSearchController
 
@@ -45,6 +46,7 @@
 -(void)backgroundImage {
 	[backgroundImageView setFrame:[super fullScreenFrame]];
 	
+	
     if (self.interfaceOrientation == UIInterfaceOrientationPortrait)
         [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-empty-p@2x.png"]];
     else
@@ -54,6 +56,9 @@
     NetworkStatus internetStatus = [r currentReachabilityStatus];
 	
 	if (internetStatus == NotReachable) {
+		
+		[searchBarHeader setUserInteractionEnabled:NO];
+		
         [imageView setImage:[UIImage imageNamed:@"DD_grandma@2x.png"]];
 		if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
 			[imageView setFrame: CGRectMake(0.0, 0.0, 200.0, 250.0)];
@@ -63,6 +68,9 @@
 			imageView.center = CGPointMake(self.view.center.x, self.view.center.y + 20);
 		}
     } else {
+		
+		[searchBarHeader setUserInteractionEnabled:YES];
+		
 		[imageView setImage:[UIImage imageNamed:@"search_anim_1@2x.png"]];
 		[imageView setFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
 		[imageView setCenter:self.view.center];

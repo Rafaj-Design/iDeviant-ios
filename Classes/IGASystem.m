@@ -7,7 +7,7 @@
 //
 
 #import "IGASystem.h"
-#import "Configuration.h"
+#import "IDConfig.h"
 
 
 @implementation IGASystem

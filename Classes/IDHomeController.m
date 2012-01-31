@@ -11,7 +11,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "IDHomeTableViewCell.h"
 #import "FTSimpleDB.h"
-#import "Configuration.h"
+#import "IDConfig.h"
 #import "IDFavouriteCategories.h"
 #import "aboutPage.h"
 //#import "JCO.h"
@@ -111,9 +111,10 @@
 			
 			if ([[d objectForKey:@"controller"] isEqualToString:@"IDCategoriesController"]) {
 				if (!internetActive) {
-					UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Internet offline" message:@"For browsing through images please turn internet on." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-					[alertView show];
-					[alertView release];
+//					UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Internet offline" message:@"For browsing through images please turn internet on." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//					[alertView show];
+//					[alertView release];
+					[super displayMessage:@"requiresinternetconnection"];
 				}
 			}
 			
@@ -143,7 +144,7 @@
 }
 
 - (void)showHideNavbar:(id)sender {
-	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 }
 
 -(void) showFeedback {
@@ -186,10 +187,7 @@
 	
 	[super createTableView];
 	[super setTitle:@"iDeviant"];
-    
-//	[super.table setAllowsSelection:YES];
-	
-	
+
 	[self initializeJiraChecks];
 }
 
@@ -267,20 +265,6 @@
 }
 
 #pragma mark Table view delegate & data source methods
-
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//	if (section == 0) {
-//		UIView *v = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 60)] autorelease];
-//		[v setBackgroundColor:[UIColor greenColor]];
-//		return v;
-//	}
-//	else return nil;
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//	return 60;
-//}
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [data count];

@@ -44,19 +44,12 @@
 	else return CGRectMake(0, 0, 320, 480);
 }
 
-- (CGRect)frameForShortcutView {
-	if (isLandscape) return CGRectMake(0, 100, 480, 74);
-	else return CGRectMake(0, 250, 320, 74);
-}
-
 #pragma mark Settings
 
 - (void)setListData:(NSArray *)array {
 	listThroughData = array;
 	[listThroughData retain];
 }
-
-
 
 #pragma Display stuff
 
@@ -67,24 +60,18 @@
 
 #pragma mark Generating pages
 
-
-
 - (NSString *)urlForItem:(MWFeedItem *)item {
 	
 	NSString *contentUrl = [[item.contents objectAtIndex:0] objectForKey:@"url"];
 	NSString *extension = [[contentUrl pathExtension] lowercaseString];
 	
-	if ([extension isEqualToString:@"png"] || [extension isEqualToString:@"jpeg"] || [extension isEqualToString:@"jpg"]) {
-//		NSLog(@"url: %@, ext: %@",[[item.contents objectAtIndex:0] objectForKey:@"url"], extension);
+	if ([extension isEqualToString:@"png"] || [extension isEqualToString:@"jpeg"] || [extension isEqualToString:@"jpg"])
 		return [[item.contents objectAtIndex:0] objectForKey:@"url"];
-	} else {
-//		NSLog(@"url: %@, ext: %@",[[item.thumbnails objectAtIndex:0] objectForKey:@"url"], extension);
+	else
 		return [[item.thumbnails objectAtIndex:0] objectForKey:@"url"];
-	}
 }
 
 - (FTImagePage *)pageForIndex:(int)index {
-//	NSLog(@"index: %d, currentIndex: %d, [listThroughData count]: %d", index, currentIndex, [listThroughData count]);
 
 	if (index < 0 || index >= [listThroughData count]) 
 			return nil;
@@ -105,6 +92,10 @@
 			[imagePage.imageZoomView.imageView setDelegate:(id<FTImageViewDelegate>)self];
 			
 			[imagePage zoomedImageWithUrl:[NSURL URLWithString:[self urlForItem:item]] andDelegate:self];
+			
+			[imagePage.imageZoomView setShowsHorizontalScrollIndicator:NO];
+			[imagePage.imageZoomView setShowsVerticalScrollIndicator:NO];
+			
 		} else {
 			[imagePage release];
 			if (currentIndex < index) {
@@ -126,7 +117,7 @@
 	[imagePages addObject:imagePage];
 	[imagePage release];
 	
-	NSLog(@"%@", imagePages);
+//	NSLog(@"%@", imagePages);
 	return imagePage;
 }
 
@@ -210,7 +201,7 @@
 	
     FTImagePage *imagePage = [self pageForIndex:currentIndex];
 	
-	NSLog(@"%@", imagePages);
+//	NSLog(@"%@", imagePages);
 	
     mainView = [[FTPageScrollView alloc] initWithFrame:[super fullScreenFrame]];
     [mainView setDummyPageImage:[UIImage imageNamed:@"dummy.png"]];
@@ -295,7 +286,7 @@
 #pragma mark Gesture recognizers
 
 - (void)didTapViewOnce:(UITapGestureRecognizer *)recognizer {
-	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 	if (!shortcutView) 
 		[self toggleNavigationVisibility];
 	else {
@@ -313,7 +304,7 @@
 
 
 - (void)didTapViewTwice:(UITapGestureRecognizer *)recognizer {
-	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 	
 	float scale = [[(FTImagePage *)[recognizer view] imageZoomView] zoomScale];
 	if (scale != 1.0)
@@ -372,7 +363,7 @@
     [mc setMailComposeDelegate:self];
     [mc setSubject:[NSString stringWithFormat:@"%@ by iDeviant", [item title]]];
 		
-	NSString *htmlBody = [NSString stringWithFormat:@"</br></br><a href=\"%@\"><img src=\"%@\" /></a></br></br>Copyright <a href=\"%@\">%@</a></br>iDeviant app by <a href=\"http://www.fuerteint.com/\">Fuerte International UK</a>", [item link], [self urlForItem:item], [item link], [[item credits] objectAtIndex:0]];
+	NSString *htmlBody = [NSString stringWithFormat:@"<br/><br/><a href=\"%@\"><img src=\"%@\"/></a><br/><br/>Copyright <a href=\"%@\">%@</a><br/>iDeviant app by <a href=\"http://www.fuerteint.com/\">Fuerte International UK</a><br/><img src=\"http://new.fuerteint.com/wp-content/themes/theme1177/images/logo.png\"/>", [item link], [self urlForItem:item], [item link], [[item credits] objectAtIndex:0]];
     [mc setMessageBody:htmlBody isHTML:YES];
 	[mc setModalPresentationStyle:UIModalPresentationPageSheet];
     [self presentModalViewController:mc animated:YES];
@@ -384,7 +375,7 @@
     // switchng the result
     switch (result) {
         case MFMailComposeResultCancelled:
-            NSLog(@"Mail send canceled.");
+//            NSLog(@"Mail send canceled.");
             //[FTTracking logEvent:@"Mail: Mail canceled"];
             break;
         case MFMailComposeResultSaved:
@@ -393,12 +384,12 @@
             //[FTTracking logEvent:@"Mail: Mail saved"];
             break;
         case MFMailComposeResultSent:
-            NSLog(@"Mail sent.");
+//            NSLog(@"Mail sent.");
             //[FTTracking logEvent:@"Mail: Mail sent"];
             //[UIAlertView showMessage:IDLangGet(@"Your email has been sent") withTitle:IDLangGet(@"Email")];
             break;
         case MFMailComposeResultFailed:
-            NSLog(@"Mail send error: %@.", [error localizedDescription]);
+//            NSLog(@"Mail send error: %@.", [error localizedDescription]);
             //[UIAlertView showMessage:[error localizedDescription] withTitle:IDLangGet(@"Error")];
             //[FlurryAnalytics logError:@"Mail" message:@"Mail send failed" error:error];
             break;
@@ -417,15 +408,15 @@
 #pragma mark Actions
 
 - (void)didClickActionButton:(UIBarButtonItem *)sender {
-	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:[IDLang get:@"actionswithimagetitle"] delegate:self cancelButtonTitle:[IDLang get:@"cancelbutton"] destructiveButtonTitle:nil otherButtonTitles:[IDLang get:@"savetogalleryit"], [IDLang get:@"facebookit"], [IDLang get:@"emailit"], nil];
 	[actionSheet showInView:self.view];
 	[actionSheet release];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-	NSLog(@"Did click button at index: %d", buttonIndex);
+//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+//	NSLog(@"Did click button at index: %d", buttonIndex);
 	if (buttonIndex == 0) {
 		// Save to gallery
 		[self saveCurrentImageToGallery];
@@ -457,6 +448,7 @@
 	for (FTImagePage *p in imagePages) {
 		if ([p.imageView.imageUrl isEqualToString:url]){
 			[p.activityIndicator stopAnimating];
+			[p.activityIndicator removeFromSuperview];
 		}
 	}
 	
@@ -494,7 +486,7 @@
 
 
 - (void)pageScrollView:(FTPageScrollView *)scrollView offsetDidChange:(CGPoint)offset {
-//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+	
 }
 
 - (CGSize)pageScrollView:(FTPageScrollView *)scrollView sizeForPage:(CGSize)size {
@@ -502,7 +494,7 @@
 }
 
 - (void)dummyScrollInPageScrollViewDidFinish:(FTPageScrollView *)scrollView {
-//	NSLog(@"dummyScrollInPageScrollViewDidFinish:");
+
 }
 
 
@@ -554,7 +546,7 @@
 	}	
 		
 	currentIndex = imagePage.pageIndex;
-	NSLog(@"didMakePageCurrent: %d", currentIndex);
+//	NSLog(@"didMakePageCurrent: %d", currentIndex);
 	
 	[self updateTitle];
 	[self maintainPages];

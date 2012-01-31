@@ -17,7 +17,7 @@
 #import "IDCategoriesViewController.h"
 #import "IDJustItemsViewController.h"
 #import "FTText.h"
-#import "Configuration.h"
+#import "IDConfig.h"
 #import "IDDetailTableViewController.h"
 
 
@@ -195,7 +195,7 @@
 		url = [url stringByAppendingString:categoryString];
 	}
 	
-	NSLog(@"URL: %@", url);
+//	NSLog(@"URL: %@", url);
 	
 	NSURL *feedURL = [NSURL URLWithString:url];
 	[feedParser release];
@@ -295,7 +295,7 @@
 }
 
 -(void) showHideNavbar:(id)sender {
-	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 	if (!popping)
 		[self.navigationController popToRootViewControllerAnimated:YES];
 	
@@ -374,7 +374,7 @@
 			if ([NSStringFromClass([v class]) isEqualToString:@"UINavigationItemView"]) {
 				[gestureView setFrame:[v frame]];
 				[self.navigationController.navigationBar addSubview:gestureView];
-				NSLog(@"titleFrame: %@", NSStringFromCGRect([v frame]));
+//				NSLog(@"titleFrame: %@", NSStringFromCGRect([v frame]));
 			}
 		}
 	}
@@ -537,7 +537,7 @@
 - (void)getDataFromBundlePlist:(NSString *)plist {
 	NSString *path = [[NSBundle mainBundle] pathForResource:plist ofType:@""];
 	NSArray *arr = [NSArray arrayWithContentsOfFile:path];
-	NSLog(@"%@", arr);
+//	NSLog(@"%@", arr);
 	[self setData:arr];
 }
 
@@ -689,24 +689,24 @@
 #pragma mark Parsing delegate methods (MWFeedParserDelegate)
 
 - (void)feedParserDidStart:(MWFeedParser *)parser {
-	NSLog(@"Started Parsing: %@", parser.url);
+//	NSLog(@"Started Parsing: %@", parser.url);
 	[parsedItems removeAllObjects];
 	[table setUserInteractionEnabled:NO];
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 }
 
 - (void)feedParser:(MWFeedParser *)parser didParseFeedInfo:(MWFeedInfo *)info {
-	NSLog(@"Parsed Feed Info: “%@”", info.title);
+//	NSLog(@"Parsed Feed Info: “%@”", info.title);
 }
 
 - (void)feedParser:(MWFeedParser *)parser didParseFeedItem:(MWFeedItem *)item {
 	if (item) 
 		[parsedItems addObject:item];	
-    NSLog(@"parsed item: %@", item);
+//    NSLog(@"parsed item: %@", item);
 }
 
 - (void)feedParserDidFinish:(MWFeedParser *)parser {
-	NSLog(@"Finished Parsing%@", (parser.stopped ? @" (Stopped)" : @""));
+//	NSLog(@"Finished Parsing%@", (parser.stopped ? @" (Stopped)" : @""));
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	NSArray *arr = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
 	[self setData:[parsedItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:arr]]];
@@ -721,7 +721,7 @@
 }
 
 - (void)feedParser:(MWFeedParser *)parser didFailWithError:(NSError *)error {
-	NSLog(@"Finished Parsing With Error: %@", error);
+//	NSLog(@"Finished Parsing With Error: %@", error);
 	[self setData:[NSArray array]];
 	[parsedItems removeAllObjects];
 	
@@ -795,7 +795,7 @@
 	NSMutableArray *arr = [[NSMutableArray alloc] init];
 	
 	for (MWFeedItem *i in data) {
-		NSLog(@"Title: %@", i.title);
+//		NSLog(@"Title: %@", i.title);
 		[arr addObject:i];
 	}
 	
@@ -809,6 +809,7 @@
 		if ([item.contents count] > 0) {
 			if (item.text) {
 				IDDocumentDetailViewController *c = [[IDDocumentDetailViewController alloc] init];
+				[c setTitle:[item title]];
 				[c inheritConnectivity:internetActive];
 				NSString *tempPath = [[NSBundle mainBundle] pathForResource:@"document-template" ofType:@"html"];
 				NSString *temp = [NSString stringWithContentsOfFile:tempPath encoding:NSUTF8StringEncoding error:nil];
@@ -838,7 +839,7 @@
 		[UIView animateWithDuration:0.7 animations:^{
 			self.view.alpha = 0.0;
 		} completion:^(BOOL finished) {
-			NSLog(@"Crashing...");
+//			NSLog(@"Crashing...");
 #ifndef __clang_analyzer__
 			CFRelease(NULL);
 #endif

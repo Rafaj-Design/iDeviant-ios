@@ -56,11 +56,9 @@
 		2BA761C213763D98006B1A65 /* MWFeedInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA761B013763D98006B1A65 /* MWFeedInfo.m */; };
 		2BA761C313763D98006B1A65 /* MWFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA761B213763D98006B1A65 /* MWFeedItem.m */; };
 		2BA761C413763D98006B1A65 /* MWFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA761B413763D98006B1A65 /* MWFeedParser.m */; };
-		2BA761C513763D98006B1A65 /* MWFeedParserAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA761B713763D98006B1A65 /* MWFeedParserAppDelegate.m */; };
 		2BA761C613763D98006B1A65 /* NSDate+InternetDateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA761B913763D98006B1A65 /* NSDate+InternetDateTime.m */; };
 		2BA761C713763D98006B1A65 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA761BB13763D98006B1A65 /* NSString+HTML.m */; };
 		2BA761C813763D98006B1A65 /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA761BD13763D98006B1A65 /* NSString+XMLEntities.m */; };
-		2BA761C913763D98006B1A65 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA761BF13763D98006B1A65 /* RootViewController.m */; };
 		2BC5E16A138E494800DB931C /* FTDynamicContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BC5E169138E494800DB931C /* FTDynamicContentView.m */; };
 		2BCDE1A7138080A4001FD1F7 /* Categories.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2BCDE1A6138080A4001FD1F7 /* Categories.plist */; };
 		2BF232D0137F5577004351D5 /* IDImageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF232CF137F5577004351D5 /* IDImageDetailViewController.m */; };
@@ -225,7 +223,7 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2B0720DF138325A2008A4094 /* IDCategoriesTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IDCategoriesTableViewCell.xib; sourceTree = "<group>"; };
 		2B15D3681381C615008FCA2E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		2B15D36D1381C61E008FCA2E /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = en; path = en.lproj/Configuration.h; sourceTree = "<group>"; };
+		2B15D36D1381C61E008FCA2E /* en */ = {isa = PBXFileReference; name = en; path = en.lproj/IDConfig.h; sourceTree = "<group>"; };
 		2B15D3841381D8C2008FCA2E /* FTToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTToolbar.h; sourceTree = "<group>"; };
 		2B15D3851381D8C2008FCA2E /* FTToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTToolbar.m; sourceTree = "<group>"; };
 		2B15D3921381E4DA008FCA2E /* IDAdultCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDAdultCheck.h; sourceTree = "<group>"; };
@@ -297,16 +295,12 @@
 		2BA761B313763D98006B1A65 /* MWFeedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedParser.h; sourceTree = "<group>"; };
 		2BA761B413763D98006B1A65 /* MWFeedParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFeedParser.m; sourceTree = "<group>"; };
 		2BA761B513763D98006B1A65 /* MWFeedParser_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedParser_Private.h; sourceTree = "<group>"; };
-		2BA761B613763D98006B1A65 /* MWFeedParserAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedParserAppDelegate.h; sourceTree = "<group>"; };
-		2BA761B713763D98006B1A65 /* MWFeedParserAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFeedParserAppDelegate.m; sourceTree = "<group>"; };
 		2BA761B813763D98006B1A65 /* NSDate+InternetDateTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+InternetDateTime.h"; sourceTree = "<group>"; };
 		2BA761B913763D98006B1A65 /* NSDate+InternetDateTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+InternetDateTime.m"; sourceTree = "<group>"; };
 		2BA761BA13763D98006B1A65 /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
 		2BA761BB13763D98006B1A65 /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
 		2BA761BC13763D98006B1A65 /* NSString+XMLEntities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XMLEntities.h"; sourceTree = "<group>"; };
 		2BA761BD13763D98006B1A65 /* NSString+XMLEntities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XMLEntities.m"; sourceTree = "<group>"; };
-		2BA761BE13763D98006B1A65 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		2BA761BF13763D98006B1A65 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		2BC5E168138E494800DB931C /* FTDynamicContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDynamicContentView.h; sourceTree = "<group>"; };
 		2BC5E169138E494800DB931C /* FTDynamicContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDynamicContentView.m; sourceTree = "<group>"; };
 		2BCDE1A6138080A4001FD1F7 /* Categories.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Categories.plist; sourceTree = "<group>"; };
@@ -816,7 +810,7 @@
 		2B9442D21254D82200D41406 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				2B15D36E1381C61E008FCA2E /* Configuration.h */,
+				2B15D36E1381C61E008FCA2E /* IDConfig.h */,
 			);
 			name = Configuration;
 			sourceTree = "<group>";
@@ -1051,16 +1045,12 @@
 				2BA761B313763D98006B1A65 /* MWFeedParser.h */,
 				2BA761B413763D98006B1A65 /* MWFeedParser.m */,
 				2BA761B513763D98006B1A65 /* MWFeedParser_Private.h */,
-				2BA761B613763D98006B1A65 /* MWFeedParserAppDelegate.h */,
-				2BA761B713763D98006B1A65 /* MWFeedParserAppDelegate.m */,
 				2BA761B813763D98006B1A65 /* NSDate+InternetDateTime.h */,
 				2BA761B913763D98006B1A65 /* NSDate+InternetDateTime.m */,
 				2BA761BA13763D98006B1A65 /* NSString+HTML.h */,
 				2BA761BB13763D98006B1A65 /* NSString+HTML.m */,
 				2BA761BC13763D98006B1A65 /* NSString+XMLEntities.h */,
 				2BA761BD13763D98006B1A65 /* NSString+XMLEntities.m */,
-				2BA761BE13763D98006B1A65 /* RootViewController.h */,
-				2BA761BF13763D98006B1A65 /* RootViewController.m */,
 			);
 			path = MWFeedParser;
 			sourceTree = "<group>";
@@ -1632,11 +1622,9 @@
 				2BA761C213763D98006B1A65 /* MWFeedInfo.m in Sources */,
 				2BA761C313763D98006B1A65 /* MWFeedItem.m in Sources */,
 				2BA761C413763D98006B1A65 /* MWFeedParser.m in Sources */,
-				2BA761C513763D98006B1A65 /* MWFeedParserAppDelegate.m in Sources */,
 				2BA761C613763D98006B1A65 /* NSDate+InternetDateTime.m in Sources */,
 				2BA761C713763D98006B1A65 /* NSString+HTML.m in Sources */,
 				2BA761C813763D98006B1A65 /* NSString+XMLEntities.m in Sources */,
-				2BA761C913763D98006B1A65 /* RootViewController.m in Sources */,
 				2B5A8EEB13788C57003FA2CE /* IDItemsViewController.m in Sources */,
 				2B5A8EF213788D4F003FA2CE /* IDCategoriesViewController.m in Sources */,
 				2B5A8EF613788D93003FA2CE /* IDLandscapeFavoritesViewController.m in Sources */,
@@ -1690,12 +1678,12 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		2B15D36E1381C61E008FCA2E /* Configuration.h */ = {
+		2B15D36E1381C61E008FCA2E /* IDConfig.h */ = {
 			isa = PBXVariantGroup;
 			children = (
 				2B15D36D1381C61E008FCA2E /* en */,
 			);
-			name = Configuration.h;
+			name = IDConfig.h;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

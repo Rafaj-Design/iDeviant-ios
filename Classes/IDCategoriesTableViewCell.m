@@ -82,7 +82,7 @@
 	}
 	isFavorite = favourite;
 	
-	NSLog(@"Category path: %@", categoryPath);
+//	NSLog(@"Category path: %@", categoryPath);
 }
 
 - (IBAction)didSelectCategory:(UIButton *)sender {

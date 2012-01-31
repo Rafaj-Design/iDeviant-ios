@@ -107,7 +107,7 @@
 		}
 		if (canAccess) {
 			if ([item.contents count] > 0) {
-				NSLog(@"Contents: %@", item.contents);
+//				NSLog(@"Contents: %@", item.contents);
 				IDImageDetailViewController *c = [[IDImageDetailViewController alloc] init];
 				[c inheritConnectivity:internetActive];
 				[c setImageUrl:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]];

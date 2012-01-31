@@ -110,8 +110,8 @@
 #pragma mark Layout
 
 - (void)doLayoutPages {
-	NSLog(@"Number of screens: %d", [self numberOfScreens]);
-	NSLog(@"First index: %d", [self firstCachedIndex]);
+//	NSLog(@"Number of screens: %d", [self numberOfScreens]);
+//	NSLog(@"First index: %d", [self firstCachedIndex]);
 	int i = 0;
 	for (UIView *v in galleryCache) {
 		[v setFrame:[self frameForScreenAtIndex:i]];

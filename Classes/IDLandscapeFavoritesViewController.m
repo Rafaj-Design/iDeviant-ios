@@ -9,7 +9,7 @@
 #import "IDLandscapeFavoritesViewController.h"
 #import "FTImageView.h"
 #import "UIView+Layout.h"
-#import "Configuration.h"
+#import "IDConfig.h"
 
 
 @implementation IDLandscapeFavoritesViewController
@@ -72,7 +72,7 @@
 }
 
 - (void)galleryScrollView:(FTPagesScrollView *)gallery turnedToPage:(int)index {
-	NSLog(@"Did turn page: %d", [gallery currentPageIndex]);
+//	NSLog(@"Did turn page: %d", [gallery currentPageIndex]);
 }
 
 #pragma mark Memory management

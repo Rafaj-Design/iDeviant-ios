@@ -8,7 +8,7 @@
 
 #import "iDeviantAppDelegate.h"
 #import "IDHomeController.h"
-#import "Configuration.h"
+#import "IDConfig.h"
 //#import "FlurryAPI.h"
 #import "Appirater.h"
 #import "IGABuildChecks.h"
@@ -207,22 +207,22 @@ static NSString* kAppId = @"118349561582677";
 //	
 //	[self authorizeWithFBAppAuth:YES safariAuth:YES];
 //}
-
-void Swizzle(Class c, SEL orig, SEL new)
-{
-    Method origMethod = class_getInstanceMethod(c, orig);
-    Method newMethod = class_getInstanceMethod(c, new);
-    if(class_addMethod(c, orig, method_getImplementation(newMethod), method_getTypeEncoding(newMethod)))
-        class_replaceMethod(c, new, method_getImplementation(origMethod), method_getTypeEncoding(origMethod));
-    else
-		method_exchangeImplementations(origMethod, newMethod);
-}
-
-void function (id self, SEL _cmd, id arg) {
-	[self setPermissions:[NSArray arrayWithObjects:@"offline_access", @"publish_stream", nil]];
-	[self setUrlSchemeSuffix:nil];
-	[self authorizeWithFBAppAuth:NO safariAuth:NO];
-}
+//
+//void Swizzle(Class c, SEL orig, SEL new)
+//{
+//    Method origMethod = class_getInstanceMethod(c, orig);
+//    Method newMethod = class_getInstanceMethod(c, new);
+//    if(class_addMethod(c, orig, method_getImplementation(newMethod), method_getTypeEncoding(newMethod)))
+//        class_replaceMethod(c, new, method_getImplementation(origMethod), method_getTypeEncoding(origMethod));
+//    else
+//		method_exchangeImplementations(origMethod, newMethod);
+//}
+//
+//void function (id self, SEL _cmd, id arg) {
+//	[self setPermissions:[NSArray arrayWithObjects:@"offline_access", @"publish_stream", nil]];
+//	[self setUrlSchemeSuffix:nil];
+//	[self authorizeWithFBAppAuth:NO safariAuth:NO];
+//}
 
 - (NSString *)urlForItem:(MWFeedItem *)item {
 	
@@ -247,7 +247,7 @@ void function (id self, SEL _cmd, id arg) {
 	
 //	Swizzle([Facebook class], <#SEL orig#>, <#SEL new#>)
 //	IMP original = class_replaceMethod([Facebook class], @selector(authorize:urlSchemeSuffix:), (IMP)function, "v@:");
-	class_replaceMethod([Facebook class], @selector(authorize:urlSchemeSuffix:), (IMP)function, "v@:");
+//	class_replaceMethod([Facebook class], @selector(authorize:urlSchemeSuffix:), (IMP)function, "v@:");
 	
 //	class_addMethod([Facebook class], @selector(anotherMethod:), original, "v@:");
 	
@@ -278,7 +278,7 @@ void function (id self, SEL _cmd, id arg) {
         [facebook dialog:@"feed" andParams:fbParams andDelegate:self];
     }
     else {
-        NSLog(@"No params");
+//        NSLog(@"No params");
     }
     
 }
@@ -295,7 +295,7 @@ void function (id self, SEL _cmd, id arg) {
 
 - (void)downloadStatusChanged:(FTDownloadStatus)downloadStatus forObject:(FTDownload *)object {
 	if (FTDownloadStatusSuccessful == downloadStatus) {
-		NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+//		NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 		
 		if (object == timestamp) {
 			NSInteger newVersion = object.downloadRequest.responseString.integerValue;

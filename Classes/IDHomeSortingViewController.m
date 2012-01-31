@@ -9,7 +9,7 @@
 #import "IDHomeSortingViewController.h"
 #import "IDHomeTableViewCell.h"
 #import "FTSimpleDB.h"
-#import "Configuration.h"
+#import "IDConfig.h"
 
 
 @implementation IDHomeSortingViewController
