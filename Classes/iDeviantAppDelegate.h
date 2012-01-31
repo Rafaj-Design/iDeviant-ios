@@ -7,13 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FTNavigationViewController.h"
-
 #include "FBConnect.h"
-
 #include "FTDownload.h"
 
 @class MWFeedItem;
+@class FTNavigationViewController;
 
 @interface iDeviantAppDelegate : NSObject <UIApplicationDelegate, FBSessionDelegate, FBDialogDelegate, FTDownloadDelegate> {
     UIWindow *window;
@@ -26,7 +24,8 @@
 	NSInteger version;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain) UIWindow *window;
+@property (nonatomic, retain) FTNavigationViewController *navigationController;
 
 @property (nonatomic, strong) Facebook *facebook;
 @property (nonatomic, strong) NSMutableDictionary *fbParams;

@@ -22,10 +22,10 @@
 	
 	[self setTitle:[IDLang get:@"search"]];
 	
-    if (self.interfaceOrientation == UIInterfaceOrientationPortrait)
-        [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-empty-p@2x.png"]];
-    else
-        [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-empty-l@2x.png"]];
+//    if (self.interfaceOrientation == UIInterfaceOrientationPortrait)
+//        [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-empty-p@2x.png"]];
+//    else
+//        [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-empty-l@2x.png"]];
 		
     imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
     [imageView setImage:[UIImage imageNamed:@"search_anim_1@2x.png"]];
@@ -43,14 +43,25 @@
 	[self doLayoutSubviews];
 }
 
+#pragma mark - Background image
+
+- (void)enableBackgroundWithImage:(UIImage *)image {
+	if (!backgroundImageView) {
+		backgroundImageView = [[UIImageView alloc] init];
+		[backgroundImageView setBackgroundColor:[UIColor clearColor]];
+		[self.view addSubview:backgroundImageView];
+		[self.view sendSubviewToBack:backgroundImageView];
+	}
+	[backgroundImageView setImage:image];
+	[backgroundImageView setFrame:self.view.bounds];
+}
+
+
 -(void)backgroundImage {
-	[backgroundImageView setFrame:[super fullScreenFrame]];
-	
-	
     if (self.interfaceOrientation == UIInterfaceOrientationPortrait)
-        [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-empty-p@2x.png"]];
+        [self enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-empty-p@2x.png"]];
     else
-        [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-empty-l@2x.png"]];
+        [self enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-empty-l@2x.png"]];
 		
 	Reachability *r = [Reachability reachabilityWithHostName:@"www.apple.com"];
     NetworkStatus internetStatus = [r currentReachabilityStatus];
@@ -75,13 +86,6 @@
 		[imageView setFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
 		[imageView setCenter:self.view.center];
 	}
-}
-
--(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
-//    if (!internetActive)
-//        return (toInterfaceOrientation == UIInterfaceOrientationPortrait);
-//    else
-        return YES;
 }
 
 -(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{

@@ -22,10 +22,19 @@
 @synthesize currentCategory;
 @synthesize currentCategoryPath;
 
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+	
+	[self fillWithData];
+	
+	[super createTableView];
+	[table reloadData];
+}
 
 #pragma mark Data
 
-// filth with data
 - (void)fillWithData {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 	if ([categoriesData count] == 0) {
@@ -50,56 +59,13 @@
 		[super setIsSearchBar:NO];
 		
 		currentCategoryPath = @"";
-	}
-	else [super setIsSearchBar:YES];
+	} else 
+		[super setIsSearchBar:YES];
 
 	[super getDataForCategory:currentCategoryPath];
 }
 
-#pragma mark View delegate methods
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-	
-	[self fillWithData];
-	
-	[super createTableView];
-	[table reloadData];
-}
-
--(void)sendToHome{
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
-
--(void)viewWillAppear:(BOOL)animated{
-	[backgroundImageView setFrame:[super fullScreenFrame]];
-	[table setFrame:self.view.bounds];
-	
-	[self doLayoutSubviews];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-}
-
-#pragma mark Table view
-
-- (void)configureCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView {
-	if (indexPath.section == 0) {
-		NSDictionary *d = [categoriesData objectAtIndex:indexPath.row];
-		NSString *path = [currentCategoryPath stringByAppendingPathComponent:[d objectForKey:@"path"]];
-		[(IDCategoriesTableViewCell *)cell setCategoryPath:path];
-		[(IDCategoriesTableViewCell *)cell setCategoryData:d];
-		[(IDCategoriesTableViewCell *)cell setIsFavourite:[IDFavouriteCategories isFavouriteCategory:path]];
-	}
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	if ([data count] > 0) 
-		return 2;
-	else
-		return 1;
-}
+#pragma mark - UITableViewDataSource
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	if (section == 1 && [data count] == 0) 
@@ -126,9 +92,28 @@
 	}
 }
 
-- (void)enablingTableEdit:(BOOL)edit {
-
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	if (section == 0)
+		return [categoriesData count];
+	else
+		return [data count];
 }
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.section == 0)
+		return [super tableView:tableView categoryCellForRowAtIndexPath:indexPath];
+	else
+		return [super tableView:tableView itemCellForRowAtIndexPath:indexPath];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+	if ([data count] > 0) 
+		return 2;
+	else
+		return 1;
+}
+
+#pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 	return 28;
@@ -143,25 +128,11 @@
 	return [v autorelease];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	if (section == 0)
-		return [categoriesData count];
-	else
-		return [data count];
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == 0)
 		return 68;
 	else
 		return 83;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == 0)
-		return [super tableView:tableView categoryCellForRowAtIndexPath:indexPath];
-	else
-		return [super tableView:tableView itemCellForRowAtIndexPath:indexPath];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -173,10 +144,26 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
-#pragma mark Memory management
+#pragma mark - UITableView stuff
+
+- (void)configureCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView {
+	[super configureCell:cell withIndexPath:indexPath forTableView:tableView];
+	
+	if (indexPath.section == 0) {
+		NSDictionary *d = [categoriesData objectAtIndex:indexPath.row];
+		NSString *path = [currentCategoryPath stringByAppendingPathComponent:[d objectForKey:@"path"]];
+		[(IDCategoriesTableViewCell *)cell setCategoryPath:path];
+		[(IDCategoriesTableViewCell *)cell setCategoryData:d];
+		[(IDCategoriesTableViewCell *)cell setIsFavourite:[IDFavouriteCategories isFavouriteCategory:path]];
+	}
+}
+
+
+#pragma mark - Memory management
 
 - (void)dealloc {
 	[currentCategory release];
+	[currentCategoryPath release];
 	
     [super dealloc];
 }

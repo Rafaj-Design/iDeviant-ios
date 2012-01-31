@@ -23,6 +23,4 @@
 - (id)initWithSearch:(NSString *)search;
 - (id)initWithCategory:(NSString *)category;
 
-- (void)getDataForParams:(NSString *)params;
-
 @end

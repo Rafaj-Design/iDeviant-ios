@@ -8,13 +8,9 @@
 
 #import "IDDailyDeviationsController.h"
 
-
 @implementation IDDailyDeviationsController
 
-
-#pragma mark Initialization
-
-#pragma mark View lifecycle
+#pragma mark - View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,16 +20,6 @@
 	[super enableRefreshButton];
 //	[super getDataForSearchString:@"icons"];
 	[super getDataForParams:@"special:dd"];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-}
-
-#pragma mark Memory management
-
-- (void)dealloc {
-    [super dealloc];
 }
 
 

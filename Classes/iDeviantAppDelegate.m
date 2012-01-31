@@ -33,6 +33,7 @@ static NSString* kAppId = @"118349561582677";
 @implementation iDeviantAppDelegate
 
 @synthesize window;
+@synthesize navigationController;
 
 @synthesize facebook;
 @synthesize fbParams;
@@ -43,7 +44,7 @@ static NSString* kAppId = @"118349561582677";
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-	
+	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	[self.window setBackgroundColor:[UIColor blackColor]];
 
     // Build checks
@@ -99,9 +100,11 @@ static NSString* kAppId = @"118349561582677";
 	IDHomeController *c = [[IDHomeController alloc] init];
 	navigationController = [[FTNavigationViewController alloc] initWithRootViewController:c];
 	[c release];
+	
+	[window setRootViewController:navigationController];
     
     // Add the navigation controller's view to the window and display.
-    [window addSubview:navigationController.view];
+//    [window addSubview:navigationController.view];
     [window makeKeyAndVisible];
 	
 	// Jira bug tracking system

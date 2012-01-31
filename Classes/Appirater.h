@@ -37,7 +37,7 @@
 
 
 #import <Foundation/Foundation.h>
-#import "Configuration.h"
+#import "IDConfig.h"
 
 
 extern NSString *const kAppiraterLaunchDate;

@@ -20,6 +20,5 @@
 @property (nonatomic, retain) NSString *currentCategoryPath;
 
 - (void)fillWithData;
--(void)sendToHome;
 
 @end

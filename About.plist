@@ -16,7 +16,7 @@
 	</dict>
 	<dict>
 		<key>controller</key>
-		<string>IDCategoriesController</string>
+		<string>IDCategoriesViewController</string>
 		<key>description</key>
 		<string>categoriesdesc</string>
 		<key>icon</key>

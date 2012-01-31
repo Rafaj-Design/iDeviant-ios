@@ -16,7 +16,7 @@
 	</dict>
 	<dict>
 		<key>controller</key>
-		<string>IDCategoriesController</string>
+		<string>IDCategoriesViewController</string>
 		<key>description</key>
 		<string>categoriesdesc</string>
 		<key>icon</key>
@@ -64,7 +64,7 @@
 	</dict>
 	<dict>
 		<key>controller</key>
-		<string>IDSettingsViewController</string>
+		<string>IDLoginViewController</string>
 		<key>description</key>
 		<string>logindesc</string>
 		<key>icon</key>
@@ -86,7 +86,7 @@
 	</dict>
 	<dict>
 		<key>controller</key>
-		<string>FTAboutCompanyAndAppViewController</string>
+		<string>IDHomeSortingViewController</string>
 		<key>description</key>
 		<string>aboutdesc</string>
 		<key>icon</key>

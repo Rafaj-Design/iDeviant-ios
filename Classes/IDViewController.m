@@ -18,12 +18,6 @@
 #import "IDJustItemsViewController.h"
 #import "FTText.h"
 #import "IDConfig.h"
-#import "IDDetailTableViewController.h"
-
-
-//static FTReachability *internetReachable;
-//static FTReachability *hostReachable;
-
 
 @implementation IDViewController
 
@@ -42,267 +36,7 @@
 
 @synthesize internetReachable;
 
-#pragma mark Positioning
-
-- (int)recalculateHeightForStatusBar:(int)height {
-	BOOL status = YES;
-	
-	if (status)
-		height -= 20;
-	
-	BOOL navigation = YES;
-	
-	if ([self.navigationController.navigationBar isTranslucent])
-		navigation = NO;
-	else if 
-		([self.navigationController.navigationBar isHidden]) navigation = NO;
-	
-	if (navigation)
-		if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
-			height -= 32;
-		else 
-			height -= 44;
-	
-	return height;
-}
-
-- (CGRect)fullScreeniPhoneFrame {
-	if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
-		return CGRectMake(0, 0, 480, [self recalculateHeightForStatusBar:320]);
-	else
-		return CGRectMake(0, 0, 320, [self recalculateHeightForStatusBar:480]);
-}
-
-- (CGRect)fullScreeniPadFormFrame {
-    return CGRectMake(0, 0, 540, 620);
-}
-
-- (CGRect)fullScreeniPadFrame {
-	if (isLandscape)
-		return CGRectMake(0, 0, 1024, [self recalculateHeightForStatusBar:768]);
-	else
-		return CGRectMake(0, 0, 768, [self recalculateHeightForStatusBar:1024]);
-}
-
-- (CGRect)fullScreenFrame {
-	return [self fullScreeniPhoneFrame];
-}
-
-- (CGRect)frameForMessageLabel {
-	CGRect r = [self fullScreenFrame];
-	r.size.height = 16;
-
-	if (self.navigationController.navigationBar.alpha == 0) {
-		
-	} else {
-		//r.origin.y = self.navigationController.navigationBar.frame.size.height;
-	}
-	
-	return r;
-}
-
-#pragma mark Messages
-
-- (void)displayMessage:(NSString *)text {
-	if ([message isHidden]) {
-		[message setAlpha:0];
-		[message setHidden:NO];
-	} else
-		return;
-	
-	[message setFrame:[self frameForMessageLabel]];
-	[message setText:[IDLang get:text]];
-	[message setText:IDLangGet(text)];
-	
-	[UIView animateWithDuration:0.4
-					 animations:^{
-						 [message setAlpha:1];
-						 if (table) {
-							 [table positionAtY:[message height]];
-						 }
-					 }
-					 completion:^(BOOL finished) {
-						 [UIView animateWithDuration:0.8
-											   delay:2
-											 options:UIViewAnimationOptionAllowUserInteraction
-										  animations:^{
-											  if (table) {
-												  [table positionAtY:0];
-											  }
-											  [message setAlpha:0];
-										  }
-										  completion:^(BOOL finished) {
-											  [message setHidden:YES];
-										  }
-						  ];
-					 }
-	 ];
-}
-
-#pragma mark Parsing
-
-- (void)refresh {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-	
-	[parsedItems removeAllObjects];
-	[feedParser stopParsing];
-	[feedParser parse];
-	[table setUserInteractionEnabled:NO];
-	
-	[UIView beginAnimations:nil context:nil];
-	[table setAlpha:0.3];
-	[UIView commitAnimations];
-}
-
-- (void)enablingTableEdit:(BOOL)edit {
-	
-}
-
-- (void)toggleEditTable {
-	[table setEditing:!table.editing animated:YES];
-	[self enablingTableEdit:table.editing];
-	[self enableEditButton];
-}
-
-- (void)getDataForParams:(NSString *)params {
-		NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@", params] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-		
-		NSURL *feedURL = [NSURL URLWithString:url];
-		feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
-		feedParser.delegate = self;
-		feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
-		feedParser.connectionType = ConnectionTypeAsynchronously;
-		[feedParser parse];
-}
-
-- (void)getDataForSearchString:(NSString *)search andCategory:(NSString *)category {	
-
-	[IDAdultCheck checkForUnlock:search];
-		
-	NSString *searchString = @"";
-	
-	if (search)
-		searchString = [NSString stringWithFormat:@"+%@", search];
-
-	NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=boost:popular%@", searchString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-
-
-	NSString *categoryString = @"";
-	
-	if (category) 
-	if (![category isEqualToString:@""]) {
-		categoryString = [NSString stringWithFormat:@"+in:%@+sort:time", category];
-		url = [url stringByAppendingString:categoryString];
-	}
-	
-//	NSLog(@"URL: %@", url);
-	
-	NSURL *feedURL = [NSURL URLWithString:url];
-	[feedParser release];
-	feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
-	[feedParser setDelegate:self];
-	feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
-	feedParser.connectionType = ConnectionTypeAsynchronously;
-	[feedParser parse];
-}
-
-- (void)getDataForCategory:(NSString *)category {
-	[self getDataForSearchString:nil andCategory:category];
-}
-
-- (void)getDataForSearchString:(NSString *)search {
-	[self getDataForSearchString:search andCategory:nil];
-}
-
-- (void)getFeedData {
-	[self getDataForSearchString:nil];
-}
-
-#pragma mark Reachability notification methods & settings
-
-- (void)inheritConnectivity:(BOOL)internet {
-	internetActive = internet;
-}
-
-- (void)checkNetworkStatus:(NSNotification *)notice {
-	NetworkStatus internetStatus = [internetReachable currentReachabilityStatus];
-	BOOL previousStatus = internetActive;
-	switch (internetStatus) {
-		case NotReachable: {
-			NSLog(@"The internet is down.");
-			internetActive = NO;
-			break;
-		}
-		case ReachableViaWiFi: {
-			NSLog(@"The internet is working via WIFI.");
-			internetActive = YES;
-			break;
-		}
-		case ReachableViaWWAN: {
-			NSLog(@"The internet is working via WWAN.");
-			internetActive = YES;
-			break;
-		}
-	}
-	if (previousStatus != internetActive) {
-		[table reloadData];
-		if (internetActive) {
-			if (refreshButton) {
-				[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
-			}
-			if ([data count] == 0) {
-				//[self refresh];
-			}
-		}
-		else {
-			if (refreshButton) {
-				[self.navigationItem setRightBarButtonItem:nil animated:YES];
-			}
-		}
-	}
-}
-
-#pragma mark View lifecycle
-
-- (void)doLayoutLocalSubviews {
-	[UIView beginAnimations:nil context:nil];
-	[backgroundImageView setFrame:[self fullScreenFrame]];
-	[table setFrame:self.view.bounds];
-	[message setFrame:[self frameForMessageLabel]];
-	[UIView commitAnimations];
-}
-
-- (void)doLayoutSubviews {
-	if (table) {
-		NSMutableArray *cells = [[NSMutableArray alloc] init];
-		for (NSInteger j = 0; j < [table numberOfSections]; ++j)
-		{
-			for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i)
-			{
-				if ([table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]] != nil)
-					[cells addObject:[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]]];
-			}
-		}
-		
-		for (IDTableViewCell *cell in cells) {
-			if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
-				[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade-land"]]];
-			else
-				[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
-		}
-		[cells release];
-	}
-}
-
--(void) showHideNavbar:(id)sender {
-//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-	if (!popping)
-		[self.navigationController popToRootViewControllerAnimated:YES];
-	
-	[self.gestureView removeGestureRecognizer:tapGesture];
-	popping = YES;
-}
-
+#pragma mark - View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -324,7 +58,12 @@
 	
 	[self setData:[NSArray array]];
 	
-	[self enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg.png"]];
+//	[self enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg.png"]];
+	
+	if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
+		[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_bg-l"]]];
+	else
+		[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_bg-p"]]];
 	
 	message = [[UILabel alloc] initWithFrame:[self frameForMessageLabel]];
 	[message setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_ok_messagebg.png"]]];
@@ -338,14 +77,9 @@
 	popping = NO;
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
-    
-}
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-	isLandscape = UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
-    [self doLayoutSubviews];
-	[self doLayoutLocalSubviews];
+- (void)viewDidUnload {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+	[gestureView removeFromSuperview];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -374,22 +108,26 @@
 			if ([NSStringFromClass([v class]) isEqualToString:@"UINavigationItemView"]) {
 				[gestureView setFrame:[v frame]];
 				[self.navigationController.navigationBar addSubview:gestureView];
-//				NSLog(@"titleFrame: %@", NSStringFromCGRect([v frame]));
 			}
 		}
 	}
-	
-	[self doLayoutSubviews];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	[self checkNetworkStatus:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
+	
 	if (searchBarHeader) {
 		if ([searchBarHeader isFirstResponder]) {
 			[searchBarHeader resignFirstResponder];
 			[searchBarHeader setShowsCancelButton:NO animated:YES];
 		}
 	}
+	
 	if (![NSStringFromClass(self.class) isEqualToString:@"IDHomeController"] && ![NSStringFromClass(self.class) isEqualToString:@"IDImageDetailViewController"] && ![NSStringFromClass(self.class) isEqualToString:@"IDDocumentDetailViewController"]) {
 		[gestureView removeGestureRecognizer:tapGesture];
 		[gestureView removeFromSuperview];
@@ -401,11 +139,6 @@
 	}
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-	[self checkNetworkStatus:nil];
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
     if ([FTSystem isTabletSize])
         return YES;
@@ -413,44 +146,255 @@
         return UIInterfaceOrientationIsLandscape(toInterfaceOrientation) || toInterfaceOrientation == UIInterfaceOrientationPortrait;
 }
 
-#pragma mark Handler for navigating backwards
-
-- (void)dismissMe:(id)sender {
-    [self goBack];
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
+	if (table) {
+		if (![NSStringFromClass(self.class) isEqualToString:@"IDHomeSortingViewController"]) {
+			NSMutableArray *cells = [[NSMutableArray alloc] init];
+			for (NSInteger j = 0; j < [table numberOfSections]; ++j)
+			{
+				for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i)
+				{
+					if ([table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]] != nil)
+						[cells addObject:[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]]];
+				}
+			}
+			
+			for (IDTableViewCell *cell in cells) {
+				if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
+					[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade-land"]]];
+				else {
+					[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
+				}
+			}
+		}
+	}
+	
+	if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
+		[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_bg-l"]]];
+	else
+		[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_bg-p"]]];
 }
 
-#pragma mark Managing view controllers
-
-- (void)dismissModalViewController {
-	[self dismissModalViewControllerAnimated:YES];
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	isLandscape = UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
+    [self doLayoutSubviews];
+	[self doLayoutLocalSubviews];
 }
 
-- (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated {
-	[modalViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-	[super presentModalViewController:modalViewController animated:animated];
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+	
 }
 
-- (void)goBack {
-	[self.navigationController popViewControllerAnimated:YES];
+#pragma mark - View stuff
+
+- (void)doLayoutLocalSubviews {
+	[UIView beginAnimations:nil context:nil];
+	
+	[backgroundImageView setFrame:self.view.bounds];
+	[table setFrame:self.view.bounds];
+	[message setFrame:[self frameForMessageLabel]];
+	
+	[UIView commitAnimations];
+}
+
+- (void)doLayoutSubviews {
+	if (table) {
+		NSMutableArray *cells = [[NSMutableArray alloc] init];
+		for (NSInteger j = 0; j < [table numberOfSections]; ++j)
+			for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i)
+				if ([table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]] != nil)
+					[cells addObject:[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]]];
+		
+		for (IDTableViewCell *cell in cells)
+			if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
+				[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade-land"]]];
+			else
+				[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
+		
+		[cells release];
+	}
+}
+
+-(void) showHideNavbar:(id)sender {
+	if (!popping)
+		[self.navigationController popToRootViewControllerAnimated:YES];
+	
+	[self.gestureView removeGestureRecognizer:tapGesture];
+	popping = YES;
+}
+
+#pragma mark - Positioning
+
+- (CGRect)fullScreenFrame {
+	return [[UIScreen mainScreen] applicationFrame];
+}
+
+- (CGRect)frameForMessageLabel {
+	CGRect frame = self.view.bounds;
+	frame.size.height = 16;
+	return frame;
+}
+
+#pragma mark Messages
+
+- (void)displayMessage:(NSString *)text {
+	if ([message isHidden]) {
+		[message setAlpha:0];
+		[message setHidden:NO];
+	} else
+		return;
+	
+	[message setFrame:[self frameForMessageLabel]];
+	[message setText:[IDLang get:text]];
+	
+	[UIView animateWithDuration:0.4
+					 animations:^{
+						 [message setAlpha:1];
+						 if (table) {
+							 [table positionAtY:[message height]];
+						 }
+					 }
+					 completion:^(BOOL finished) {
+						 [UIView animateWithDuration:0.8
+											   delay:2
+											 options:UIViewAnimationOptionAllowUserInteraction
+										  animations:^{
+											  if (table) {
+												  [table positionAtY:0];
+											  }
+											  [message setAlpha:0];
+										  }
+										  completion:^(BOOL finished) {
+											  [message setHidden:YES];
+										  }
+						  ];
+					 }
+	 ];
+}
+
+#pragma mark - Refreshing data
+
+- (void)refresh {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+	
+	[parsedItems removeAllObjects];
+	[feedParser stopParsing];
+	[feedParser parse];
+	[table setUserInteractionEnabled:NO];
+	
+	[UIView beginAnimations:nil context:nil];
+	[table setAlpha:0.3];
+	[UIView commitAnimations];
+}
+
+#pragma mark - Editing
+
+- (void)enablingTableEdit:(BOOL)edit {
+	
+}
+
+- (void)toggleEditTable {
+	[table setEditing:!table.editing animated:YES];
+	[self enablingTableEdit:table.editing];
+	[self enableEditButton];
+}
+
+#pragma mark - Getting data
+
+- (void)getDataForParams:(NSString *)params {
+		NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@", params] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+		
+		NSURL *feedURL = [NSURL URLWithString:url];
+		feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
+		feedParser.delegate = self;
+		feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
+		feedParser.connectionType = ConnectionTypeAsynchronously;
+		[feedParser parse];
+}
+
+- (void)getDataForSearchString:(NSString *)search andCategory:(NSString *)category {	
+
+	[IDAdultCheck checkForUnlock:search];
+		
+	NSString *searchString = @"";
+	
+	if (search)
+		searchString = [NSString stringWithFormat:@"+%@", search];
+
+	NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=boost:popular%@", searchString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+
+	NSString *categoryString = @"";
+	
+	if (category && (![category isEqualToString:@""])) {
+		categoryString = [NSString stringWithFormat:@"+in:%@+sort:time", category];
+		url = [url stringByAppendingString:categoryString];
+	}
+	
+	NSURL *feedURL = [NSURL URLWithString:url];
+	[feedParser release];
+	feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
+	[feedParser setDelegate:self];
+	feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
+	feedParser.connectionType = ConnectionTypeAsynchronously;
+	[feedParser parse];
+}
+
+- (void)getDataForCategory:(NSString *)category {
+	[self getDataForSearchString:nil andCategory:category];
+}
+
+- (void)getDataForSearchString:(NSString *)search {
+	[self getDataForSearchString:search andCategory:nil];
+}
+
+- (void)getFeedData {
+	[self getDataForSearchString:nil];
+}
+
+#pragma mark - Reachability
+
+- (void)inheritConnectivity:(BOOL)internet {
+	internetActive = internet;
+}
+
+- (void)checkNetworkStatus:(NSNotification *)notice {
+	NetworkStatus internetStatus = [internetReachable currentReachabilityStatus];
+	BOOL previousStatus = internetActive;
+	switch (internetStatus) {
+		case NotReachable: {
+			NSLog(@"The internet is down.");
+			internetActive = NO;
+			break;
+		}
+		case ReachableViaWiFi: {
+			NSLog(@"The internet is working via WIFI.");
+			internetActive = YES;
+			break;
+		}
+		case ReachableViaWWAN: {
+			NSLog(@"The internet is working via WWAN.");
+			internetActive = YES;
+			break;
+		}
+	}
+	
+	if (previousStatus != internetActive) {
+		[table reloadData];
+		if (internetActive) {
+			if (refreshButton)
+				[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
+			if ([data count] == 0)
+				[self refresh];
+		} else if (refreshButton)
+				[self.navigationItem setRightBarButtonItem:nil animated:YES];
+	}
 }
 
 #pragma mark Sound controller
 
 - (void)playSound:(NSString *)soundName {
 	[soundController playSound:soundName];
-}
-
-#pragma mark Background image
-
-- (void)enableBackgroundWithImage:(UIImage *)image {
-	if (!backgroundImageView) {
-		backgroundImageView = [[UIImageView alloc] init];
-		[backgroundImageView setBackgroundColor:[UIColor clearColor]];
-		[self.view addSubview:backgroundImageView];
-		[self.view sendSubviewToBack:backgroundImageView];
-	}
-	[backgroundImageView setImage:image];
-	[backgroundImageView setFrame:[self fullScreenFrame]];
 }
 
 #pragma mark Settings
@@ -466,7 +410,7 @@
 
 - (void)createTableViewWithSearchBar:(BOOL)searchBar andStyle:(UITableViewStyle)style {
 	isSearchBar = searchBar;
-	table = [[UITableView alloc] initWithFrame:[self fullScreenFrame] style:style];
+	table = [[UITableView alloc] initWithFrame:self.view.bounds style:style];
 	[table setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 	[table setAutoresizesSubviews:YES];
 	[table setDataSource:self];
@@ -509,45 +453,13 @@
 	//[FlurryAPI logEvent:[NSString stringWithFormat:@"Screen: %@", newTitle]];
 }
 
-#pragma mark Table view data source & delegate methods
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-	if (isSearchBar)
-		return 44;
-	else
-		return 0;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-	if (section == 0)
-		if (isSearchBar) {
-			if (!searchBarHeader) {
-				searchBarHeader = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 44)];
-				[searchBarHeader setTintColor:[UIColor lightGrayColor]];
-				[searchBarHeader setDelegate:self];
-				[searchBarHeader setAutocapitalizationType:UITextAutocapitalizationTypeNone];
-				[searchBarHeader setPlaceholder:[IDLang get:@"searchplaceholder"]];
-			}
-			return searchBarHeader;
-		}
-
-	return nil;
-}
-
 - (void)getDataFromBundlePlist:(NSString *)plist {
 	NSString *path = [[NSBundle mainBundle] pathForResource:plist ofType:@""];
 	NSArray *arr = [NSArray arrayWithContentsOfFile:path];
-//	NSLog(@"%@", arr);
 	[self setData:arr];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [data count];
-}
+#pragma mark - UITableView stuff
 
 - (void)configureCell:(IDTableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView {
 	if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
@@ -660,33 +572,115 @@
 	return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	IDDetailTableViewController *detail = [[IDDetailTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-	detail.item = (MWFeedItem *)[data objectAtIndex:indexPath.row];
-	[self.navigationController pushViewController:detail animated:YES];
-	[detail release];
+- (void)launchCategoryInTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath andCurrentCategoryPath:(NSString *)currentCategoryPath {
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	NSDictionary *d = [categoriesData objectAtIndex:indexPath.row];
 	
-	// Deselect
-//	[table deselectRowAtIndexPath:indexPath animated:YES];
+	if ([[d objectForKey:@"subcategories"] count] > 0) {
+		IDCategoriesViewController *c = [[IDCategoriesViewController alloc] init];
+		[c inheritConnectivity:internetActive];
+		[c setCurrentCategory:d];
+		[c setCurrentCategoryPath:[currentCategoryPath stringByAppendingPathComponent:[d objectForKey:@"path"]]];
+		[c setTitle:[d objectForKey:@"name"]];
+		[c setCategoriesData:[d objectForKey:@"subcategories"]];
+		[self.navigationController pushViewController:c animated:YES];
+		[c release];
+	} else
+		if (internetActive) {
+			IDJustItemsViewController *c = [[IDJustItemsViewController alloc] init];
+			[c inheritConnectivity:internetActive];
+			[c setJustCategory:[currentCategoryPath stringByAppendingPathComponent:[d objectForKey:@"path"]]];
+			[c setTitle:[d objectForKey:@"name"]];
+			[self.navigationController pushViewController:c animated:YES];
+			[c release];
+		}
 }
 
-#pragma mark Memory management
-
-- (void)recreateElements {
+- (void)launchItemInTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath {
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	MWFeedItem *item = [data objectAtIndex:indexPath.row];
+	NSMutableArray *arr = [[NSMutableArray alloc] init];
 	
+	for (MWFeedItem *i in data) {
+		[arr addObject:i];
+	}
+	
+	BOOL canAccess = YES;
+	
+	if ([item.rating isEqualToString:@"adult"])
+		if (![IDAdultCheck canAccessAdultStuff]) 
+			canAccess = NO;
+	
+	if (canAccess) {
+		if ([item.contents count] > 0) {
+			if (item.text) {
+				IDDocumentDetailViewController *c = [[IDDocumentDetailViewController alloc] init];
+				[c setTitle:[item title]];
+				[c inheritConnectivity:internetActive];
+				NSString *tempPath = [[NSBundle mainBundle] pathForResource:@"document-template" ofType:@"html"];
+				NSString *temp = [NSString stringWithContentsOfFile:tempPath encoding:NSUTF8StringEncoding error:nil];
+				NSDictionary *arr = [NSDictionary dictionaryWithObject:item.text forKey:@"{CONTENT}"];
+				NSString *text = [FTText parseCodes:arr inTemplate:temp];
+				[c setContent:text];
+				[self.navigationController pushViewController:c animated:YES];
+				[c release];
+			} else {
+				IDImageDetailViewController *c = [[IDImageDetailViewController alloc] init];
+				[c inheritConnectivity:internetActive];
+				[c setCurrentIndex:indexPath.row];
+				[c setListData:arr];
+				//[c.data retain];
+				[c setImageUrl:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]];
+				[self.navigationController pushViewController:c animated:YES];
+				[c release];
+			}
+		}
+	} else
+		[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	
+	[arr release];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-	[self recreateElements];
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
 }
 
-- (void)viewDidUnload {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-	[gestureView removeFromSuperview];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [data count];
 }
 
-#pragma mark Parsing delegate methods (MWFeedParserDelegate)
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	if (isSearchBar)
+		return 44;
+	else
+		return 0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+	if (section == 0)
+		if (isSearchBar) {
+			if (!searchBarHeader) {
+				searchBarHeader = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 44)];
+				[searchBarHeader setTintColor:[UIColor lightGrayColor]];
+				[searchBarHeader setDelegate:self];
+				[searchBarHeader setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+				[searchBarHeader setPlaceholder:[IDLang get:@"searchplaceholder"]];
+			}
+			return searchBarHeader;
+		}
+	
+	return nil;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {	
+	[table deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - MWFeedParserDelegate
 
 - (void)feedParserDidStart:(MWFeedParser *)parser {
 //	NSLog(@"Started Parsing: %@", parser.url);
@@ -729,7 +723,7 @@
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
-#pragma mark Search bar delegate
+#pragma mark - UISearchBarDelegate
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
 	[searchBarHeader setShowsCancelButton:YES animated:YES];
@@ -762,93 +756,6 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
 	[searchBarHeader setShowsCancelButton:NO animated:YES];
 	[searchBarHeader resignFirstResponder];
-}
-
-- (void)launchCategoryInTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath andCurrentCategoryPath:(NSString *)currentCategoryPath {
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
-	NSDictionary *d = [categoriesData objectAtIndex:indexPath.row];
-	
-	if ([[d objectForKey:@"subcategories"] count] > 0) {
-		IDCategoriesViewController *c = [[IDCategoriesViewController alloc] init];
-		[c inheritConnectivity:internetActive];
-		[c setCurrentCategory:d];
-		[c setCurrentCategoryPath:[currentCategoryPath stringByAppendingPathComponent:[d objectForKey:@"path"]]];
-		[c setTitle:[d objectForKey:@"name"]];
-		[c setCategoriesData:[d objectForKey:@"subcategories"]];
-		[self.navigationController pushViewController:c animated:YES];
-		[c release];
-	} else {
-		if (internetActive) {
-			IDJustItemsViewController *c = [[IDJustItemsViewController alloc] init];
-			[c inheritConnectivity:internetActive];
-			[c setJustCategory:[currentCategoryPath stringByAppendingPathComponent:[d objectForKey:@"path"]]];
-			[c setTitle:[d objectForKey:@"name"]];
-			[self.navigationController pushViewController:c animated:YES];
-			[c release];
-		}
-	}
-}
-
-- (void)launchItemInTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath {
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
-	MWFeedItem *item = [data objectAtIndex:indexPath.row];
-	NSMutableArray *arr = [[NSMutableArray alloc] init];
-	
-	for (MWFeedItem *i in data) {
-//		NSLog(@"Title: %@", i.title);
-		[arr addObject:i];
-	}
-	
-	BOOL canAccess = YES;
-	
-	if ([item.rating isEqualToString:@"adult"])
-		if (![IDAdultCheck canAccessAdultStuff]) 
-			canAccess = NO;
-	
-	if (canAccess) {
-		if ([item.contents count] > 0) {
-			if (item.text) {
-				IDDocumentDetailViewController *c = [[IDDocumentDetailViewController alloc] init];
-				[c setTitle:[item title]];
-				[c inheritConnectivity:internetActive];
-				NSString *tempPath = [[NSBundle mainBundle] pathForResource:@"document-template" ofType:@"html"];
-				NSString *temp = [NSString stringWithContentsOfFile:tempPath encoding:NSUTF8StringEncoding error:nil];
-				NSDictionary *arr = [NSDictionary dictionaryWithObject:item.text forKey:@"{CONTENT}"];
-				NSString *text = [FTText parseCodes:arr inTemplate:temp];
-				[c setContent:text];
-				[self.navigationController pushViewController:c animated:YES];
-				[c release];
-			} else {
-				IDImageDetailViewController *c = [[IDImageDetailViewController alloc] init];
-				[c inheritConnectivity:internetActive];
-				[c setCurrentIndex:indexPath.row];
-				[c setListData:arr];
-				//[c.data retain];
-				[c setImageUrl:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]];
-				[self.navigationController pushViewController:c animated:YES];
-				[c release];
-			}
-		}
-	} else {
-		[tableView deselectRowAtIndexPath:indexPath animated:YES];
-	}
-	
-	[arr release];
-	
-	if (kDebugCauseCrash) {
-		[UIView animateWithDuration:0.7 animations:^{
-			self.view.alpha = 0.0;
-		} completion:^(BOOL finished) {
-//			NSLog(@"Crashing...");
-#ifndef __clang_analyzer__
-			CFRelease(NULL);
-#endif
-		}];
-	}
-}
-
--(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
-
 }
 
 #pragma mark - Memory management

@@ -7,31 +7,77 @@
 //
 
 #import "IDHomeController.h"
-#import "IDLandscapeFavoritesViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "IDHomeTableViewCell.h"
 #import "FTSimpleDB.h"
 #import "IDConfig.h"
 #import "IDFavouriteCategories.h"
-#import "aboutPage.h"
-//#import "JCO.h"
-
 
 @implementation IDHomeController
 
+#pragma mark - View lifecycle
 
-#pragma mark Layout
+- (void)viewDidLoad {
+    [super viewDidLoad];
+	
+    UIColor *color = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.7];
+	UIImage *img = [UIImage imageNamed:@"DA_topbar.png"];
+	[img drawInRect:CGRectMake(0, 0, 10, 10)];
+    [self.navigationController.navigationBar setBackgroundImage:img forBarMetrics:UIBarMetricsDefault];
+	[self.navigationController.navigationBar setTintColor:color];
+	
+	if ([FTSimpleDB getNumberOfItemsInDb:kSystemHomeMenuDbName] == 0) {
+		[super getDataFromBundlePlist:@"Home.plist"];
+		for (NSDictionary *d in data) {
+			[FTSimpleDB addItemToBottom:d intoDb:kSystemHomeMenuDbName];
+		}
+	} else
+		[super setData:[FTSimpleDB getItemsFromDb:kSystemHomeMenuDbName]];
+	
+	[super createTableView];
+	[super setTitle:@"iDeviant"];
+}
 
-- (void)doControllerCheck {
-	if (isLandscape && NO) {
-		IDLandscapeFavoritesViewController *c = [[IDLandscapeFavoritesViewController alloc] init];
-		[c setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-		[self presentModalViewController:c animated:YES];
-		[c release];
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+    
+    UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fuerte-logo.png"]];
+	
+    [logo positionAtX:self.view.center.x-100 andY:-65];  
+    
+	[logo setBackgroundColor:[UIColor clearColor]];
+    
+    [table addSubview:logo];
+	[logo release];
+    
+    if (YES) {
+		[super setData:[FTSimpleDB getItemsFromDb:kSystemHomeMenuDbName]];
+		[table reloadData];
 	}
 }
 
-#pragma mark Table view delegate method
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+}
+
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    [table removeSubviews];
+    UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fuerte-logo.png"]];
+	
+    [logo positionAtX:self.view.center.x-100 andY:-65];  
+    
+	[logo setBackgroundColor:[UIColor clearColor]];
+    
+    [table addSubview:logo];
+	[logo release];
+    
+    if (YES) {
+		[super setData:[FTSimpleDB getItemsFromDb:kSystemHomeMenuDbName]];
+		[table reloadData];
+	}
+}
+
+#pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	return 83;
@@ -65,14 +111,11 @@
 		[cell setAccessoryType:UITableViewCellAccessoryNone];
 		
 		[cell.iconImageView setImage:[UIImage imageNamed:[d objectForKey:@"icon"]]];
-		//[cell.imageView setBackgroundColor:[UIColor clearColor]];
 		[cell.imageView.layer setCornerRadius:4];
     }
-	//NSLog(@"Data: %@", d);
-
+	
 	[cell setBackgroundColor:[UIColor clearColor]];
 	
-	//[cell setBackgroundColor:[UIColor colorWithPatternImage:[[UIImage imageNamed:@"bcg-cell.png"] stretchableImageWithLeftCapWidth:1 topCapHeight:27]]];
 	if ([[d objectForKey:@"requiresConnection"] boolValue] && !internetActive) {
 		[cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-x.png"]];
 	}
@@ -83,7 +126,6 @@
         [cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-x.png"]];
     }
 	
-//	[tableView setAllowsSelection:YES];
 	[cell setSelectionStyle:UITableViewCellSelectionStyleGray];
 	
 	if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
@@ -99,172 +141,29 @@
 	[table deselectRowAtIndexPath:indexPath animated:YES];
 	
 	NSDictionary *d = [data objectAtIndex:indexPath.section];
-	if ([[d objectForKey:@"requiresConnection"] boolValue] && !internetActive) {
+	if ([[d objectForKey:@"requiresConnection"] boolValue] && !internetActive)
 		[super displayMessage:@"requiresinternetconnection"];
-	}
-	else if (([[d objectForKey:@"FVRT"] boolValue]) && [[IDFavouriteCategories dataForFavorites]count]==0) {
+	else if (([[d objectForKey:@"FVRT"] boolValue]) && [[IDFavouriteCategories dataForFavorites]count]==0)
         [super displayMessage:IDLangGet(@"nonefavorites")];
-    }else{
+    else {
 		IDViewController *c = (IDViewController *)[[NSClassFromString([d objectForKey:@"controller"]) alloc] init];
 		if (c) {
-			//[c inheritConnectivity:internetActive];
+			[c inheritConnectivity:internetActive];
 			
-			if ([[d objectForKey:@"controller"] isEqualToString:@"IDCategoriesController"]) {
-				if (!internetActive) {
-//					UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Internet offline" message:@"For browsing through images please turn internet on." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//					[alertView show];
-//					[alertView release];
+			if ([[d objectForKey:@"controller"] isEqualToString:@"IDCategoriesViewController"])
+				if (!internetActive)
 					[super displayMessage:@"requiresinternetconnection"];
-				}
-			}
 			
 			[c setTitle:[d objectForKey:@"name"]];
             [self.navigationController pushViewController:c animated:YES];
 			[c release];
-            if ([[d objectForKey:@"requiresConnection"] boolValue]){
+            if ([[d objectForKey:@"requiresConnection"] boolValue])
                 [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-            }
 		}
 	}
 }
 
-#pragma mark Jira reporting
-
-
-
-- (void)initializeJiraChecks {
-    //show about page
-    //self.navigationItem.rightBarButtonItem =  [[[UIBarButtonItem alloc] initWithTitle:[IDLang get:@"About"] style:UIBarButtonItemStyleBordered target:self action:@selector(showFeedback)] autorelease];
-    
-    
-    /*
-    self.navigationItem.leftBarButtonItem =
-    [[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(showPastFeedback)] autorelease];
-     */
-}
-
-- (void)showHideNavbar:(id)sender {
-//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-}
-
--(void) showFeedback {
-    aboutPage *AC = [[aboutPage alloc] initWithNibName:@"aboutPage" bundle:nil];
-    [self.navigationController pushViewController:AC animated:YES];
-    [AC release];
-}
-
--(void) showPastFeedback {
-    //[self presentModalViewController:[[JCO instance] issuesViewController] animated:YES];
-}
-
-
-#pragma mark View delegate methods
-
-- (void)viewDidLoad {
-    
-    //==
-	
-    UIColor *color = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.7];
-	UIImage *img = [UIImage imageNamed:@"DA_topbar.png"];
-	[img drawInRect:CGRectMake(0, 0, 10, 10)];
-    [self.navigationController.navigationBar setBackgroundImage:img forBarMetrics:UIBarMetricsDefault];
-	[self.navigationController.navigationBar setTintColor:color];
-	
-    //==
-    
-    
-    [super viewDidLoad];
-	
-	if ([FTSimpleDB getNumberOfItemsInDb:kSystemHomeMenuDbName] == 0) {
-		[super getDataFromBundlePlist:@"Home.plist"];
-		for (NSDictionary *d in data) {
-			[FTSimpleDB addItemToBottom:d intoDb:kSystemHomeMenuDbName];
-		}
-	}
-	else {
-		[super setData:[FTSimpleDB getItemsFromDb:kSystemHomeMenuDbName]];
-	}
-	
-	[super createTableView];
-	[super setTitle:@"iDeviant"];
-
-	[self initializeJiraChecks];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-	[self doControllerCheck];
-    
-    UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fuerte-logo.png"]];
-	
-    [logo positionAtX:self.view.center.x-100 andY:-65];  
-    
-	[logo setBackgroundColor:[UIColor clearColor]];
-    
-    [table addSubview:logo];
-	[logo release];
-    
-    if (YES) {
-		[super setData:[FTSimpleDB getItemsFromDb:kSystemHomeMenuDbName]];
-		[table reloadData];
-	}
-}
-
--(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
-    [table removeSubviews];
-    UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fuerte-logo.png"]];
-	
-    [logo positionAtX:self.view.center.x-100 andY:-65];  
-    
-	[logo setBackgroundColor:[UIColor clearColor]];
-    
-    [table addSubview:logo];
-	[logo release];
-    
-    if (YES) {
-		[super setData:[FTSimpleDB getItemsFromDb:kSystemHomeMenuDbName]];
-		[table reloadData];
-	}
-	
-	NSMutableArray *cells = [[NSMutableArray alloc] init];
-	for (NSInteger j = 0; j < [table numberOfSections]; ++j)
-	{
-		for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i)
-		{
-			if ([table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]] != nil)
-				[cells addObject:[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]]];
-		}
-	}
-	
-	if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || 
-        ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight)) 
-	{       
-		
-	} else {
-		
-	}
-	
-	for (IDHomeTableViewCell *cell in cells) {
-		if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
-			[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade-land"]]];
-		else {
-			[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
-		}
-	}
-	
-	[cells release];
-}
-
--(void)viewWillDisappear:(BOOL)animated{
-    [table removeSubviews];
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-	[self doControllerCheck];
-}
-
-#pragma mark Table view delegate & data source methods
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [data count];
@@ -272,12 +171,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
-}
-
-#pragma mark Memory management
-
-- (void)dealloc {
-    [super dealloc];
 }
 
 @end

@@ -20,6 +20,7 @@
 
 @synthesize delegate;
 @synthesize mainView;
+@synthesize bottomBar;
 @synthesize imagePages;
 @synthesize imageUrl;
 @synthesize actionButton;
@@ -30,12 +31,135 @@
 @synthesize isOverlayShowing;
 @synthesize tap, doubletap;
 
-#pragma mark Positioning
+#pragma mark - View lifecycle
+
+- (void)viewDidLoad {
+//	[super viewDidLoad];
+	
+	[self.view setFrame:[[UIScreen mainScreen] bounds]];
+	
+	[self.view setBackgroundColor:[UIColor blackColor]];
+	
+	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
+	
+	[self.navigationController.navigationBar setTranslucent:YES];
+	
+	[UIView beginAnimations:nil context:nil];
+	[self.navigationController.navigationBar setAlpha:kIDImageDetailViewControllerMaxAlpha];
+	[UIView commitAnimations];
+	
+	isOverlayShowing = YES;
+	
+	imagePages = [[NSMutableArray alloc] init];
+	
+    FTImagePage *imagePage = [self pageForIndex:currentIndex];
+	
+	mainView = [[FTPageScrollView alloc] initWithFrame:self.view.bounds];
+    [mainView setDummyPageImage:[UIImage imageNamed:@"dummy.png"]];
+    [mainView setInitialPage:imagePage withDelegate:(id<FTPageScrollViewDelegate>)self];
+	[mainView setPage:imagePage pageCount:[listThroughData count] animate:YES];
+	
+	FTPage *rPage = [self pageForIndex:(currentIndex + 1)];
+	FTPage *lPage = [self pageForIndex:(currentIndex - 1)];
+	
+	[mainView performSelector:@selector(setRightPage:) withObject:rPage];
+	[mainView performSelector:@selector(setLeftPage:) withObject:lPage];
+	
+    [mainView setScrollEnabled:YES];
+    [mainView setBouncesZoom:YES];
+    [mainView setPagingEnabled:YES];
+	
+	[mainView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+	
+	[self.view addSubview:mainView];
+	
+	bottomBar = [[FTToolbar alloc] initWithFrame:[self frameForToolbar]];
+	[bottomBar setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin];
+	[self.view addSubview:bottomBar];
+	
+	actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(didClickActionButton:)];
+	[bottomBar setItems:[NSArray arrayWithObjects:actionButton, nil]];
+	
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	[self toggleNavigationVisibility];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+//	[super viewWillAppear:animated];
+	
+	[self updateTitle];
+	
+//	[UIView beginAnimations:nil context:nil];
+//	[self.navigationController.navigationBar setAlpha:kIDImageDetailViewControllerMaxAlpha];
+//	[UIView commitAnimations];
+	
+//    [mainView setFrame:[super fullScreenFrame]];
+//    [bottomBar setFrame:[self frameForToolbar]];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+//	[super viewWillDisappear:animated];
+	
+	[self.navigationController.navigationBar setTranslucent:NO];
+	
+	[UIView beginAnimations:nil context:nil];
+	
+	[self.navigationController.navigationBar setAlpha:1.0];
+	
+	[UIView commitAnimations];
+	
+	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+	[[UIApplication sharedApplication] setStatusBarHidden:NO];
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	[super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	
+    if (!isOverlayShowing)
+        [[UIApplication sharedApplication] setStatusBarHidden:NO];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+	[super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+	
+    if (!isOverlayShowing) 
+        [[UIApplication sharedApplication] setStatusBarHidden:YES];
+	
+	[self.view setBackgroundColor:[UIColor blackColor]];
+	[bottomBar setFrame:[self frameForToolbar]];
+}
+
+#pragma mark - View stuff
+
+- (void)doLayoutSubviews {
+	[UIView beginAnimations:nil context:nil];
+	
+//	[mainView setFrame:[super fullScreenFrame]];
+//	[bottomBar setFrame:[self frameForToolbar]];
+	[shortcutView centerInSuperView];
+	
+	[UIView commitAnimations];
+	
+    [mainView reload];
+}
+
+#pragma - mark Positioning
 
 - (CGRect)frameForToolbar {
-	CGRect r = [super fullScreenFrame];
-	r.origin.y = (r.size.height - 44);
-	r.size.height = 44;
+	NSInteger height;
+	if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
+		height = 34;
+	else
+		height = 44;
+	
+	
+	CGRect r = self.view.bounds;
+	r.origin.y = (r.size.height - height);
+	r.size.height = height;
 	return r;
 }
 
@@ -44,21 +168,21 @@
 	else return CGRectMake(0, 0, 320, 480);
 }
 
-#pragma mark Settings
+#pragma - mark Settings
 
 - (void)setListData:(NSArray *)array {
 	listThroughData = array;
 	[listThroughData retain];
 }
 
-#pragma Display stuff
+#pragma - Display stuff
 
 - (void)updateTitle {
 	NSString *t = [NSString stringWithFormat:@"%d / %d", (currentIndex + 1), [listThroughData count]];
 	[self setTitle:t];
 }
 
-#pragma mark Generating pages
+#pragma mark - Generating pages
 
 - (NSString *)urlForItem:(MWFeedItem *)item {
 	
@@ -117,11 +241,10 @@
 	[imagePages addObject:imagePage];
 	[imagePage release];
 	
-//	NSLog(@"%@", imagePages);
 	return imagePage;
 }
 
-#pragma mark Navigation animations
+#pragma mark - Navigation animations
 
 - (void)finishNavigationToggle {
 	if (bottomBar.alpha == 0) {
@@ -131,6 +254,7 @@
 }
 
 - (void)toggleNavigationVisibility {
+//	NSLog(@"applicationFrame before: %@", NSStringFromCGRect([[UIScreen mainScreen] applicationFrame]));
 	if (isOverlayShowing)
 		isOverlayShowing = NO;
 	else
@@ -169,6 +293,8 @@
 	[message setFrame:[super frameForMessageLabel]];
 	
 	[UIView commitAnimations];
+
+//	NSLog(@"applicationFrame after: %@", NSStringFromCGRect([[UIScreen mainScreen] applicationFrame]));
 }
 
 - (void)toggleShortcut {
@@ -180,110 +306,9 @@
 	[shortcutView.table scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
 }
 
-#pragma mark View lifecycle
-
-- (void)viewDidLoad {
-	[self.view setBackgroundColor:[UIColor blackColor]];
-	
-    [super viewDidLoad];
-	
-	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
-	
-	[self.navigationController.navigationBar setTranslucent:YES];
-	
-	[UIView beginAnimations:nil context:nil];
-	[self.navigationController.navigationBar setAlpha:kIDImageDetailViewControllerMaxAlpha];
-	[UIView commitAnimations];
-	
-	isOverlayShowing = YES;
-	
-	imagePages = [[NSMutableArray alloc] init];
-	
-    FTImagePage *imagePage = [self pageForIndex:currentIndex];
-	
-//	NSLog(@"%@", imagePages);
-	
-    mainView = [[FTPageScrollView alloc] initWithFrame:[super fullScreenFrame]];
-    [mainView setDummyPageImage:[UIImage imageNamed:@"dummy.png"]];
-    [mainView setInitialPage:imagePage withDelegate:(id<FTPageScrollViewDelegate>)self];
-	[mainView setPage:imagePage pageCount:[listThroughData count] animate:YES];
-	
-	FTPage *rPage = [self pageForIndex:(currentIndex + 1)];
-	FTPage *lPage = [self pageForIndex:(currentIndex - 1)];
-	
-	[mainView performSelector:@selector(setRightPage:) withObject:rPage];
-	[mainView performSelector:@selector(setLeftPage:) withObject:lPage];
-	
-    [mainView setScrollEnabled:YES];
-    [mainView setBouncesZoom:YES];
-    [mainView setPagingEnabled:YES];
-		
-	[self.view addSubview:mainView];
-	
-	bottomBar = [[FTToolbar alloc] initWithFrame:[self frameForToolbar]];
-	[self.view addSubview:bottomBar];
-	
-	actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(didClickActionButton:)];
-	[bottomBar setItems:[NSArray arrayWithObjects:actionButton, nil]];
-
-}
 
 
-- (void)viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
-	[self toggleNavigationVisibility];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-	[super enableBackgroundWithImage:nil];
-	[self updateTitle];
-	
-	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
-	
-	[self.navigationController.navigationBar setTranslucent:YES];
-	
-	[UIView beginAnimations:nil context:nil];
-	[self.navigationController.navigationBar setAlpha:kIDImageDetailViewControllerMaxAlpha];
-	[UIView commitAnimations];
-	
-    [mainView setFrame:[super fullScreenFrame]];
-    [bottomBar setFrame:[self frameForToolbar]];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-	[super viewWillDisappear:animated];
-	[self.navigationController.navigationBar setTranslucent:NO];
-	
-	[UIView beginAnimations:nil context:nil];
-	
-	[self.navigationController.navigationBar setAlpha:1.0];
-	
-	[UIView commitAnimations];
-	
-	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-	[[UIApplication sharedApplication] setStatusBarHidden:NO];
-}
-
-- (void)viewDidUnload {
-	[super viewDidUnload];
-}
-
-#pragma mark Layout
-
-- (void)doLayoutSubviews {
-	[UIView beginAnimations:nil context:nil];
-	
-	[mainView setFrame:[super fullScreenFrame]];
-	[bottomBar setFrame:[self frameForToolbar]];
-	[shortcutView centerInSuperView];
-	
-	[UIView commitAnimations];
-	
-    [mainView reload];
-}
-
-#pragma mark Gesture recognizers
+#pragma mark - Gesture recognizers
 
 - (void)didTapViewOnce:(UITapGestureRecognizer *)recognizer {
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
@@ -322,7 +347,7 @@
 	[UIView commitAnimations];    
 }
 
-#pragma mark Image loading
+#pragma mark - Image loading
 
 - (void)imageViewDidFailLoadingImage:(FTImageView *)imgView withError:(NSError *)error {
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
@@ -366,7 +391,10 @@
 	NSString *htmlBody = [NSString stringWithFormat:@"<br/><br/><a href=\"%@\"><img src=\"%@\"/></a><br/><br/>Copyright <a href=\"%@\">%@</a><br/>iDeviant app by <a href=\"http://www.fuerteint.com/\">Fuerte International UK</a><br/><img src=\"http://new.fuerteint.com/wp-content/themes/theme1177/images/logo.png\"/>", [item link], [self urlForItem:item], [item link], [[item credits] objectAtIndex:0]];
     [mc setMessageBody:htmlBody isHTML:YES];
 	[mc setModalPresentationStyle:UIModalPresentationPageSheet];
-    [self presentModalViewController:mc animated:YES];
+	
+	[mc setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+	
+    [super presentModalViewController:mc animated:YES];
     
 }
 
@@ -432,7 +460,7 @@
 	}
 }
 
-#pragma mark Image view delegate & data source methods
+#pragma mark - Image view delegate & data source methods
 
 -(void)imageViewDidStartLoadingImage:(FTImageView *)imgView{
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
@@ -458,7 +486,7 @@
 }
 
 
-#pragma mark Page scroll view delegate & data source methods
+#pragma mark - Page scroll view delegate & data source methods
 
 - (FTPage *)leftPageForPageScrollView:(FTPageScrollView *)scrollView withTouchCount:(NSInteger)touchCount {
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
@@ -558,10 +586,6 @@
 	
 }
 
-- (void)showHideNavbar:(id)sender {
-//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-}
-
 #pragma mark FTShareFacebookDelegate
 
 - (void)facebookDidPost:(NSError *)error {
@@ -574,24 +598,6 @@
 	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Facebook" message:messageString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
 	[alertView show];
 	[alertView release];
-}
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    if (!isOverlayShowing)
-    {
-        [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    }
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    if (!isOverlayShowing)
-    {
-        [[UIApplication sharedApplication] setStatusBarHidden:YES];
-    }
-    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
 }
 
 #pragma mark Memory management

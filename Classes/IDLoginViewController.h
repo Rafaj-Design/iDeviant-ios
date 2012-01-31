@@ -8,6 +8,24 @@
 
 #import "IDViewController.h"
 
-@interface IDLoginViewController : IDViewController
+#define kFileName @"archive"
+#define kDataName @"Data"
+
+@interface IDLoginViewController : IDViewController <UITextFieldDelegate> {
+    UITextField *nick;
+    UITextField *pass;
+    UIButton *login;
+    UISwitch *remember;
+    UILabel *rememberme;
+}
+
+@property (nonatomic, retain) IBOutlet UITextField *nick;
+@property (nonatomic, retain) IBOutlet UITextField *pass;
+@property (nonatomic, retain) IBOutlet UISwitch *remember;
+@property (nonatomic, retain) IBOutlet UILabel *rememberme;
+-(IBAction)login:(id)sender;
+-(IBAction)backgroundtap:(id)sender;
+-(NSString *)dataFilePath;
+-(void)nextTextField;
 
 @end

@@ -69,4 +69,13 @@
 - (void)setListData:(NSArray *)array;
 - (void)maintainPages;
 
+- (void)updateTitle;
+- (FTImagePage *)pageForIndex:(int)index;
+
+- (CGRect)frameForToolbar;
+- (CGRect)frameForPage;
+
+- (void)toggleNavigationVisibility;
+
+
 @end

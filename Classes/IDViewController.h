@@ -80,13 +80,6 @@
 @property (nonatomic, retain) UITapGestureRecognizer *tapGesture;
 @property (nonatomic, retain) Reachability *internetReachable;
 
-
-- (CGRect)fullScreeniPhoneFrame;
-
-- (CGRect)fullScreeniPadFormFrame;
-
-- (CGRect)fullScreeniPadFrame;
-
 - (CGRect)fullScreenFrame;
 
 - (CGRect)frameForMessageLabel;
@@ -105,17 +98,12 @@
 
 - (void)createTableView;
 
-- (void)enableBackgroundWithImage:(UIImage *)image;
+//- (void)enableBackgroundWithImage:(UIImage *)image;
 
 - (void)playSound:(NSString *)soundName;
 
-- (void)dismissModalViewController;
-
-- (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated;
-
-- (void)goBack;
-
 - (void)doLayoutSubviews;
+- (void)doLayoutLocalSubviews;
 
 - (void)enableRefreshButton;
 - (void)enableEditButton;

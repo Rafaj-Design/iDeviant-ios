@@ -10,51 +10,130 @@
 
 @implementation IDLoginViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@synthesize nick, pass, remember, rememberme;
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
+#pragma mark View delegate methods
 
-#pragma mark - View lifecycle
-
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-}
-*/
-
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
+    [self.nick setPlaceholder:[IDLang get:@"nickname"]];
+    [self.pass setPlaceholder:[IDLang get:@"password"]];
+    [self.rememberme setText:[IDLang get:@"rememberme"]];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [super viewDidLoad];
+    //load nick and password to field
+	NSString *filePath = [self dataFilePath];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+        NSArray *arr = [[NSArray alloc] initWithContentsOfFile:filePath];
+        nick.text = [arr objectAtIndex:0];
+        pass.text = [arr objectAtIndex:1];
+        [arr release];
+    }
+    
+    [self.nick setDelegate:self];
+    [self.nick setReturnKeyType:UIReturnKeyNext];
+    [self.nick addTarget:self
+                  action:@selector(nextTextField)
+        forControlEvents:UIControlEventEditingDidEndOnExit];
+    
+    [self.pass setDelegate:self];
+    [self.pass setReturnKeyType:UIReturnKeyGo];
+    [self.pass addTarget:self
+				  action:@selector(login:)
+		forControlEvents:UIControlEventEditingDidEndOnExit];
+    
+    
+    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 20)];
+    self.nick.leftView = paddingView;
+	[paddingView release];
+    self.nick.leftViewMode = UITextFieldViewModeAlways;
+    
+    UIView *paddingViewpas = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 20)];
+    self.pass.leftView = paddingViewpas;
+	[paddingViewpas release];
+    self.pass.leftViewMode = UITextFieldViewModeAlways;
+    
+    UIImage *image = [UIImage imageNamed:@"DD_login_bg"];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:image]];
 }
-*/
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+-(void)nextTextField{
+    [pass becomeFirstResponder];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+    
+}
+
+#pragma mark Memory management
+
+- (void)dealloc {
+    [super dealloc];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+-(NSString *)dataFilePath{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectory = [paths objectAtIndex:0];
+    
+    return [documentDirectory stringByAppendingPathComponent:kFileName];
+}
+
+-(IBAction)login:(id)sender{
+    if ([self.nick.text length]==0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[IDLang get:@"nicknull"] message:nil
+                                                       delegate:self cancelButtonTitle:[IDLang get:@"OK"] otherButtonTitles:nil, nil];
+        [alert show];
+        
+        [alert release];
+    } else if ([self.pass.text length]==0){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[IDLang get:@"passwordnull"] message:nil
+                                                       delegate:self cancelButtonTitle:[IDLang get:@"OK"] otherButtonTitles:nil, nil];
+        [alert show];
+        
+        [alert release];
+    } else {
+		NSString *filePath = [self dataFilePath];
+		NSFileManager *fileManager = [NSFileManager defaultManager];
+		[fileManager removeItemAtPath:filePath error:nil];
+		
+		NSString *urlAddress = @"https://www.deviantart.com/users/login";
+		NSString *body = [NSString stringWithFormat: @"username=%@&password=%@", nick.text, pass.text];
+		NSURL *url = [NSURL URLWithString:urlAddress];
+		NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+		[request setURL:url];
+		[request setHTTPMethod:@"POST"];
+		[request setHTTPBody:[body dataUsingEncoding: NSUTF8StringEncoding]];
+		
+		UIViewController *c = [[UIViewController alloc] init];
+		[c setTitle:@"Deviant Art"];
+		
+		UIWebView *webView = [[UIWebView alloc] initWithFrame:[super fullScreenFrame]];
+		[webView loadRequest:request];
+		[request release];
+		
+		c.view = webView;
+		[webView release];
+		
+		[self.navigationController pushViewController:c animated:YES];
+		
+		if (remember.on) {
+			//save login
+			NSArray *arr = [NSArray arrayWithObjects:nick.text, pass.text, nil];
+			[arr writeToFile:[self dataFilePath] atomically:NO];
+		}
+    }
+}
+
+//hide keyboard
+-(IBAction) backgroundtap:(id)sender{
+    [nick resignFirstResponder];
+    [pass resignFirstResponder];
 }
 
 @end
