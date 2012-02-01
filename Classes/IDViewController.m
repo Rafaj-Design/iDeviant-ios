@@ -585,15 +585,15 @@
 		[c setCategoriesData:[d objectForKey:@"subcategories"]];
 		[self.navigationController pushViewController:c animated:YES];
 		[c release];
-	} else
-		if (internetActive) {
+	} else if (internetActive) {
 			IDJustItemsViewController *c = [[IDJustItemsViewController alloc] init];
 			[c inheritConnectivity:internetActive];
 			[c setJustCategory:[currentCategoryPath stringByAppendingPathComponent:[d objectForKey:@"path"]]];
 			[c setTitle:[d objectForKey:@"name"]];
 			[self.navigationController pushViewController:c animated:YES];
 			[c release];
-		}
+		} else
+			[self displayMessage:@"requiresinternetconnection"];
 }
 
 - (void)launchItemInTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath {
@@ -611,7 +611,7 @@
 		if (![IDAdultCheck canAccessAdultStuff]) 
 			canAccess = NO;
 	
-	if (canAccess) {
+	if (canAccess && internetActive) {
 		if ([item.contents count] > 0) {
 			if (item.text) {
 				IDDocumentDetailViewController *c = [[IDDocumentDetailViewController alloc] init];
@@ -635,8 +635,12 @@
 				[c release];
 			}
 		}
-	} else
+	} else if (canAccess) {
+		[self displayMessage:@"requiresinternetconnection"];
+	} else {
+//		[self displayMessage:@"cantaccessadultcontent"]; - translate in future version
 		[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	}
 	
 	[arr release];
 }

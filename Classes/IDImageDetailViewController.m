@@ -45,10 +45,13 @@
 	[self.view setBackgroundColor:[UIColor blackColor]];
 	
 	[self.navigationController.navigationBar setTranslucent:YES];
+	self.navigationController.wantsFullScreenLayout = NO;
 	
 	[UIView beginAnimations:nil context:nil];
 	[self.navigationController.navigationBar setAlpha:kIDImageDetailViewControllerMaxAlpha];
 	[UIView commitAnimations];
+	
+//	[self.navigationController.navigationBar setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin];
 	
 	isOverlayShowing = YES;
 	
@@ -88,7 +91,11 @@
 	[super viewDidAppear:animated];
 	NSLog(@"viewDidAppear: self.view.frame: %@, self.view.bounds: %@", NSStringFromCGRect(self.view.frame), NSStringFromCGRect(self.view.bounds));
 	
-	[self toggleNavigationVisibility];	
+	[self toggleNavigationVisibility];
+
+//	[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
+//	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
+//	[self.view setNeedsLayout];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -136,6 +143,11 @@
 	[self.view setBackgroundColor:[UIColor blackColor]];
 //	[self.view setFrame:[[UIScreen mainScreen] bounds]];
 	[bottomBar setFrame:[self frameForToolbar]];
+}
+
+- (void)viewWillLayoutSubviews {
+	[super viewWillLayoutSubviews];
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 }
 
 #pragma mark - View stuff

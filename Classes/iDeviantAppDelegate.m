@@ -28,6 +28,8 @@
 #import "FTFilesystemIO.h"
 #import "FTFilesystemPaths.h"
 
+#import "IDImageDetailViewController.h"
+
 static NSString* kAppId = @"118349561582677";
 
 @implementation iDeviantAppDelegate
@@ -116,15 +118,12 @@ static NSString* kAppId = @"118349561582677";
     return YES;
 }
 
-//- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {	
-//    return [facebook handleOpenURL:url]; 
-//}
-
 - (void)applicationWillResignActive:(UIApplication *)application {
     /*
      Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
      Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
      */
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -133,12 +132,14 @@ static NSString* kAppId = @"118349561582677";
      If your application supports background execution, called instead of applicationWillTerminate: when the user quits.
      */
 	//[IDLang printLanguageDebug];
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     /*
      Called as part of  transition from the background to the inactive state: here you can undo many of the changes made on entering the background.
      */
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -147,6 +148,16 @@ static NSString* kAppId = @"118349561582677";
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+		
+	NSInteger i = [[[self navigationController] viewControllers] count];
+	if (i > 0)
+		i -= 1;
+	
+	if ([[[[self navigationController] viewControllers] objectAtIndex:i] class] == [IDImageDetailViewController class]) {
+		NSLog(@"hojreka");
+		//tuduuuuuuuuu when you return to IDImageDet.. and there is no statusbar it positions navbar to 0.0... instead 0.20..
+	}
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -155,6 +166,7 @@ static NSString* kAppId = @"118349561582677";
      See also applicationDidEnterBackground:.
      */
 	//[IDLang printLanguageDebug];
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 }
 
 #pragma mark Memory management
@@ -163,6 +175,7 @@ static NSString* kAppId = @"118349561582677";
     /*
      Free up as much memory as possible by purging cached data objects that can be recreated (or reloaded from disk) later.
      */
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 }
 
 - (void)dealloc {
