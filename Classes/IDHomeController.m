@@ -42,11 +42,9 @@
 	[super viewWillAppear:animated];
     
     UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fuerte-logo.png"]];
-	
     [logo positionAtX:self.view.center.x-100 andY:-65];  
-    
 	[logo setBackgroundColor:[UIColor clearColor]];
-    
+    [logo setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin];
     [table addSubview:logo];
 	[logo release];
     
@@ -62,6 +60,7 @@
 
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     [table removeSubviews];
+	
     UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fuerte-logo.png"]];
 	
     [logo positionAtX:self.view.center.x-100 andY:-65];  

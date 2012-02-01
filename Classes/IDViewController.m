@@ -182,7 +182,7 @@
 }
 
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
-	
+	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 
 #pragma mark - View stuff

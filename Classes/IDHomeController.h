@@ -10,7 +10,9 @@
 #import "IDViewController.h"
 
 @interface IDHomeController : IDViewController {
-	
+//	UIImageView *logo;
 }
+
+//@property (nonatomic, retain) UIImageView *logo;
 
 @end

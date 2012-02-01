@@ -34,13 +34,15 @@
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
-//	[super viewDidLoad];
+	[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
+	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
 	
-	[self.view setFrame:[[UIScreen mainScreen] bounds]];
+//	[self.view setFrame:[[UIScreen mainScreen] applicationFrame]];
+	self.wantsFullScreenLayout = YES;
+
+	NSLog(@"[[UIScreen mainScreen] applicationFrame]: %@, self.view.frame: %@, self.view.bounds: %@", NSStringFromCGRect([[UIScreen mainScreen] applicationFrame]), NSStringFromCGRect(self.view.frame), NSStringFromCGRect(self.view.bounds));
 	
 	[self.view setBackgroundColor:[UIColor blackColor]];
-	
-	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
 	
 	[self.navigationController.navigationBar setTranslucent:YES];
 	
@@ -84,21 +86,14 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
+	NSLog(@"viewDidAppear: self.view.frame: %@, self.view.bounds: %@", NSStringFromCGRect(self.view.frame), NSStringFromCGRect(self.view.bounds));
 	
-	[self toggleNavigationVisibility];
+	[self toggleNavigationVisibility];	
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-//	[super viewWillAppear:animated];
-	
+	NSLog(@"viewWillAppear: self.view.frame: %@, self.view.bounds: %@", NSStringFromCGRect(self.view.frame), NSStringFromCGRect(self.view.bounds));
 	[self updateTitle];
-	
-//	[UIView beginAnimations:nil context:nil];
-//	[self.navigationController.navigationBar setAlpha:kIDImageDetailViewControllerMaxAlpha];
-//	[UIView commitAnimations];
-	
-//    [mainView setFrame:[super fullScreenFrame]];
-//    [bottomBar setFrame:[self frameForToolbar]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -114,6 +109,15 @@
 	
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 	[[UIApplication sharedApplication] setStatusBarHidden:NO];
+	
+	for (FTImagePage *p in imagePages) {
+		
+		[p.imageZoomView setZoomDelegate:nil];
+		[p.imageZoomView.imageView setDelegate:nil];
+		
+		[p.imageZoomView.imageView.imageRequest cancel];
+		[p.imageZoomView.imageView.imageRequest setDelegate:nil];
+	}
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
@@ -130,6 +134,7 @@
         [[UIApplication sharedApplication] setStatusBarHidden:YES];
 	
 	[self.view setBackgroundColor:[UIColor blackColor]];
+//	[self.view setFrame:[[UIScreen mainScreen] bounds]];
 	[bottomBar setFrame:[self frameForToolbar]];
 }
 
@@ -206,36 +211,33 @@
 	[imagePage.activityIndicator centerInSuperView];
 	
 	BOOL canAccess = YES;
-	if ([item.rating isEqualToString:@"adult"]) {
+	if ([item.rating isEqualToString:@"adult"])
 		if (![IDAdultCheck canAccessAdultStuff]) canAccess = NO;
-	}
 
 	if (canAccess) {
-		if ([item.thumbnails count] > 0) {
+		if (([item.thumbnails count] > 0) && ([item.contents count] > 0)) {
 			[imagePage.imageZoomView.imageView enableDebugMode:YES];
 			[imagePage.imageZoomView.imageView setDelegate:(id<FTImageViewDelegate>)self];
 			
-			[imagePage zoomedImageWithUrl:[NSURL URLWithString:[self urlForItem:item]] andDelegate:self];
+			[imagePage zoomedImageWithUrl:[NSURL URLWithString:[self urlForItem:item]]];
 			
 			[imagePage.imageZoomView setShowsHorizontalScrollIndicator:NO];
 			[imagePage.imageZoomView setShowsVerticalScrollIndicator:NO];
 			
 		} else {
 			[imagePage release];
-			if (currentIndex < index) {
+			if (currentIndex < index)
 				return [self pageForIndex:(index + 1)];
-			} else {
+			else
 				return [self pageForIndex:(index - 1)];
-			}
 		}
 	}
-	else {
-		if (currentIndex < index) {
+	else
+		if (currentIndex < index)
 			return [self pageForIndex:(index + 1)];
-		} else {
+		else
 			return [self pageForIndex:(index - 1)];
-		}
-	}
+	
 	[imagePage setPageIndex:index];
 	
 	[imagePages addObject:imagePage];
@@ -254,7 +256,7 @@
 }
 
 - (void)toggleNavigationVisibility {
-//	NSLog(@"applicationFrame before: %@", NSStringFromCGRect([[UIScreen mainScreen] applicationFrame]));
+	NSLog(@"applicationFrame before: %@", NSStringFromCGRect([[UIScreen mainScreen] applicationFrame]));
 	if (isOverlayShowing)
 		isOverlayShowing = NO;
 	else
@@ -293,8 +295,6 @@
 	[message setFrame:[super frameForMessageLabel]];
 	
 	[UIView commitAnimations];
-
-//	NSLog(@"applicationFrame after: %@", NSStringFromCGRect([[UIScreen mainScreen] applicationFrame]));
 }
 
 - (void)toggleShortcut {
@@ -492,7 +492,7 @@
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    actionButton.enabled=false;
+//    actionButton.enabled=false;
 	if (currentIndex > 0)
 		return [self pageForIndex:(currentIndex - 1)];
 	else
@@ -503,7 +503,7 @@
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
 
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    actionButton.enabled=false;
+//    actionButton.enabled=false;
 	return [self pageForIndex:(currentIndex + 1)];
 	
 	if (currentIndex < [listThroughData count])
@@ -543,6 +543,13 @@
 	
 	if (count > 3) {
 		for (NSInteger i = 0; i < (count - 3); i++) {
+			
+			[[[imagePages objectAtIndex:i] imageZoomView] setZoomDelegate:nil];
+			[[[imagePages objectAtIndex:i] imageZoomView].imageView setDelegate:nil];
+			
+			[[[imagePages objectAtIndex:i] imageZoomView].imageView.imageRequest cancel];
+			[[[imagePages objectAtIndex:i] imageZoomView].imageView.imageRequest setDelegate:nil];
+			
 			[imagePages removeObjectAtIndex:i];
 		}
 	}
@@ -550,31 +557,25 @@
 
 - (void)pageScrollView:(FTPageScrollView *)scrollView didMakePageCurrent:(FTImagePage *)imagePage {
 //	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-	
-	if (![[imagePage gestureRecognizers] containsObject:doubletap]) {
-		if (doubletap) {
-			doubletap = nil;
-			[doubletap release];
-		}
-		doubletap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewTwice:)];
-		[doubletap setNumberOfTapsRequired:2];
-		[imagePage addGestureRecognizer:doubletap];
-		[doubletap release];
+
+	if (doubletap) {
+		[doubletap removeTarget:nil action:NULL];
+		doubletap = nil;
 	}
+	doubletap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewTwice:)];
+	[doubletap setNumberOfTapsRequired:2];
+	[imagePage addGestureRecognizer:doubletap];
 	
-	if (![[mainView gestureRecognizers] containsObject:tap]) {
-		if (tap) {
-			tap = nil;
-			[tap release];
-		}
-		tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewOnce:)];
-		[tap requireGestureRecognizerToFail:doubletap];
-		[mainView addGestureRecognizer:tap];
-		[tap release];
-	}	
+	if (tap) {
+		[tap removeTarget:nil action:NULL];
+		tap = nil;
+	}
+
+	tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewOnce:)];
+	[tap requireGestureRecognizerToFail:doubletap];
+	[imagePage addGestureRecognizer:tap];
 		
 	currentIndex = imagePage.pageIndex;
-//	NSLog(@"didMakePageCurrent: %d", currentIndex);
 	
 	[self updateTitle];
 	[self maintainPages];
@@ -612,6 +613,9 @@
 	[listThroughData release];
 	[shortcutView release];
 	[currentImage release];
+	
+	[tap release];
+	[doubletap release];
 	
     [super dealloc];
 }

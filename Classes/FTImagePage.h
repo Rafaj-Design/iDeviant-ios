@@ -8,30 +8,30 @@
 
 #import <Foundation/Foundation.h>
 #import "FTPage.h"
-#import "FTImageZoomView.h"
-#import "FTImageView.h"
+#import "IDImageZoomView.h"
+#import "IDImageView.h"
 
 
-@interface FTImagePage : FTPage {
+@interface FTImagePage : FTPage <IDImageViewDelegate, IDImageZoomViewDelegate> {
 	
-	FTImageView *imageView;
+	IDImageView *imageView;
 	
-	FTImageZoomView *imageZoomView;
+	IDImageZoomView *imageZoomView;
 	
 	UIActivityIndicatorView *activityIndicator;
 	
 }
 
-@property (nonatomic, retain) FTImageView *imageView;
+@property (nonatomic, retain) IDImageView *imageView;
 
-@property (nonatomic, retain) FTImageZoomView *imageZoomView;
+@property (nonatomic, retain) IDImageZoomView *imageZoomView;
 
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicator;
 
 
 - (void)imageWithContentsOfFile:(NSString *)path;
 
-- (void)imageNamed:(NSString *)imageName withDelegate:(id <FTImageViewDelegate, FTImageZoomViewDelegate>)delegate;
+- (void)imageNamed:(NSString *)imageName withDelegate:(id <IDImageViewDelegate, IDImageZoomViewDelegate>)delegate;
 
 - (void)imageNamed:(NSString *)imageName;
 
@@ -39,11 +39,12 @@
 
 - (void)zoomedImageWithContentsOfFile:(NSString *)path;
 
-- (void)zoomedImageNamed:(NSString *)imageName withDelegate:(id <FTImageViewDelegate, FTImageZoomViewDelegate>)delegate;
+- (void)zoomedImageNamed:(NSString *)imageName withDelegate:(id <IDImageViewDelegate, IDImageZoomViewDelegate>)delegate;
 
 - (void)zoomedImageNamed:(NSString *)imageName;
 
-- (void)zoomedImageWithUrl:(NSURL *)url andDelegate:(id <FTImageViewDelegate, FTImageZoomViewDelegate>)delegate;
+- (void)zoomedImageWithUrl:(NSURL *)url andDelegate:(id <IDImageViewDelegate, IDImageZoomViewDelegate>)delegate;
+- (void)zoomedImageWithUrl:(NSURL *)url;
 
 
 @end

@@ -134,6 +134,8 @@
 		66AC01C014D82FEF00F6BD36 /* DA_bg-p.png in Resources */ = {isa = PBXBuildFile; fileRef = 66AC01BC14D82FEF00F6BD36 /* DA_bg-p.png */; };
 		66AC01C114D82FEF00F6BD36 /* DA_bg-p@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 66AC01BD14D82FEF00F6BD36 /* DA_bg-p@2x.png */; };
 		66CD733514C5D2C900DB0E02 /* IDLang.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CD733414C5D2C900DB0E02 /* IDLang.m */; };
+		66DD9E0314D957F0003D85BF /* IDImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DD9E0214D957F0003D85BF /* IDImageView.m */; };
+		66DD9E0714D95BAF003D85BF /* IDImageZoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DD9E0614D95BAF003D85BF /* IDImageZoomView.m */; };
 		66FDBC3814CEAA9900AB2A40 /* DA_shade-land.png in Resources */ = {isa = PBXBuildFile; fileRef = 66FDBC3714CEAA9900AB2A40 /* DA_shade-land.png */; };
 		66FDBC3B14CEAAA200AB2A40 /* DA_shade-land@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 66FDBC3A14CEAAA200AB2A40 /* DA_shade-land@2x.png */; };
 		66FDBC4414D0182C00AB2A40 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 66FDBC4314D0182C00AB2A40 /* FBDialog.bundle */; };
@@ -385,6 +387,10 @@
 		66AC01BD14D82FEF00F6BD36 /* DA_bg-p@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DA_bg-p@2x.png"; sourceTree = "<group>"; };
 		66CD733314C5D2C900DB0E02 /* IDLang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDLang.h; sourceTree = "<group>"; };
 		66CD733414C5D2C900DB0E02 /* IDLang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDLang.m; sourceTree = "<group>"; };
+		66DD9E0114D957F0003D85BF /* IDImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDImageView.h; sourceTree = "<group>"; };
+		66DD9E0214D957F0003D85BF /* IDImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDImageView.m; sourceTree = "<group>"; };
+		66DD9E0514D95BAF003D85BF /* IDImageZoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDImageZoomView.h; sourceTree = "<group>"; };
+		66DD9E0614D95BAF003D85BF /* IDImageZoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDImageZoomView.m; sourceTree = "<group>"; };
 		66EAE67914BF133600DE3A2A /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
 		66FDBC3714CEAA9900AB2A40 /* DA_shade-land.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DA_shade-land.png"; sourceTree = "<group>"; };
 		66FDBC3A14CEAAA200AB2A40 /* DA_shade-land@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DA_shade-land@2x.png"; sourceTree = "<group>"; };
@@ -839,6 +845,7 @@
 				4CD28A7013AA88030023F034 /* IDHorizontalItems.m */,
 				2BC5E168138E494800DB931C /* FTDynamicContentView.h */,
 				2BC5E169138E494800DB931C /* FTDynamicContentView.m */,
+				66DD9DFE14D957C8003D85BF /* UIImageView */,
 				66AC01B014D807CD00F6BD36 /* UIScrollView */,
 				66AC01AD14D8071C00F6BD36 /* UITableViewCell */,
 				66AC01AC14D806EB00F6BD36 /* UIToolbar */,
@@ -964,6 +971,7 @@
 		66AC01B014D807CD00F6BD36 /* UIScrollView */ = {
 			isa = PBXGroup;
 			children = (
+				66DD9E0414D95B87003D85BF /* FTZoomView */,
 				2BA761031375CBF1006B1A65 /* FTPagesScrollView.h */,
 				2BA761041375CBF1006B1A65 /* FTPagesScrollView.m */,
 			);
@@ -1038,6 +1046,32 @@
 				4C98AF1613943CBF00F567C9 /* IDFavoriteCategoriesTableViewCell.xib */,
 			);
 			name = XIBs;
+			sourceTree = "<group>";
+		};
+		66DD9DFE14D957C8003D85BF /* UIImageView */ = {
+			isa = PBXGroup;
+			children = (
+				66DD9E0014D957D4003D85BF /* FTImageView */,
+			);
+			name = UIImageView;
+			sourceTree = "<group>";
+		};
+		66DD9E0014D957D4003D85BF /* FTImageView */ = {
+			isa = PBXGroup;
+			children = (
+				66DD9E0114D957F0003D85BF /* IDImageView.h */,
+				66DD9E0214D957F0003D85BF /* IDImageView.m */,
+			);
+			name = FTImageView;
+			sourceTree = "<group>";
+		};
+		66DD9E0414D95B87003D85BF /* FTZoomView */ = {
+			isa = PBXGroup;
+			children = (
+				66DD9E0514D95BAF003D85BF /* IDImageZoomView.h */,
+				66DD9E0614D95BAF003D85BF /* IDImageZoomView.m */,
+			);
+			name = FTZoomView;
 			sourceTree = "<group>";
 		};
 		C7E02F7E12DF0ABC0098AAE6 /* Images */ = {
@@ -1340,6 +1374,8 @@
 				4CEB1C331403B3F600B70C98 /* FTImagePage.m in Sources */,
 				4C8AD6021404F5470078DE52 /* IDLoginViewController.m in Sources */,
 				66CD733514C5D2C900DB0E02 /* IDLang.m in Sources */,
+				66DD9E0314D957F0003D85BF /* IDImageView.m in Sources */,
+				66DD9E0714D95BAF003D85BF /* IDImageZoomView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

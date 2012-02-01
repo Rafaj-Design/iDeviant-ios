@@ -23,7 +23,7 @@
 
 @end
 
-@interface IDImageDetailViewController : IDViewController <UIActionSheetDelegate, FTImageViewDelegate, FTImageZoomViewDelegate, FTPageScrollViewDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate> {
+@interface IDImageDetailViewController : IDViewController <UIActionSheetDelegate, FTPageScrollViewDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate> {
 	
 	id <IDImageDetailViewControllerDelegate> delegate;
 	

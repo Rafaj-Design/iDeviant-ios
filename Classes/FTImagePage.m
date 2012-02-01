@@ -7,6 +7,7 @@
 //
 
 #import "FTImagePage.h"
+#import "IDImageView.h"
 
 
 @implementation FTImagePage
@@ -22,8 +23,12 @@
 	if (self) {
 		activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
 		[activityIndicator centerInSuperView];
+		[activityIndicator setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin];
+		
 		[activityIndicator startAnimating];
 		[self addSubview:activityIndicator];
+		
+		[self setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
 	}
 	return self;
 }
@@ -34,12 +39,13 @@
 	[self.imageView setImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:path]]];
 }
 
-- (void)imageNamed:(NSString *)imageName withDelegate:(id <FTImageViewDelegate, FTImageZoomViewDelegate>)delegate {
+- (void)imageNamed:(NSString *)imageName withDelegate:(id <IDImageViewDelegate, IDImageZoomViewDelegate>)delegate {
 	if (!imageView) {
-		imageView = [[FTImageView alloc] initWithFrame:self.bounds];
+		imageView = [[IDImageView alloc] initWithFrame:self.bounds];
 		[imageView setContentMode:UIViewContentModeScaleAspectFit];
 		[imageView setBackgroundColor:[UIColor clearColor]];
-		[imageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+		[imageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+		[imageView setDelegate:(id<IDImageViewDelegate>)self];
 		[self addSubview:imageView];
 	}
 	if (imageName) {
@@ -52,7 +58,7 @@
 	[self imageNamed:imageName withDelegate:nil];
 }
 
-- (void)imageWithUrl:(NSURL *)url andDelegate:(id <FTImageViewDelegate, FTImageZoomViewDelegate>)delegate {
+- (void)imageWithUrl:(NSURL *)url andDelegate:(id <IDImageViewDelegate, IDImageZoomViewDelegate>)delegate {
 	[self imageNamed:nil];
 	if (delegate) {
 		[imageZoomView setZoomDelegate:delegate];
@@ -71,16 +77,16 @@
 	[self.imageView setImage:[UIImage imageWithData:[NSData dataWithContentsOfFile:path]]];
 }
 
-- (void)zoomedImageNamed:(NSString *)imageName withDelegate:(id <FTImageViewDelegate, FTImageZoomViewDelegate>)delegate {
+- (void)zoomedImageNamed:(NSString *)imageName withDelegate:(id <IDImageViewDelegate, IDImageZoomViewDelegate>)delegate {
 	if (!imageZoomView) {
-		imageZoomView = [[FTImageZoomView alloc] initWithFrame:self.bounds];
+		imageZoomView = [[IDImageZoomView alloc] initWithFrame:self.bounds];
 		[imageZoomView setContentMode:UIViewContentModeScaleAspectFit];
 		[imageZoomView setBackgroundColor:[UIColor clearColor]];
 		if (delegate) {
 			[imageZoomView setZoomDelegate:delegate];
 			[imageZoomView.imageView setDelegate:delegate];
 		}
-		[imageZoomView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+		[imageZoomView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
 		[self addSubview:imageZoomView];
 	}
 	if (imageName) {
@@ -93,7 +99,7 @@
 	[self zoomedImageNamed:imageName withDelegate:nil];
 }
 
-- (void)zoomedImageWithUrl:(NSURL *)url andDelegate:(id <FTImageViewDelegate, FTImageZoomViewDelegate>)delegate {
+- (void)zoomedImageWithUrl:(NSURL *)url andDelegate:(id <IDImageViewDelegate, IDImageZoomViewDelegate>)delegate {
 	[self zoomedImageNamed:nil];
 	[imageZoomView setImage:nil];
 	if (delegate) {
@@ -103,9 +109,42 @@
 	[imageZoomView.imageView loadImageFromUrl:[url absoluteString]];
 }
 
+- (void)zoomedImageWithUrl:(NSURL *)url {
+	[self zoomedImageNamed:nil];
+	[imageZoomView setImage:nil];
+	
+	[imageZoomView setZoomDelegate:(id <IDImageZoomViewDelegate>)self];
+	[imageZoomView.imageView setDelegate:(id <IDImageViewDelegate>)self];
+
+	[imageZoomView.imageView loadImageFromUrl:[url absoluteString]];
+}
+
+
+#pragma mark - IDImageViewDelegate
+
+-(void)imageViewDidStartLoadingImage:(IDImageView *)imgView{
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+	
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
+
+- (void)imageView:(IDImageView *)imgView didFinishLoadingImage:(UIImage *)image {
+	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+	
+	[activityIndicator stopAnimating];
+	[activityIndicator removeFromSuperview];
+
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
 #pragma mark Memory management
 
 - (void)dealloc {
+	
+	[imageZoomView.imageView.imageRequest cancel];
+	[imageZoomView.imageView.imageRequest setDelegate:nil];
+	
+	
 	[imageView release];
 	[imageZoomView release];
 	[super dealloc];
