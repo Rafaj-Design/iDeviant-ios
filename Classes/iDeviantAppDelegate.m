@@ -87,9 +87,9 @@ static NSString* kAppId = @"118349561582677";
         facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
 	}
 	
-	if (![facebook isSessionValid]) {
-		[facebook authorize:nil];
-	}
+//	if (![facebook isSessionValid]) {
+//		[facebook authorize:nil];
+//	}
 	
 	
 	fbParams = [[NSMutableDictionary alloc] init];
@@ -226,6 +226,8 @@ static NSString* kAppId = @"118349561582677";
 
 - (void)postFbMessageWithObject:(MWFeedItem *)item {
 	
+	
+	
     [fbParams removeAllObjects];
 	
 	[fbParams setObject:[item title] forKey:@"name"];
@@ -238,9 +240,8 @@ static NSString* kAppId = @"118349561582677";
 		NSArray *permissions = [[NSArray alloc] initWithObjects:@"publish_stream", nil];
 		[facebook authorize:permissions];
 		[permissions release];
-		[facebook dialog:@"feed" andParams:fbParams andDelegate:self];
 	} else {
-		[facebook dialog:@"feed" andParams:fbParams andDelegate:self];
+		[facebook dialog:@"stream.publish" andParams:fbParams andDelegate:self];
 	}
 }
 
@@ -252,7 +253,9 @@ static NSString* kAppId = @"118349561582677";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:[facebook accessToken] forKey:@"FBAccessTokenKey"];
     [defaults setObject:[facebook expirationDate] forKey:@"FBExpirationDateKey"];
-    [defaults synchronize];    
+    [defaults synchronize];
+	
+	[facebook dialog:@"stream.publish" andParams:fbParams andDelegate:self];
 }
 
 -(void)fbDidNotLogin:(BOOL)cancelled {
