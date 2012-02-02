@@ -282,6 +282,7 @@
 	if (alpha == 0.0) {
 		a = kIDImageDetailViewControllerMaxAlpha;
 		
+		
 		[self.navigationController.navigationBar setHidden:NO];
 		
 		[bottomBar setHidden:NO];

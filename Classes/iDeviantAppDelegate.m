@@ -15,7 +15,7 @@
 #import "ASIDownloadCache.h"
 //#import "JCO.h"
 
-#import "FBConnect.h"
+//#import "FBConnect.h"
 
 #import <objc/runtime.h> 
 #import <objc/message.h>
@@ -63,7 +63,6 @@ static NSString* kAppId = @"118349561582677";
 	}
 	
 	timestamp = [[FTDownload alloc] initWithPath:@"http://staging.fuerteint.com/projects/ideviant/timestamp.php"];
-//	[timestamp setDownloadToFilePath:path];
 	[timestamp setDelegate:(id<FTDownloadDelegate>)self];
 	[timestamp startDownload];
 	
@@ -75,27 +74,24 @@ static NSString* kAppId = @"118349561582677";
 	[categories setDownloadToFilePath:path];
 	[categories setDelegate:(id<FTDownloadDelegate>)self];
 	
-	
-//	// starting Flurry tracking
-//	if (kSystemTrackingFlurryEnableTracking) {
-//		if (kDebug && [kSystemTrackingFlurryAPICode isEqualToString:@"app-code-here"]) NSLog(@"Configuration error: Please check Flurry API code!"); 
-//		[FlurryAPI startSession:kSystemTrackingFlurryAPICode];
-//		
-//		// Track information about language
-//		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//		NSArray *languages = [defaults objectForKey:@"AppleLanguages"];
-//		NSString *currentLanguage = [languages objectAtIndex:0];
-//		
-//		[FlurryAPI logEvent:[NSString stringWithFormat:@"Locale id: %@", [[NSLocale currentLocale] localeIdentifier]]];
-//		[FlurryAPI logEvent:[NSString stringWithFormat:@"Current language: : %@", currentLanguage]];
-//	}
-	
-	// Starting AppiRater
 	if (kSystemApiRaterDebug || kSystemApiRaterEnabled) {
 		[Appirater appLaunched];
 	}
 		
 	facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:(id<FBSessionDelegate>)self];
+	
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	if ([defaults objectForKey:@"FBAccessTokenKey"] 
+        && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+	}
+	
+	if (![facebook isSessionValid]) {
+		[facebook authorize:nil];
+	}
+	
+	
 	fbParams = [[NSMutableDictionary alloc] init];
 		
     // Override point for customization after application launch you bloody maggots.
@@ -103,10 +99,11 @@ static NSString* kAppId = @"118349561582677";
 	navigationController = [[FTNavigationViewController alloc] initWithRootViewController:c];
 	[c release];
 	
-	[window setRootViewController:navigationController];
+	
     
     // Add the navigation controller's view to the window and display.
-//    [window addSubview:navigationController.view];
+
+	[window setRootViewController:navigationController];
     [window makeKeyAndVisible];
 	
 	// Jira bug tracking system
@@ -124,6 +121,16 @@ static NSString* kAppId = @"118349561582677";
      Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
      */
 	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
+	
+	NSInteger i = [[[self navigationController] viewControllers] count];
+	if (i > 0)
+		i -= 1;
+	
+	if ([[[[self navigationController] viewControllers] objectAtIndex:i] class] == [IDImageDetailViewController class]) {
+		NSLog(@"hojreka");
+		//tuduuuuuuuuu when you return to IDImageDet.. and there is no statusbar it positions navbar to 0.0... instead 0.20..
+		[(IDImageDetailViewController *)[[[self navigationController] viewControllers] objectAtIndex:i] toggleNavigationVisibility]; 
+	}
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -157,6 +164,7 @@ static NSString* kAppId = @"118349561582677";
 	if ([[[[self navigationController] viewControllers] objectAtIndex:i] class] == [IDImageDetailViewController class]) {
 		NSLog(@"hojreka");
 		//tuduuuuuuuuu when you return to IDImageDet.. and there is no statusbar it positions navbar to 0.0... instead 0.20..
+//		[(IDImageDetailViewController *)[[[self navigationController] viewControllers] objectAtIndex:i] toggleNavigationVisibility];
 	}
 }
 
@@ -204,42 +212,6 @@ static NSString* kAppId = @"118349561582677";
 
 #pragma mark FBSessionDelegate
 
-//NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-//                               @"Share on Facebook",  @"user_message_prompt",
-//                               actionLinksStr, @"action_links",
-//                               attachmentStr, @"attachment",
-//                               message,@"message",
-//                               nil];
-//
-//
-//[_facebook dialog:@"feed"
-//        andParams:params
-//      andDelegate:self];
-
-//- (void)authorize:(NSArray *)permissions
-//  urlSchemeSuffix:(NSString *)urlSchemeSuffix {
-//	self.urlSchemeSuffix = urlSchemeSuffix;
-//	self.permissions = permissions;
-//	
-//	[self authorizeWithFBAppAuth:YES safariAuth:YES];
-//}
-//
-//void Swizzle(Class c, SEL orig, SEL new)
-//{
-//    Method origMethod = class_getInstanceMethod(c, orig);
-//    Method newMethod = class_getInstanceMethod(c, new);
-//    if(class_addMethod(c, orig, method_getImplementation(newMethod), method_getTypeEncoding(newMethod)))
-//        class_replaceMethod(c, new, method_getImplementation(origMethod), method_getTypeEncoding(origMethod));
-//    else
-//		method_exchangeImplementations(origMethod, newMethod);
-//}
-//
-//void function (id self, SEL _cmd, id arg) {
-//	[self setPermissions:[NSArray arrayWithObjects:@"offline_access", @"publish_stream", nil]];
-//	[self setUrlSchemeSuffix:nil];
-//	[self authorizeWithFBAppAuth:NO safariAuth:NO];
-//}
-
 - (NSString *)urlForItem:(MWFeedItem *)item {
 	
 	NSString *contentUrl = [[item.contents objectAtIndex:0] objectForKey:@"url"];
@@ -253,30 +225,22 @@ static NSString* kAppId = @"118349561582677";
 }
 
 - (void)postFbMessageWithObject:(MWFeedItem *)item {
+	
     [fbParams removeAllObjects];
 	
 	[fbParams setObject:[item title] forKey:@"name"];
 	[fbParams setObject:[self urlForItem:item] forKey:@"picture"];
 	[fbParams setObject:[item link] forKey:@"link"];
 	[fbParams setObject:[[item copyright] objectForKey:@"name"] forKey:@"caption"];
-	[fbParams setObject:[item summary] forKey:@"description"];
-	
-//	Swizzle([Facebook class], <#SEL orig#>, <#SEL new#>)
-//	IMP original = class_replaceMethod([Facebook class], @selector(authorize:urlSchemeSuffix:), (IMP)function, "v@:");
-//	class_replaceMethod([Facebook class], @selector(authorize:urlSchemeSuffix:), (IMP)function, "v@:");
-	
-//	class_addMethod([Facebook class], @selector(anotherMethod:), original, "v@:");
-	
-	
-	facebook.accessToken    = [[NSUserDefaults standardUserDefaults] stringForKey:@"FBAccessToken"];
-	facebook.expirationDate = (NSDate *) [[NSUserDefaults standardUserDefaults] objectForKey:@"FBExpirationDate"];
+	[fbParams setObject:[item summary] forKey:@"description"];	
 	
 	if (![facebook isSessionValid]) {
-		NSArray *permissions = [NSArray arrayWithObjects:@"offline_access", @"publish_stream", nil];
+		NSArray *permissions = [[NSArray alloc] initWithObjects:@"publish_stream", nil];
 		[facebook authorize:permissions];
-	}
-	else {
-//		[facebook dialog:@"feed" andParams:fbParams andDelegate:self];
+		[permissions release];
+		[facebook dialog:@"feed" andParams:fbParams andDelegate:self];
+	} else {
+		[facebook dialog:@"feed" andParams:fbParams andDelegate:self];
 	}
 }
 
@@ -288,15 +252,7 @@ static NSString* kAppId = @"118349561582677";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:[facebook accessToken] forKey:@"FBAccessTokenKey"];
     [defaults setObject:[facebook expirationDate] forKey:@"FBExpirationDateKey"];
-    [defaults synchronize];	
-	
-    if (fbParams) {
-        [facebook dialog:@"feed" andParams:fbParams andDelegate:self];
-    }
-    else {
-//        NSLog(@"No params");
-    }
-    
+    [defaults synchronize];    
 }
 
 -(void)fbDidNotLogin:(BOOL)cancelled {

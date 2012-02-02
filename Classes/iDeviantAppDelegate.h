@@ -18,6 +18,7 @@
     FTNavigationViewController *navigationController;
 	
 	Facebook *facebook;
+	
 	NSMutableDictionary *fbParams;
 	
 	FTDownload *timestamp, *categories;
