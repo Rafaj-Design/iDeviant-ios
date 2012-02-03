@@ -129,7 +129,7 @@ static NSString* kAppId = @"118349561582677";
 	if ([[[[self navigationController] viewControllers] objectAtIndex:i] class] == [IDImageDetailViewController class]) {
 		NSLog(@"hojreka");
 		//tuduuuuuuuuu when you return to IDImageDet.. and there is no statusbar it positions navbar to 0.0... instead 0.20..
-		[(IDImageDetailViewController *)[[[self navigationController] viewControllers] objectAtIndex:i] toggleNavigationVisibility]; 
+//		[(IDImageDetailViewController *)[[[self navigationController] viewControllers] objectAtIndex:i] toggleNavigationVisibility]; 
 	}
 }
 

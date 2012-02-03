@@ -34,7 +34,7 @@
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
-	[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
+	[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
 	[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
 	
 //	[self.view setFrame:[[UIScreen mainScreen] applicationFrame]];
@@ -45,7 +45,7 @@
 	[self.view setBackgroundColor:[UIColor blackColor]];
 	
 	[self.navigationController.navigationBar setTranslucent:YES];
-	self.navigationController.wantsFullScreenLayout = NO;
+//	self.navigationController.wantsFullScreenLayout = NO;
 	
 	[UIView beginAnimations:nil context:nil];
 	[self.navigationController.navigationBar setAlpha:kIDImageDetailViewControllerMaxAlpha];
@@ -260,15 +260,20 @@
 
 #pragma mark - Navigation animations
 
-- (void)finishNavigationToggle {
-	if (bottomBar.alpha == 0) {
-		[self.navigationController.navigationBar setHidden:YES];
-		[bottomBar setHidden:YES];
-	}
-}
-
 - (void)toggleNavigationVisibility {
 	NSLog(@"applicationFrame before: %@", NSStringFromCGRect([[UIScreen mainScreen] applicationFrame]));
+	
+//	[self.navigationController.navigationBar setNeedsLayout];
+	
+//	[self.navigationController.view setNeedsLayout];
+	
+//	self.navigationController.navigationBar setFrame:CG
+	
+//	CGRect frame = self.navigationController.view.frame;
+
+	
+	
+	
 	if (isOverlayShowing)
 		isOverlayShowing = NO;
 	else
@@ -276,36 +281,44 @@
 
 	float a = 0.0;
 	float alpha = self.navigationController.navigationBar.alpha;
-	
-	BOOL hide = NO;
 
 	if (alpha == 0.0) {
 		a = kIDImageDetailViewControllerMaxAlpha;
 		
-		
+		[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
 		[self.navigationController.navigationBar setHidden:NO];
 		
 		[bottomBar setHidden:NO];
-		hide = NO;
 	}
 	else if (alpha == 1.0) {
 		a = 0.0;
-		hide = YES;
+		[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
 	} else if (alpha == kIDImageDetailViewControllerMaxAlpha) {
-		hide = YES;
+		[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
 	}
 	
-	[[UIApplication sharedApplication] setStatusBarHidden:hide];
+	
+	if (a == 0) {
+		[self.navigationController.navigationBar setHidden:YES];
+		[bottomBar setHidden:YES];
+	} else {
+		[self.navigationController.navigationBar setHidden:NO];
+		[bottomBar setHidden:NO];
+	}
+	
+	CGRect frame = self.navigationController.navigationBar.frame;
+	
+	if (frame.origin.y == 0) {
+		frame.origin.y = [[UIApplication sharedApplication] statusBarFrame].size.height;
+		self.navigationController.navigationBar.frame = frame;
+	}
 
 	[UIView beginAnimations:nil context:nil];
 	[UIView setAnimationDuration:0.1];
 	[UIView setAnimationDelegate:self];
-	[UIView setAnimationDidStopSelector:@selector(finishNavigationToggle)];
 
 	[self.navigationController.navigationBar setAlpha:a];
-	
 	[bottomBar setAlpha:a];
-	[message setFrame:[super frameForMessageLabel]];
 	
 	[UIView commitAnimations];
 }

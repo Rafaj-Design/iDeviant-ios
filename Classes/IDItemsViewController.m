@@ -82,7 +82,7 @@
 - (void)viewDidUnload {
 	[super viewDidUnload];
 	
-	[[UIApplication sharedApplication] setStatusBarHidden:NO];
+//	[[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
 
 #pragma mark - UITableViewDelegate

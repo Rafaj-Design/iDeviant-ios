@@ -53,7 +53,7 @@
 - (void)abortParsingEarly;
 - (void)parsingFinished;
 - (void)parsingFailedWithErrorCode:(int)code andDescription:(NSString *)description;
-- (void)startParsingData:(NSData *)data textEncodingName:(NSString *)textEncodingName;
+- (void)startParsingData:(NSData *)data;
 
 // Dispatching to Delegate
 - (void)dispatchFeedInfoToDelegate;

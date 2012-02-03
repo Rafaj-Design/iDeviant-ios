@@ -18,6 +18,7 @@
 #import "IDJustItemsViewController.h"
 #import "FTText.h"
 #import "IDConfig.h"
+#import <dispatch/dispatch.h>
 
 @implementation IDViewController
 
@@ -111,6 +112,28 @@
 			}
 		}
 	}
+	
+	if (table) {
+		if (![NSStringFromClass(self.class) isEqualToString:@"IDHomeSortingViewController"]) {
+			NSMutableArray *cells = [[NSMutableArray alloc] init];
+			for (NSInteger j = 0; j < [table numberOfSections]; ++j)
+			{
+				for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i)
+				{
+					if ([table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]] != nil)
+						[cells addObject:[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]]];
+				}
+			}
+			
+			for (IDTableViewCell *cell in cells) {
+				if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
+					[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade-land"]]];
+				else {
+					[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
+				}
+			}
+		}
+	}
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -136,6 +159,10 @@
 		[tapGesture removeTarget:nil action:NULL];
 		[tapGesture setDelegate:nil];
 		tapGesture = nil;
+	}
+	
+	if (feedParser) {
+		[feedParser setDelegate:nil];
 	}
 }
 
@@ -301,15 +328,28 @@
 
 #pragma mark - Getting data
 
+- (void)prase:(MWFeedParser *)parser {
+	[parser parse];
+}
+
 - (void)getDataForParams:(NSString *)params {
-		NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@", params] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-		
-		NSURL *feedURL = [NSURL URLWithString:url];
-		feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
-		feedParser.delegate = self;
-		feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
-		feedParser.connectionType = ConnectionTypeAsynchronously;
+	NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@", params] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	
+	NSURL *feedURL = [NSURL URLWithString:url];
+	feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
+	feedParser.delegate = self;
+	feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
+	feedParser.connectionType = ConnectionTypeAsynchronously;
+
+	
+//	[NSThread detachNewThreadSelector:@selector(prase:) toTarget:nil withObject:feedParser];
+	
+	
+//	[self performSelectorInBackground:@selector(prase:) withObject:feedParser];
+	
+//	dispatch_async(backgroundQueue, ^(void){
 		[feedParser parse];
+//	});
 }
 
 - (void)getDataForSearchString:(NSString *)search andCategory:(NSString *)category {	
@@ -333,11 +373,23 @@
 	
 	NSURL *feedURL = [NSURL URLWithString:url];
 	[feedParser release];
-	feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
-	[feedParser setDelegate:self];
-	feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
-	feedParser.connectionType = ConnectionTypeAsynchronously;
-	[feedParser parse];
+	
+//	dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+		feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
+		[feedParser setDelegate:self];
+		feedParser.feedParseType = ParseTypeFull; // Parse feed info and all items
+		feedParser.connectionType = ConnectionTypeAsynchronously;
+//		[feedParser performSelectorOnMainThread:@selector(parse) withObject:nil waitUntilDone:NO];
+	NSLog(@"neco");
+		[feedParser parse];
+	NSLog(@"neco2");
+//	[NSThread detachNewThreadSelector:@selector(prase:) toTarget:self withObject:feedParser];
+
+//		dispatch_async( dispatch_get_main_queue(), ^{
+//			NSLog(@"Fin getdata");
+//		});
+//	});
 }
 
 - (void)getDataForCategory:(NSString *)category {
@@ -687,7 +739,7 @@
 #pragma mark - MWFeedParserDelegate
 
 - (void)feedParserDidStart:(MWFeedParser *)parser {
-//	NSLog(@"Started Parsing: %@", parser.url);
+	NSLog(@"Started Parsing: %@", parser.url);
 	[parsedItems removeAllObjects];
 	[table setUserInteractionEnabled:NO];
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
@@ -704,7 +756,7 @@
 }
 
 - (void)feedParserDidFinish:(MWFeedParser *)parser {
-//	NSLog(@"Finished Parsing%@", (parser.stopped ? @" (Stopped)" : @""));
+	NSLog(@"Finished Parsing%@", (parser.stopped ? @" (Stopped)" : @""));
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	NSArray *arr = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
 	[self setData:[parsedItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:arr]]];
@@ -765,6 +817,7 @@
 #pragma mark - Memory management
 
 - (void)dealloc {
+	
 	[table release];
 	[data release];
 	[categoriesData release];

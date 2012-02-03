@@ -178,21 +178,7 @@
 			success = NO;
 		}
 		
-	} else {
-	
-		// Sync
-		NSURLResponse *response = nil;
-		NSError *error = nil;
-		NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-		if (data && !error) {
-			[self startParsingData:data textEncodingName:[response textEncodingName]]; // Process
-		} else {
-			[self parsingFailedWithErrorCode:MWErrorCodeConnectionFailed 
-							  andDescription:[NSString stringWithFormat:@"Synchronous connection failed to URL: %@", url]];
-			success = NO;
-		}
-		
-	}
+	} 
 	
 	// Cleanup & return
 	[request release];
@@ -201,7 +187,10 @@
 }
 
 // Begin XML parsing
-- (void)startParsingData:(NSData *)data textEncodingName:(NSString *)textEncodingName {
+- (void)startParsingData:(NSData *)data {
+	NSLog(@"shajtz");
+//	sleep(10);
+	NSString *textEncodingName = self.asyncTextEncodingName;
 	if (data && !feedParser) {
 		
 		// Create feed info
@@ -282,7 +271,13 @@
 				// Parse!
 				feedParser.delegate = self;
 				[feedParser setShouldProcessNamespaces:YES];
+				NSLog(@"A");
 				[feedParser parse];
+
+//				[feedParser performSelectorInBackground:@selector(parse) withObject:nil];
+//				[feedParser performSelectorOnMainThread:@selector(parse) withObject:nil waitUntilDone:NO];
+				
+				NSLog(@"B");
 				self.feedParser = nil; // Release after parse
 				
 			} else {
@@ -293,6 +288,11 @@
 		}
 
 	}
+	
+	// Cleanup
+    self.urlConnection = nil;
+    self.asyncData = nil;
+	self.asyncTextEncodingName = nil;
 }
 
 // Abort parsing early if we're ignoring feed items
@@ -424,12 +424,14 @@
 	MWLog(@"MWFeedParser: Connection successful... received %d bytes of data", [asyncData length]);
 	
 	// Parse
-	if (!stopped) [self startParsingData:asyncData textEncodingName:self.asyncTextEncodingName];
+	if (!stopped) {
+
+				
+		[self performSelectorInBackground:@selector(startParsingData:) withObject:asyncData];
+
+	}
 	
-    // Cleanup
-    self.urlConnection = nil;
-    self.asyncData = nil;
-	self.asyncTextEncodingName = nil;
+
 
 }
 
@@ -617,7 +619,10 @@
 	if (currentText) {
 		
 		// Remove newlines and whitespace from currentText
-		NSString *processedText = [currentText stringByRemovingNewLinesAndWhitespace];
+		//NSString *processedText = [currentText stringByRemovingNewLinesAndWhitespace];
+		NSCharacterSet *newLineAndWhitespaceCharacters = [NSCharacterSet characterSetWithCharactersInString:
+														  [NSString stringWithFormat:@" \t\n\r%C%C%C%C", 0x0085, 0x000C, 0x2028, 0x2029]];
+		NSString *processedText = [currentText stringByTrimmingCharactersInSet:newLineAndWhitespaceCharacters];
 
 		// Process
 		switch (feedType) {
@@ -855,6 +860,7 @@
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser {
 	MWXMLLog(@"NSXMLParser: parserDidStartDocument");
+	NSLog(@"NSXMLParser: parserDidStartDocument");
 	
 	// Debug Log
 	MWLog(@"MWFeedParser: Parsing started");
@@ -867,6 +873,7 @@
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser {
 	MWXMLLog(@"NSXMLParser: parserDidEndDocument");
+	NSLog(@"NSXMLParser: parserDidEndDocument");
 
 	// Debug Log
 	MWLog(@"MWFeedParser: Parsing finished");
