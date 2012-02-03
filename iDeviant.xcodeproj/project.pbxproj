@@ -1413,7 +1413,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Adam Horacek (H965LZ6656)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1429,7 +1429,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = iDeviant;
-				PROVISIONING_PROFILE = "F0BED3CD-A9D5-4FFF-910A-DE29276F15E4";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
 			name = Debug;
@@ -1438,8 +1438,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Adam Horacek (H965LZ6656)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Adam Horacek (H965LZ6656)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Fuerte Int Ltd";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Fuerte Int Ltd";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1452,8 +1452,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = iDeviant;
-				PROVISIONING_PROFILE = "F0BED3CD-A9D5-4FFF-910A-DE29276F15E4";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F0BED3CD-A9D5-4FFF-910A-DE29276F15E4";
+				PROVISIONING_PROFILE = "A490D99D-E25E-4431-82E9-747BE62AECCC";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A490D99D-E25E-4431-82E9-747BE62AECCC";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1463,7 +1463,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alex Siddall (383SY3D8S9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1473,7 +1473,6 @@
 					"-ObjC",
 					"-all_load",
 				);
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7377C183-C68B-400C-B0AF-77EDE188AE7E";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../FTLibrary/**";
 			};
@@ -1484,7 +1483,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alex Siddall (383SY3D8S9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1495,7 +1494,6 @@
 					"-ObjC",
 					"-all_load",
 				);
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7377C183-C68B-400C-B0AF-77EDE188AE7E";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../FTLibrary/**";
 			};
