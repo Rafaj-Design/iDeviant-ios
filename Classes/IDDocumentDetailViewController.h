@@ -11,13 +11,11 @@
 
 
 @interface IDDocumentDetailViewController : IDViewController <UIWebViewDelegate> {
-    
-	UIWebView *wv;
-	
-	NSString *content;
-	
+	NSString *content; 
+	UIWebView *webView;
 }
 
-- (void)setContent:(NSString *)text;
+@property (nonatomic, retain) NSString *content;
+@property (nonatomic, retain) UIWebView *webView;
 
 @end

@@ -16,7 +16,6 @@
 //#import "FlurryAPI.h"
 #import "FTReachability.h"
 
-
 @interface IDViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MWFeedParserDelegate, UISearchBarDelegate, UIGestureRecognizerDelegate> {
 	
 	NSArray *data;

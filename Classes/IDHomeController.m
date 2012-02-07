@@ -157,8 +157,6 @@
 			[c setTitle:[d objectForKey:@"name"]];
             [self.navigationController pushViewController:c animated:YES];
 			[c release];
-//            if ([[d objectForKey:@"requiresConnection"] boolValue])
-//                [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 		}
 	}
 }

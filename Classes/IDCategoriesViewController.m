@@ -159,6 +159,19 @@
 }
 
 
+#pragma mark - IDImageDetailViewControllerDelegate
+
+- (void)didFinishAtIndex:(NSInteger)index {
+	
+	NSInteger section = [table numberOfSections];
+	if (section > 0)
+		section -= 1;
+	
+	NSIndexPath *scrollIndexPath = [NSIndexPath indexPathForRow:index inSection:section];
+	[table scrollToRowAtIndexPath:scrollIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+}
+
+
 #pragma mark - Memory management
 
 - (void)dealloc {

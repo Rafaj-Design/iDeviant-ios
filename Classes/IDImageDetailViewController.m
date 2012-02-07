@@ -125,6 +125,9 @@
 		[p.imageZoomView.imageView.imageRequest cancel];
 		[p.imageZoomView.imageView.imageRequest setDelegate:nil];
 	}
+
+	if (delegate && [delegate respondsToSelector:@selector(didFinishAtIndex:)])
+		[delegate performSelector:@selector(didFinishAtIndex:) withObject:currentIndex];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {

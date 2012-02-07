@@ -19,7 +19,10 @@
 
 @protocol IDImageDetailViewControllerDelegate <NSObject>
 
+@optional
+
 - (void)imageDetailViewController:(IDImageDetailViewController *)controller didFinishWithItem:(NSDictionary *)item atIndex:(int)index;
+- (void)didFinishAtIndex:(NSInteger)index;
 
 @end
 

@@ -614,7 +614,8 @@
 				NSString *temp = [NSString stringWithContentsOfFile:tempPath encoding:NSUTF8StringEncoding error:nil];
 				NSDictionary *arr = [NSDictionary dictionaryWithObject:item.text forKey:@"{CONTENT}"];
 				NSString *text = [FTText parseCodes:arr inTemplate:temp];
-				[c setContent:text];
+//				[c setContent:text];
+				c.content = text;
 				[self.navigationController pushViewController:c animated:YES];
 				[c release];
 			} else {
@@ -622,6 +623,7 @@
 				[c inheritConnectivity:internetActive];
 				[c setCurrentIndex:indexPath.row];
 				[c setListData:arr];
+				[c setDelegate:(id<IDImageDetailViewControllerDelegate>)self];
 				//[c.data retain];
 				[c setImageUrl:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]];
 				[self.navigationController pushViewController:c animated:YES];
@@ -754,6 +756,8 @@
 	[searchBarHeader setShowsCancelButton:NO animated:YES];
 	[searchBarHeader resignFirstResponder];
 }
+
+
 
 #pragma mark - Memory management
 
