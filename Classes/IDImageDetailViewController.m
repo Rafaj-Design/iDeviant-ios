@@ -306,12 +306,16 @@
 		[bottomBar setHidden:NO];
 	}
 	
-	CGRect frame = self.navigationController.navigationBar.frame;
+//	CGRect frame = self.navigationController.navigationBar.frame;
+//	
+//	if (frame.origin.y == 0) {
+//		frame.origin.y = [[UIApplication sharedApplication] statusBarFrame].size.height;
+//		self.navigationController.navigationBar.frame = frame;
+//	}
 	
-	if (frame.origin.y == 0) {
-		frame.origin.y = [[UIApplication sharedApplication] statusBarFrame].size.height;
-		self.navigationController.navigationBar.frame = frame;
-	}
+	[self.navigationController.view setNeedsLayout];
+	[[[UIApplication sharedApplication] keyWindow] layoutSubviews];
+	
 
 	[UIView beginAnimations:nil context:nil];
 	[UIView setAnimationDuration:0.1];

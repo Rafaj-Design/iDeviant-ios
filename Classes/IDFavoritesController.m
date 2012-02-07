@@ -51,10 +51,6 @@
 	return YES;
 }
 
-- (void)configureCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView {
-	
-}
-
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	if (section == 0) {
 		if ([categoriesData count] > 0) return [IDLang get:@"myfavoritecategories"];

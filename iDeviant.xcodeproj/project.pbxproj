@@ -142,8 +142,7 @@
 		C7E02E6E12DF03BD0098AAE6 /* FTNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E02E6D12DF03BD0098AAE6 /* FTNavigationViewController.m */; };
 		C84031591448BD6B00D86A99 /* fuerte-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C84031571448BD6B00D86A99 /* fuerte-logo@2x.png */; };
 		C840315A1448BD6B00D86A99 /* fuerte-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = C84031581448BD6B00D86A99 /* fuerte-logo.png */; };
-		C85DB467144F334E00FC0929 /* IDSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C85DB466144F334E00FC0929 /* IDSettingsViewController.xib */; };
-		C85DB473144F40BA00FC0929 /* IDLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C85DB471144F40BA00FC0929 /* IDLoginController.xib */; };
+		C85DB467144F334E00FC0929 /* IDLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C85DB466144F334E00FC0929 /* IDLoginViewController.xib */; };
 		C85DB478144F587500FC0929 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1C181403B37300B70C98 /* CoreGraphics.framework */; };
 		C8830CA9144745D400416C81 /* libFTLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C8830CA8144745D400416C81 /* libFTLibrary.a */; };
 		C8B5DE0C1474352D001061C6 /* DD_login_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C8B5DE041474352D001061C6 /* DD_login_bg.png */; };
@@ -401,8 +400,7 @@
 		C7E02EA412DF04DE0098AAE6 /* FTMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMacros.h; sourceTree = "<group>"; };
 		C84031571448BD6B00D86A99 /* fuerte-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fuerte-logo@2x.png"; sourceTree = "<group>"; };
 		C84031581448BD6B00D86A99 /* fuerte-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fuerte-logo.png"; sourceTree = "<group>"; };
-		C85DB466144F334E00FC0929 /* IDSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IDSettingsViewController.xib; sourceTree = "<group>"; };
-		C85DB471144F40BA00FC0929 /* IDLoginController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IDLoginController.xib; sourceTree = "<group>"; };
+		C85DB466144F334E00FC0929 /* IDLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IDLoginViewController.xib; sourceTree = "<group>"; };
 		C8830CA8144745D400416C81 /* libFTLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFTLibrary.a; path = "../../../Library/Developer/Xcode/DerivedData/RunMe-cslzpemdbmqbpkcfxqhbxzlsratz/Build/Products/Debug-iphoneos/libFTLibrary.a"; sourceTree = "<group>"; };
 		C8B5DE041474352D001061C6 /* DD_login_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DD_login_bg.png; sourceTree = "<group>"; };
 		C8B5DE051474352D001061C6 /* DD_login_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DD_login_bg@2x.png"; sourceTree = "<group>"; };
@@ -1037,8 +1035,7 @@
 		66AC01B914D80DF700F6BD36 /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
-				C85DB471144F40BA00FC0929 /* IDLoginController.xib */,
-				C85DB466144F334E00FC0929 /* IDSettingsViewController.xib */,
+				C85DB466144F334E00FC0929 /* IDLoginViewController.xib */,
 				4CBB0BED13B399F800F67E1C /* IDHomeSortCell.xib */,
 				2B7BF809137E9FAA00211D28 /* IDItemsTableViewCell.xib */,
 				2BF7D5A5137F09D9002E9B74 /* IDHomeTableViewCell.xib */,
@@ -1257,8 +1254,7 @@
 				4C8AD5F51404F4280078DE52 /* HomeFull.plist in Resources */,
 				C84031591448BD6B00D86A99 /* fuerte-logo@2x.png in Resources */,
 				C840315A1448BD6B00D86A99 /* fuerte-logo.png in Resources */,
-				C85DB467144F334E00FC0929 /* IDSettingsViewController.xib in Resources */,
-				C85DB473144F40BA00FC0929 /* IDLoginController.xib in Resources */,
+				C85DB467144F334E00FC0929 /* IDLoginViewController.xib in Resources */,
 				C8B5DE0C1474352D001061C6 /* DD_login_bg.png in Resources */,
 				C8B5DE0D1474352D001061C6 /* DD_login_bg@2x.png in Resources */,
 				C8B5DE0E1474352D001061C6 /* DD_login_btn.png in Resources */,

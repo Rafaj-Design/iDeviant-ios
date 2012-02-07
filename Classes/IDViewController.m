@@ -112,28 +112,6 @@
 			}
 		}
 	}
-	
-	if (table) {
-		if (![NSStringFromClass(self.class) isEqualToString:@"IDHomeSortingViewController"]) {
-			NSMutableArray *cells = [[NSMutableArray alloc] init];
-			for (NSInteger j = 0; j < [table numberOfSections]; ++j)
-			{
-				for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i)
-				{
-					if ([table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]] != nil)
-						[cells addObject:[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]]];
-				}
-			}
-			
-			for (IDTableViewCell *cell in cells) {
-				if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
-					[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade-land"]]];
-				else {
-					[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
-				}
-			}
-		}
-	}
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -174,27 +152,6 @@
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
-	if (table) {
-		if (![NSStringFromClass(self.class) isEqualToString:@"IDHomeSortingViewController"]) {
-			NSMutableArray *cells = [[NSMutableArray alloc] init];
-			for (NSInteger j = 0; j < [table numberOfSections]; ++j)
-			{
-				for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i)
-				{
-					if ([table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]] != nil)
-						[cells addObject:[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]]];
-				}
-			}
-			
-			for (IDTableViewCell *cell in cells) {
-				if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
-					[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade-land"]]];
-				else {
-					[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
-				}
-			}
-		}
-	}
 	
 	if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
 		[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_bg-l"]]];
@@ -206,10 +163,6 @@
 	isLandscape = UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
     [self doLayoutSubviews];
 	[self doLayoutLocalSubviews];
-}
-
--(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
-	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 
 #pragma mark - View stuff
@@ -225,21 +178,7 @@
 }
 
 - (void)doLayoutSubviews {
-	if (table) {
-		NSMutableArray *cells = [[NSMutableArray alloc] init];
-		for (NSInteger j = 0; j < [table numberOfSections]; ++j)
-			for (NSInteger i = 0; i < [table numberOfRowsInSection:j]; ++i)
-				if ([table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]] != nil)
-					[cells addObject:[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:j]]];
-		
-		for (IDTableViewCell *cell in cells)
-			if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
-				[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade-land"]]];
-			else
-				[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
-		
-		[cells release];
-	}
+
 }
 
 -(void) showHideNavbar:(id)sender {
@@ -514,10 +453,12 @@
 #pragma mark - UITableView stuff
 
 - (void)configureCell:(IDTableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView {
-	if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
-		[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade-land"]]];
-	else
-		[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
+	if (![NSStringFromClass(self.class) isEqualToString:@"IDHomeSortingViewController"]) {	
+		UIImageView *iV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"DA_shade-land"]];
+		[iV setContentMode:UIViewContentModeScaleToFill];
+		[iV setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+		cell.backgroundView = iV;
+	}
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView itemCellForRowAtIndexPath:(NSIndexPath *)indexPath {

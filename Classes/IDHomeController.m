@@ -84,7 +84,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"HomeCell";
     
     IDHomeTableViewCell *cell = (IDHomeTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	
@@ -127,10 +127,11 @@
 	
 	[cell setSelectionStyle:UITableViewCellSelectionStyleGray];
 	
-	if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
-		[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade-land"]]];
-	else {
-		[cell.background setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_shade"]]];
+	if (![NSStringFromClass(self.class) isEqualToString:@"IDHomeSortingViewController"]) {	
+		UIImageView *iV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"DA_shade-land"]];
+		[iV setContentMode:UIViewContentModeScaleToFill];
+		[iV setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+		cell.backgroundView = iV;
 	}
 	
     return cell;
@@ -156,8 +157,8 @@
 			[c setTitle:[d objectForKey:@"name"]];
             [self.navigationController pushViewController:c animated:YES];
 			[c release];
-            if ([[d objectForKey:@"requiresConnection"] boolValue])
-                [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+//            if ([[d objectForKey:@"requiresConnection"] boolValue])
+//                [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 		}
 	}
 }
