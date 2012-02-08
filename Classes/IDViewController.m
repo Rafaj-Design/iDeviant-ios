@@ -248,9 +248,9 @@
 	[feedParser parse];
 	[table setUserInteractionEnabled:NO];
 	
-	[UIView beginAnimations:nil context:nil];
-	[table setAlpha:0.3];
-	[UIView commitAnimations];
+//	[UIView beginAnimations:nil context:nil];
+//	[table setAlpha:0.3];
+//	[UIView commitAnimations];
 }
 
 #pragma mark - Editing
@@ -391,12 +391,17 @@
 #pragma mark Settings
 
 - (void)enableTable {
-	[table setUserInteractionEnabled:YES];
-	[table reloadData];
 	
-	[UIView beginAnimations:nil context:nil];
-	[table setAlpha:1];
-	[UIView commitAnimations];
+	if (table) {
+		[table setUserInteractionEnabled:YES];
+		[table reloadData];
+		
+		//	[UIView beginAnimations:nil context:nil];
+		//	[table setAlpha:1];
+		//	[UIView commitAnimations];
+		//	
+		[table setHidden:NO];
+	}
 }
 
 - (void)createTableViewWithSearchBar:(BOOL)searchBar andStyle:(UITableViewStyle)style {
@@ -458,6 +463,8 @@
 		[iV setContentMode:UIViewContentModeScaleToFill];
 		[iV setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
 		cell.backgroundView = iV;
+		cell.layer.shouldRasterize = YES;
+		cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
 	}
 }
 
@@ -618,16 +625,18 @@
 				c.content = text;
 				[self.navigationController pushViewController:c animated:YES];
 				[c release];
-			} else {
-				IDImageDetailViewController *c = [[IDImageDetailViewController alloc] init];
-				[c inheritConnectivity:internetActive];
-				[c setCurrentIndex:indexPath.row];
-				[c setListData:arr];
-				[c setDelegate:(id<IDImageDetailViewControllerDelegate>)self];
-				//[c.data retain];
-				[c setImageUrl:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]];
-				[self.navigationController pushViewController:c animated:YES];
-				[c release];
+			} else if (item.thumbnails.count > 0) {
+				if ([[item.thumbnails objectAtIndex:0] objectForKey:@"url"] != nil) {
+					IDImageDetailViewController *c = [[IDImageDetailViewController alloc] init];
+					[c inheritConnectivity:internetActive];
+					[c setCurrentIndex:indexPath.row];
+					[c setListData:arr];
+					[c setDelegate:(id<IDImageDetailViewControllerDelegate>)self];
+					//[c.data retain];
+					[c setImageUrl:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]];
+					[self.navigationController pushViewController:c animated:YES];
+					[c release];
+				}
 			}
 		}
 	} else if (canAccess) {
@@ -705,12 +714,14 @@
 	[self setData:[parsedItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:arr]]];
 	[arr release];
 	
-	[self enableTable];
-	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-	[table reloadData];
-	[imageView stopAnimating];
-    [imageView setHidden:YES];
-	[self enableRefreshButton];
+	if (table) {
+		[self enableTable];
+		[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+		[table reloadData];
+		[imageView stopAnimating];
+		[imageView setHidden:YES];
+		[self enableRefreshButton];
+	}
 }
 
 - (void)feedParser:(MWFeedParser *)parser didFailWithError:(NSError *)error {
@@ -730,26 +741,32 @@
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-	[searchBarHeader setShowsCancelButton:NO animated:YES];
-	[searchBarHeader resignFirstResponder];
-
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    
-    int i;
-    NSMutableArray *imgs = [[NSMutableArray alloc] init];
-    for (i=1; i<=40; i++) {
-        NSString *str = [NSString stringWithFormat:@"search_anim_%i@2x.png", i];
-        UIImage* img = [UIImage imageNamed:str];
-        [imgs addObject:img];
-    }
-    NSArray *images = [NSArray arrayWithArray:imgs];
-    [imgs release];
-    
-	[imageView setHidden:NO];
-    [imageView setAnimationImages:images];
-    [imageView startAnimating];
-
-	[self getDataForSearchString:[searchBarHeader text] andCategory:nil];
+	if (internetActive) {
+		[searchBarHeader setShowsCancelButton:NO animated:YES];
+		[searchBarHeader resignFirstResponder];
+		
+		[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+		
+		int i;
+		NSMutableArray *imgs = [[NSMutableArray alloc] init];
+		for (i=1; i<=40; i++) {
+			NSString *str = [NSString stringWithFormat:@"search_anim_%i@2x.png", i];
+			UIImage* img = [UIImage imageNamed:str];
+			[imgs addObject:img];
+		}
+		NSArray *images = [NSArray arrayWithArray:imgs];
+		[imgs release];
+		
+		[imageView setHidden:NO];
+		[imageView setAnimationImages:images];
+		[imageView startAnimating];
+		
+		[self getDataForSearchString:[searchBarHeader text] andCategory:nil];
+	} else {
+		[searchBarHeader setShowsCancelButton:NO animated:YES];
+		[searchBarHeader resignFirstResponder];
+	}
+	[self performSelector:@selector(backgroundImage)];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {

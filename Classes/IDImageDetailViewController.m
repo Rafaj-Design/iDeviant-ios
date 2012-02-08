@@ -60,6 +60,7 @@
     FTImagePage *imagePage = [self pageForIndex:currentIndex];
 	
 	mainView = [[FTPageScrollView alloc] initWithFrame:self.view.bounds];
+//	[mainView setAlwaysBounceHorizontal:YES];
     [mainView setDummyPageImage:[UIImage imageNamed:@"dummy.png"]];
     [mainView setInitialPage:imagePage withDelegate:(id<FTPageScrollViewDelegate>)self];
 	[mainView setPage:imagePage pageCount:[listThroughData count] animate:YES];
@@ -72,6 +73,7 @@
 	
     [mainView setScrollEnabled:YES];
     [mainView setBouncesZoom:YES];
+	[mainView setBounces:YES];
     [mainView setPagingEnabled:YES];
 	
 	[mainView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
@@ -184,8 +186,10 @@
 }
 
 - (CGRect)getFrameForPage {
-	if (isLandscape) return CGRectMake(0, 0, 480, 320);
-	else return CGRectMake(0, 0, 320, 480);
+	if (isLandscape) 
+		return CGRectMake(0, 0, 480, 320);
+	else 
+		return CGRectMake(0, 0, 320, 480);
 }
 
 #pragma - mark Settings
@@ -222,7 +226,11 @@
 
 	MWFeedItem *item = [listThroughData objectAtIndex:index];
 	
-	FTImagePage *imagePage = [[FTImagePage alloc] initWithFrame:[self getFrameForPage]];
+//	FTImagePage *imagePage = [[FTImagePage alloc] initWithFrame:[self getFrameForPage]];
+	FTImagePage *imagePage = [[FTImagePage alloc] initWithFrame:self.view.bounds];
+
+	[imagePage setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+	
 	[imagePage.activityIndicator centerInSuperView];
 	
 	BOOL canAccess = YES;

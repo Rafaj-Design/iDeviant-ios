@@ -15,11 +15,20 @@
 #pragma mark View delegate methods
 
 - (void)viewDidLoad {
+	UIColor *color = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.7];
+	UIImage *img = [UIImage imageNamed:@"DA_topbar.png"];
+	[img drawInRect:CGRectMake(0, 0, 10, 10)];
+	[self.navigationController.navigationBar setBackgroundImage:img forBarMetrics:UIBarMetricsDefault];
+	[self.navigationController.navigationBar setTintColor:color];
+	
+	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(done)];
+	self.navigationItem.leftBarButtonItem = item;
+	
     [self.nick setPlaceholder:[IDLang get:@"nickname"]];
     [self.pass setPlaceholder:[IDLang get:@"password"]];
     [self.rememberme setText:[IDLang get:@"rememberme"]];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    [super viewDidLoad];
+//    [super viewDidLoad];
     //load nick and password to field
 	NSString *filePath = [self dataFilePath];
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
@@ -74,7 +83,8 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+//    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	return NO;
 }
 
 -(NSString *)dataFilePath{
@@ -113,7 +123,8 @@
 		UIViewController *c = [[UIViewController alloc] init];
 		[c setTitle:@"Deviant Art"];
 		
-		UIWebView *webView = [[UIWebView alloc] initWithFrame:[super fullScreenFrame]];
+//		UIWebView *webView = [[UIWebView alloc] initWithFrame:[super fullScreenFrame]];
+		UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
 		[webView loadRequest:request];
 		[request release];
 		
@@ -134,6 +145,12 @@
 -(IBAction) backgroundtap:(id)sender{
     [nick resignFirstResponder];
     [pass resignFirstResponder];
+}
+
+
+- (void)done {
+	[self dismissModalViewControllerAnimated:YES];
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

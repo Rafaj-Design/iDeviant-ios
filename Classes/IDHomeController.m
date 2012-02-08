@@ -12,8 +12,12 @@
 #import "FTSimpleDB.h"
 #import "IDConfig.h"
 #import "IDFavouriteCategories.h"
+#import "IDLoginViewController.h"
+#import "FTNavigationViewController.h"
 
 @implementation IDHomeController
+
+@synthesize logo;
 
 #pragma mark - View lifecycle
 
@@ -40,13 +44,22 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+	
+	if (table) {
+		[logo removeFromSuperview];
+		logo = nil;
+		[logo release];
+	}
     
-    UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fuerte-logo.png"]];
-    [logo positionAtX:self.view.center.x-100 andY:-65];  
-	[logo setBackgroundColor:[UIColor clearColor]];
-    [logo setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin];
-    [table addSubview:logo];
-	[logo release];
+	if (!logo) {
+		logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fuerte-logo.png"]];
+		[logo setFrame:CGRectMake(0, 0, 200, 55)];
+		[logo positionAtX:self.view.center.x-100 andY:-65];
+		[logo setBackgroundColor:[UIColor clearColor]];
+		[logo setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin];
+		[table addSubview:logo];
+		[logo release];	
+	}
     
     if (YES) {
 		[super setData:[FTSimpleDB getItemsFromDb:kSystemHomeMenuDbName]];
@@ -61,14 +74,20 @@
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     [table removeSubviews];
 	
-    UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fuerte-logo.png"]];
+	if (table) {
+		logo = nil;
+		[logo release];
+	}
 	
-    [logo positionAtX:self.view.center.x-100 andY:-65];  
-    
-	[logo setBackgroundColor:[UIColor clearColor]];
-    
-    [table addSubview:logo];
-	[logo release];
+	if (!logo) {
+		logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"fuerte-logo.png"]];
+		[logo setFrame:CGRectMake(0, 0, 200, 55)];
+		[logo positionAtX:self.view.center.x-100 andY:-65];
+		[logo setBackgroundColor:[UIColor clearColor]];
+		[logo setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin];
+		[table addSubview:logo];
+		[logo release];	
+	}
     
     if (YES) {
 		[super setData:[FTSimpleDB getItemsFromDb:kSystemHomeMenuDbName]];
@@ -111,6 +130,9 @@
 		
 		[cell.iconImageView setImage:[UIImage imageNamed:[d objectForKey:@"icon"]]];
 		[cell.imageView.layer setCornerRadius:4];
+		
+		cell.layer.shouldRasterize = YES;
+		cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
     }
 	
 	[cell setBackgroundColor:[UIColor clearColor]];
@@ -145,20 +167,44 @@
 		[super displayMessage:@"requiresinternetconnection"];
 	else if (([[d objectForKey:@"FVRT"] boolValue]) && [[IDFavouriteCategories dataForFavorites]count]==0)
         [super displayMessage:IDLangGet(@"nonefavorites")];
-    else {
+    else {//if (![[d objectForKey:@"controller"] isEqualToString:@"IDLoginViewController"]) {
+
 		IDViewController *c = (IDViewController *)[[NSClassFromString([d objectForKey:@"controller"]) alloc] init];
+
 		if (c) {
-			[c inheritConnectivity:internetActive];
+//			if (![[d objectForKey:@"controller"] isEqualToString:@"IDLoginViewController"])
+				[c inheritConnectivity:internetActive];
 			
 			if ([[d objectForKey:@"controller"] isEqualToString:@"IDCategoriesViewController"])
 				if (!internetActive)
 					[super displayMessage:@"requiresinternetconnection"];
 			
 			[c setTitle:[d objectForKey:@"name"]];
-            [self.navigationController pushViewController:c animated:YES];
+			
+			if (isLandscape && [[d objectForKey:@"controller"] isEqualToString:@"IDLoginViewController"]) {
+				
+//				[c setModalPresentationStyle:UIModalPresentationCurrentContext];
+//				[c setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+				
+				FTNavigationViewController *navigationController = [[FTNavigationViewController alloc] initWithRootViewController:c];
+				
+				
+				[self presentModalViewController:navigationController animated:YES];					
+			} 
+			else
+				[self.navigationController pushViewController:c animated:YES];
 			[c release];
 		}
-	}
+	} 
+//else if ([[d objectForKey:@"controller"] isEqualToString:@"IDLoginViewController"]) {
+//		IDLoginViewController *c = [[IDLoginViewController alloc] initWithNibName:@"IDLoginViewController" bundle:nil];
+//		
+//		if (c) {			
+//			[c setTitle:[d objectForKey:@"name"]];
+//            [self.navigationController pushViewController:c animated:YES];
+//			[c release];
+//		}
+//	}
 }
 
 #pragma mark - UITableViewDataSource
@@ -170,5 +216,13 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
+
+//#pragma mark - Memory management
+//
+//- (void)dealloc {
+//	[logo release];
+//	
+//	[super dealloc];
+//}
 
 @end

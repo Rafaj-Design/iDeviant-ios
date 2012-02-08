@@ -12,6 +12,8 @@
 
 @implementation IDSearchController
 
+@synthesize babaImageView, lupaImageView;
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
@@ -21,47 +23,33 @@
 	[super setIsSearchBar:YES];
 	
 	[self setTitle:[IDLang get:@"search"]];
-	
-//    if (self.interfaceOrientation == UIInterfaceOrientationPortrait)
-//        [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-empty-p@2x.png"]];
-//    else
-//        [super enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-empty-l@2x.png"]];
 		
-    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
+    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+//	[imageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+//	[imageView setContentMode:UIViewContentModeScaleAspectFit];
+//	[imageView setContentMode:UIViewContentModeCenter];
     [imageView setImage:[UIImage imageNamed:@"search_anim_1@2x.png"]];
-	
     [self.view addSubview:imageView];
-    
-    [ai setCenter:CGPointMake(self.view.center.x, self.view.center.y-50)];
+	
+	
+	
+	if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
+		[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_bg-empty-l@2x"]]];
+	else
+		[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_bg-empty-p@2x"]]];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    [imageView setCenter:self.view.center];
+//    [imageView setCenter:self.view.center];
 	[table setFrame:self.view.bounds];
 	
+	[table reloadData];
 	[self backgroundImage];
-	[self doLayoutSubviews];
 }
 
 #pragma mark - Background image
 
-- (void)enableBackgroundWithImage:(UIImage *)image {
-	if (!backgroundImageView) {
-		backgroundImageView = [[UIImageView alloc] init];
-		[backgroundImageView setBackgroundColor:[UIColor clearColor]];
-		[self.view addSubview:backgroundImageView];
-		[self.view sendSubviewToBack:backgroundImageView];
-	}
-	[backgroundImageView setImage:image];
-	[backgroundImageView setFrame:self.view.bounds];
-}
-
-
 -(void)backgroundImage {
-    if (self.interfaceOrientation == UIInterfaceOrientationPortrait)
-        [self enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-empty-p@2x.png"]];
-    else
-        [self enableBackgroundWithImage:[UIImage imageNamed:@"DA_bg-empty-l@2x.png"]];
 		
 	Reachability *r = [Reachability reachabilityWithHostName:@"www.apple.com"];
     NetworkStatus internetStatus = [r currentReachabilityStatus];
@@ -70,30 +58,34 @@
 		
 		[searchBarHeader setUserInteractionEnabled:NO];
 		
-        [imageView setImage:[UIImage imageNamed:@"DD_grandma@2x.png"]];
-		if (self.interfaceOrientation == UIInterfaceOrientationPortrait) {
-			[imageView setFrame: CGRectMake(0.0, 0.0, 200.0, 250.0)];
-			[imageView setCenter:self.view.center]; 
-		} else {
+		[imageView setImage:[UIImage imageNamed:@"DD_grandma@2x.png"]];
+		
+		if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight)) {
 			[imageView setFrame: CGRectMake(0.0, 0.0, 160.0, 200.0)];
 			imageView.center = CGPointMake(self.view.center.x, self.view.center.y + 20);
+		} else {
+			[imageView setFrame: CGRectMake(0.0, 0.0, 200.0, 250.0)];
+			[imageView setCenter:self.view.center]; 
 		}
-    } else {
-		
+    } else {		
 		[searchBarHeader setUserInteractionEnabled:YES];
 		
 		[imageView setImage:[UIImage imageNamed:@"search_anim_1@2x.png"]];
+
 		[imageView setFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
 		[imageView setCenter:self.view.center];
 	}
 }
 
--(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
-    [ai setCenter:self.view.center];
-    [imageView setCenter:self.view.center];
+-(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{	
+	if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
+		[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_bg-empty-l@2x"]]];
+	else
+		[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_bg-empty-p@2x"]]];
+	
 	[table setFrame:self.view.bounds];
 	
-	[self doLayoutSubviews];
+	[table reloadData];
 	[self backgroundImage];
 }
 
@@ -135,18 +127,11 @@
 		if (cell == nil)
             cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero] autorelease];
         
+		cell.layer.shouldRasterize = YES;
+		cell.layer.rasterizationScale = [UIScreen mainScreen].scale;
+		
 		return cell;
 	}
-}
-
-- (void)doLayoutSubviews {
-	[table reloadData];
-}
-
-#pragma mark Memory management
-
-- (void)dealloc {
-    [super dealloc];
 }
 
 @end

@@ -10,7 +10,11 @@
 #import "IDItemsViewController.h"
 
 
-@interface IDSearchController : IDItemsViewController 
+@interface IDSearchController : IDItemsViewController {
+	UIImageView *babaImageView, *lupaImageView;
+}
+
+@property (nonatomic, retain) UIImageView *babaImageView, *lupaImageView;
 
 -(void)backgroundImage;
 
