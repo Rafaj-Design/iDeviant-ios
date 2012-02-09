@@ -372,13 +372,23 @@
 	
 	if (previousStatus != internetActive) {
 		[table reloadData];
+		if ([NSStringFromClass(self.class) isEqualToString:@"IDSearchController"])
+			[self performSelector:@selector(backgroundImage)];
 		if (internetActive) {
 			if (refreshButton)
 				[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
 			if ([data count] == 0)
 				[self refresh];
-		} else if (refreshButton)
-				[self.navigationItem setRightBarButtonItem:nil animated:YES];
+			
+//			if ([NSStringFromClass(self.class) isEqualToString:@"IDSearchController"])
+//				[searchBarHeader setUserInteractionEnabled:YES];
+			
+		} else if (refreshButton) {
+			[self.navigationItem setRightBarButtonItem:nil animated:YES];
+			
+//			if ([NSStringFromClass(self.class) isEqualToString:@"IDSearchController"])
+//				[searchBarHeader setUserInteractionEnabled:NO];
+		}
 	}
 }
 
@@ -736,12 +746,24 @@
 #pragma mark - UISearchBarDelegate
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
-	[searchBarHeader setShowsCancelButton:YES animated:YES];
-	return YES;
+	
+//	Reachability *r = [Reachability reachabilityWithHostName:@"www.apple.com"];
+//    NetworkStatus internetStatus = [r currentReachabilityStatus];
+//	
+//	if (internetStatus != NotReachable) {
+		[searchBarHeader setShowsCancelButton:YES animated:YES];
+		return YES;
+//	} else
+//		return NO;
+//	
+//	[self performSelector:@selector(backgroundImage)];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-	if (internetActive) {
+	Reachability *r = [Reachability reachabilityWithHostName:@"www.apple.com"];
+    NetworkStatus internetStatus = [r currentReachabilityStatus];
+	
+	if (internetStatus != NotReachable) {
 		[searchBarHeader setShowsCancelButton:NO animated:YES];
 		[searchBarHeader resignFirstResponder];
 		
@@ -758,6 +780,8 @@
 		[imgs release];
 		
 		[imageView setHidden:NO];
+		[imageView setFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
+		imageView.center = CGPointMake(self.view.center.x, self.view.center.y + 22);
 		[imageView setAnimationImages:images];
 		[imageView startAnimating];
 		
@@ -765,13 +789,14 @@
 	} else {
 		[searchBarHeader setShowsCancelButton:NO animated:YES];
 		[searchBarHeader resignFirstResponder];
+		[self performSelector:@selector(backgroundImage)];
 	}
-	[self performSelector:@selector(backgroundImage)];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
 	[searchBarHeader setShowsCancelButton:NO animated:YES];
 	[searchBarHeader resignFirstResponder];
+	[self performSelector:@selector(backgroundImage)];
 }
 
 

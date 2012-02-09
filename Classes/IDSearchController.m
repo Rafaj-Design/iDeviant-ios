@@ -25,13 +25,10 @@
 	[self setTitle:[IDLang get:@"search"]];
 		
     imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-//	[imageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-//	[imageView setContentMode:UIViewContentModeScaleAspectFit];
-//	[imageView setContentMode:UIViewContentModeCenter];
-    [imageView setImage:[UIImage imageNamed:@"search_anim_1@2x.png"]];
+	[imageView setImage:[UIImage imageNamed:@"search_anim_1@2x.png"]];
+	imageView.center = CGPointMake(self.view.center.x, self.view.center.y + 22);
+    
     [self.view addSubview:imageView];
-	
-	
 	
 	if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight))
 		[self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"DA_bg-empty-l@2x"]]];
@@ -40,7 +37,6 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-//    [imageView setCenter:self.view.center];
 	[table setFrame:self.view.bounds];
 	
 	[table reloadData];
@@ -56,24 +52,22 @@
 	
 	if (internetStatus == NotReachable) {
 		
-		[searchBarHeader setUserInteractionEnabled:NO];
-		
-		[imageView setImage:[UIImage imageNamed:@"DD_grandma@2x.png"]];
+		[imageView setImage:[UIImage imageNamed:@"DD_grandma.png"]];
 		
 		if (([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) || ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight)) {
-			[imageView setFrame: CGRectMake(0.0, 0.0, 160.0, 200.0)];
-			imageView.center = CGPointMake(self.view.center.x, self.view.center.y + 20);
+			[imageView setFrame: CGRectMake(0.0, 0.0, 151.0, 222.0)];
+	
+			imageView.center = CGPointMake(self.view.center.x, self.view.center.y + 22);
 		} else {
-			[imageView setFrame: CGRectMake(0.0, 0.0, 200.0, 250.0)];
-			[imageView setCenter:self.view.center]; 
+			[imageView setFrame: CGRectMake(0.0, 0.0, 178.0, 262.0)];
+			imageView.center = CGPointMake(self.view.center.x, self.view.center.y + 22);
 		}
-    } else {		
-		[searchBarHeader setUserInteractionEnabled:YES];
+    } else {
 		
 		[imageView setImage:[UIImage imageNamed:@"search_anim_1@2x.png"]];
 
 		[imageView setFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
-		[imageView setCenter:self.view.center];
+		imageView.center = CGPointMake(self.view.center.x, self.view.center.y + 22);
 	}
 }
 
