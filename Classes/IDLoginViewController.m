@@ -120,6 +120,9 @@
 		[request setHTTPMethod:@"POST"];
 		[request setHTTPBody:[body dataUsingEncoding: NSUTF8StringEncoding]];
 		
+		[nick resignFirstResponder];
+		[pass resignFirstResponder];		
+		
 		UIViewController *c = [[UIViewController alloc] init];
 		[c setTitle:@"Deviant Art"];
 		
