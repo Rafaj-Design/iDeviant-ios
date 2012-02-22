@@ -94,6 +94,7 @@
 		4CBB0BEE13B399F800F67E1C /* IDHomeSortCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CBB0BED13B399F800F67E1C /* IDHomeSortCell.xib */; };
 		4CBB0BF113B4879500F67E1C /* DA_sorting-arrows.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CBB0BEF13B4879500F67E1C /* DA_sorting-arrows.png */; };
 		4CBB0BF213B4879500F67E1C /* DA_sorting-arrows@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CBB0BF013B4879500F67E1C /* DA_sorting-arrows@2x.png */; };
+		4CBB607A14E8825300E3A3FC /* libFTLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CBB607914E8825300E3A3FC /* libFTLibrary.a */; };
 		4CC15FFB139C0F00000794C1 /* FTReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC15FFA139C0F00000794C1 /* FTReachability.m */; };
 		4CC15FFE139CD056000794C1 /* fake-data.xml in Resources */ = {isa = PBXBuildFile; fileRef = 4CC15FFD139CD056000794C1 /* fake-data.xml */; };
 		4CD28A7113AA88030023F034 /* IDHorizontalItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD28A7013AA88030023F034 /* IDHorizontalItems.m */; };
@@ -144,7 +145,6 @@
 		C840315A1448BD6B00D86A99 /* fuerte-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = C84031581448BD6B00D86A99 /* fuerte-logo.png */; };
 		C85DB467144F334E00FC0929 /* IDLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C85DB466144F334E00FC0929 /* IDLoginViewController.xib */; };
 		C85DB478144F587500FC0929 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1C181403B37300B70C98 /* CoreGraphics.framework */; };
-		C8830CA9144745D400416C81 /* libFTLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C8830CA8144745D400416C81 /* libFTLibrary.a */; };
 		C8B5DE0C1474352D001061C6 /* DD_login_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = C8B5DE041474352D001061C6 /* DD_login_bg.png */; };
 		C8B5DE0D1474352D001061C6 /* DD_login_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C8B5DE051474352D001061C6 /* DD_login_bg@2x.png */; };
 		C8B5DE0E1474352D001061C6 /* DD_login_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = C8B5DE061474352D001061C6 /* DD_login_btn.png */; };
@@ -329,6 +329,7 @@
 		4CBB0BED13B399F800F67E1C /* IDHomeSortCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IDHomeSortCell.xib; sourceTree = "<group>"; };
 		4CBB0BEF13B4879500F67E1C /* DA_sorting-arrows.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DA_sorting-arrows.png"; sourceTree = "<group>"; };
 		4CBB0BF013B4879500F67E1C /* DA_sorting-arrows@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DA_sorting-arrows@2x.png"; sourceTree = "<group>"; };
+		4CBB607914E8825300E3A3FC /* libFTLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFTLibrary.a; path = "DerivedData/RunMe/Build/Products/Debug-iphoneos/libFTLibrary.a"; sourceTree = "<group>"; };
 		4CC15FF9139C0F00000794C1 /* FTReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTReachability.h; sourceTree = "<group>"; };
 		4CC15FFA139C0F00000794C1 /* FTReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTReachability.m; sourceTree = "<group>"; };
 		4CC15FFD139CD056000794C1 /* fake-data.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "fake-data.xml"; sourceTree = "<group>"; };
@@ -401,7 +402,6 @@
 		C84031571448BD6B00D86A99 /* fuerte-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fuerte-logo@2x.png"; sourceTree = "<group>"; };
 		C84031581448BD6B00D86A99 /* fuerte-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fuerte-logo.png"; sourceTree = "<group>"; };
 		C85DB466144F334E00FC0929 /* IDLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IDLoginViewController.xib; sourceTree = "<group>"; };
-		C8830CA8144745D400416C81 /* libFTLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFTLibrary.a; path = "../../../Library/Developer/Xcode/DerivedData/RunMe-cslzpemdbmqbpkcfxqhbxzlsratz/Build/Products/Debug-iphoneos/libFTLibrary.a"; sourceTree = "<group>"; };
 		C8B5DE041474352D001061C6 /* DD_login_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DD_login_bg.png; sourceTree = "<group>"; };
 		C8B5DE051474352D001061C6 /* DD_login_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DD_login_bg@2x.png"; sourceTree = "<group>"; };
 		C8B5DE061474352D001061C6 /* DD_login_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DD_login_btn.png; sourceTree = "<group>"; };
@@ -463,8 +463,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CBB607A14E8825300E3A3FC /* libFTLibrary.a in Frameworks */,
 				C85DB478144F587500FC0929 /* CoreGraphics.framework in Frameworks */,
-				C8830CA9144745D400416C81 /* libFTLibrary.a in Frameworks */,
 				4CEB1C191403B37300B70C98 /* Foundation.framework in Frameworks */,
 				4CEB1C1B1403B37300B70C98 /* UIKit.framework in Frameworks */,
 				4CEB1C1C1403B37300B70C98 /* AddressBook.framework in Frameworks */,
@@ -512,6 +512,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				4CBB607914E8825300E3A3FC /* libFTLibrary.a */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -551,7 +552,6 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C8830CA8144745D400416C81 /* libFTLibrary.a */,
 				4CEB1C011403B37300B70C98 /* Foundation.framework */,
 				4CEB1C021403B37300B70C98 /* CoreGraphics.framework */,
 				4CEB1C031403B37300B70C98 /* UIKit.framework */,
@@ -1422,15 +1422,18 @@
 				GCC_PREFIX_HEADER = iDeviant_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iDeviant-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
-				LIBRARY_SEARCH_PATHS = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/DerivedData/RunMe/Build/Products/Debug-iphoneos\"",
+				);
 				PRODUCT_NAME = iDeviant;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 			};
 			name = Debug;
 		};
-		1D6058950D05DD3E006BFB54 /* Release */ = {
+		1D6058950D05DD3E006BFB54 /* Enterprise */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1445,14 +1448,65 @@
 				GCC_PREFIX_HEADER = iDeviant_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iDeviant-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
-				LIBRARY_SEARCH_PATHS = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/DerivedData/RunMe/Build/Products/Debug-iphoneos\"",
+				);
 				PRODUCT_NAME = iDeviant;
-				PROVISIONING_PROFILE = "A490D99D-E25E-4431-82E9-747BE62AECCC";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A490D99D-E25E-4431-82E9-747BE62AECCC";
+				PROVISIONING_PROFILE = "D439A1B2-912C-4DD6-9F5C-48CBEA78BD55";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D439A1B2-912C-4DD6-9F5C-48CBEA78BD55";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = Enterprise;
+		};
+		4CBB607714E8810F00E3A3FC /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "../FTLibrary/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "../FTLibrary/**";
+			};
+			name = AppStore;
+		};
+		4CBB607814E8810F00E3A3FC /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Fuerte Int Ltd";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Fuerte Int Ltd";
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Classes/JCOClasses/Libraries\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = iDeviant_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = "iDeviant-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/DerivedData/RunMe/Build/Products/Debug-iphoneos\"",
+				);
+				PRODUCT_NAME = iDeviant;
+				PROVISIONING_PROFILE = "796E540C-9978-4980-AB41-4D67C4728EE4";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "796E540C-9978-4980-AB41-4D67C4728EE4";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = AppStore;
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1474,7 +1528,7 @@
 			};
 			name = Debug;
 		};
-		C01FCF5008A954540054247B /* Release */ = {
+		C01FCF5008A954540054247B /* Enterprise */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
@@ -1493,7 +1547,7 @@
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "../FTLibrary/**";
 			};
-			name = Release;
+			name = Enterprise;
 		};
 /* End XCBuildConfiguration section */
 
@@ -1502,19 +1556,21 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
-				1D6058950D05DD3E006BFB54 /* Release */,
+				1D6058950D05DD3E006BFB54 /* Enterprise */,
+				4CBB607814E8810F00E3A3FC /* AppStore */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Enterprise;
 		};
 		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "iDeviant" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
-				C01FCF5008A954540054247B /* Release */,
+				C01FCF5008A954540054247B /* Enterprise */,
+				4CBB607714E8810F00E3A3FC /* AppStore */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Enterprise;
 		};
 /* End XCConfigurationList section */
 	};
