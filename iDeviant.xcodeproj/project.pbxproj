@@ -135,6 +135,7 @@
 		66AC01C014D82FEF00F6BD36 /* DA_bg-p.png in Resources */ = {isa = PBXBuildFile; fileRef = 66AC01BC14D82FEF00F6BD36 /* DA_bg-p.png */; };
 		66AC01C114D82FEF00F6BD36 /* DA_bg-p@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 66AC01BD14D82FEF00F6BD36 /* DA_bg-p@2x.png */; };
 		66CD733514C5D2C900DB0E02 /* IDLang.m in Sources */ = {isa = PBXBuildFile; fileRef = 66CD733414C5D2C900DB0E02 /* IDLang.m */; };
+		66DC2B6015090D95008CFEF1 /* IDWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DC2B5F15090D95008CFEF1 /* IDWebViewController.m */; };
 		66DD9E0314D957F0003D85BF /* IDImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DD9E0214D957F0003D85BF /* IDImageView.m */; };
 		66DD9E0714D95BAF003D85BF /* IDImageZoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DD9E0614D95BAF003D85BF /* IDImageZoomView.m */; };
 		66FDBC3814CEAA9900AB2A40 /* DA_shade-land.png in Resources */ = {isa = PBXBuildFile; fileRef = 66FDBC3714CEAA9900AB2A40 /* DA_shade-land.png */; };
@@ -387,6 +388,8 @@
 		66AC01BD14D82FEF00F6BD36 /* DA_bg-p@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DA_bg-p@2x.png"; sourceTree = "<group>"; };
 		66CD733314C5D2C900DB0E02 /* IDLang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDLang.h; sourceTree = "<group>"; };
 		66CD733414C5D2C900DB0E02 /* IDLang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDLang.m; sourceTree = "<group>"; };
+		66DC2B5E15090D95008CFEF1 /* IDWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDWebViewController.h; sourceTree = "<group>"; };
+		66DC2B5F15090D95008CFEF1 /* IDWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDWebViewController.m; sourceTree = "<group>"; };
 		66DD9E0114D957F0003D85BF /* IDImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDImageView.h; sourceTree = "<group>"; };
 		66DD9E0214D957F0003D85BF /* IDImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDImageView.m; sourceTree = "<group>"; };
 		66DD9E0514D95BAF003D85BF /* IDImageZoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDImageZoomView.h; sourceTree = "<group>"; };
@@ -991,6 +994,8 @@
 				4C98AF1C1394570D00F567C9 /* IDDocumentDetailViewController.m */,
 				4C8AD6001404F5470078DE52 /* IDLoginViewController.h */,
 				4C8AD6011404F5470078DE52 /* IDLoginViewController.m */,
+				66DC2B5E15090D95008CFEF1 /* IDWebViewController.h */,
+				66DC2B5F15090D95008CFEF1 /* IDWebViewController.m */,
 				4CBB0BB213B3369000F67E1C /* IDHomeSortingViewController.h */,
 				4CBB0BB313B3369000F67E1C /* IDHomeSortingViewController.m */,
 				66AC01B514D808FD00F6BD36 /* IDCategoriesViewController */,
@@ -1372,6 +1377,7 @@
 				66CD733514C5D2C900DB0E02 /* IDLang.m in Sources */,
 				66DD9E0314D957F0003D85BF /* IDImageView.m in Sources */,
 				66DD9E0714D95BAF003D85BF /* IDImageZoomView.m in Sources */,
+				66DC2B6015090D95008CFEF1 /* IDWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

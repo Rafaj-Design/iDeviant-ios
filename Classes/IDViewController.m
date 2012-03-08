@@ -79,6 +79,24 @@
 }
 
 - (void)viewDidUnload {
+	table = nil;
+	table.dataSource = nil;
+	table.delegate = nil;
+	data = nil;
+	categoriesData = nil;
+	backgroundImageView = nil;
+	formatter = nil;
+	parsedItems = nil;
+	itemsToDisplay = nil;
+	[feedParser cancelParsing];
+	feedParser = nil;
+	searchBarHeader = nil;
+	internetReachable = nil;
+	refreshButton = nil;
+	message = nil;
+	gestureView = nil;
+	tapGesture = nil;
+		
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 	[gestureView removeFromSuperview];
 }
@@ -182,8 +200,10 @@
 }
 
 -(void) showHideNavbar:(id)sender {
-	if (!popping)
+	if (!popping) {
+		[self.navigationController dismissModalViewControllerAnimated:YES];
 		[self.navigationController popToRootViewControllerAnimated:YES];
+	}
 	
 	[self.gestureView removeGestureRecognizer:tapGesture];
 	popping = YES;
@@ -492,49 +512,50 @@
 		
 		[cell setSelectionStyle:UITableViewCellSelectionStyleGray];
 		
-		if ([data count] > 0) {
-			// Configure the cell.
-			MWFeedItem *item = [data objectAtIndex:indexPath.row];
-			if (item) {
-				// Process
-				NSString *itemTitle = item.title ? [item.title stringByConvertingHTMLToPlainText] : @"[No Title]";
-				NSString *itemSummary = item.summary ? [item.summary stringByConvertingHTMLToPlainText] : @"[No Summary]";
-				
-				// Set
-				cell.cellTitleLabel.text = itemTitle;
-				[cell.cellTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeueLTPro-LtCn" size:16]];
-				
-				NSMutableString *subtitle = [NSMutableString string];
-				if (item.date) [subtitle appendFormat:@"%@: ", [formatter stringFromDate:item.date]];
-				[subtitle appendString:itemSummary];
-				
-				[cell setDynamicDetailText:subtitle];
-				[cell.cellDetailLabel setFont:[UIFont fontWithName:@"HelveticaNeueLTPro-LtCn" size:12]];
-				
-				BOOL canAccess = YES;
-				if ([item.rating isEqualToString:@"adult"]) {
-					if (![IDAdultCheck canAccessAdultStuff]) {
-						canAccess = NO;
-						[cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-x.png"]];
+		if (data)
+			if ([data count] > 0) {
+				// Configure the cell.
+				MWFeedItem *item = [data objectAtIndex:indexPath.row];
+				if (item) {
+					// Process
+					NSString *itemTitle = item.title ? [item.title stringByConvertingHTMLToPlainText] : @"[No Title]";
+					NSString *itemSummary = item.summary ? [item.summary stringByConvertingHTMLToPlainText] : @"[No Summary]";
+					
+					// Set
+					cell.cellTitleLabel.text = itemTitle;
+					[cell.cellTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeueLTPro-LtCn" size:16]];
+					
+					NSMutableString *subtitle = [NSMutableString string];
+					if (item.date) [subtitle appendFormat:@"%@: ", [formatter stringFromDate:item.date]];
+					[subtitle appendString:itemSummary];
+					
+					[cell setDynamicDetailText:subtitle];
+					[cell.cellDetailLabel setFont:[UIFont fontWithName:@"HelveticaNeueLTPro-LtCn" size:12]];
+					
+					BOOL canAccess = YES;
+					if ([item.rating isEqualToString:@"adult"]) {
+						if (![IDAdultCheck canAccessAdultStuff]) {
+							canAccess = NO;
+							[cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-x.png"]];
+						}
+						else {
+							[cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-heart.png"]];
+						}
 					}
 					else {
-						[cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-heart.png"]];
+						[cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-white.png"]];
 					}
-				}
-				else {
-					[cell.accessoryArrow setImage:[UIImage imageNamed:@"DA_arrow-white.png"]];
-				}
-				if (canAccess) {
-					if ([item.thumbnails count] > 0) {
-						if (([[[item.thumbnails objectAtIndex:0] objectForKey:@"width"] intValue] <= 200) || ([[[item.thumbnails objectAtIndex:0] objectForKey:@"height"] intValue] <= 200))
-							[cell.cellImageView loadImageFromUrl:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]];
+					if (canAccess) {
+						if ([item.thumbnails count] > 0) {
+							if (([[[item.thumbnails objectAtIndex:0] objectForKey:@"width"] intValue] <= 200) || ([[[item.thumbnails objectAtIndex:0] objectForKey:@"height"] intValue] <= 200))
+								[cell.cellImageView loadImageFromUrl:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]];
+						}
 					}
-				}
-				else {
-					[cell.cellImageView setImage:[UIImage imageNamed:@"DA_adult-lock.png"]];
+					else {
+						[cell.cellImageView setImage:[UIImage imageNamed:@"DA_adult-lock.png"]];
+					}
 				}
 			}
-		}
     }
 	[self configureCell:cell withIndexPath:indexPath forTableView:tableView];
 	
@@ -812,7 +833,7 @@
 	[formatter release];
 	[parsedItems release];
 	[itemsToDisplay release];
-	[feedParser cancelParsing];
+//	[feedParser cancelParsing];
 	[feedParser release];
 	[searchBarHeader release];
 	[internetReachable release];

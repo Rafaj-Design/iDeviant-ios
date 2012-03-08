@@ -7,6 +7,7 @@
 //
 
 #import "IDLoginViewController.h"
+#import "IDWebViewController.h"
 
 @implementation IDLoginViewController
 
@@ -115,26 +116,19 @@
 		NSString *urlAddress = @"https://www.deviantart.com/users/login";
 		NSString *body = [NSString stringWithFormat: @"username=%@&password=%@", nick.text, pass.text];
 		NSURL *url = [NSURL URLWithString:urlAddress];
-		NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-		[request setURL:url];
-		[request setHTTPMethod:@"POST"];
-		[request setHTTPBody:[body dataUsingEncoding: NSUTF8StringEncoding]];
 		
 		[nick resignFirstResponder];
 		[pass resignFirstResponder];		
 		
-		UIViewController *c = [[UIViewController alloc] init];
-		[c setTitle:@"Deviant Art"];
+		IDWebViewController *webViewController = [[IDWebViewController alloc] init];
+		[webViewController setTitle:@"Deviant Art"];
 		
-//		UIWebView *webView = [[UIWebView alloc] initWithFrame:[super fullScreenFrame]];
-		UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
-		[webView loadRequest:request];
-		[request release];
+		webViewController.request = [[NSMutableURLRequest alloc] init];
+		[webViewController.request setURL:url];
+		[webViewController.request setHTTPMethod:@"POST"];
+		[webViewController.request setHTTPBody:[body dataUsingEncoding: NSUTF8StringEncoding]];
 		
-		c.view = webView;
-		[webView release];
-		
-		[self.navigationController pushViewController:c animated:YES];
+		[self.navigationController pushViewController:webViewController animated:YES];
 		
 		if (remember.on) {
 			//save login

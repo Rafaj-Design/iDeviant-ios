@@ -83,6 +83,23 @@
 	[super viewDidUnload];
 	
 //	[[UIApplication sharedApplication] setStatusBarHidden:NO];
+	table = nil;
+	table.dataSource = nil;
+	table.delegate = nil;
+	data = nil;
+	categoriesData = nil;
+	backgroundImageView = nil;
+	formatter = nil;
+	parsedItems = nil;
+	itemsToDisplay = nil;
+	[feedParser cancelParsing];
+	feedParser = nil;
+	searchBarHeader = nil;
+	internetReachable = nil;
+	refreshButton = nil;
+	message = nil;
+	gestureView = nil;
+	tapGesture = nil;
 }
 
 #pragma mark - UITableViewDelegate
