@@ -37,6 +37,8 @@
 
 @synthesize internetReachable;
 
+@synthesize photos, itms;
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
@@ -76,6 +78,9 @@
 	[message setHidden:YES];
 	
 	popping = NO;
+	
+	photos = [[NSMutableArray alloc] init];
+	itms = [[NSMutableArray alloc] init];
 }
 
 - (void)viewDidUnload {
@@ -658,15 +663,39 @@
 				[c release];
 			} else if (item.thumbnails.count > 0) {
 				if ([[item.thumbnails objectAtIndex:0] objectForKey:@"url"] != nil) {
-					IDImageDetailViewController *c = [[IDImageDetailViewController alloc] init];
-					[c inheritConnectivity:internetActive];
-					[c setCurrentIndex:indexPath.row];
-					[c setListData:arr];
-					[c setDelegate:(id<IDImageDetailViewControllerDelegate>)self];
-					//[c.data retain];
-					[c setImageUrl:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]];
-					[self.navigationController pushViewController:c animated:YES];
-					[c release];
+//					IDImageDetailViewController *c = [[IDImageDetailViewController alloc] init];
+//					[c inheritConnectivity:internetActive];
+//					[c setCurrentIndex:indexPath.row];
+//					[c setListData:arr];
+//					[c setDelegate:(id<IDImageDetailViewControllerDelegate>)self];
+//					//[c.data retain];
+//					[c setImageUrl:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]];
+//					[self.navigationController pushViewController:c animated:YES];
+//					[c release];
+					
+					MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+					// Set options
+					browser.wantsFullScreenLayout = YES; // Decide if you want the photo browser full screen, i.e. whether the status bar is affected (defaults to YES)
+					browser.displayActionButton = YES; // Show action button to save, copy or email photos (defaults to NO)
+					
+					NSInteger index = 0;
+					NSInteger i = 0;
+					
+					for (MWPhoto *photo in photos) {
+						if ([photo.urlString isEqualToString:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]])
+							index = i;
+						else if ([photo.urlString isEqualToString:[[item.contents objectAtIndex:0] objectForKey:@"url"]])
+							index = i;
+						
+						i++;
+					}
+					
+					[browser setInitialPageIndex:index]; // Example: allows second image to be presented first
+					[browser setItms:itms];
+					// Present
+				
+					[self.navigationController pushViewController:browser animated:YES];
+					
 				}
 			}
 		}
@@ -678,6 +707,18 @@
 	}
 	
 	[arr release];
+}
+
+#pragma mark - MWPhotoBrowserDelegate
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+	return photos.count;
+}
+
+- (MWPhoto *)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    if (index < self.photos.count)
+        return [self.photos objectAtIndex:index];
+    return nil;
 }
 
 #pragma mark - UITableViewDataSource
@@ -744,6 +785,29 @@
 	NSArray *arr = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
 	[self setData:[parsedItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:arr]]];
 	[arr release];
+	
+	
+	for (MWFeedItem *item in data) {
+		BOOL canAccess = YES;
+		if ([item.rating isEqualToString:@"adult"])
+			if (![IDAdultCheck canAccessAdultStuff]) 
+				canAccess = NO;
+		
+		if (canAccess)
+			if (([item.contents count] > 0) && (item.thumbnails.count > 0)) {
+				NSString *contentUrl = [[item.contents objectAtIndex:0] objectForKey:@"url"];
+				NSString *extension = [[contentUrl pathExtension] lowercaseString];
+				
+				if ([extension isEqualToString:@"png"] || [extension isEqualToString:@"jpeg"] || [extension isEqualToString:@"jpg"]){
+					[photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:[[item.contents objectAtIndex:0] objectForKey:@"url"]]]];
+					[itms addObject:item];
+				}
+				else {
+					[photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]]]];
+					[itms addObject:item];
+				}
+			}
+	}
 	
 	if (table) {
 		[self enableTable];

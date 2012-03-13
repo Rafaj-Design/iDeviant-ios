@@ -14,6 +14,7 @@
 #import "IDHorizontalItems.h"
 #import "FTShare.h"
 #import "FTImagePage.h"
+#import "MWPhotoBrowser.h"
 
 @class IDImageDetailViewController;
 

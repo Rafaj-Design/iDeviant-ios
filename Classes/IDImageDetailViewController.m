@@ -64,6 +64,7 @@
     [mainView setDummyPageImage:[UIImage imageNamed:@"dummy.png"]];
     [mainView setInitialPage:imagePage withDelegate:(id<FTPageScrollViewDelegate>)self];
 	[mainView setPage:imagePage pageCount:[listThroughData count] animate:YES];
+	[mainView setBackgroundColor:[UIColor purpleColor]];
 	
 	FTPage *rPage = [self pageForIndex:(currentIndex + 1)];
 	FTPage *lPage = [self pageForIndex:(currentIndex - 1)];
@@ -77,6 +78,7 @@
     [mainView setPagingEnabled:YES];
 	
 	[mainView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+	[mainView setAutoresizesSubviews:YES];
 	
 	[self.view addSubview:mainView];
 	
@@ -147,6 +149,12 @@
 	
 	[self.view setBackgroundColor:[UIColor blackColor]];
 //	[self.view setFrame:[[UIScreen mainScreen] bounds]];
+//	for (FTImagePage *imagePage in imagePages) {
+//		[imagePage setFrame:self.view.bounds];
+//		[imagePage.imageZoomView setFrame:self.view.bounds];
+//		[imagePage.imageZoomView.imageView setFrame:self.view.bounds];
+//		[imagePage.imageView setFrame:self.view.bounds];
+//	}
 	[bottomBar setFrame:[self frameForToolbar]];
 }
 
@@ -185,13 +193,6 @@
 	return r;
 }
 
-- (CGRect)getFrameForPage {
-	if (isLandscape) 
-		return CGRectMake(0, 0, 480, 320);
-	else 
-		return CGRectMake(0, 0, 320, 480);
-}
-
 #pragma - mark Settings
 
 - (void)setListData:(NSArray *)array {
@@ -225,10 +226,14 @@
 			return nil;
 
 	MWFeedItem *item = [listThroughData objectAtIndex:index];
-	
-//	FTImagePage *imagePage = [[FTImagePage alloc] initWithFrame:[self getFrameForPage]];
-	FTImagePage *imagePage = [[FTImagePage alloc] initWithFrame:self.view.bounds];
 
+	FTImagePage *imagePage = [[FTImagePage alloc] initWithFrame:self.view.bounds];
+//	[imagePage setBackgroundColor:[UIColor redColor]];
+//	[imagePage.imageZoomView setBackgroundColor:[UIColor yellowColor]];
+//	[imagePage.imageZoomView.imageView setBackgroundColor:[UIColor blueColor]];
+	[imagePage.imageZoomView.imageView setFrame:self.view.bounds];
+	[imagePage.imageZoomView.imageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+	
 	[imagePage setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
 	
 	[imagePage.activityIndicator centerInSuperView];
@@ -556,10 +561,6 @@
 
 - (void)pageScrollView:(FTPageScrollView *)scrollView offsetDidChange:(CGPoint)offset {
 	
-}
-
-- (CGSize)pageScrollView:(FTPageScrollView *)scrollView sizeForPage:(CGSize)size {
-	return [self getFrameForPage].size;
 }
 
 - (void)dummyScrollInPageScrollViewDidFinish:(FTPageScrollView *)scrollView {

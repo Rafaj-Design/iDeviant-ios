@@ -15,8 +15,9 @@
 //#import "IDLang.h"
 //#import "FlurryAPI.h"
 #import "FTReachability.h"
+#import "MWPhotoBrowser.h"
 
-@interface IDViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MWFeedParserDelegate, UISearchBarDelegate, UIGestureRecognizerDelegate> {
+@interface IDViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MWFeedParserDelegate, UISearchBarDelegate, UIGestureRecognizerDelegate, MWPhotoBrowserDelegate> {
 	
 	NSArray *data;
 	NSArray *categoriesData;
@@ -55,6 +56,8 @@
 	
 	UIView *gestureView;
 	UITapGestureRecognizer *tapGesture;
+	
+	NSMutableArray *photos, *itms;
 }
 
 @property (nonatomic, retain) NSArray *data;
@@ -78,6 +81,8 @@
 @property (nonatomic, retain) UIView *gestureView;
 @property (nonatomic, retain) UITapGestureRecognizer *tapGesture;
 @property (nonatomic, retain) Reachability *internetReachable;
+
+@property (nonatomic, retain) NSMutableArray *photos, *itms;
 
 - (CGRect)fullScreenFrame;
 
