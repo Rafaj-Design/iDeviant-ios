@@ -31,6 +31,8 @@
 	[super setData:[FTSimpleDB getItemsFromDb:kSystemHomeMenuDbName]];
 	[super createTableView];
 	[table setEditing:YES animated:NO];
+	
+	[FlurryAnalytics logEvent:@"homesorting"];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

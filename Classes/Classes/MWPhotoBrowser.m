@@ -11,6 +11,8 @@
 #import "MWZoomingScrollView.h"
 #import "MBProgressHUD.h"
 #import "SDImageCache.h"
+#import "MWFeedItem.h"
+#import "iDeviantAppDelegate.h"
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
@@ -119,6 +121,7 @@
 // Actions
 - (void)savePhoto;
 - (void)copyPhoto;
+- (void)facebookPhoto;
 - (void)emailPhoto;
 
 @end
@@ -262,6 +265,14 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
 	// Super
     [super viewDidLoad];
 	
+	MWFeedItem *item = [itms objectAtIndex:_currentPageIndex];
+	
+	NSDictionary *dictionary;
+	if ([[item rating] isEqualToString:@"adult"])
+		dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"title", [item title], @"adult", @"YES", nil];
+	else 
+		dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"title", [item title], @"adult", @"NO", nil];
+	[FlurryAnalytics logEvent:@"detail" withParameters:dictionary];
 }
 
 - (void)performLayout {
@@ -830,7 +841,7 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
     
 	// Title
 	if ([self numberOfPhotos] > 1) {
-		self.title = [NSString stringWithFormat:@"%i %@ %i", _currentPageIndex+1, NSLocalizedString(@"of", @"Used in the context: 'Showing 1 of 3 items'"), [self numberOfPhotos]];		
+		self.title = [NSString stringWithFormat:@"%i %@ %i", _currentPageIndex+1, @" / ", [self numberOfPhotos]];		
 	} else {
 		self.title = nil;
 	}
@@ -965,13 +976,13 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
             
             // Sheet
             if ([MFMailComposeViewController canSendMail]) {
-                self.actionsSheet = [[[UIActionSheet alloc] initWithTitle:nil delegate:self
-                                                        cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil
-                                                        otherButtonTitles:NSLocalizedString(@"Save", nil), NSLocalizedString(@"Copy", nil), NSLocalizedString(@"Email", nil), nil] autorelease];
+                self.actionsSheet = [[[UIActionSheet alloc] initWithTitle:[IDLang get:@"actionswithimagetitle"] delegate:self
+                                                        cancelButtonTitle:[IDLang get:@"cancelbutton"] destructiveButtonTitle:nil
+                                                        otherButtonTitles:[IDLang get:@"savetogalleryit"], [IDLang get:@"facebookit"], [IDLang get:@"emailit"], nil] autorelease];
             } else {
-                self.actionsSheet = [[[UIActionSheet alloc] initWithTitle:nil delegate:self
-                                                        cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil
-                                                        otherButtonTitles:NSLocalizedString(@"Save", nil), NSLocalizedString(@"Copy", nil), nil] autorelease];
+                self.actionsSheet = [[[UIActionSheet alloc] initWithTitle:[IDLang get:@"actionswithimagetitle"] delegate:self
+                                                        cancelButtonTitle:[IDLang get:@"cancelbutton"] destructiveButtonTitle:nil
+                                                        otherButtonTitles:[IDLang get:@"savetogalleryit"], [IDLang get:@"facebookit"], nil] autorelease];
             }
             _actionsSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -994,7 +1005,7 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
             if (buttonIndex == actionSheet.firstOtherButtonIndex) {
                 [self savePhoto]; return;
             } else if (buttonIndex == actionSheet.firstOtherButtonIndex + 1) {
-                [self copyPhoto]; return;	
+                [self facebookPhoto]; return;	
             } else if (buttonIndex == actionSheet.firstOtherButtonIndex + 2) {
                 [self emailPhoto]; return;
             }
@@ -1082,6 +1093,18 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
     }
 }
 
+- (void)facebookPhoto {
+        [self showProgressHUDWithMessage:[NSString stringWithFormat:@"%@\u2026" , @"Sharing"]];
+        [self performSelector:@selector(actuallyFacebookPhoto) withObject:nil afterDelay:0.2];
+}
+
+- (void)actuallyFacebookPhoto {
+	iDeviantAppDelegate *appDelegate = [(iDeviantAppDelegate *)[UIApplication sharedApplication] delegate];	
+	MWFeedItem *item = [itms objectAtIndex:_currentPageIndex];
+	[appDelegate postFbMessageWithObject:item];
+	[self hideProgressHUD:YES];
+}
+
 - (void)emailPhoto {
     id <MWPhoto> photo = [self photoAtIndex:_currentPageIndex];
     if ([photo underlyingImage]) {
@@ -1091,11 +1114,18 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
 }
 
 - (void)actuallyEmailPhoto:(id<MWPhoto>)photo {
+	
+	MWFeedItem *item = [itms objectAtIndex:_currentPageIndex];
+	if (![item title])
+		item.title = [NSString stringWithFormat:@"Title"];
+	
     if ([photo underlyingImage]) {
         MFMailComposeViewController *emailer = [[MFMailComposeViewController alloc] init];
         emailer.mailComposeDelegate = self;
-        [emailer setSubject:NSLocalizedString(@"Photo", nil)];
-        [emailer addAttachmentData:UIImagePNGRepresentation([photo underlyingImage]) mimeType:@"png" fileName:@"Photo.png"];
+        [emailer setSubject:[NSString stringWithFormat:@"%@ by iDeviant", [item title]]];
+		NSString *htmlBody = [NSString stringWithFormat:@"<br/><br/><a href=\"%@\"><img src=\"%@\"/></a><br/><br/>Copyright <a href=\"%@\">%@</a><br/>iDeviant app by <a href=\"http://www.fuerteint.com/\">Fuerte International UK</a><br/><img src=\"http://new.fuerteint.com/wp-content/themes/theme1177/images/logo.png\"/>", [item link], [(MWPhoto *)photo urlString], [item link], [[item credits] objectAtIndex:0]];
+		[emailer setMessageBody:htmlBody isHTML:YES];
+//        [emailer addAttachmentData:UIImagePNGRepresentation([photo underlyingImage]) mimeType:@"png" fileName:@"Photo.png"];
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             emailer.modalPresentationStyle = UIModalPresentationPageSheet;
         }
@@ -1116,5 +1146,14 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
     }
 	[self dismissModalViewControllerAnimated:YES];
 }
+
+//MWFeedItem *item = [itms objectAtIndex:_currentPageIndex];
+//
+//BOOL adult = NO;
+//if ([[item rating] isEqualToString:@"adult"])
+//adult = YES;
+//
+//NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"title", [item title], @"adult", adult, nil];
+//[FlurryAnalytics logEvent:@"detail" withParameters:dictionary];
 
 @end

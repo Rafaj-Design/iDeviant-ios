@@ -20,6 +20,8 @@
 	[super enableRefreshButton];
 //	[super getDataForSearchString:@"icons"];
 	[super getDataForParams:@"special:dd"];
+	
+	[FlurryAnalytics logEvent:@"daily"];
 }
 
 

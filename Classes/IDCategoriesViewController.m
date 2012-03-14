@@ -31,6 +31,13 @@
 	
 	[super createTableView];
 	[table reloadData];
+	
+	if ([NSStringFromClass([self class]) isEqualToString:@"IDCategoriesViewController"]) {
+		NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"subcategories", currentCategoryPath, nil];
+		[FlurryAnalytics logEvent:@"categories" withParameters:dictionary];
+	} else {
+		[FlurryAnalytics logEvent:@"favorites"];
+	}
 }
 
 #pragma mark Data

@@ -14,6 +14,7 @@
 #import "IGABuildChecks.h"
 #import "ASIDownloadCache.h"
 //#import "JCO.h"
+#import "JMC.h"
 
 //#import "FBConnect.h"
 
@@ -29,6 +30,7 @@
 #import "FTFilesystemPaths.h"
 
 #import "IDImageDetailViewController.h"
+#import "FlurryAnalytics.h"
 
 static NSString* kAppId = @"118349561582677";
 
@@ -45,10 +47,28 @@ static NSString* kAppId = @"118349561582677";
 
 #pragma mark Application lifecycle
 
+- (void)crash {
+	CFRelease(NULL);
+}
+
+void uncaughtExceptionHandler(NSException *exception) {
+    [FlurryAnalytics logError:@"Uncaught" message:@"Crash!" exception:exception];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
+	NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+	
+	[FlurryAnalytics startSession:@"1267caee8ed3726c1683a6323e9d19d5"];
+	
+	[[JMC sharedInstance] configureJiraConnect:@"http://jira.fuerteint.com:8080/"
+									projectKey:@"IDV"
+										apiKey:@"80266370-3993-4530-8a51-708a2353f556"];
+	
+//	[self performSelector:@selector(crash) withObject:nil afterDelay:20];
+	
 	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	[self.window setBackgroundColor:[UIColor blackColor]];
-
+	
     // Build checks
 	if (kDebug) {
 		[IGABuildChecks perform];

@@ -64,6 +64,8 @@
     
     UIImage *image = [UIImage imageNamed:@"DD_login_bg"];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:image]];
+	
+	[FlurryAnalytics logEvent:@"login"];
 }
 
 -(void)nextTextField{

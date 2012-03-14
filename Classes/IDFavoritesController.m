@@ -35,6 +35,7 @@
 //	[super getDataForSearchString:@"nude"];
 	
 	//IDFavoriteCategoriesTableViewCell
+//	[FlurryAnalytics logEvent:@"favorites"];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

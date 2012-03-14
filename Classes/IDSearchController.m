@@ -41,6 +41,9 @@
 	
 	[table reloadData];
 	[self backgroundImage];
+	
+	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"searchQuery", @"", nil];
+	[FlurryAnalytics logEvent:@"search" withParameters:dictionary];
 }
 
 #pragma mark - Background image
