@@ -241,13 +241,14 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
 	
 	UIColor *color = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.7];
 	UIImage *img = [UIImage imageNamed:@"DA_topbar-alpha.png"];
+	UIImage *imgland = [UIImage imageNamed:@"DA_topbar-alpha-land.png"];
 	
     // Toolbar
     _toolbar = [[UIToolbar alloc] initWithFrame:[self frameForToolbarAtOrientation:self.interfaceOrientation]];
     _toolbar.tintColor = color;
     if ([[UIToolbar class] respondsToSelector:@selector(appearance)]) {
         [_toolbar setBackgroundImage:img forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
-        [_toolbar setBackgroundImage:img forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsLandscapePhone];
+        [_toolbar setBackgroundImage:imgland forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsLandscapePhone];
     }
     _toolbar.barStyle = UIBarStyleBlackTranslucent;
     _toolbar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
@@ -405,12 +406,13 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
 - (void)setNavBarAppearance:(BOOL)animated {
 //	UIColor *color = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.7];
 	UIImage *img = [UIImage imageNamed:@"DA_topbar-alpha.png"];
+	UIImage *imgland = [UIImage imageNamed:@"DA_topbar-alpha-land.png"];
 	
     self.navigationController.navigationBar.tintColor = nil;
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     if ([[UINavigationBar class] respondsToSelector:@selector(appearance)]) {
         [self.navigationController.navigationBar setBackgroundImage:img forBarMetrics:UIBarMetricsDefault];
-        [self.navigationController.navigationBar setBackgroundImage:img forBarMetrics:UIBarMetricsLandscapePhone];
+        [self.navigationController.navigationBar setBackgroundImage:imgland forBarMetrics:UIBarMetricsLandscapePhone];
     }
 	
 	
