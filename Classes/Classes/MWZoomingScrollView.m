@@ -56,7 +56,7 @@
 		[self addSubview:_spinner];
 		
 		// Setup
-		self.backgroundColor = [UIColor greenColor];
+		self.backgroundColor = [UIColor blackColor];
 		self.delegate = self;
 		self.showsHorizontalScrollIndicator = NO;
 		self.showsVerticalScrollIndicator = NO;

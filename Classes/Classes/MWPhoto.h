@@ -18,8 +18,7 @@
 @interface MWPhoto : NSObject <MWPhoto, SDWebImageManagerDelegate, SDWebImageDecoderDelegate>
 
 // Properties
-@property (nonatomic, retain) NSString *caption;
-@property (nonatomic, retain) NSString *urlString;
+@property (nonatomic, retain) NSString *caption, *urlString;
 
 // Class
 + (MWPhoto *)photoWithImage:(UIImage *)image;

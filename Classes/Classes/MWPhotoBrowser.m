@@ -11,10 +11,6 @@
 #import "MWZoomingScrollView.h"
 #import "MBProgressHUD.h"
 #import "SDImageCache.h"
-#import "FTToolbar.h"
-#import "MWFeedItem.h"
-#import "iDeviantAppDelegate.h"
-
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
@@ -99,7 +95,6 @@
 - (CGSize)contentSizeForPagingScrollView;
 - (CGPoint)contentOffsetForPageAtIndex:(NSUInteger)index;
 - (CGRect)frameForToolbarAtOrientation:(UIInterfaceOrientation)orientation;
-- (CGRect)frameForCaptionView:(MWCaptionView *)captionView atIndex:(NSUInteger)index;
 
 // Navigation
 - (void)updateNavigation;
@@ -163,13 +158,13 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
         _photos = [[NSMutableArray alloc] init];
         _displayActionButton = NO;
         _didSavePreviousStateOfNavBar = NO;
-		itms = [[NSMutableArray alloc] init];
         
         // Listen for MWPhoto notifications
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(handleMWPhotoLoadingDidEndNotification:)
                                                      name:MWPHOTO_LOADING_DID_END_NOTIFICATION
                                                    object:nil];
+		itms = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -231,11 +226,9 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
 	
 	// View
 	self.view.backgroundColor = [UIColor blackColor];
-	[self hideControls];
 	
 	// Setup paging scrolling view
-//	CGRect pagingScrollViewFrame = [self frameForPagingScrollView];
-	CGRect pagingScrollViewFrame = [[UIScreen mainScreen] applicationFrame];
+	CGRect pagingScrollViewFrame = [self frameForPagingScrollView];
 	_pagingScrollView = [[UIScrollView alloc] initWithFrame:pagingScrollViewFrame];
 	_pagingScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	_pagingScrollView.pagingEnabled = YES;
@@ -244,21 +237,18 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
 	_pagingScrollView.showsVerticalScrollIndicator = NO;
 	_pagingScrollView.backgroundColor = [UIColor blackColor];
     _pagingScrollView.contentSize = [self contentSizeForPagingScrollView];
-	_pagingScrollView.center = self.view.center;
 	[self.view addSubview:_pagingScrollView];
 	
-    // Toolbar
 	UIColor *color = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.7];
 	UIImage *img = [UIImage imageNamed:@"DA_topbar-alpha.png"];
-	[img drawInRect:CGRectMake(0, 0, 10, 10)];
 	
+    // Toolbar
     _toolbar = [[UIToolbar alloc] initWithFrame:[self frameForToolbarAtOrientation:self.interfaceOrientation]];
     _toolbar.tintColor = color;
     if ([[UIToolbar class] respondsToSelector:@selector(appearance)]) {
         [_toolbar setBackgroundImage:img forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
         [_toolbar setBackgroundImage:img forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsLandscapePhone];
-    }	
-	
+    }
     _toolbar.barStyle = UIBarStyleBlackTranslucent;
     _toolbar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
     
@@ -270,9 +260,6 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
     
 	// Super
     [super viewDidLoad];
-	
-//	[self.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-	
 	
 }
 
@@ -294,16 +281,7 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
     }
     
     // Toolbar items & navigation
-//    UIBarButtonItem *fixedLeftSpace = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:nil] autorelease];
-//    fixedLeftSpace.width = 32; // To balance action button
-//    UIBarButtonItem *flexSpace = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil] autorelease];
     NSMutableArray *items = [[NSMutableArray alloc] init];
-//    if (_displayActionButton) [items addObject:fixedLeftSpace];
-//    [items addObject:flexSpace];
-//    if (numberOfPhotos > 1) [items addObject:_previousButton];
-//    [items addObject:flexSpace];
-//    if (numberOfPhotos > 1) [items addObject:_nextButton];
-//    [items addObject:flexSpace];
     if (_displayActionButton) [items addObject:_actionButton];
     [_toolbar setItems:items];
     [items release];
@@ -385,8 +363,6 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
     
     // Update UI
 	[self hideControlsAfterDelay];
-	
-	_pagingScrollView.center = self.view.center;
     
 }
 
@@ -427,17 +403,17 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
 #pragma mark - Nav Bar Appearance
 
 - (void)setNavBarAppearance:(BOOL)animated {
-	
-	UIColor *color = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.7];
+//	UIColor *color = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.7];
 	UIImage *img = [UIImage imageNamed:@"DA_topbar-alpha.png"];
-	[img drawInRect:CGRectMake(0, 0, 10, 10)];
 	
-    self.navigationController.navigationBar.tintColor = color;
+    self.navigationController.navigationBar.tintColor = nil;
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     if ([[UINavigationBar class] respondsToSelector:@selector(appearance)]) {
         [self.navigationController.navigationBar setBackgroundImage:img forBarMetrics:UIBarMetricsDefault];
         [self.navigationController.navigationBar setBackgroundImage:img forBarMetrics:UIBarMetricsLandscapePhone];
     }
+	
+	
 }
 
 - (void)storePreviousNavBarAppearance {
@@ -487,17 +463,13 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
 	CGRect pagingScrollViewFrame = [self frameForPagingScrollView];
     
 	// Frame needs changing
-//	_pagingScrollView.frame = pagingScrollViewFrame;
-	_pagingScrollView.frame = [[UIScreen mainScreen] bounds];
+	_pagingScrollView.frame = pagingScrollViewFrame;
 	
 	// Recalculate contentSize based on current orientation
 	_pagingScrollView.contentSize = [self contentSizeForPagingScrollView];
 	
-	_pagingScrollView.backgroundColor = [UIColor redColor];
-	
 	// Adjust frames and configuration of each visible page
 	for (MWZoomingScrollView *page in _visiblePages) {
-		page.backgroundColor = [UIColor blueColor];
         NSUInteger index = PAGE_INDEX(page);
 		page.frame = [self frameForPageAtIndex:index];
 		[page setMaxMinZoomScalesForCurrentBounds];
@@ -921,12 +893,6 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
         self.navigationController.navigationBar.frame = navBarFrame;
         
     }
-    
-    // Captions
-    NSMutableSet *captionViews = [[[NSMutableSet alloc] initWithCapacity:_visiblePages.count] autorelease];
-    for (MWZoomingScrollView *page in _visiblePages) {
-        if (page.captionView) [captionViews addObject:page.captionView];
-    }
 	
 	// Animate
     if (animated) {
@@ -936,7 +902,6 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
     CGFloat alpha = hidden ? 0 : 1;
 	[self.navigationController.navigationBar setAlpha:alpha];
 	[_toolbar setAlpha:alpha];
-    for (UIView *v in captionViews) v.alpha = alpha;
 	if (animated) [UIView commitAnimations];
 	
 	// Control hiding timer
@@ -992,30 +957,26 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
     } else {
         id <MWPhoto> photo = [self photoAtIndex:_currentPageIndex];
         if ([self numberOfPhotos] > 0 && [photo underlyingImage]) {
-			
-			UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:[IDLang get:@"actionswithimagetitle"] delegate:self cancelButtonTitle:[IDLang get:@"cancelbutton"] destructiveButtonTitle:nil otherButtonTitles:[IDLang get:@"savetogalleryit"], [IDLang get:@"facebookit"], [IDLang get:@"emailit"], nil];
-			[actionSheet showInView:self.view];
-			[actionSheet release];
             
             // Keep controls hidden
-//            [self setControlsHidden:NO animated:YES permanent:YES];
-//            
-//            // Sheet
-//            if ([MFMailComposeViewController canSendMail]) {
-//                self.actionsSheet = [[[UIActionSheet alloc] initWithTitle:nil delegate:self
-//                                                        cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil
-//                                                        otherButtonTitles:NSLocalizedString(@"Save", nil), NSLocalizedString(@"Copy", nil), NSLocalizedString(@"Email", nil), nil] autorelease];
-//            } else {
-//                self.actionsSheet = [[[UIActionSheet alloc] initWithTitle:nil delegate:self
-//                                                        cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil
-//                                                        otherButtonTitles:NSLocalizedString(@"Save", nil), NSLocalizedString(@"Copy", nil), nil] autorelease];
-//            }
-//            _actionsSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
-//            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-//                [_actionsSheet showFromBarButtonItem:sender animated:YES];
-//            } else {
-//                [_actionsSheet showInView:self.view];
-//            }
+            [self setControlsHidden:NO animated:YES permanent:YES];
+            
+            // Sheet
+            if ([MFMailComposeViewController canSendMail]) {
+                self.actionsSheet = [[[UIActionSheet alloc] initWithTitle:nil delegate:self
+                                                        cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil
+                                                        otherButtonTitles:NSLocalizedString(@"Save", nil), NSLocalizedString(@"Copy", nil), NSLocalizedString(@"Email", nil), nil] autorelease];
+            } else {
+                self.actionsSheet = [[[UIActionSheet alloc] initWithTitle:nil delegate:self
+                                                        cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil
+                                                        otherButtonTitles:NSLocalizedString(@"Save", nil), NSLocalizedString(@"Copy", nil), nil] autorelease];
+            }
+            _actionsSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                [_actionsSheet showFromBarButtonItem:sender animated:YES];
+            } else {
+                [_actionsSheet showInView:self.view];
+            }
             
         }
     }
@@ -1144,117 +1105,14 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
 
 #pragma mark Mail Compose Delegate
 
-//- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
-//    if (result == MFMailComposeResultFailed) {
-//		UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Email", nil)
-//                                                         message:NSLocalizedString(@"Email failed to send. Please try again.", nil)
-//                                                        delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss", nil) otherButtonTitles:nil] autorelease];
-//		[alert show];
-//    }
-//	[self dismissModalViewControllerAnimated:YES];
-//}
-
-#pragma mark Actions methods
-
-- (void)saveCurrentImageToGallery {
-	
-//	UIImageWriteToSavedPhotosAlbum(self.currentImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-//    
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[IDLang get:@"imagesaved"] message:nil
-//												   delegate:self cancelButtonTitle:[IDLang get:@"OK"] otherButtonTitles:nil, nil];
-//	[alert show];
-//	[alert release];
-	[self savePhoto];
-	//[FlurryAPI logEvent:@"Func: Saving image"];
-}
-
-- (void)emailCurrentImage {
-	//[FlurryAPI logEvent:@"Func: Emailing image"];
-	
-	MWFeedItem *item = [itms objectAtIndex:_currentPageIndex];
-	if (![item title])
-		item.title = [NSString stringWithFormat:@"Title"];
-    
-    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
-    [mc setMailComposeDelegate:self];
-    [mc setSubject:[NSString stringWithFormat:@"%@ by iDeviant", [item title]]];
-	
-	id <MWPhoto> photo = [self photoAtIndex:_currentPageIndex];
-	
-	
-	
-	NSString *htmlBody = [NSString stringWithFormat:@"<br/><br/><a href=\"%@\"><img src=\"%@\"/></a><br/><br/>Copyright <a href=\"%@\">%@</a><br/>iDeviant app by <a href=\"http://www.fuerteint.com/\">Fuerte International UK</a><br/><img src=\"http://new.fuerteint.com/wp-content/themes/theme1177/images/logo.png\"/>", [item link], [(MWPhoto *)photo urlString], [item link], [[item credits] objectAtIndex:0]];
-    [mc setMessageBody:htmlBody isHTML:YES];
-	[mc setModalPresentationStyle:UIModalPresentationPageSheet];
-	
-	[mc setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-	
-    [super presentModalViewController:mc animated:YES];
-    
-}
-
-- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
-    
-    // switchng the result
-    switch (result) {
-        case MFMailComposeResultCancelled:
-			//            NSLog(@"Mail send canceled.");
-            //[FTTracking logEvent:@"Mail: Mail canceled"];
-            break;
-        case MFMailComposeResultSaved:
-            //[UIAlertView showMessage:IDLangGet(@"Your email has been saved") withTitle:IDLangGet(@"Email")];
-            
-            //[FTTracking logEvent:@"Mail: Mail saved"];
-            break;
-        case MFMailComposeResultSent:
-			//            NSLog(@"Mail sent.");
-            //[FTTracking logEvent:@"Mail: Mail sent"];
-            //[UIAlertView showMessage:IDLangGet(@"Your email has been sent") withTitle:IDLangGet(@"Email")];
-            break;
-        case MFMailComposeResultFailed:
-			//            NSLog(@"Mail send error: %@.", [error localizedDescription]);
-            //[UIAlertView showMessage:[error localizedDescription] withTitle:IDLangGet(@"Error")];
-            //[FlurryAnalytics logError:@"Mail" message:@"Mail send failed" error:error];
-            break;
-        default:
-            break;
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+    if (result == MFMailComposeResultFailed) {
+		UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Email", nil)
+                                                         message:NSLocalizedString(@"Email failed to send. Please try again.", nil)
+                                                        delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss", nil) otherButtonTitles:nil] autorelease];
+		[alert show];
     }
-    //[self toggleBottomBar];
-    
-    //[self doLayoutSubviews];
-    // hide the modal view controller
-    [self dismissModalViewControllerAnimated:YES];
-    
-	
-}
-
-#pragma mark Actions
-
-- (void)didClickActionButton:(UIBarButtonItem *)sender {
-	//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-	UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:[IDLang get:@"actionswithimagetitle"] delegate:self cancelButtonTitle:[IDLang get:@"cancelbutton"] destructiveButtonTitle:nil otherButtonTitles:[IDLang get:@"savetogalleryit"], [IDLang get:@"facebookit"], [IDLang get:@"emailit"], nil];
-	[actionSheet showInView:self.view];
-	[actionSheet release];
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-	//	NSLog(@"Line: %d, File: %s %@", __LINE__, __FILE__,  NSStringFromSelector(_cmd));
-	//	NSLog(@"Did click button at index: %d", buttonIndex);
-	if (buttonIndex == 0) {
-		// Save to gallery
-		[self saveCurrentImageToGallery];
-	}
-	else if (buttonIndex == 1) {
-		iDeviantAppDelegate *appDelegate = [(iDeviantAppDelegate *)[UIApplication sharedApplication] delegate];
-		
-		MWFeedItem *item = [itms objectAtIndex:_currentPageIndex];
-		if (![item title])
-			[item setTitle:@"Title"];
-		[appDelegate postFbMessageWithObject:item];
-	}
-	else if (buttonIndex == 2) {
-		[self emailCurrentImage];
-	}
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 @end
