@@ -461,8 +461,8 @@
 }
 
 - (void)enableRefreshButton {
-	refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
-	[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
+//	refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
+//	[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
 }
 
 - (void)enableEditButton {

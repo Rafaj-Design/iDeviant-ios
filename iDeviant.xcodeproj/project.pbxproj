@@ -681,6 +681,7 @@
 		66BDFF371510D03700EE6707 /* notsent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notsent.png; sourceTree = "<group>"; };
 		66BDFF381510D03700EE6707 /* notsent@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notsent@2x.png"; sourceTree = "<group>"; };
 		66BDFF951510D13A00EE6707 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		66BDFFAF151122E100EE6707 /* MPReachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPReachability.h; sourceTree = "<group>"; };
 		66CD733314C5D2C900DB0E02 /* IDLang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDLang.h; sourceTree = "<group>"; };
 		66CD733414C5D2C900DB0E02 /* IDLang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IDLang.m; sourceTree = "<group>"; };
 		66DC2B5E15090D95008CFEF1 /* IDWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IDWebViewController.h; sourceTree = "<group>"; };
@@ -1088,6 +1089,7 @@
 				4CEB1BC614039FF500B70C98 /* UINavigationBar+IDTools.h */,
 				4CEB1BC714039FF500B70C98 /* UINavigationBar+IDTools.m */,
 				2BA761AD13763D98006B1A65 /* GTMNSString+HTML.h */,
+				66BDFFAF151122E100EE6707 /* MPReachability.h */,
 				2BA761AE13763D98006B1A65 /* GTMNSString+HTML.m */,
 				2BA761B813763D98006B1A65 /* NSDate+InternetDateTime.h */,
 				2BA761B913763D98006B1A65 /* NSDate+InternetDateTime.m */,

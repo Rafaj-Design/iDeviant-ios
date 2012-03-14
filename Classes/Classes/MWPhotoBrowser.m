@@ -419,8 +419,10 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
 	UIImage *img = [UIImage imageNamed:@"DA_topbar-alpha.png"];
 	UIImage *imgland = [UIImage imageNamed:@"DA_topbar-alpha-land.png"];
 	
-    self.navigationController.navigationBar.tintColor = nil;
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+//    self.navigationController.navigationBar.tintColor = nil;
+//    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+	self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+	[self.navigationController.navigationBar setTranslucent:YES];
     if ([[UINavigationBar class] respondsToSelector:@selector(appearance)]) {
         [self.navigationController.navigationBar setBackgroundImage:img forBarMetrics:UIBarMetricsDefault];
         [self.navigationController.navigationBar setBackgroundImage:imgland forBarMetrics:UIBarMetricsLandscapePhone];

@@ -77,7 +77,6 @@
 - (FTImagePage *)pageForIndex:(int)index;
 
 - (CGRect)frameForToolbar;
-- (CGRect)frameForPage;
 
 - (void)toggleNavigationVisibility;
 
