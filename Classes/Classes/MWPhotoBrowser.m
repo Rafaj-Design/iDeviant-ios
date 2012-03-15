@@ -1101,7 +1101,7 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
 }
 
 - (void)actuallyFacebookPhoto {
-	iDeviantAppDelegate *appDelegate = [(iDeviantAppDelegate *)[UIApplication sharedApplication] delegate];	
+	iDeviantAppDelegate *appDelegate = (iDeviantAppDelegate *)[[UIApplication sharedApplication] delegate];	
 	MWFeedItem *item = [itms objectAtIndex:_currentPageIndex];
 	[appDelegate postFbMessageWithObject:item];
 	[self hideProgressHUD:YES];

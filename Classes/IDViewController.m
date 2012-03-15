@@ -782,8 +782,11 @@
 - (void)feedParserDidFinish:(MWFeedParser *)parser {
 	NSLog(@"Finished Parsing%@", (parser.stopped ? @" (Stopped)" : @""));
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-	NSArray *arr = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
+//	NSArray *arr = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
+//	[self setData:[parsedItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:arr]]];
+	NSSortDescriptor *arr = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
 	[self setData:[parsedItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:arr]]];
+
 	[arr release];
 	
 	

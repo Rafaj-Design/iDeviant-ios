@@ -32,6 +32,8 @@
 #import "IDImageDetailViewController.h"
 #import "FlurryAnalytics.h"
 
+#import "FTNavigationViewController.h"
+
 static NSString* kAppId = @"118349561582677";
 
 @implementation iDeviantAppDelegate

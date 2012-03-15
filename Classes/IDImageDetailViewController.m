@@ -496,7 +496,7 @@
 		[self saveCurrentImageToGallery];
 	}
 	else if (buttonIndex == 1) {
-		iDeviantAppDelegate *appDelegate = [(iDeviantAppDelegate *)[UIApplication sharedApplication] delegate];
+		iDeviantAppDelegate *appDelegate = (iDeviantAppDelegate *)[[UIApplication sharedApplication] delegate];
 		
 		MWFeedItem *item = [listThroughData objectAtIndex:currentIndex];
 		[appDelegate postFbMessageWithObject:item];

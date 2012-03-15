@@ -14,7 +14,7 @@
 #import "UIView+Layout.h"
 //#import "IDLang.h"
 //#import "FlurryAPI.h"
-#import "FTReachability.h"
+#import "MPReachability.h"
 #import "MWPhotoBrowser.h"
 
 @interface IDViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MWFeedParserDelegate, UISearchBarDelegate, UIGestureRecognizerDelegate, MWPhotoBrowserDelegate> {

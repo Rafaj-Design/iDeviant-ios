@@ -2198,10 +2198,6 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iDeviant-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/DerivedData/RunMe/Build/Products/Debug-iphoneos\"",
-				);
 				PRODUCT_NAME = iDeviant;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -2225,10 +2221,6 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iDeviant-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/DerivedData/RunMe/Build/Products/Debug-iphoneos\"",
-				);
 				PRODUCT_NAME = iDeviant;
 				PROVISIONING_PROFILE = "D439A1B2-912C-4DD6-9F5C-48CBEA78BD55";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D439A1B2-912C-4DD6-9F5C-48CBEA78BD55";
@@ -2274,10 +2266,6 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "iDeviant-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/DerivedData/RunMe/Build/Products/Debug-iphoneos\"",
-				);
 				PRODUCT_NAME = iDeviant;
 				PROVISIONING_PROFILE = "796E540C-9978-4980-AB41-4D67C4728EE4";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "796E540C-9978-4980-AB41-4D67C4728EE4";

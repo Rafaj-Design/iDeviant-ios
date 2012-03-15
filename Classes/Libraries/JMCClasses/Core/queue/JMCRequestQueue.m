@@ -11,7 +11,7 @@
 #import "JMCReplyTransport.h"
 #import "JMCCreateIssueDelegate.h"
 #import "JMCReplyDelegate.h"
-#import "Reachability.h"
+#import "MPReachability.h"
 #import "JMC.h"
 #import "JMCTransportOperation.h"
 

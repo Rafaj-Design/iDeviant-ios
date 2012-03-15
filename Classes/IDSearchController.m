@@ -7,7 +7,7 @@
 //
 
 #import "IDSearchController.h"
-#import "Reachability.h"
+#import "MPReachability.h"
 #import "IDViewController.h"
 
 @implementation IDSearchController
