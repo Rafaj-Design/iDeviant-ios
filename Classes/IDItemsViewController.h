@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "IDViewController.h"
-#import "IDImageDetailViewController.h"
 
-@interface IDItemsViewController : IDViewController <IDImageDetailViewControllerDelegate> {
+@interface IDItemsViewController : IDViewController {
 
 	NSString *predefinedSearchTerm;
 	NSString *predefinedCategory;

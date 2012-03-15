@@ -272,6 +272,7 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
 		dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"title", [item title], @"adult", @"YES", nil];
 	else 
 		dictionary = [NSDictionary dictionaryWithObjectsAndKeys:@"title", [item title], @"adult", @"NO", nil];
+
 	[FlurryAnalytics logEvent:@"detail" withParameters:dictionary];
 }
 
@@ -419,16 +420,14 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
 	UIImage *img = [UIImage imageNamed:@"DA_topbar-alpha.png"];
 	UIImage *imgland = [UIImage imageNamed:@"DA_topbar-alpha-land.png"];
 	
-//    self.navigationController.navigationBar.tintColor = nil;
-//    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
-	self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-	[self.navigationController.navigationBar setTranslucent:YES];
+    self.navigationController.navigationBar.tintColor = nil;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+//	self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+//	[self.navigationController.navigationBar setTranslucent:YES];
     if ([[UINavigationBar class] respondsToSelector:@selector(appearance)]) {
         [self.navigationController.navigationBar setBackgroundImage:img forBarMetrics:UIBarMetricsDefault];
         [self.navigationController.navigationBar setBackgroundImage:imgland forBarMetrics:UIBarMetricsLandscapePhone];
     }
-	
-	
 }
 
 - (void)storePreviousNavBarAppearance {
@@ -497,7 +496,6 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
 	// Reset
 	_currentPageIndex = indexPriorToLayout;
 	_performingLayout = NO;
-    
 }
 
 #pragma mark - Rotation
@@ -1125,7 +1123,7 @@ navigationBarBackgroundImageLandscapePhone = _navigationBarBackgroundImageLandsc
         MFMailComposeViewController *emailer = [[MFMailComposeViewController alloc] init];
         emailer.mailComposeDelegate = self;
         [emailer setSubject:[NSString stringWithFormat:@"%@ by iDeviant", [item title]]];
-		NSString *htmlBody = [NSString stringWithFormat:@"<br/><br/><a href=\"%@\"><img src=\"%@\"/></a><br/><br/>Copyright <a href=\"%@\">%@</a><br/>iDeviant app by <a href=\"http://www.fuerteint.com/\">Fuerte International UK</a><br/><img src=\"http://new.fuerteint.com/wp-content/themes/theme1177/images/logo.png\"/>", [item link], [(MWPhoto *)photo urlString], [item link], [[item credits] objectAtIndex:0]];
+		NSString *htmlBody = [NSString stringWithFormat:@"<br/><br/><a href=\"%@\"><img src=\"%@\"/></a><br/><br/>Copyright <a href=\"%@\">%@</a><br/>iDeviant app by <a href=\"http://www.fuerteint.com/\">Fuerte International UK</a><br/><img src=\"http://www.fuerteint.com/wp-content/themes/theme1177/images/logo.png\"/>", [item link], [(MWPhoto *)photo urlString], [item link], [[item credits] objectAtIndex:0]];
 		[emailer setMessageBody:htmlBody isHTML:YES];
 //        [emailer addAttachmentData:UIImagePNGRepresentation([photo underlyingImage]) mimeType:@"png" fileName:@"Photo.png"];
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {

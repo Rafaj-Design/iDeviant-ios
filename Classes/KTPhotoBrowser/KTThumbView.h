@@ -1,0 +1,22 @@
+//
+//  KTThumbView.h
+//  KTPhotoBrowser
+//
+//  Created by Kirby Turner on 2/3/10.
+//  Copyright 2010 White Peak Software Inc. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@class IDViewController;
+
+@interface KTThumbView : UIButton
+
+@property (nonatomic, assign) IDViewController *controller;
+
+- (id)initWithFrame:(CGRect)frame;
+- (void)setThumbImage:(UIImage *)newImage;
+- (void)setHasBorder:(BOOL)hasBorder;
+
+@end
+

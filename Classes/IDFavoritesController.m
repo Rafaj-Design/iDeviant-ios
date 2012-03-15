@@ -10,8 +10,7 @@
 #import "IDFavouriteCategories.h"
 #import "IDJustItemsViewController.h"
 #import "IDAdultCheck.h"
-#import "IDImageDetailViewController.h"
-
+ 
 
 @implementation IDFavoritesController
 
@@ -104,12 +103,31 @@
 		}
 		if (canAccess) {
 			if ([item.contents count] > 0) {
-//				NSLog(@"Contents: %@", item.contents);
-				IDImageDetailViewController *c = [[IDImageDetailViewController alloc] init];
-				[c inheritConnectivity:internetActive];
-				[c setImageUrl:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]];
-				[self.navigationController pushViewController:c animated:YES];
-				[c release];
+				if ([[item.thumbnails objectAtIndex:0] objectForKey:@"url"] != nil) {
+					MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+					
+					browser.wantsFullScreenLayout = YES;
+					browser.displayActionButton = YES;
+					
+					NSInteger index = 0;
+					NSInteger i = 0;
+					
+					for (MWPhoto *photo in photos) {
+						if ([photo.urlString isEqualToString:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]])
+							index = i;
+						else if ([photo.urlString isEqualToString:[[item.contents objectAtIndex:0] objectForKey:@"url"]])
+							index = i;
+						
+						i++;
+					}
+					
+					[browser setInitialPageIndex:index]; // Example: allows second image to be presented first
+					[browser setItms:itms];
+					// Present
+					
+					[self.navigationController pushViewController:browser animated:YES];
+					
+				}
 			}
 		}
 		else {

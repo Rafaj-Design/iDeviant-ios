@@ -7,7 +7,6 @@
 //
 
 #import "IDItemsViewController.h"
-#import "IDImageDetailViewController.h"
 #import "IDAdultCheck.h"
 #import "NSString+HTML.h"
 

@@ -12,13 +12,15 @@
 #import "IDAdultCheck.h"
 #import "NSString+HTML.h"
 #import "IDFavouriteItems.h"
-#import "IDImageDetailViewController.h"
 #import "IDDocumentDetailViewController.h"
 #import "IDCategoriesViewController.h"
 #import "IDJustItemsViewController.h"
 #import "FTText.h"
 #import "IDConfig.h"
 #import <dispatch/dispatch.h>
+
+#import "KTThumbsView.h"
+#import "KTThumbView.h"
 
 @implementation IDViewController
 
@@ -38,6 +40,7 @@
 @synthesize internetReachable;
 
 @synthesize photos, itms;
+@synthesize thumbsView;
 
 #pragma mark - View lifecycle
 
@@ -135,6 +138,12 @@
 			}
 		}
 	}
+	
+	UIColor *color = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.7];
+	UIImage *img = [UIImage imageNamed:@"DA_topbar.png"];
+	[img drawInRect:CGRectMake(0, 0, 10, 10)];
+    [self.navigationController.navigationBar setBackgroundImage:img forBarMetrics:UIBarMetricsDefault];
+	[self.navigationController.navigationBar setTintColor:color];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -196,6 +205,7 @@
 	[backgroundImageView setFrame:self.view.bounds];
 	[table setFrame:self.view.bounds];
 	[message setFrame:[self frameForMessageLabel]];
+	[thumbsView reloadData];
 	
 	[UIView commitAnimations];
 }
@@ -460,9 +470,46 @@
 	[self createTableViewWithSearchBar:NO andStyle:UITableViewStylePlain];
 }
 
+- (void)toggleGrid {
+
+//	KTThumbsViewController *thumbsViewController = [[KTThumbsViewController alloc] init];
+//	
+//	[thumbsViewController setItms:itms];
+//	[thumbsViewController setPhotos:photos];
+//
+//	[self.navigationController pushViewController:thumbsViewController animated:YES];			
+	
+	if (thumbsView.hidden) {
+		
+		[thumbsView setItms:itms];
+		[thumbsView setPhotos:photos];
+		[thumbsView reloadData];
+		[thumbsView setHidden:NO];
+		[thumbsView setAlpha:1.0f];
+		[thumbsView reloadData];
+		[table setAlpha:0];
+		[table setHidden:YES];
+	} else {
+		[thumbsView setAlpha:0.0f];
+		[thumbsView setHidden:YES];
+		[table setHidden:NO];
+		[table setAlpha:1];
+	}
+}
+
 - (void)enableRefreshButton {
-//	refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
-//	[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
+	refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(toggleGrid)];
+	[self.navigationItem setRightBarButtonItem:refreshButton animated:YES];
+	
+	thumbsView = [[KTThumbsView alloc] initWithFrame:self.view.bounds];
+	[thumbsView setController:self];
+	[thumbsView setScrollsToTop:YES];
+	[thumbsView setScrollEnabled:YES];
+	[thumbsView setAlwaysBounceVertical:YES];
+	[thumbsView setBackgroundColor:[UIColor whiteColor]];
+	[thumbsView setAlpha:0];
+	[thumbsView setHidden:YES];
+	[self.view addSubview:thumbsView];
 }
 
 - (void)enableEditButton {
@@ -657,26 +704,15 @@
 				NSString *temp = [NSString stringWithContentsOfFile:tempPath encoding:NSUTF8StringEncoding error:nil];
 				NSDictionary *arr = [NSDictionary dictionaryWithObject:item.text forKey:@"{CONTENT}"];
 				NSString *text = [FTText parseCodes:arr inTemplate:temp];
-//				[c setContent:text];
-				c.content = text;
+				[c setContent:text];
 				[self.navigationController pushViewController:c animated:YES];
 				[c release];
 			} else if (item.thumbnails.count > 0) {
 				if ([[item.thumbnails objectAtIndex:0] objectForKey:@"url"] != nil) {
-//					IDImageDetailViewController *c = [[IDImageDetailViewController alloc] init];
-//					[c inheritConnectivity:internetActive];
-//					[c setCurrentIndex:indexPath.row];
-//					[c setListData:arr];
-//					[c setDelegate:(id<IDImageDetailViewControllerDelegate>)self];
-//					//[c.data retain];
-//					[c setImageUrl:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]];
-//					[self.navigationController pushViewController:c animated:YES];
-//					[c release];
-					
 					MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
-					// Set options
-					browser.wantsFullScreenLayout = YES; // Decide if you want the photo browser full screen, i.e. whether the status bar is affected (defaults to YES)
-					browser.displayActionButton = YES; // Show action button to save, copy or email photos (defaults to NO)
+					
+					browser.wantsFullScreenLayout = YES;
+					browser.displayActionButton = YES;
 					
 					NSInteger index = 0;
 					NSInteger i = 0;
@@ -887,7 +923,58 @@
 	[self performSelector:@selector(backgroundImage)];
 }
 
-
+- (void)didSelectThumbAtIndex:(NSInteger)index {
+	MWFeedItem *item = [data objectAtIndex:index];
+	
+	BOOL canAccess = YES;	
+	if ([item.rating isEqualToString:@"adult"])
+		if (![IDAdultCheck canAccessAdultStuff]) 
+			canAccess = NO;
+	
+	if (canAccess && internetActive) {
+		if ([item.contents count] > 0) {
+			if (item.text) {
+				IDDocumentDetailViewController *c = [[IDDocumentDetailViewController alloc] init];
+				[c setTitle:[item title]];
+				[c inheritConnectivity:internetActive];
+				NSString *tempPath = [[NSBundle mainBundle] pathForResource:@"document-template" ofType:@"html"];
+				NSString *temp = [NSString stringWithContentsOfFile:tempPath encoding:NSUTF8StringEncoding error:nil];
+				NSDictionary *arr = [NSDictionary dictionaryWithObject:item.text forKey:@"{CONTENT}"];
+				NSString *text = [FTText parseCodes:arr inTemplate:temp];
+				[c setContent:text];
+				[self.navigationController pushViewController:c animated:YES];
+				[c release];
+			} else if (item.thumbnails.count > 0) {
+				if ([[item.thumbnails objectAtIndex:0] objectForKey:@"url"] != nil) {
+					MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+					
+					browser.wantsFullScreenLayout = YES;
+					browser.displayActionButton = YES;
+					
+					NSInteger index = 0;
+					NSInteger i = 0;
+					
+					for (MWPhoto *photo in photos) {
+						if ([photo.urlString isEqualToString:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]])
+							index = i;
+						else if ([photo.urlString isEqualToString:[[item.contents objectAtIndex:0] objectForKey:@"url"]])
+							index = i;
+						
+						i++;
+					}
+					
+					[browser setInitialPageIndex:index]; // Example: allows second image to be presented first
+					[browser setItms:itms];
+					// Present
+					
+					[self.navigationController pushViewController:browser animated:YES];
+					
+				}
+			}
+		}
+	} else if (canAccess)
+		[self displayMessage:@"requiresinternetconnection"];
+}
 
 #pragma mark - Memory management
 

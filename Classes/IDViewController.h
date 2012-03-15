@@ -16,6 +16,7 @@
 //#import "FlurryAPI.h"
 #import "MPReachability.h"
 #import "MWPhotoBrowser.h"
+#import "KTThumbsView.h"
 
 @interface IDViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, MWFeedParserDelegate, UISearchBarDelegate, UIGestureRecognizerDelegate, MWPhotoBrowserDelegate> {
 	
@@ -58,6 +59,7 @@
 	UITapGestureRecognizer *tapGesture;
 	
 	NSMutableArray *photos, *itms;
+	KTThumbsView *thumbsView;
 }
 
 @property (nonatomic, retain) NSArray *data;
@@ -83,6 +85,7 @@
 @property (nonatomic, retain) Reachability *internetReachable;
 
 @property (nonatomic, retain) NSMutableArray *photos, *itms;
+@property (nonatomic, retain) KTThumbsView *thumbsView;
 
 - (CGRect)fullScreenFrame;
 

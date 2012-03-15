@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "IDViewController.h"
-#import "IDImageDetailViewController.h"
 
-@interface IDCategoriesViewController : IDViewController <IDImageDetailViewControllerDelegate> {
+@interface IDCategoriesViewController : IDViewController  {
 	
 	NSDictionary *currentCategory;
 	NSString *currentCategoryPath;
