@@ -10,7 +10,6 @@
 #import <MessageUI/MessageUI.h>
 #import "MWPhoto.h"
 #import "MWPhotoProtocol.h"
-#import "MWCaptionView.h"
 
 // Debug Logging
 #if 0 // Set to 1 to enable debug logging
@@ -24,8 +23,6 @@
 @protocol MWPhotoBrowserDelegate <NSObject>
 - (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser;
 - (id<MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index;
-@optional
-- (MWCaptionView *)photoBrowser:(MWPhotoBrowser *)photoBrowser captionViewForPhotoAtIndex:(NSUInteger)index;
 @end
 
 // MWPhotoBrowser
