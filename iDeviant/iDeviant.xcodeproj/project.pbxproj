@@ -58,6 +58,20 @@
 		15B1758217F379D8007F480B /* FTHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1758017F379D8007F480B /* FTHomeCell.m */; };
 		15B1758517F382CE007F480B /* kitten.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 15B1758417F382CE007F480B /* kitten.jpg */; };
 		15B1758917F48426007F480B /* FTArtCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1758817F48426007F480B /* FTArtCell.m */; };
+		15B1759E17F49B9E007F480B /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759017F49B9E007F480B /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		15B1759F17F49B9E007F480B /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759017F49B9E007F480B /* GTMNSString+HTML.m */; };
+		15B175A017F49B9E007F480B /* MWFeedInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759217F49B9E007F480B /* MWFeedInfo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		15B175A117F49B9E007F480B /* MWFeedInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759217F49B9E007F480B /* MWFeedInfo.m */; };
+		15B175A217F49B9E007F480B /* MWFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759417F49B9E007F480B /* MWFeedItem.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		15B175A317F49B9E007F480B /* MWFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759417F49B9E007F480B /* MWFeedItem.m */; };
+		15B175A417F49B9E007F480B /* MWFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759617F49B9E007F480B /* MWFeedParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		15B175A517F49B9E007F480B /* MWFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759617F49B9E007F480B /* MWFeedParser.m */; };
+		15B175A617F49B9E007F480B /* NSDate+InternetDateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759917F49B9E007F480B /* NSDate+InternetDateTime.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		15B175A717F49B9E007F480B /* NSDate+InternetDateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759917F49B9E007F480B /* NSDate+InternetDateTime.m */; };
+		15B175A817F49B9E007F480B /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759B17F49B9E007F480B /* NSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		15B175A917F49B9E007F480B /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759B17F49B9E007F480B /* NSString+HTML.m */; };
+		15B175AA17F49B9E007F480B /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759D17F49B9E007F480B /* NSString+XMLEntities.m */; };
+		15B175AB17F49B9E007F480B /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759D17F49B9E007F480B /* NSString+XMLEntities.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +153,21 @@
 		15B1758417F382CE007F480B /* kitten.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kitten.jpg; sourceTree = "<group>"; };
 		15B1758717F48426007F480B /* FTArtCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTArtCell.h; sourceTree = "<group>"; };
 		15B1758817F48426007F480B /* FTArtCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTArtCell.m; sourceTree = "<group>"; };
+		15B1758F17F49B9E007F480B /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		15B1759017F49B9E007F480B /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
+		15B1759117F49B9E007F480B /* MWFeedInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedInfo.h; sourceTree = "<group>"; };
+		15B1759217F49B9E007F480B /* MWFeedInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFeedInfo.m; sourceTree = "<group>"; };
+		15B1759317F49B9E007F480B /* MWFeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedItem.h; sourceTree = "<group>"; };
+		15B1759417F49B9E007F480B /* MWFeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFeedItem.m; sourceTree = "<group>"; };
+		15B1759517F49B9E007F480B /* MWFeedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedParser.h; sourceTree = "<group>"; };
+		15B1759617F49B9E007F480B /* MWFeedParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFeedParser.m; sourceTree = "<group>"; };
+		15B1759717F49B9E007F480B /* MWFeedParser_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedParser_Private.h; sourceTree = "<group>"; };
+		15B1759817F49B9E007F480B /* NSDate+InternetDateTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+InternetDateTime.h"; sourceTree = "<group>"; };
+		15B1759917F49B9E007F480B /* NSDate+InternetDateTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+InternetDateTime.m"; sourceTree = "<group>"; };
+		15B1759A17F49B9E007F480B /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
+		15B1759B17F49B9E007F480B /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
+		15B1759C17F49B9E007F480B /* NSString+XMLEntities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XMLEntities.h"; sourceTree = "<group>"; };
+		15B1759D17F49B9E007F480B /* NSString+XMLEntities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XMLEntities.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +243,7 @@
 		15B174E717F35504007F480B /* iDeviant */ = {
 			isa = PBXGroup;
 			children = (
+				15B1758D17F49B9E007F480B /* Thirdparty */,
 				15B1753C17F356E1007F480B /* Categories */,
 				15B1753B17F356DA007F480B /* Data */,
 				15B1753A17F356D4007F480B /* Libs */,
@@ -471,6 +501,36 @@
 			name = Art;
 			sourceTree = "<group>";
 		};
+		15B1758D17F49B9E007F480B /* Thirdparty */ = {
+			isa = PBXGroup;
+			children = (
+				15B1758E17F49B9E007F480B /* MWFeedParser */,
+			);
+			path = Thirdparty;
+			sourceTree = SOURCE_ROOT;
+		};
+		15B1758E17F49B9E007F480B /* MWFeedParser */ = {
+			isa = PBXGroup;
+			children = (
+				15B1758F17F49B9E007F480B /* GTMNSString+HTML.h */,
+				15B1759017F49B9E007F480B /* GTMNSString+HTML.m */,
+				15B1759117F49B9E007F480B /* MWFeedInfo.h */,
+				15B1759217F49B9E007F480B /* MWFeedInfo.m */,
+				15B1759317F49B9E007F480B /* MWFeedItem.h */,
+				15B1759417F49B9E007F480B /* MWFeedItem.m */,
+				15B1759517F49B9E007F480B /* MWFeedParser.h */,
+				15B1759617F49B9E007F480B /* MWFeedParser.m */,
+				15B1759717F49B9E007F480B /* MWFeedParser_Private.h */,
+				15B1759817F49B9E007F480B /* NSDate+InternetDateTime.h */,
+				15B1759917F49B9E007F480B /* NSDate+InternetDateTime.m */,
+				15B1759A17F49B9E007F480B /* NSString+HTML.h */,
+				15B1759B17F49B9E007F480B /* NSString+HTML.m */,
+				15B1759C17F49B9E007F480B /* NSString+XMLEntities.h */,
+				15B1759D17F49B9E007F480B /* NSString+XMLEntities.m */,
+			);
+			path = MWFeedParser;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -584,6 +644,10 @@
 			files = (
 				15B1757817F358B5007F480B /* FTLang.m in Sources */,
 				15B174F217F35504007F480B /* FTAppDelegate.m in Sources */,
+				15B175A417F49B9E007F480B /* MWFeedParser.m in Sources */,
+				15B175A817F49B9E007F480B /* NSString+HTML.m in Sources */,
+				15B175A217F49B9E007F480B /* MWFeedItem.m in Sources */,
+				15B175A017F49B9E007F480B /* MWFeedInfo.m in Sources */,
 				15B1754C17F357A9007F480B /* FTDownload.m in Sources */,
 				15B1755E17F357B5007F480B /* UIColor+Tools.m in Sources */,
 				15B1754817F35796007F480B /* FTKeychainObject.m in Sources */,
@@ -593,9 +657,12 @@
 				15B174EE17F35504007F480B /* main.m in Sources */,
 				15B1756417F357B5007F480B /* NSString+URLTools.m in Sources */,
 				15B1754417F35765007F480B /* FTView.m in Sources */,
+				15B1759E17F49B9E007F480B /* GTMNSString+HTML.m in Sources */,
 				15B1758117F379D8007F480B /* FTHomeCell.m in Sources */,
 				15B174FB17F35504007F480B /* FTViewController.m in Sources */,
+				15B175AA17F49B9E007F480B /* NSString+XMLEntities.m in Sources */,
 				15B1754117F35748007F480B /* FTBasicCell.m in Sources */,
+				15B175A617F49B9E007F480B /* NSDate+InternetDateTime.m in Sources */,
 				15B1753817F356CB007F480B /* FTHomeViewController.m in Sources */,
 				15B1755A17F357B5007F480B /* NSData+Base64.m in Sources */,
 				15B1756017F357B5007F480B /* UIView+Effects.m in Sources */,
@@ -608,10 +675,17 @@
 			files = (
 				15B1758217F379D8007F480B /* FTHomeCell.m in Sources */,
 				15B1754D17F357A9007F480B /* FTDownload.m in Sources */,
+				15B175A517F49B9E007F480B /* MWFeedParser.m in Sources */,
+				15B175A317F49B9E007F480B /* MWFeedItem.m in Sources */,
+				15B175A717F49B9E007F480B /* NSDate+InternetDateTime.m in Sources */,
+				15B175A917F49B9E007F480B /* NSString+HTML.m in Sources */,
 				15B1755B17F357B5007F480B /* NSData+Base64.m in Sources */,
 				15B1754917F35796007F480B /* FTKeychainObject.m in Sources */,
 				15B1755D17F357B5007F480B /* UIImage+Tools.m in Sources */,
+				15B1759F17F49B9E007F480B /* GTMNSString+HTML.m in Sources */,
+				15B175A117F49B9E007F480B /* MWFeedInfo.m in Sources */,
 				15B1756317F357B5007F480B /* UIView+Layout.m in Sources */,
+				15B175AB17F49B9E007F480B /* NSString+XMLEntities.m in Sources */,
 				15B1757917F358B5007F480B /* FTLang.m in Sources */,
 				15B1756517F357B5007F480B /* NSString+URLTools.m in Sources */,
 				15B1751017F35504007F480B /* iDeviantTests.m in Sources */,

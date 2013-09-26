@@ -4,20 +4,6 @@
 <array>
 	<dict>
 		<key>controller</key>
-		<string>IDSearchViewController</string>
-		<key>description</key>
-		<string>searchdesc</string>
-		<key>icon</key>
-		<string>DA_icon4.png</string>
-		<key>name</key>
-		<string>search</string>
-		<key>requiresConnection</key>
-		<true/>
-		<key>detail</key>
-		<true/>
-	</dict>
-	<dict>
-		<key>controller</key>
 		<string>IDCategoriesViewController</string>
 		<key>description</key>
 		<string>categoriesdesc</string>
@@ -73,6 +59,8 @@
 		<true/>
 		<key>detail</key>
 		<true/>
+		<key>presetDataQuery</key>
+		<string>special:dd</string>
 	</dict>
 	<dict>
 		<key>controller</key>

@@ -35,7 +35,7 @@
     [super createAllElements];
     
     [super createTableView];
-    [self createSearchBar];
+    [self createSearchBarWithSearchOptionTitles:@[@"Say", @"What!"]];
     [self createSearchController];
 }
 
@@ -49,28 +49,33 @@
 
 #pragma mark Table view delegate & datasource methods
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 44;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return self.searchBar;
-}
-
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    return self.searchController.searchBar.height;
+//}
+//
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+//    return self.searchController.searchBar;
+//}
+//
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 115;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *identifier = @"HomeCell";
-    FTHomeCell *cell = (FTHomeCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell) {
-        cell = [[FTHomeCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
+    if (tableView == self.searchController.searchResultsTableView) {
+        return [super tableView:tableView cellForRowAtIndexPath:indexPath];
     }
-    NSDictionary *d = [self objectForIndexPath:indexPath];
-    [cell.textLabel setText:FTLangGet([d objectForKey:@"name"])];
-    [cell.detailTextLabel setText:FTLangGet([d objectForKey:@"description"]).lowercaseString];
-    return cell;
+    else {
+        static NSString *identifier = @"HomeCell";
+        FTHomeCell *cell = (FTHomeCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+            cell = [[FTHomeCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
+        }
+        NSDictionary *d = [self objectForIndexPath:indexPath];
+        [cell.textLabel setText:FTLangGet([d objectForKey:@"name"])];
+        [cell.detailTextLabel setText:FTLangGet([d objectForKey:@"description"]).lowercaseString];
+        return cell;
+    }
 }
 
 

@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "FTArtCell.h"
+#import "MWFeedParser.h"
 
 
-@interface FTViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
+@interface FTViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate, MWFeedParserDelegate>
 
 @property (nonatomic, strong) UIPopoverController *popover;
 
@@ -19,6 +20,9 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *data;
 @property (nonatomic, strong) NSArray *searchData;
+@property (nonatomic) BOOL searchIsEnabled;
+
+@property (nonatomic, strong) NSString *categoryCode;
 
 @property (nonatomic, strong, readonly) UISearchBar *searchBar;
 @property (nonatomic, strong, readonly) UISearchDisplayController *searchController;
@@ -34,6 +38,7 @@
 // Creating and configuring view
 - (void)setupView;
 
+- (void)createSearchBarWithSearchOptionTitles:(NSArray *)searchOptions;
 - (void)createSearchBar;
 - (void)createSearchController;
 
@@ -42,10 +47,18 @@
 
 - (void)createAllElements;
 
+// Data
+- (void)getDataForParams:(NSString *)params;
+- (void)getDataForSearchString:(NSString *)search andCategory:(NSString *)category;
+- (void)getDataForCategory:(NSString *)category;
+- (void)getDataForSearchString:(NSString *)search;
+- (void)getFeedData;
+
 // Alerts
 - (void)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message;
 
 // Cell configuration
+- (FTArtCell *)artCellForTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath;
 - (void)configureArtCell:(FTArtCell *)cell forIndexPath:(NSIndexPath *)indexPath inTable:(UITableView *)tableView;
 
 

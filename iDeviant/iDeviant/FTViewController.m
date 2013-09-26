@@ -12,6 +12,9 @@
 
 @interface FTViewController ()
 
+@property (nonatomic, strong) MWFeedParser *feedParser;
+@property (nonatomic, strong) NSMutableArray *tempParsedItems;
+
 @end
 
 
@@ -75,21 +78,72 @@
     
 }
 
+#pragma mark Data
+
+- (void)getDataForParams:(NSString *)params {
+	NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@", params] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	NSURL *feedURL = [NSURL URLWithString:url];
+	_feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
+	[_feedParser setDelegate:self];
+    [_feedParser setFeedParseType:ParseTypeFull];
+    [_feedParser setConnectionType:ConnectionTypeAsynchronously];
+    [_feedParser parse];
+}
+
+- (void)getDataForSearchString:(NSString *)search andCategory:(NSString *)category {
+	//[IDAdultCheck checkForUnlock:search];
+	NSString *searchString = @"";
+	if (search) searchString = [NSString stringWithFormat:@"+%@", search];
+	NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=boost:popular%@", searchString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+	NSString *categoryString = @"";
+	if (category && (![category isEqualToString:@""])) {
+		categoryString = [NSString stringWithFormat:@"+in:%@+sort:time", category];
+		url = [url stringByAppendingString:categoryString];
+	}
+	
+	NSURL *feedURL = [NSURL URLWithString:url];
+	_feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
+    [_feedParser setDelegate:self];
+    [_feedParser setFeedParseType:ParseTypeFull];
+    [_feedParser setConnectionType:ConnectionTypeAsynchronously];
+    [_feedParser parse];
+}
+
+- (void)getDataForCategory:(NSString *)category {
+	[self getDataForSearchString:nil andCategory:category];
+}
+
+- (void)getDataForSearchString:(NSString *)search {
+	[self getDataForSearchString:search andCategory:nil];
+}
+
+- (void)getFeedData {
+	[self getDataForSearchString:nil];
+}
+
 #pragma mark Creating elements
 
-- (void)createSearchBar {
-    if (!_searchBar) {
-        _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-        [_searchBar setBarTintColor:[UIColor colorWithHexString:@"5E7162"]];
+- (void)createSearchBarWithSearchOptionTitles:(NSArray *)searchOptions {
+    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    [_searchBar setPlaceholder:FTLangGet(@"searchdesc")];
+    [_searchBar setBarTintColor:[UIColor colorWithHexString:@"5E7162"]];
+    if (searchOptions) {
+        [_searchBar setScopeButtonTitles:searchOptions];
     }
 }
 
+- (void)createSearchBar {
+    [self createSearchBarWithSearchOptionTitles:nil];
+}
+
 - (void)createSearchController {
-    [self createSearchBar];
     _searchController = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar contentsController:self];
     [_searchController setDelegate:self];
     [_searchController setSearchResultsDataSource:self];
     [_searchController setSearchResultsDelegate:self];
+    [_searchController setDisplaysSearchBarInNavigationBar:NO];
+    [_tableView setTableHeaderView:_searchBar];
 }
 
 - (void)createTableView {
@@ -184,17 +238,9 @@
     }
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return (section == 0) ? 44 : 24;
-//}
-
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
     return FTLangGet(@"Remove");
 }
-
-//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-//    return @"Header title";
-//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 85;
@@ -202,8 +248,9 @@
 
 - (void)configureArtCell:(FTArtCell *)cell forIndexPath:(NSIndexPath *)indexPath inTable:(UITableView *)tableView {
     if (tableView == _searchController.searchResultsTableView) {
-        [cell.textLabel setText:@"Art title"];
-        [cell.detailTextLabel setText:@"Art description"];
+        MWFeedItem *item = [_searchData objectAtIndex:indexPath.row];
+        [cell.textLabel setText:item.title];
+        [cell.detailTextLabel setText:item.summary];
     }
 }
 
@@ -249,9 +296,98 @@
 }
 
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
-    //[_searchController setActive:NO animated:YES];
+    NSString *str = searchBar.text;
+    [_searchController setActive:NO animated:YES];
+    _searchController.searchBar.text = str;
+    _searchData = nil;
+    _searchIsEnabled = NO;
     return YES;
 }
+
+#pragma mark Search controller delegate methods
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+    _searchIsEnabled = YES;
+    NSLog(@"Search string: %@", searchString);
+    if (searchString.length >= 3) {
+        [self getDataForSearchString:searchString andCategory:_categoryCode];
+    }
+    return YES;
+}
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption {
+    NSLog(@"Search option: %ld", (long)searchOption);
+    return YES;
+}
+
+#pragma mark Feed parser delegate methods
+
+- (void)feedParserDidStart:(MWFeedParser *)parser {
+    _tempParsedItems = [NSMutableArray array];
+	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+}
+
+- (void)feedParser:(MWFeedParser *)parser didParseFeedInfo:(MWFeedInfo *)info {
+    NSLog(@"Parsed feed info: “%@”", info.title);
+}
+
+- (void)feedParser:(MWFeedParser *)parser didParseFeedItem:(MWFeedItem *)item {
+	if (item) {
+        [_tempParsedItems addObject:item];
+    }
+}
+
+- (void)feedParserDidFinish:(MWFeedParser *)parser {
+	NSLog(@"Finished parsing%@ %lu items", (parser.stopped ? @" (Stopped)" : @""), (unsigned long)((_searchIsEnabled) ? _searchData.count : _data.count));
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    NSSortDescriptor *arr = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
+    NSArray *sortedArr = [_tempParsedItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:arr]];
+	if (_searchIsEnabled) {
+        _searchData = sortedArr;
+    }
+    else {
+        _data = sortedArr;
+    }
+    
+	for (MWFeedItem *item in sortedArr) {
+		BOOL canAccess = YES;
+		if ([item.rating isEqualToString:@"adult"]) {
+			//if (![IDAdultCheck canAccessAdultStuff]) canAccess = NO;
+		}
+		if (canAccess)
+			if (([item.contents count] > 0) && (item.thumbnails.count > 0)) {
+				NSString *contentUrl = [[item.contents objectAtIndex:0] objectForKey:@"url"];
+				NSString *extension = [[contentUrl pathExtension] lowercaseString];
+				
+				if ([extension isEqualToString:@"png"] || [extension isEqualToString:@"jpeg"] || [extension isEqualToString:@"jpg"]){
+					//[photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:[[item.contents objectAtIndex:0] objectForKey:@"url"]]]];
+					//[itms addObject:item];
+				}
+				else {
+					//[photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]]]];
+					//[itms addObject:item];
+				}
+			}
+	}
+	
+	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    [_tableView reloadData];
+    [_searchDisplayController.searchResultsTableView reloadData];
+}
+
+- (void)feedParser:(MWFeedParser *)parser didFailWithError:(NSError *)error {
+    NSLog(@"Finished parsing with error: %@", [error localizedDescription]);
+	if (_searchIsEnabled) {
+        _searchData = [NSArray array];
+    }
+    else {
+        _data = [NSArray array];
+    }
+	
+	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
+
+
 
 
 @end
