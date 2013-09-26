@@ -2,31 +2,33 @@
 //  iDeviantTests.m
 //  iDeviantTests
 //
-//  Created by Ondrej Rafaj on 12/01/2013.
-//  Copyright (c) 2013 Ondrej Rafaj. All rights reserved.
+//  Created by Ondrej Rafaj on 25/09/2013.
+//  Copyright (c) 2013 Fuerte Innovations. All rights reserved.
 //
 
-#import "iDeviantTests.h"
+#import <XCTest/XCTest.h>
+
+@interface iDeviantTests : XCTestCase
+
+@end
 
 @implementation iDeviantTests
 
 - (void)setUp
 {
     [super setUp];
-    
-    // Set-up code here.
+    // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
 - (void)tearDown
 {
-    // Tear-down code here.
-    
+    // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 
 - (void)testExample
 {
-    STFail(@"Unit tests are not implemented yet in iDeviantTests");
+    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
 }
 
 @end

@@ -1,0 +1,56 @@
+/* 
+ Localizable.strings
+ iDeviant
+ 
+ Created by Ondrej Rafaj on 16/05/2011.
+ Copyright 2011 Fuerte International. All rights reserved.
+ */
+
+"search"="Recherche";
+"searchdesc"="Recherchez une image";
+
+"categories"="Catégories";
+"categoriesdesc"="Parcourez DeviantArt";
+
+"favorites"="Favoris";
+"favoritesdesc"="Votre collection de favoris";
+
+"dailydeviations"="Aujourd\'hui";
+"dailydeviationsdesc"="Les images les plus récentes";
+
+"popular"="Populaire";
+"populardesc"="Les images aux meilleurs votes";
+
+"login"="LOGIN";
+"logindesc"="Accédez à votre compte";
+
+"settings"="settings";
+"settingsdesc"="settingsdesc";
+
+"homesorting"="Réarrangement du menu";
+"homesortingdesc"="&#8230;comme bon vous semble";
+
+"requiresinternetconnection"="requires internet connection";
+"nonefavorites"="none favorites";
+"imagesaved"="image saved";
+"actionswithimagetitle"="action with image";
+"savetogalleryit"="Save to galery";
+"facebookit"="Facebook";
+"emailit"="E-mail";
+"cancelbutton"="Cancel";
+"search"="Search";
+"searchplaceholder"="Search iDeviant";
+"subcategoriesinmaincat"="categories in main";
+"subcategoriesincat"="subcategories in ";
+"subcategories "="subcategories";
+"itemsinmaincat"="items in main";
+"itemsincategory"="items in ";
+"myfavoritecategories"="my favorite categories";
+"myfavoriteitems"="my favorite items";
+"About"="About";
+"name"="name";
+"description"="description";
+"OK"="OK";
+"nicknull"="Please enter nick";
+"passwordnull"="Please enter password";
+"rememberme"="Remember me";

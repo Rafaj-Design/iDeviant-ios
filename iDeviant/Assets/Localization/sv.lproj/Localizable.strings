@@ -1,0 +1,56 @@
+/* 
+ Localizable.strings
+ iDeviant
+ 
+ Created by Ondrej Rafaj on 16/05/2011.
+ Copyright 2011 Fuerte International. All rights reserved.
+ */
+
+"search"="Sök";
+"searchdesc"="Sök efter deviations";
+
+"categories"="Kategorier";
+"categoriesdesc"="Upptäck DeviantArt";
+
+"favorites"="Favoriter";
+"favoritesdesc"="Dina favoriter";
+
+"dailydeviations"="Dagens deviations";
+"dailydeviationsdesc"="Dagens bästa";
+
+"popular"="Populära";
+"populardesc"="Högst betygsatta deviations";
+
+"login"="Logga in";
+"logindesc"="Tillgĺng till ditt konto";
+
+"settings"="settings";
+"settingsdesc"="settingsdesc";
+
+"homesorting"="Startskärmssortering";
+"homesortingdesc"="Sortera startskärmen";
+
+"requiresinternetconnection"="requires internet connection";
+"nonefavorites"="none favorites";
+"imagesaved"="image saved";
+"actionswithimagetitle"="action with image";
+"savetogalleryit"="Save to galery";
+"facebookit"="Facebook";
+"emailit"="E-mail";
+"cancelbutton"="Cancel";
+"search"="Search";
+"searchplaceholder"="Search iDeviant";
+"subcategoriesinmaincat"="categories in main";
+"subcategoriesincat"="subcategories in ";
+"subcategories "="subcategories";
+"itemsinmaincat"="items in main";
+"itemsincategory"="items in ";
+"myfavoritecategories"="my favorite categories";
+"myfavoriteitems"="my favorite items";
+"About"="About";
+"name"="name";
+"description"="description";
+"OK"="OK";
+"nicknull"="Please enter nick";
+"passwordnull"="Please enter password";
+"rememberme"="Remember me";

@@ -1,0 +1,56 @@
+/* 
+ Localizable.strings
+ iDeviant
+ 
+ Created by Ondrej Rafaj on 16/05/2011.
+ Copyright 2011 Fuerte International. All rights reserved.
+ */
+
+"search"="Zoek";
+"searchdesc"="Zoek Afwijkingen";
+
+"categories"="Categorien";
+"categoriesdesc"="dig in deviantart";
+
+"favorites"="Favourieten";
+"favoritesdesc"="Je Favourite Verzameling";
+
+"dailydeviations"="Dagelijkse Afwijkingen";
+"dailydeviationsdesc"="Het Beste van Vandaag";
+
+"popular"="Populair";
+"populardesc"="Hoogst Gewaardeerde Afwijkingen";
+
+"login"="LOGIN";
+"logindesc"="Toegang Mijn Account";
+
+"settings"="settings";
+"settingsdesc"="settingsdesc";
+
+"homesorting"="Home sorterin";
+"homesortingdesc"="Sorteer Home Scherm";
+
+"requiresinternetconnection"="requires internet connection";
+"nonefavorites"="none favorites";
+"imagesaved"="image saved";
+"actionswithimagetitle"="action with image";
+"savetogalleryit"="Save to galery";
+"facebookit"="Facebook";
+"emailit"="E-mail";
+"cancelbutton"="Cancel";
+"search"="Search";
+"searchplaceholder"="Search iDeviant";
+"subcategoriesinmaincat"="categories in main";
+"subcategoriesincat"="subcategories in ";
+"subcategories "="subcategories";
+"itemsinmaincat"="items in main";
+"itemsincategory"="items in ";
+"myfavoritecategories"="my favorite categories";
+"myfavoriteitems"="my favorite items";
+"About"="About";
+"name"="name";
+"description"="description";
+"OK"="OK";
+"nicknull"="Please enter nick";
+"passwordnull"="Please enter password";
+"rememberme"="Remember me";

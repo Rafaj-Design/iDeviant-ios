@@ -1,0 +1,56 @@
+/* 
+ Localizable.strings
+ iDeviant
+ 
+ Created by Ondrej Rafaj on 16/05/2011.
+ Copyright 2011 Fuerte International. All rights reserved.
+ */
+
+"search"="Vyhledávání";
+"searchdesc"="Vyhledávání v DeviantArt";
+
+"categories"="Kategorie";
+"categoriesdesc"="Kategorie DeviantArt";
+
+"favorites"="Moje oblíbené";
+"favoritesdesc"="Oblíbené kategorie";
+
+"dailydeviations"="Nejnovější";
+"dailydeviationsdesc"="Nejnovější deviace";
+
+"popular"="Nejoblíbenější";
+"populardesc"="Nejoblíbenější deviace";
+
+"login"="Přihlášení";
+"logindesc"="Přihlášení na web DeviantArtu";
+
+"settings"="settings";
+"settingsdesc"="settingsdesc";
+
+"homesorting"="Nastavení";
+"homesortingdesc"="Řazení hlavního menu";
+
+"requiresinternetconnection"="Vyžaduje připojení k internetu";
+"nonefavorites"="Žádné oblíbené";
+"imagesaved"="Obrázek uložen";
+"actionswithimagetitle"="Action with image";
+"savetogalleryit"="Uloženo do galerie";
+"facebookit"="Facebook";
+"emailit"="E-mail";
+"cancelbutton"="Zrušit";
+"search"="Hledat";
+"searchplaceholder"="Hledat iDeviant";
+"subcategoriesinmaincat"="Hlavní kategorie";
+"subcategoriesincat"="Podkategorie v ";
+"subcategories "="Podkategorie";
+"itemsinmaincat"="Položky v hlavní";
+"itemsincategory"="Položky v ";
+"myfavoritecategories"="Moje oblíbené kategorie";
+"myfavoriteitems"="Moje oblíbené položky";
+"About"="O aplikaci";
+"name"="Jméno";
+"description"="Popis";
+"OK"="OK";
+"nicknull"="Vaše přezdívka";
+"passwordnull"="Vaše heslo";
+"rememberme"="Zapamatuj si mě";
