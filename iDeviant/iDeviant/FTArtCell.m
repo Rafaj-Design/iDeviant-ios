@@ -1,15 +1,15 @@
 //
-//  FTHomeCell.m
+//  FTArtCell.m
 //  iDeviant
 //
-//  Created by Ondrej Rafaj on 25/09/2013.
+//  Created by Ondrej Rafaj on 26/09/2013.
 //  Copyright (c) 2013 Fuerte Innovations. All rights reserved.
 //
 
-#import "FTHomeCell.h"
+#import "FTArtCell.h"
 
 
-@implementation FTHomeCell
+@implementation FTArtCell
 
 
 #pragma mark Creating elements
@@ -17,8 +17,7 @@
 - (void)createImageView {
     [super createImageView];
     
-    [self.cellImageView setFrame:CGRectMake(17, 27, 63, 63)];
-    [self.cellImageView.layer setCornerRadius:(self.cellImageView.width / 2)];
+    [self.cellImageView setFrame:CGRectMake(6, 6, 73, 73)];
     [self.cellImageView setBackgroundColor:[UIColor lightGrayColor]];
     
     [self.cellImageView setImage:[UIImage imageNamed:@"kitten.jpg"]];

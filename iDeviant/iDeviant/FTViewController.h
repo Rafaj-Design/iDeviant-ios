@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FTArtCell.h"
 
 
 @interface FTViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
@@ -17,6 +18,7 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *data;
+@property (nonatomic, strong) NSArray *searchData;
 
 @property (nonatomic, strong, readonly) UISearchBar *searchBar;
 @property (nonatomic, strong, readonly) UISearchDisplayController *searchController;
@@ -42,6 +44,9 @@
 
 // Alerts
 - (void)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message;
+
+// Cell configuration
+- (void)configureArtCell:(FTArtCell *)cell forIndexPath:(NSIndexPath *)indexPath inTable:(UITableView *)tableView;
 
 
 @end

@@ -78,11 +78,14 @@
 #pragma mark Creating elements
 
 - (void)createSearchBar {
-    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-    [_searchBar setBarTintColor:[UIColor colorWithHexString:@"5E7162"]];
+    if (!_searchBar) {
+        _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+        [_searchBar setBarTintColor:[UIColor colorWithHexString:@"5E7162"]];
+    }
 }
 
 - (void)createSearchController {
+    [self createSearchBar];
     _searchController = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar contentsController:self];
     [_searchController setDelegate:self];
     [_searchController setSearchResultsDataSource:self];
@@ -171,8 +174,14 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (_data) return _data.count;
-    else return 10;
+    if (tableView == _searchController.searchResultsTableView) {
+        if (_searchData) return _searchData.count;
+        else return 5;
+    }
+    else {
+        if (_data) return _data.count;
+        else return 10;
+    }
 }
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -188,10 +197,27 @@
 //}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 54;
+    return 85;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)configureArtCell:(FTArtCell *)cell forIndexPath:(NSIndexPath *)indexPath inTable:(UITableView *)tableView {
+    if (tableView == _searchController.searchResultsTableView) {
+        [cell.textLabel setText:@"Art title"];
+        [cell.detailTextLabel setText:@"Art description"];
+    }
+}
+
+- (FTArtCell *)artCellForTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellId = @"artCellId";
+    FTArtCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (!cell) {
+        cell = [[FTArtCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
+    }
+    [self configureArtCell:cell forIndexPath:indexPath inTable:tableView];
+    return cell;
+}
+
+- (FTBasicCell *)basicCellForTableView:(UITableView *)tableView {
     static NSString *cellId = @"cellId";
     FTBasicCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if (!cell) {
@@ -202,8 +228,29 @@
     return cell;
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView == _searchController.searchResultsTableView) {
+        return [self artCellForTableView:tableView withIndexPath:indexPath];
+    }
+    else {
+        return [self basicCellForTableView:tableView];
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark Search bar delegate methods
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    [_searchController setActive:YES animated:YES];
+    return YES;
+}
+
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
+    //[_searchController setActive:NO animated:YES];
+    return YES;
 }
 
 

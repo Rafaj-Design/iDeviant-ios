@@ -76,6 +76,13 @@
 
 #pragma mark Settings
 
+- (void)setAccessoryType:(UITableViewCellAccessoryType)accessoryType {
+    [super setAccessoryType:accessoryType];
+    if (accessoryType == UITableViewCellAccessoryDisclosureIndicator) {
+        [self.accessoryView setAlpha:0.2];
+    }
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 }
