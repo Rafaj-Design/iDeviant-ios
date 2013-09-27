@@ -1,9 +1,8 @@
 //
 //  FTImageCache.h
-//  iDeviant
 //
 //  Created by Ondrej Rafaj on 03/09/2013.
-//  Copyright (c) 2013 Wilson Fletcher. All rights reserved.
+//  Copyright (c) 2013 Fuerte Innovations. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

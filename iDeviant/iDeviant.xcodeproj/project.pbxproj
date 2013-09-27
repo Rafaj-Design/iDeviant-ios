@@ -79,6 +79,10 @@
 		15B175BB17F5623E007F480B /* GCNetworkReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175B817F5623E007F480B /* GCNetworkReachability.m */; };
 		15B175C017F581AD007F480B /* FTDeviationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175BF17F581AD007F480B /* FTDeviationsViewController.m */; };
 		15B175C517F5820D007F480B /* FTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175C417F5820D007F480B /* FTDetailViewController.m */; };
+		15B175CA17F59632007F480B /* FTDetailImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175C917F59632007F480B /* FTDetailImageViewController.m */; };
+		15B175CF17F598FB007F480B /* FTDetailBasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175CE17F598FB007F480B /* FTDetailBasicViewController.m */; };
+		15B175D417F5A3A4007F480B /* FTDetailTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175D317F5A3A4007F480B /* FTDetailTextViewController.m */; };
+		15B1761417F5A46A007F480B /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175F817F5A46A007F480B /* MBProgressHUD.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -185,6 +189,14 @@
 		15B175BF17F581AD007F480B /* FTDeviationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDeviationsViewController.m; sourceTree = "<group>"; };
 		15B175C317F5820D007F480B /* FTDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDetailViewController.h; sourceTree = "<group>"; };
 		15B175C417F5820D007F480B /* FTDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDetailViewController.m; sourceTree = "<group>"; };
+		15B175C817F59632007F480B /* FTDetailImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDetailImageViewController.h; sourceTree = "<group>"; };
+		15B175C917F59632007F480B /* FTDetailImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDetailImageViewController.m; sourceTree = "<group>"; };
+		15B175CD17F598FB007F480B /* FTDetailBasicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDetailBasicViewController.h; sourceTree = "<group>"; };
+		15B175CE17F598FB007F480B /* FTDetailBasicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDetailBasicViewController.m; sourceTree = "<group>"; };
+		15B175D217F5A3A4007F480B /* FTDetailTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDetailTextViewController.h; sourceTree = "<group>"; };
+		15B175D317F5A3A4007F480B /* FTDetailTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDetailTextViewController.m; sourceTree = "<group>"; };
+		15B175F717F5A46A007F480B /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		15B175F817F5A46A007F480B /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -407,8 +419,7 @@
 		15B1753A17F356D4007F480B /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				15B175AC17F56113007F480B /* FTImageCache.h */,
-				15B175AD17F56113007F480B /* FTImageCache.m */,
+				15B175D117F5A2AE007F480B /* Image cache */,
 				15B1757C17F358DF007F480B /* Keychain */,
 				15B1757B17F358D8007F480B /* Download */,
 				15B1757A17F358D1007F480B /* Languages */,
@@ -528,6 +539,7 @@
 		15B1758D17F49B9E007F480B /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				15B175D517F5A46A007F480B /* MBProgressHUD */,
 				15B175B617F5623E007F480B /* GCNetworkReachability */,
 				15B1758E17F49B9E007F480B /* MWFeedParser */,
 			);
@@ -568,10 +580,66 @@
 		15B175C217F581FA007F480B /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				15B175C717F59618007F480B /* Content */,
 				15B175C317F5820D007F480B /* FTDetailViewController.h */,
 				15B175C417F5820D007F480B /* FTDetailViewController.m */,
 			);
 			name = Detail;
+			sourceTree = "<group>";
+		};
+		15B175C717F59618007F480B /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				15B175D017F5A1CA007F480B /* Text */,
+				15B175CC17F598E4007F480B /* Image */,
+				15B175CB17F598DF007F480B /* Basic */,
+			);
+			name = Content;
+			sourceTree = "<group>";
+		};
+		15B175CB17F598DF007F480B /* Basic */ = {
+			isa = PBXGroup;
+			children = (
+				15B175CD17F598FB007F480B /* FTDetailBasicViewController.h */,
+				15B175CE17F598FB007F480B /* FTDetailBasicViewController.m */,
+			);
+			name = Basic;
+			sourceTree = "<group>";
+		};
+		15B175CC17F598E4007F480B /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				15B175C817F59632007F480B /* FTDetailImageViewController.h */,
+				15B175C917F59632007F480B /* FTDetailImageViewController.m */,
+			);
+			name = Image;
+			sourceTree = "<group>";
+		};
+		15B175D017F5A1CA007F480B /* Text */ = {
+			isa = PBXGroup;
+			children = (
+				15B175D217F5A3A4007F480B /* FTDetailTextViewController.h */,
+				15B175D317F5A3A4007F480B /* FTDetailTextViewController.m */,
+			);
+			name = Text;
+			sourceTree = "<group>";
+		};
+		15B175D117F5A2AE007F480B /* Image cache */ = {
+			isa = PBXGroup;
+			children = (
+				15B175AC17F56113007F480B /* FTImageCache.h */,
+				15B175AD17F56113007F480B /* FTImageCache.m */,
+			);
+			name = "Image cache";
+			sourceTree = "<group>";
+		};
+		15B175D517F5A46A007F480B /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				15B175F717F5A46A007F480B /* MBProgressHUD.h */,
+				15B175F817F5A46A007F480B /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -686,11 +754,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				15B1757817F358B5007F480B /* FTLang.m in Sources */,
+				15B175CA17F59632007F480B /* FTDetailImageViewController.m in Sources */,
 				15B174F217F35504007F480B /* FTAppDelegate.m in Sources */,
+				15B175CF17F598FB007F480B /* FTDetailBasicViewController.m in Sources */,
 				15B175C017F581AD007F480B /* FTDeviationsViewController.m in Sources */,
 				15B175AE17F56113007F480B /* FTImageCache.m in Sources */,
 				15B175A417F49B9E007F480B /* MWFeedParser.m in Sources */,
 				15B175A817F49B9E007F480B /* NSString+HTML.m in Sources */,
+				15B175D417F5A3A4007F480B /* FTDetailTextViewController.m in Sources */,
 				15B175A217F49B9E007F480B /* MWFeedItem.m in Sources */,
 				15B175A017F49B9E007F480B /* MWFeedInfo.m in Sources */,
 				15B1754C17F357A9007F480B /* FTDownload.m in Sources */,
@@ -710,6 +781,7 @@
 				15B174FB17F35504007F480B /* FTViewController.m in Sources */,
 				15B175AA17F49B9E007F480B /* NSString+XMLEntities.m in Sources */,
 				15B1754117F35748007F480B /* FTBasicCell.m in Sources */,
+				15B1761417F5A46A007F480B /* MBProgressHUD.m in Sources */,
 				15B175A617F49B9E007F480B /* NSDate+InternetDateTime.m in Sources */,
 				15B1753817F356CB007F480B /* FTHomeViewController.m in Sources */,
 				15B1755A17F357B5007F480B /* NSData+Base64.m in Sources */,

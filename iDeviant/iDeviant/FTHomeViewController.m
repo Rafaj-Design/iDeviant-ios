@@ -71,12 +71,35 @@
     }
 }
 
+- (void)handlePresetControllerForIndexPath:(NSIndexPath *)indexPath {
+    id d = [self.data objectAtIndex:indexPath.row];
+    if ([d objectForKey:@"controller"]) {
+        NSString *className = [d objectForKey:@"controller"];
+        Class class = NSClassFromString(className);
+        if (class) {
+            FTViewController *c = (FTViewController *)[[class alloc] init];
+            [c setTitle:FTLangGet([d objectForKey:@"name"])];
+            if ([[d objectForKey:@"type"] isEqualToString:@"modal"]) {
+                [c setNeedsCloseButton:YES];
+                UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:c];
+                [self presentViewController:nc animated:YES completion:^{
+                    
+                }];
+            }
+            else {
+                [self.navigationController pushViewController:c animated:YES];
+            }
+        }
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (tableView == self.searchController.searchResultsTableView) {
         [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     }
     else {
-        NSDictionary *d = [self objectForIndexPath:indexPath];
+        [self handlePresetControllerForIndexPath:indexPath];
     }
 }
 

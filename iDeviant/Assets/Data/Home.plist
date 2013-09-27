@@ -20,7 +20,7 @@
 	</dict>
 	<dict>
 		<key>controller</key>
-		<string>IDFavoritesViewController</string>
+		<string>FTDeviationsViewController</string>
 		<key>FVRT</key>
 		<true/>
 		<key>description</key>
@@ -34,7 +34,7 @@
 	</dict>
 	<dict>
 		<key>controller</key>
-		<string>IDAutodownloadViewController</string>
+		<string></string>
 		<key>FVRT</key>
 		<true/>
 		<key>description</key>
@@ -78,7 +78,7 @@
 	</dict>
 	<dict>
 		<key>controller</key>
-		<string>IDLoginViewController</string>
+		<string></string>
 		<key>description</key>
 		<string>logindesc</string>
 		<key>icon</key>
@@ -94,7 +94,7 @@
 	</dict>
 	<dict>
 		<key>controller</key>
-		<string>IDHomeSortingViewController</string>
+		<string></string>
 		<key>description</key>
 		<string>homesortingdesc</string>
 		<key>icon</key>

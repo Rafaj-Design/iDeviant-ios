@@ -1,26 +1,23 @@
 //
 //  FTImageCache.m
-//  iDeviant
 //
 //  Created by Ondrej Rafaj on 03/09/2013.
-//  Copyright (c) 2013 Wilson Fletcher. All rights reserved.
+//  Copyright (c) 2013 Fuerte Innovations. All rights reserved.
 //
 
 #import "FTImageCache.h"
 #import "FTDownload.h"
 #import "GCNetworkReachability.h"
-//#import "WFConfig.h"
+
 
 static inline NSString *FTImageCacheDirectory() {
 	static NSString *_FTImageCacheDirectory;
 	static dispatch_once_t onceToken;
-    
 	dispatch_once(&onceToken, ^{
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
 		NSString *cachesDirectory = [paths objectAtIndex:0];
 		_FTImageCacheDirectory = [cachesDirectory stringByAppendingPathComponent:@"FTImageCache"];
 	});
-    
 	return _FTImageCacheDirectory;
 }
 
@@ -59,33 +56,29 @@ static inline NSString *cachePathForKey(NSString *key) {
 
 - (id)init {
     self = [super init];
-    if(!self) return nil;
-    
-    _diskOperationQueue = [[NSOperationQueue alloc] init];
-    [_diskOperationQueue setMaxConcurrentOperationCount:2];
-    
-    _downloadOperationQueue = [[NSOperationQueue alloc] init];
-    [_downloadOperationQueue setMaxConcurrentOperationCount:2];
-    
-    [[NSFileManager defaultManager] createDirectoryAtPath:FTImageCacheDirectory()
-                              withIntermediateDirectories:YES
-                                               attributes:nil
-                                                    error:NULL];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMemoryWarningNotification:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
-    
-    self.reachability = [GCNetworkReachability reachabilityWithHostName:@"http://www.deviantart.com"];
-    
-    [self.reachability startMonitoringNetworkReachabilityWithHandler:^(GCNetworkReachabilityStatus status) {
-        self.reachabilityStatus = status;
-    }];
-    
+    if (self) {
+        _diskOperationQueue = [[NSOperationQueue alloc] init];
+        [_diskOperationQueue setMaxConcurrentOperationCount:2];
+        
+        _downloadOperationQueue = [[NSOperationQueue alloc] init];
+        [_downloadOperationQueue setMaxConcurrentOperationCount:2];
+        
+        [[NSFileManager defaultManager] createDirectoryAtPath:FTImageCacheDirectory() withIntermediateDirectories:YES attributes:nil error:NULL];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMemoryWarningNotification:) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+        
+        _reachability = [GCNetworkReachability reachabilityWithHostName:@"http://www.deviantart.com"];
+        
+        [_reachability startMonitoringNetworkReachabilityWithHandler:^(GCNetworkReachabilityStatus status) {
+            _reachabilityStatus = status;
+        }];
+    }
 	return self;
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self.reachability stopMonitoringNetworkReachability];
+    [_reachability stopMonitoringNetworkReachability];
 }
 
 - (void)didReceiveMemoryWarningNotification:(NSNotification *)notification {
@@ -93,7 +86,7 @@ static inline NSString *cachePathForKey(NSString *key) {
 }
 
 
-#pragma mark - Public API/overrides
+#pragma mark - Public API / overrides
 
 - (void)removeAllImagesOnCompletion:(void (^)(BOOL success))completionBlock {
     [self removeAllObjects];
@@ -118,26 +111,23 @@ static inline NSString *cachePathForKey(NSString *key) {
 }
 
 - (void)imageForURL:(NSURL *)url success:(void (^)(UIImage *image))successBlock failure:(void (^)(NSError* error))failureBlock progress:(void (^)(CGFloat progress))progressBlock {
-
+    
     NSString *key = keyForURL(url);
-
+    
     if (key) {
         UIImage *cachedImage = [self cachedImageForKey:key];
         
         if (cachedImage) {
             if (successBlock) successBlock(cachedImage);
-        } else {
-            [self downloadCacheAndPersistImageForURL:url
-                                                 key:key
-                                             success:^(UIImage *image) {
-                                                 if (successBlock) successBlock(image);
-                                             }
-                                             failure:^(NSError *error) {
-                                                 if (failureBlock) failureBlock(error);
-                                             }
-                                            progress:^(CGFloat progress) {
-                                                if (progressBlock) progressBlock(progress);
-                                            }];
+        }
+        else {
+            [self downloadCacheAndPersistImageForURL:url key:key success:^(UIImage *image) {
+                if (successBlock) successBlock(image);
+            } failure:^(NSError *error) {
+                if (failureBlock) failureBlock(error);
+            } progress:^(CGFloat progress) {
+                if (progressBlock) progressBlock(progress);
+            }];
         }
     }
 }
@@ -146,12 +136,12 @@ static inline NSString *cachePathForKey(NSString *key) {
 #pragma mark - Helper methods
 
 - (BOOL)allowsEvictionOfPersistedImages {
-    switch (self.evictionPolicy) {
+    switch (_evictionPolicy) {
         case FTImageCacheDiskEvictionPolicyAlwaysAllow:
             return YES;
             break;
         case FTImageCacheDiskEvictionPolicyOnlineOnly:
-            return self.reachabilityStatus != GCNetworkReachabilityStatusNotReachable;
+            return _reachabilityStatus != GCNetworkReachabilityStatusNotReachable;
             break;
         default:
             return YES;
@@ -163,32 +153,30 @@ static inline NSString *cachePathForKey(NSString *key) {
 #pragma mark Network operations
 
 - (void)downloadCacheAndPersistImageForURL:(NSURL *)url
-                                       key:(NSString *)key 
+                                       key:(NSString *)key
                                    success:(void (^)(UIImage *image))successBlock
                                    failure:(void (^)(NSError* error))failureBlock
                                   progress:(void (^)(CGFloat progress))progressBlock {
     
-    FTDownload *imageDownload = [[FTDownload alloc] initWithURL:[url absoluteString]
-                                                  cacheLifetime:FTDownloadCacheLifetimeNone
-                                                        success:^(NSData *data) {
-                                                            UIImage *image = [UIImage imageWithData:data];
-                                                            if (image && [image isKindOfClass:[UIImage class]]) {
-                                                                [self setImage:image forKey:key];
-                                                                [self persistData:data forKey:key];
-                                                                if (successBlock) successBlock(image);
-                                                            } else {
-                                                                if (failureBlock) {
-                                                                    NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
-                                                                    [errorDetail setValue:[NSString stringWithFormat:@"Failed to init image with data from for URL: %@", url] forKey:NSLocalizedDescriptionKey];
-                                                                    NSError* error = [NSError errorWithDomain:@"FTImageCacheErrorDomain" code:1 userInfo:errorDetail];
-                                                                    failureBlock(error);
-                                                                }
-                                                            }
-                                                        } failure:^(NSError *error) {
-                                                            if (failureBlock) failureBlock(error);
-                                                        } progress:^(CGFloat progress) {
-                                                            if (progressBlock) progressBlock(progress);
-                                                        }];
+    FTDownload *imageDownload = [[FTDownload alloc] initWithURL:[url absoluteString] cacheLifetime:FTDownloadCacheLifetimeNone success:^(NSData *data) {
+        UIImage *image = [UIImage imageWithData:data];
+        if (image && [image isKindOfClass:[UIImage class]]) {
+            [self setImage:image forKey:key];
+            [self persistData:data forKey:key];
+            if (successBlock) successBlock(image);
+        } else {
+            if (failureBlock) {
+                NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
+                [errorDetail setValue:[NSString stringWithFormat:@"Failed to init image with data from for URL: %@", url] forKey:NSLocalizedDescriptionKey];
+                NSError* error = [NSError errorWithDomain:@"FTImageCacheErrorDomain" code:1 userInfo:errorDetail];
+                failureBlock(error);
+            }
+        }
+    } failure:^(NSError *error) {
+        if (failureBlock) failureBlock(error);
+    } progress:^(CGFloat progress) {
+        if (progressBlock) progressBlock(progress);
+    }];
     [_downloadOperationQueue addOperation:imageDownload];
 }
 
@@ -276,7 +264,8 @@ static inline NSString *cachePathForKey(NSString *key) {
 
 - (void)performDiskWriteOperation:(NSInvocation *)invocation {
 	NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithInvocation:invocation];
-	[self.diskOperationQueue addOperation:operation];
+	[_diskOperationQueue addOperation:operation];
 }
+
 
 @end

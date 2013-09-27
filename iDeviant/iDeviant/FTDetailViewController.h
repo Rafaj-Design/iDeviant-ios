@@ -8,6 +8,15 @@
 
 #import "FTViewController.h"
 
-@interface FTDetailViewController : FTViewController
+
+@class MWFeedItem;
+
+@interface FTDetailViewController : FTViewController <UIPageViewControllerDelegate, UIPageViewControllerDataSource>
+
+@property (nonatomic, strong) NSArray *items;
+@property (nonatomic) NSInteger selectedIndex;
+
+@property (nonatomic, strong) UIPageViewController *pageViewController;
+
 
 @end

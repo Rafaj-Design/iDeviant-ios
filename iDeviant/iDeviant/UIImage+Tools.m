@@ -1,6 +1,5 @@
 //
 //  UIImage+Tools.m
-//  iJenkins
 //
 //  Created by Ondrej Rafaj on 26/09/2011.
 //  Copyright (c) 2011 Fuerte Innovations. All rights reserved.
@@ -396,7 +395,7 @@ static inline CGFloat toRadians (CGFloat degrees) { return degrees * M_PI/180.0f
 //image that is given here has to be 8bpp in greyscale colorSpace
 //function counts black pixels for given angle MODULE(it checks for -ang and +ang) and returned value(its module: abs(...)) gives u the number of blacks that have been found(maximum)
 //if returned value is positive than, maximum blacks number returned are counted for positive angle otherwise for negative
-+ (NSInteger)getBlackPercentageForAngle:(NSInteger) ang forImageData:(UIImage *)image andBlackTreshold:(unsigned char) blackTreshold {
++ (NSInteger)getBlackPercentageForAngle:(NSInteger)ang forImageData:(UIImage *)image andBlackTreshold:(unsigned char) blackTreshold {
 
 	NSInteger iwidth = CGImageGetWidth(image.CGImage);
 	NSInteger iheight = CGImageGetHeight(image.CGImage);
@@ -406,7 +405,7 @@ static inline CGFloat toRadians (CGFloat degrees) { return degrees * M_PI/180.0f
 	
 	//get array with number of pixels in each line that should be taken to account - Bresenham's algorithm
 	int *bresArray = [UIImage newNumOfPixelsInEachLineForWidth:iwidth andAngle:ang];
-	temporaryImageAngle = ang;
+	temporaryImageAngle = (int)ang;
 	NSInteger lineStep = 40;
 	
 	for(NSInteger i = 0; i < iheight - ang; i += lineStep){
@@ -446,8 +445,8 @@ static inline CGFloat toRadians (CGFloat degrees) { return degrees * M_PI/180.0f
 	NSInteger stepAngle = [UIImage degrees:degStep inPixelsForImage:image];
 	for(; currentCheckingAngleInPixels < maximumCheckingAngleInPixels && currentCheckingAngleInPixels < image.size.height; currentCheckingAngleInPixels += stepAngle){
 		NSInteger blackPercentageForGivenAngle = [UIImage getBlackPercentageForAngle:currentCheckingAngleInPixels forImageData:image andBlackTreshold:blackTreshold];
-		if(abs(blackPercentageForGivenAngle) > percentOfBlacksForDetectedAngle){
-			percentOfBlacksForDetectedAngle = abs(blackPercentageForGivenAngle);
+		if(abs((int)blackPercentageForGivenAngle) > percentOfBlacksForDetectedAngle){
+			percentOfBlacksForDetectedAngle = abs((int)blackPercentageForGivenAngle);
 			detectedAngleInPixels = currentCheckingAngleInPixels;
 			if(blackPercentageForGivenAngle < 0){
 				detectedAngleInPixels = -detectedAngleInPixels;
@@ -529,7 +528,7 @@ static inline CGFloat toRadians (CGFloat degrees) { return degrees * M_PI/180.0f
 
 
 + (CGPoint) getPointAtIndex:(NSUInteger) index ofRect:(CGRect) rect {
-	NSAssert1(index >= 0 && index < 4, @"Rectangle has 4 corners, index should be between [0,3], u passed %d", index);
+	NSAssert1(index >= 0 && index < 4, @"Rectangle has 4 corners, index should be between [0,3], u passed %lu", index);
 	CGPoint point = rect.origin;
 	if(index == 1){
 		point.x += CGRectGetWidth(rect);

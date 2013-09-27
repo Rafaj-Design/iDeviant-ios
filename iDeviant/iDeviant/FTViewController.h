@@ -27,6 +27,8 @@
 @property (nonatomic, strong, readonly) UISearchBar *searchBar;
 @property (nonatomic, strong, readonly) UISearchDisplayController *searchController;
 
+@property (nonatomic) BOOL needsCloseButton;
+
 // Positioning
 - (CGFloat)screenHeight;
 - (CGFloat)screenWidth;
@@ -44,6 +46,8 @@
 
 - (void)createTableView;
 - (void)fillData;
+
+- (void)showDetailFor:(MWFeedItem *)item inDataSet:(NSArray *)data;
 
 - (void)createAllElements;
 

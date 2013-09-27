@@ -7,6 +7,7 @@
 //
 
 #import "FTViewController.h"
+#import "FTDetailViewController.h"
 #import "FTImageCache.h"
 #import "FTBasicCell.h"
 
@@ -161,6 +162,13 @@
     
 }
 
+#pragma mark Settings
+
+- (void)setNeedsCloseButton:(BOOL)needsCloseButton {
+    UIBarButtonItem *close = [[UIBarButtonItem alloc] initWithTitle:FTLangGet(@"Close") style:UIBarButtonItemStyleDone target:nil action:nil];
+    [self.navigationItem setLeftBarButtonItem:close];
+}
+
 #pragma mark Initialization
 
 - (void)setupView {
@@ -298,8 +306,20 @@
     }
 }
 
+- (void)showDetailFor:(MWFeedItem *)item inDataSet:(NSArray *)data {
+    FTDetailViewController *c = [[FTDetailViewController alloc] init];
+    [c setItems:data];
+    [c setSelectedIndex:[data indexOfObject:item]];
+    [self.navigationController pushViewController:c animated:YES];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (tableView == _searchController.searchResultsTableView) {
+        MWFeedItem *item = [_searchData objectAtIndex:indexPath.row];
+        [self showDetailFor:item inDataSet:_searchData];
+    }
 }
 
 #pragma mark Search bar delegate methods
