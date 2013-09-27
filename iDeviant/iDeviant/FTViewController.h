@@ -19,8 +19,11 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *data;
+@property (nonatomic, strong) NSArray *categoryData;
 @property (nonatomic, strong) NSArray *searchData;
 @property (nonatomic) BOOL searchIsEnabled;
+
+@property (nonatomic, strong) NSDictionary *homeInfo;
 
 @property (nonatomic, strong) NSString *categoryCode;
 
@@ -62,6 +65,7 @@
 - (void)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message;
 
 // Cell configuration
+- (FTBasicCell *)categoryCellForTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath;
 - (FTArtCell *)artCellForTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath;
 - (void)configureArtCell:(FTArtCell *)cell forIndexPath:(NSIndexPath *)indexPath inTable:(UITableView *)tableView;
 

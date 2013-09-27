@@ -54,7 +54,9 @@
 #pragma mark Gesture recognizers
 
 - (void)didTapDetailView:(UITapGestureRecognizer *)recognizer {
+    [self.view setBackgroundColor:[UIColor randomColor]];
     [self.navigationController setNavigationBarHidden:!self.navigationController.isNavigationBarHidden animated:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:![UIApplication sharedApplication].isStatusBarHidden withAnimation:UIStatusBarAnimationNone];
 }
 
 #pragma mark Page controller datasource & delegate methods
@@ -91,6 +93,12 @@
     [_pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
     [_pageViewController setDoubleSided:NO];
     return UIPageViewControllerSpineLocationMin;
+}
+
+- (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers {
+    _selectedIndex = [_items indexOfObject:[(FTDetailBasicViewController *)pendingViewControllers.lastObject item]];
+    MWFeedItem *item = [_items objectAtIndex:_selectedIndex];
+    [self setTitle:item.title];
 }
 
 

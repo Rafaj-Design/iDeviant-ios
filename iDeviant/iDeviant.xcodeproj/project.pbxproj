@@ -83,6 +83,12 @@
 		15B175CF17F598FB007F480B /* FTDetailBasicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175CE17F598FB007F480B /* FTDetailBasicViewController.m */; };
 		15B175D417F5A3A4007F480B /* FTDetailTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175D317F5A3A4007F480B /* FTDetailTextViewController.m */; };
 		15B1761417F5A46A007F480B /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175F817F5A46A007F480B /* MBProgressHUD.m */; };
+		15B1762217F5C3BC007F480B /* FTFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1762117F5C3BC007F480B /* FTFavoritesViewController.m */; };
+		15B1762517F5C3F8007F480B /* FTCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1762417F5C3F8007F480B /* FTCategoriesViewController.m */; };
+		15B1762917F5C41C007F480B /* FTDailyDeviationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1762817F5C41C007F480B /* FTDailyDeviationsViewController.m */; };
+		15B1762E17F5C471007F480B /* FTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1762D17F5C471007F480B /* FTLoginViewController.m */; };
+		15B1763117F5C483007F480B /* FTPopularViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1763017F5C483007F480B /* FTPopularViewController.m */; };
+		15B1763517F5C498007F480B /* FTSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1763417F5C498007F480B /* FTSettingsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,6 +203,18 @@
 		15B175D317F5A3A4007F480B /* FTDetailTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDetailTextViewController.m; sourceTree = "<group>"; };
 		15B175F717F5A46A007F480B /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		15B175F817F5A46A007F480B /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		15B1762017F5C3BC007F480B /* FTFavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTFavoritesViewController.h; sourceTree = "<group>"; };
+		15B1762117F5C3BC007F480B /* FTFavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTFavoritesViewController.m; sourceTree = "<group>"; };
+		15B1762317F5C3F8007F480B /* FTCategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCategoriesViewController.h; sourceTree = "<group>"; };
+		15B1762417F5C3F8007F480B /* FTCategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCategoriesViewController.m; sourceTree = "<group>"; };
+		15B1762717F5C41C007F480B /* FTDailyDeviationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDailyDeviationsViewController.h; sourceTree = "<group>"; };
+		15B1762817F5C41C007F480B /* FTDailyDeviationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDailyDeviationsViewController.m; sourceTree = "<group>"; };
+		15B1762C17F5C471007F480B /* FTLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLoginViewController.h; sourceTree = "<group>"; };
+		15B1762D17F5C471007F480B /* FTLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLoginViewController.m; sourceTree = "<group>"; };
+		15B1762F17F5C483007F480B /* FTPopularViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPopularViewController.h; sourceTree = "<group>"; };
+		15B1763017F5C483007F480B /* FTPopularViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPopularViewController.m; sourceTree = "<group>"; };
+		15B1763317F5C498007F480B /* FTSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSettingsViewController.h; sourceTree = "<group>"; };
+		15B1763417F5C498007F480B /* FTSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSettingsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -392,6 +410,12 @@
 		15B1753417F35613007F480B /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				15B1763217F5C48B007F480B /* Settings */,
+				15B1762B17F5C463007F480B /* Login */,
+				15B1762A17F5C45D007F480B /* Popular */,
+				15B1762617F5C405007F480B /* Daily deviations */,
+				15B1761F17F5C3AC007F480B /* Categories */,
+				15B1761E17F5C39E007F480B /* Favorites */,
 				15B1753617F356CB007F480B /* FTHomeViewController.h */,
 				15B1753717F356CB007F480B /* FTHomeViewController.m */,
 			);
@@ -642,6 +666,60 @@
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
+		15B1761E17F5C39E007F480B /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				15B1762017F5C3BC007F480B /* FTFavoritesViewController.h */,
+				15B1762117F5C3BC007F480B /* FTFavoritesViewController.m */,
+			);
+			name = Favorites;
+			sourceTree = "<group>";
+		};
+		15B1761F17F5C3AC007F480B /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				15B1762317F5C3F8007F480B /* FTCategoriesViewController.h */,
+				15B1762417F5C3F8007F480B /* FTCategoriesViewController.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		15B1762617F5C405007F480B /* Daily deviations */ = {
+			isa = PBXGroup;
+			children = (
+				15B1762717F5C41C007F480B /* FTDailyDeviationsViewController.h */,
+				15B1762817F5C41C007F480B /* FTDailyDeviationsViewController.m */,
+			);
+			name = "Daily deviations";
+			sourceTree = "<group>";
+		};
+		15B1762A17F5C45D007F480B /* Popular */ = {
+			isa = PBXGroup;
+			children = (
+				15B1762F17F5C483007F480B /* FTPopularViewController.h */,
+				15B1763017F5C483007F480B /* FTPopularViewController.m */,
+			);
+			name = Popular;
+			sourceTree = "<group>";
+		};
+		15B1762B17F5C463007F480B /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				15B1762C17F5C471007F480B /* FTLoginViewController.h */,
+				15B1762D17F5C471007F480B /* FTLoginViewController.m */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		15B1763217F5C48B007F480B /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				15B1763317F5C498007F480B /* FTSettingsViewController.h */,
+				15B1763417F5C498007F480B /* FTSettingsViewController.m */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -754,12 +832,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				15B1757817F358B5007F480B /* FTLang.m in Sources */,
+				15B1762517F5C3F8007F480B /* FTCategoriesViewController.m in Sources */,
 				15B175CA17F59632007F480B /* FTDetailImageViewController.m in Sources */,
 				15B174F217F35504007F480B /* FTAppDelegate.m in Sources */,
+				15B1763517F5C498007F480B /* FTSettingsViewController.m in Sources */,
 				15B175CF17F598FB007F480B /* FTDetailBasicViewController.m in Sources */,
 				15B175C017F581AD007F480B /* FTDeviationsViewController.m in Sources */,
 				15B175AE17F56113007F480B /* FTImageCache.m in Sources */,
 				15B175A417F49B9E007F480B /* MWFeedParser.m in Sources */,
+				15B1763117F5C483007F480B /* FTPopularViewController.m in Sources */,
 				15B175A817F49B9E007F480B /* NSString+HTML.m in Sources */,
 				15B175D417F5A3A4007F480B /* FTDetailTextViewController.m in Sources */,
 				15B175A217F49B9E007F480B /* MWFeedItem.m in Sources */,
@@ -771,14 +852,17 @@
 				15B175BA17F5623E007F480B /* GCNetworkReachability.m in Sources */,
 				15B1758917F48426007F480B /* FTArtCell.m in Sources */,
 				15B1756217F357B5007F480B /* UIView+Layout.m in Sources */,
+				15B1762E17F5C471007F480B /* FTLoginViewController.m in Sources */,
 				15B174EE17F35504007F480B /* main.m in Sources */,
 				15B175C517F5820D007F480B /* FTDetailViewController.m in Sources */,
 				15B1756417F357B5007F480B /* NSString+URLTools.m in Sources */,
+				15B1762917F5C41C007F480B /* FTDailyDeviationsViewController.m in Sources */,
 				15B1754417F35765007F480B /* FTView.m in Sources */,
 				15B1759E17F49B9E007F480B /* GTMNSString+HTML.m in Sources */,
 				15B1758117F379D8007F480B /* FTHomeCell.m in Sources */,
 				15B175B517F56186007F480B /* FTImageView.m in Sources */,
 				15B174FB17F35504007F480B /* FTViewController.m in Sources */,
+				15B1762217F5C3BC007F480B /* FTFavoritesViewController.m in Sources */,
 				15B175AA17F49B9E007F480B /* NSString+XMLEntities.m in Sources */,
 				15B1754117F35748007F480B /* FTBasicCell.m in Sources */,
 				15B1761417F5A46A007F480B /* MBProgressHUD.m in Sources */,

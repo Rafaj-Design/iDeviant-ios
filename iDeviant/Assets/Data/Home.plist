@@ -4,7 +4,7 @@
 <array>
 	<dict>
 		<key>controller</key>
-		<string>FTDeviationsViewController</string>
+		<string>FTCategoriesViewController</string>
 		<key>description</key>
 		<string>categoriesdesc</string>
 		<key>icon</key>
@@ -20,7 +20,7 @@
 	</dict>
 	<dict>
 		<key>controller</key>
-		<string>FTDeviationsViewController</string>
+		<string>FTFavoritesViewController</string>
 		<key>FVRT</key>
 		<true/>
 		<key>description</key>
@@ -48,7 +48,7 @@
 	</dict>
 	<dict>
 		<key>controller</key>
-		<string>FTDeviationsViewController</string>
+		<string>FTDailyDeviationsViewController</string>
 		<key>description</key>
 		<string>dailydeviationsdesc</string>
 		<key>icon</key>
@@ -59,12 +59,10 @@
 		<true/>
 		<key>detail</key>
 		<true/>
-		<key>presetDataQuery</key>
-		<string>special:dd</string>
 	</dict>
 	<dict>
 		<key>controller</key>
-		<string>FTDeviationsViewController</string>
+		<string>FTPopularViewController</string>
 		<key>description</key>
 		<string>populardesc</string>
 		<key>icon</key>
@@ -78,7 +76,7 @@
 	</dict>
 	<dict>
 		<key>controller</key>
-		<string></string>
+		<string>FTLoginViewController</string>
 		<key>description</key>
 		<string>logindesc</string>
 		<key>icon</key>
@@ -91,18 +89,6 @@
 		<true/>
 		<key>type</key>
 		<string>modal</string>
-	</dict>
-	<dict>
-		<key>controller</key>
-		<string></string>
-		<key>description</key>
-		<string>homesortingdesc</string>
-		<key>icon</key>
-		<string>DA_icon6.png</string>
-		<key>name</key>
-		<string>homesorting</string>
-		<key>detail</key>
-		<false/>
 	</dict>
 </array>
 </plist>

@@ -242,8 +242,7 @@
         else return 0;
     }
     else {
-        if (_data) return _data.count;
-        else return 10;
+        return _data.count;
     }
 }
 
@@ -274,6 +273,17 @@
             
         }];
     }
+}
+
+- (FTBasicCell *)categoryCellForTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath {
+    static NSString *cellId = @"categoryCellId";
+    FTBasicCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (!cell) {
+        cell = [[FTBasicCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
+    }
+    NSDictionary *category = [_categoryData objectAtIndex:indexPath.row];
+    [cell.textLabel setText:[category objectForKey:@"name"]];
+    return cell;
 }
 
 - (FTArtCell *)artCellForTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath {
@@ -308,6 +318,7 @@
 
 - (void)showDetailFor:(MWFeedItem *)item inDataSet:(NSArray *)data {
     FTDetailViewController *c = [[FTDetailViewController alloc] init];
+    [c setTitle:item.title];
     [c setItems:data];
     [c setSelectedIndex:[data indexOfObject:item]];
     [self.navigationController pushViewController:c animated:YES];
@@ -374,6 +385,8 @@
 }
 
 - (void)feedParserDidFinish:(MWFeedParser *)parser {
+    NSLog(@"Data: %@", _tempParsedItems);
+    
 	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	if (_searchIsEnabled) {
         _searchData = _tempParsedItems;
