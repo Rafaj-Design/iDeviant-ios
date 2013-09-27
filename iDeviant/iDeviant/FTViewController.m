@@ -261,8 +261,10 @@
     [cell.detailTextLabel setText:item.summary];
     [cell.cellImageView setImage:nil];
     
+    NSLog(@"Thumbnails: %@", item.thumbnails);
+    
     if ([item.thumbnails count] > 0) {
-        NSString *url = [[item.thumbnails objectAtIndex:0] objectForKey:@"url"];
+        NSString *url = [[item.thumbnails lastObject] objectForKey:@"url"];
         [[FTImageCache sharedCache] imageForURL:[NSURL URLWithString:url] success:^(UIImage *image) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [cell.cellImageView setImage:image];
