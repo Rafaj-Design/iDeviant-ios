@@ -4,7 +4,7 @@
 <array>
 	<dict>
 		<key>controller</key>
-		<string>IDCategoriesViewController</string>
+		<string>FTDeviationsViewController</string>
 		<key>description</key>
 		<string>categoriesdesc</string>
 		<key>icon</key>
@@ -48,7 +48,7 @@
 	</dict>
 	<dict>
 		<key>controller</key>
-		<string>IDDailyDeviationsViewController</string>
+		<string>FTDeviationsViewController</string>
 		<key>description</key>
 		<string>dailydeviationsdesc</string>
 		<key>icon</key>
@@ -64,7 +64,7 @@
 	</dict>
 	<dict>
 		<key>controller</key>
-		<string>IDPopularViewController</string>
+		<string>FTDeviationsViewController</string>
 		<key>description</key>
 		<string>populardesc</string>
 		<key>icon</key>

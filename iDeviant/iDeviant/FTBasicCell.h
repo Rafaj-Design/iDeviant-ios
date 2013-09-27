@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Fuerte Innovations. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "FTImageView.h"
 
 
 typedef enum {
@@ -18,7 +18,7 @@ typedef enum {
 @interface FTBasicCell : UITableViewCell
 
 @property (nonatomic) FTBasicCellLayoutType layoutType;
-@property (nonatomic, strong) UIImageView *cellImageView;
+@property (nonatomic, strong) FTImageView *cellImageView;
 
 + (FTBasicCell *)cellForTable:(UITableView *)tableView;
 

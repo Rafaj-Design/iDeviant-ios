@@ -1,0 +1,3 @@
+[submodule "iDeviant/Thirdparty/GCNetworkReachability"]
+	path = iDeviant/Thirdparty/GCNetworkReachability
+	url = git@github.com:GlennChiu/GCNetworkReachability.git

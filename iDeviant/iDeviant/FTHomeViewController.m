@@ -7,6 +7,7 @@
 //
 
 #import "FTHomeViewController.h"
+#import "FTDeviationsViewController.h"
 #import "FTHomeCell.h"
 
 
@@ -35,7 +36,7 @@
     [super createAllElements];
     
     [super createTableView];
-    [self createSearchBarWithSearchOptionTitles:@[@"Say", @"What!"]];
+    [self createSearchBar];
     [self createSearchController];
 }
 
@@ -49,14 +50,6 @@
 
 #pragma mark Table view delegate & datasource methods
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return self.searchController.searchBar.height;
-//}
-//
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    return self.searchController.searchBar;
-//}
-//
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 115;
 }
@@ -77,6 +70,17 @@
         return cell;
     }
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView == self.searchController.searchResultsTableView) {
+        [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+    }
+    else {
+        NSDictionary *d = [self objectForIndexPath:indexPath];
+    }
+}
+
+
 
 
 @end

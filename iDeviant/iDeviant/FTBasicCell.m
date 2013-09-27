@@ -49,7 +49,7 @@
 }
 
 - (void)createImageView {
-    _cellImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 30, 30)];
+    _cellImageView = [[FTImageView alloc] initWithFrame:CGRectMake(5, 5, 30, 30)];
     [_cellImageView setClipsToBounds:YES];
     [_cellImageView setContentMode:UIViewContentModeScaleAspectFill];
     [self addSubview:_cellImageView];

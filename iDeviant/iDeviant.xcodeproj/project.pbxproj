@@ -72,6 +72,13 @@
 		15B175A917F49B9E007F480B /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759B17F49B9E007F480B /* NSString+HTML.m */; };
 		15B175AA17F49B9E007F480B /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759D17F49B9E007F480B /* NSString+XMLEntities.m */; };
 		15B175AB17F49B9E007F480B /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759D17F49B9E007F480B /* NSString+XMLEntities.m */; };
+		15B175AE17F56113007F480B /* FTImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175AD17F56113007F480B /* FTImageCache.m */; };
+		15B175AF17F56113007F480B /* FTImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175AD17F56113007F480B /* FTImageCache.m */; };
+		15B175B517F56186007F480B /* FTImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175B417F56186007F480B /* FTImageView.m */; };
+		15B175BA17F5623E007F480B /* GCNetworkReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175B817F5623E007F480B /* GCNetworkReachability.m */; };
+		15B175BB17F5623E007F480B /* GCNetworkReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175B817F5623E007F480B /* GCNetworkReachability.m */; };
+		15B175C017F581AD007F480B /* FTDeviationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175BF17F581AD007F480B /* FTDeviationsViewController.m */; };
+		15B175C517F5820D007F480B /* FTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175C417F5820D007F480B /* FTDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,6 +175,16 @@
 		15B1759B17F49B9E007F480B /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
 		15B1759C17F49B9E007F480B /* NSString+XMLEntities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XMLEntities.h"; sourceTree = "<group>"; };
 		15B1759D17F49B9E007F480B /* NSString+XMLEntities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XMLEntities.m"; sourceTree = "<group>"; };
+		15B175AC17F56113007F480B /* FTImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTImageCache.h; sourceTree = "<group>"; };
+		15B175AD17F56113007F480B /* FTImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTImageCache.m; sourceTree = "<group>"; };
+		15B175B317F56186007F480B /* FTImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTImageView.h; sourceTree = "<group>"; };
+		15B175B417F56186007F480B /* FTImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTImageView.m; sourceTree = "<group>"; };
+		15B175B717F5623E007F480B /* GCNetworkReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCNetworkReachability.h; sourceTree = "<group>"; };
+		15B175B817F5623E007F480B /* GCNetworkReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCNetworkReachability.m; sourceTree = "<group>"; };
+		15B175BE17F581AD007F480B /* FTDeviationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDeviationsViewController.h; sourceTree = "<group>"; };
+		15B175BF17F581AD007F480B /* FTDeviationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDeviationsViewController.m; sourceTree = "<group>"; };
+		15B175C317F5820D007F480B /* FTDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDetailViewController.h; sourceTree = "<group>"; };
+		15B175C417F5820D007F480B /* FTDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -372,6 +389,9 @@
 		15B1753517F35620007F480B /* Deviations */ = {
 			isa = PBXGroup;
 			children = (
+				15B175C217F581FA007F480B /* Detail */,
+				15B175BE17F581AD007F480B /* FTDeviationsViewController.h */,
+				15B175BF17F581AD007F480B /* FTDeviationsViewController.m */,
 			);
 			name = Deviations;
 			sourceTree = "<group>";
@@ -387,6 +407,8 @@
 		15B1753A17F356D4007F480B /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				15B175AC17F56113007F480B /* FTImageCache.h */,
+				15B175AD17F56113007F480B /* FTImageCache.m */,
 				15B1757C17F358DF007F480B /* Keychain */,
 				15B1757B17F358D8007F480B /* Download */,
 				15B1757A17F358D1007F480B /* Languages */,
@@ -444,6 +466,8 @@
 			children = (
 				15B1754217F35765007F480B /* FTView.h */,
 				15B1754317F35765007F480B /* FTView.m */,
+				15B175B317F56186007F480B /* FTImageView.h */,
+				15B175B417F56186007F480B /* FTImageView.m */,
 			);
 			name = Basic;
 			sourceTree = "<group>";
@@ -504,6 +528,7 @@
 		15B1758D17F49B9E007F480B /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				15B175B617F5623E007F480B /* GCNetworkReachability */,
 				15B1758E17F49B9E007F480B /* MWFeedParser */,
 			);
 			path = Thirdparty;
@@ -529,6 +554,24 @@
 				15B1759D17F49B9E007F480B /* NSString+XMLEntities.m */,
 			);
 			path = MWFeedParser;
+			sourceTree = "<group>";
+		};
+		15B175B617F5623E007F480B /* GCNetworkReachability */ = {
+			isa = PBXGroup;
+			children = (
+				15B175B717F5623E007F480B /* GCNetworkReachability.h */,
+				15B175B817F5623E007F480B /* GCNetworkReachability.m */,
+			);
+			path = GCNetworkReachability;
+			sourceTree = "<group>";
+		};
+		15B175C217F581FA007F480B /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				15B175C317F5820D007F480B /* FTDetailViewController.h */,
+				15B175C417F5820D007F480B /* FTDetailViewController.m */,
+			);
+			name = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -644,6 +687,8 @@
 			files = (
 				15B1757817F358B5007F480B /* FTLang.m in Sources */,
 				15B174F217F35504007F480B /* FTAppDelegate.m in Sources */,
+				15B175C017F581AD007F480B /* FTDeviationsViewController.m in Sources */,
+				15B175AE17F56113007F480B /* FTImageCache.m in Sources */,
 				15B175A417F49B9E007F480B /* MWFeedParser.m in Sources */,
 				15B175A817F49B9E007F480B /* NSString+HTML.m in Sources */,
 				15B175A217F49B9E007F480B /* MWFeedItem.m in Sources */,
@@ -652,13 +697,16 @@
 				15B1755E17F357B5007F480B /* UIColor+Tools.m in Sources */,
 				15B1754817F35796007F480B /* FTKeychainObject.m in Sources */,
 				15B1755C17F357B5007F480B /* UIImage+Tools.m in Sources */,
+				15B175BA17F5623E007F480B /* GCNetworkReachability.m in Sources */,
 				15B1758917F48426007F480B /* FTArtCell.m in Sources */,
 				15B1756217F357B5007F480B /* UIView+Layout.m in Sources */,
 				15B174EE17F35504007F480B /* main.m in Sources */,
+				15B175C517F5820D007F480B /* FTDetailViewController.m in Sources */,
 				15B1756417F357B5007F480B /* NSString+URLTools.m in Sources */,
 				15B1754417F35765007F480B /* FTView.m in Sources */,
 				15B1759E17F49B9E007F480B /* GTMNSString+HTML.m in Sources */,
 				15B1758117F379D8007F480B /* FTHomeCell.m in Sources */,
+				15B175B517F56186007F480B /* FTImageView.m in Sources */,
 				15B174FB17F35504007F480B /* FTViewController.m in Sources */,
 				15B175AA17F49B9E007F480B /* NSString+XMLEntities.m in Sources */,
 				15B1754117F35748007F480B /* FTBasicCell.m in Sources */,
@@ -675,6 +723,7 @@
 			files = (
 				15B1758217F379D8007F480B /* FTHomeCell.m in Sources */,
 				15B1754D17F357A9007F480B /* FTDownload.m in Sources */,
+				15B175AF17F56113007F480B /* FTImageCache.m in Sources */,
 				15B175A517F49B9E007F480B /* MWFeedParser.m in Sources */,
 				15B175A317F49B9E007F480B /* MWFeedItem.m in Sources */,
 				15B175A717F49B9E007F480B /* NSDate+InternetDateTime.m in Sources */,
@@ -683,6 +732,7 @@
 				15B1754917F35796007F480B /* FTKeychainObject.m in Sources */,
 				15B1755D17F357B5007F480B /* UIImage+Tools.m in Sources */,
 				15B1759F17F49B9E007F480B /* GTMNSString+HTML.m in Sources */,
+				15B175BB17F5623E007F480B /* GCNetworkReachability.m in Sources */,
 				15B175A117F49B9E007F480B /* MWFeedInfo.m in Sources */,
 				15B1756317F357B5007F480B /* UIView+Layout.m in Sources */,
 				15B175AB17F49B9E007F480B /* NSString+XMLEntities.m in Sources */,

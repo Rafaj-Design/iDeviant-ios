@@ -7,6 +7,7 @@
 //
 
 #import "FTViewController.h"
+#import "FTImageCache.h"
 #import "FTBasicCell.h"
 
 
@@ -230,7 +231,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView == _searchController.searchResultsTableView) {
         if (_searchData) return _searchData.count;
-        else return 5;
+        else return 0;
     }
     else {
         if (_data) return _data.count;
@@ -247,10 +248,23 @@
 }
 
 - (void)configureArtCell:(FTArtCell *)cell forIndexPath:(NSIndexPath *)indexPath inTable:(UITableView *)tableView {
-    if (tableView == _searchController.searchResultsTableView) {
-        MWFeedItem *item = [_searchData objectAtIndex:indexPath.row];
-        [cell.textLabel setText:item.title];
-        [cell.detailTextLabel setText:item.summary];
+    MWFeedItem *item = [(_searchIsEnabled ? _searchData : _data) objectAtIndex:indexPath.row];
+    [cell.textLabel setText:item.title];
+    [cell.detailTextLabel setText:item.summary];
+    [cell.cellImageView setImage:nil];
+    
+    if ([item.thumbnails count] > 0) {
+        NSString *url = [[item.thumbnails objectAtIndex:0] objectForKey:@"url"];
+        [[FTImageCache sharedCache] imageForURL:[NSURL URLWithString:url] success:^(UIImage *image) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [cell.cellImageView setImage:image];
+                [cell setNeedsLayout];
+            });
+        } failure:^(NSError *error) {
+            
+        } progress:^(CGFloat progress) {
+            NSLog(@"Progress: %f", progress);
+        }];
     }
 }
 
@@ -308,9 +322,11 @@
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
     _searchIsEnabled = YES;
-    NSLog(@"Search string: %@", searchString);
     if (searchString.length >= 3) {
         [self getDataForSearchString:searchString andCategory:_categoryCode];
+    }
+    else {
+        [_searchController.searchResultsTableView reloadData];
     }
     return YES;
 }
@@ -328,7 +344,7 @@
 }
 
 - (void)feedParser:(MWFeedParser *)parser didParseFeedInfo:(MWFeedInfo *)info {
-    NSLog(@"Parsed feed info: “%@”", info.title);
+    
 }
 
 - (void)feedParser:(MWFeedParser *)parser didParseFeedItem:(MWFeedItem *)item {
@@ -338,46 +354,42 @@
 }
 
 - (void)feedParserDidFinish:(MWFeedParser *)parser {
-	NSLog(@"Finished parsing%@ %lu items", (parser.stopped ? @" (Stopped)" : @""), (unsigned long)((_searchIsEnabled) ? _searchData.count : _data.count));
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    NSSortDescriptor *arr = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
-    NSArray *sortedArr = [_tempParsedItems sortedArrayUsingDescriptors:[NSArray arrayWithObject:arr]];
+	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 	if (_searchIsEnabled) {
-        _searchData = sortedArr;
+        _searchData = _tempParsedItems;
     }
     else {
-        _data = sortedArr;
+        _data = _tempParsedItems;
     }
     
-	for (MWFeedItem *item in sortedArr) {
-		BOOL canAccess = YES;
-		if ([item.rating isEqualToString:@"adult"]) {
-			//if (![IDAdultCheck canAccessAdultStuff]) canAccess = NO;
-		}
-		if (canAccess)
-			if (([item.contents count] > 0) && (item.thumbnails.count > 0)) {
-				NSString *contentUrl = [[item.contents objectAtIndex:0] objectForKey:@"url"];
-				NSString *extension = [[contentUrl pathExtension] lowercaseString];
-				
-				if ([extension isEqualToString:@"png"] || [extension isEqualToString:@"jpeg"] || [extension isEqualToString:@"jpg"]){
-					//[photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:[[item.contents objectAtIndex:0] objectForKey:@"url"]]]];
-					//[itms addObject:item];
-				}
-				else {
-					//[photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]]]];
-					//[itms addObject:item];
-				}
-			}
-	}
+//	for (MWFeedItem *item in _tempParsedItems) {
+//		BOOL canAccess = YES;
+//		if ([item.rating isEqualToString:@"adult"]) {
+//			//if (![IDAdultCheck canAccessAdultStuff]) canAccess = NO;
+//		}
+//		if (canAccess)
+//			if (([item.contents count] > 0) && (item.thumbnails.count > 0)) {
+//				NSString *contentUrl = [[item.contents objectAtIndex:0] objectForKey:@"url"];
+//				NSString *extension = [[contentUrl pathExtension] lowercaseString];
+//				
+//				if ([extension isEqualToString:@"png"] || [extension isEqualToString:@"jpeg"] || [extension isEqualToString:@"jpg"]){
+//					//[photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:[[item.contents objectAtIndex:0] objectForKey:@"url"]]]];
+//					//[itms addObject:item];
+//				}
+//				else {
+//					//[photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]]]];
+//					//[itms addObject:item];
+//				}
+//			}
+//	}
 	
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     [_tableView reloadData];
-    [_searchDisplayController.searchResultsTableView reloadData];
+    [_searchController.searchResultsTableView reloadData];
 }
 
 - (void)feedParser:(MWFeedParser *)parser didFailWithError:(NSError *)error {
-    NSLog(@"Finished parsing with error: %@", [error localizedDescription]);
-	if (_searchIsEnabled) {
+    if (_searchIsEnabled) {
         _searchData = [NSArray array];
     }
     else {
