@@ -43,9 +43,7 @@
 - (void)setItem:(MWFeedItem *)item {
     [super setItem:item];
     
-    NSLog(@"Contents: %@", item.contents);
-    
-    NSString *url = [[item.thumbnails objectAtIndex:0] objectForKey:@"url"];
+    NSString *url = [[item.thumbnails lastObject] objectForKey:@"url"];
     if ([FTDownload isFileForUrlString:url andCacheLifetime:FTDownloadCacheLifetimeForever]) {
         NSString *path = [FTDownload fileForUrlString:url andCacheLifetime:FTDownloadCacheLifetimeForever];
         NSData *d = [NSData dataWithContentsOfFile:path];

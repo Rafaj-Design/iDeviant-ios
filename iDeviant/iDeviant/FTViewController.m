@@ -261,8 +261,6 @@
     [cell.detailTextLabel setText:item.summary];
     [cell.cellImageView setImage:nil];
     
-    NSLog(@"Thumbnails: %@", item.thumbnails);
-    
     if ([item.thumbnails count] > 0) {
         NSString *url = [[item.thumbnails lastObject] objectForKey:@"url"];
         [[FTImageCache sharedCache] imageForURL:[NSURL URLWithString:url] success:^(UIImage *image) {
@@ -273,7 +271,7 @@
         } failure:^(NSError *error) {
             
         } progress:^(CGFloat progress) {
-            NSLog(@"Progress: %f", progress);
+            
         }];
     }
 }

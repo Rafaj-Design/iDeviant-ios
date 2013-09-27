@@ -51,11 +51,21 @@
     [_pageViewController didMoveToParentViewController:self];
 }
 
+#pragma mark Gesture recognizers
+
+- (void)didTapDetailView:(UITapGestureRecognizer *)recognizer {
+    [self.navigationController setNavigationBarHidden:!self.navigationController.isNavigationBarHidden animated:YES];
+}
+
 #pragma mark Page controller datasource & delegate methods
 
 - (FTDetailBasicViewController *)detailControllerForIndex:(NSInteger)index {
     FTDetailImageViewController *c = [[FTDetailImageViewController alloc] init];
     [c setItem:[_items objectAtIndex:index]];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapDetailView:)];
+    [c.view addGestureRecognizer:tap];
+    
     return c;
 }
 
