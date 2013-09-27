@@ -29,7 +29,6 @@
     [_progressView setHidden:YES];
     [_progressView centerInSuperview];
     [_progressView setAutoresizingCenter];
-    
 }
 
 - (void)createAllElements {
@@ -41,7 +40,7 @@
 #pragma mark Settings
 
 - (void)setPreloaderValue:(CGFloat)value {
-    [_progressView setProgress:value];
+    [_progressView setProgress:(value / 100)];
     if (_progressView.isHidden) {
         [self showPreloader];
     }
@@ -52,19 +51,21 @@
 
 - (void)showPreloader {
     [_progressView setHidden:NO];
-    [_progressView setAlpha:0];
-    [UIView animateWithDuration:0.0 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+    [_progressView setAlpha:1];
+    [self.view bringSubviewToFront:_progressView];
+    
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         [_progressView setAlpha:1];
     } completion:^(BOOL finished) {
-        
+        NSLog(@"Preloader frame: %@", NSStringFromCGRect(_progressView.frame));
     }];
 }
 
 - (void)hidePreloader {
-    [UIView animateWithDuration:0.0 delay:0.3 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+    [UIView animateWithDuration:0.2 delay:0.3 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         [_progressView setAlpha:0];
     } completion:^(BOOL finished) {
-        [_progressView setHidden:NO];
+        [_progressView setHidden:YES];
     }];
 }
 
