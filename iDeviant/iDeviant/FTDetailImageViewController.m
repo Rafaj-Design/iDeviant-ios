@@ -7,6 +7,8 @@
 //
 
 #import "FTDetailImageViewController.h"
+#import "FTImageCache.h"
+#import "FTDownload.h"
 
 
 @interface FTDetailImageViewController ()
@@ -34,6 +36,41 @@
     [super createAllElements];
     
     [self createImageView];
+}
+
+#pragma mark Settings
+
+- (void)setItem:(MWFeedItem *)item {
+    [super setItem:item];
+    
+    NSLog(@"Contents: %@", item.contents);
+    
+    NSString *url = [[item.thumbnails objectAtIndex:0] objectForKey:@"url"];
+    if ([FTDownload isFileForUrlString:url andCacheLifetime:FTDownloadCacheLifetimeForever]) {
+        NSString *path = [FTDownload fileForUrlString:url andCacheLifetime:FTDownloadCacheLifetimeForever];
+        NSData *d = [NSData dataWithContentsOfFile:path];
+        [_imageView setImage:[UIImage imageWithData:d]];
+    }
+    
+    NSDictionary *content = [self.item.contents lastObject];
+    url = [content objectForKey:@"url"];
+    
+    [[FTImageCache sharedCache] imageForURL:[NSURL URLWithString:url] success:^(UIImage *image) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_imageView setImage:image];
+            [self.view setNeedsLayout];
+            [super hidePreloader];
+        });
+    } failure:^(NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [super hidePreloader];
+        });
+    } progress:^(CGFloat progress) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Progress: %f", progress);
+            [super setPreloaderValue:progress];
+        });
+    }];
 }
 
 

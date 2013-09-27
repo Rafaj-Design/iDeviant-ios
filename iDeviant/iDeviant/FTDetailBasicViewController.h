@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) MWFeedItem *item;
 
+- (void)setPreloaderValue:(CGFloat)value;
 - (void)showPreloader;
 - (void)hidePreloader;
 
