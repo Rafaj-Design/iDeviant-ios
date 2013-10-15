@@ -9,11 +9,11 @@
 #import "FTViewController.h"
 
 
-@class MWFeedItem;
+@class FTMediaRSSParserFeedItem;
 
 @interface FTDetailBasicViewController : FTViewController
 
-@property (nonatomic, strong) MWFeedItem *item;
+@property (nonatomic, strong) FTMediaRSSParserFeedItem *item;
 
 - (void)setPreloaderValue:(CGFloat)value;
 - (void)showPreloader;

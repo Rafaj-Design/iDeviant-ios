@@ -9,8 +9,6 @@
 #import "FTViewController.h"
 
 
-@class MWFeedItem;
-
 @interface FTDetailViewController : FTViewController <UIPageViewControllerDelegate, UIPageViewControllerDataSource>
 
 @property (nonatomic, strong) NSArray *items;

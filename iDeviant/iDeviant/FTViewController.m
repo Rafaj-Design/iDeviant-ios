@@ -14,7 +14,6 @@
 
 @interface FTViewController ()
 
-@property (nonatomic, strong) MWFeedParser *feedParser;
 @property (nonatomic, strong) NSMutableArray *tempParsedItems;
 
 @end
@@ -83,33 +82,33 @@
 #pragma mark Data
 
 - (void)getDataForParams:(NSString *)params {
-	NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@", params] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-	NSURL *feedURL = [NSURL URLWithString:url];
-	_feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
-	[_feedParser setDelegate:self];
-    [_feedParser setFeedParseType:ParseTypeFull];
-    [_feedParser setConnectionType:ConnectionTypeAsynchronously];
-    [_feedParser parse];
+//	NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@", params] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//	NSURL *feedURL = [NSURL URLWithString:url];
+    
+    NSData *data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"data" ofType:@"xml"]];
+    [FTMediaRSSParser parseData:data withCompletionHandler:^(FTMediaRSSParserFeedInfo *info, NSArray *items, NSError *error) {
+        _data = items;
+    }];
 }
 
 - (void)getDataForSearchString:(NSString *)search andCategory:(NSString *)category {
 	//[IDAdultCheck checkForUnlock:search];
-	NSString *searchString = @"";
-	if (search) searchString = [NSString stringWithFormat:@"+%@", search];
-	NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=boost:popular%@", searchString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//	NSString *searchString = @"";
+//	if (search) searchString = [NSString stringWithFormat:@"+%@", search];
+//	NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=boost:popular%@", searchString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    
+//	NSString *categoryString = @"";
+//	if (category && (![category isEqualToString:@""])) {
+//		categoryString = [NSString stringWithFormat:@"+in:%@+sort:time", category];
+//		url = [url stringByAppendingString:categoryString];
+//	}
+//	
+//	NSURL *feedURL = [NSURL URLWithString:url];
     
-	NSString *categoryString = @"";
-	if (category && (![category isEqualToString:@""])) {
-		categoryString = [NSString stringWithFormat:@"+in:%@+sort:time", category];
-		url = [url stringByAppendingString:categoryString];
-	}
-	
-	NSURL *feedURL = [NSURL URLWithString:url];
-	_feedParser = [[MWFeedParser alloc] initWithFeedURL:feedURL];
-    [_feedParser setDelegate:self];
-    [_feedParser setFeedParseType:ParseTypeFull];
-    [_feedParser setConnectionType:ConnectionTypeAsynchronously];
-    [_feedParser parse];
+    NSData *data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"data" ofType:@"xml"]];
+    [FTMediaRSSParser parseData:data withCompletionHandler:^(FTMediaRSSParserFeedInfo *info, NSArray *items, NSError *error) {
+        _searchData = items;
+    }];
 }
 
 - (void)getDataForCategory:(NSString *)category {
@@ -255,13 +254,13 @@
 }
 
 - (void)configureArtCell:(FTArtCell *)cell forIndexPath:(NSIndexPath *)indexPath inTable:(UITableView *)tableView {
-    MWFeedItem *item = [(_searchIsEnabled ? _searchData : _data) objectAtIndex:indexPath.row];
+    FTMediaRSSParserFeedItem *item = [(_searchIsEnabled ? _searchData : _data) objectAtIndex:indexPath.row];
     [cell.textLabel setText:item.title];
-    [cell.detailTextLabel setText:item.summary];
+    [cell.detailTextLabel setText:item.descriptionText];
     [cell.cellImageView setImage:nil];
     
     if ([item.thumbnails count] > 0) {
-        NSString *url = [[item.thumbnails lastObject] objectForKey:@"url"];
+        NSString *url = [(FTMediaRSSParserFeedItemThumbnail *)[item.thumbnails lastObject] urlString];
         [[FTImageCache sharedCache] imageForURL:[NSURL URLWithString:url] success:^(UIImage *image) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [cell.cellImageView setImage:image];
@@ -316,7 +315,7 @@
     }
 }
 
-- (void)showDetailFor:(MWFeedItem *)item inDataSet:(NSArray *)data {
+- (void)showDetailFor:(FTMediaRSSParserFeedItem *)item inDataSet:(NSArray *)data {
     FTDetailViewController *c = [[FTDetailViewController alloc] init];
     [c setTitle:item.title];
     [c setItems:data];
@@ -328,7 +327,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (tableView == _searchController.searchResultsTableView) {
-        MWFeedItem *item = [_searchData objectAtIndex:indexPath.row];
+        FTMediaRSSParserFeedItem *item = [_searchData objectAtIndex:indexPath.row];
         [self showDetailFor:item inDataSet:_searchData];
     }
 }
@@ -366,73 +365,6 @@
     NSLog(@"Search option: %ld", (long)searchOption);
     return YES;
 }
-
-#pragma mark Feed parser delegate methods
-
-- (void)feedParserDidStart:(MWFeedParser *)parser {
-    _tempParsedItems = [NSMutableArray array];
-	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-}
-
-- (void)feedParser:(MWFeedParser *)parser didParseFeedInfo:(MWFeedInfo *)info {
-    
-}
-
-- (void)feedParser:(MWFeedParser *)parser didParseFeedItem:(MWFeedItem *)item {
-	if (item) {
-        [_tempParsedItems addObject:item];
-    }
-}
-
-- (void)feedParserDidFinish:(MWFeedParser *)parser {
-    NSLog(@"Data: %@", _tempParsedItems);
-    
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-	if (_searchIsEnabled) {
-        _searchData = _tempParsedItems;
-    }
-    else {
-        _data = _tempParsedItems;
-    }
-    
-//	for (MWFeedItem *item in _tempParsedItems) {
-//		BOOL canAccess = YES;
-//		if ([item.rating isEqualToString:@"adult"]) {
-//			//if (![IDAdultCheck canAccessAdultStuff]) canAccess = NO;
-//		}
-//		if (canAccess)
-//			if (([item.contents count] > 0) && (item.thumbnails.count > 0)) {
-//				NSString *contentUrl = [[item.contents objectAtIndex:0] objectForKey:@"url"];
-//				NSString *extension = [[contentUrl pathExtension] lowercaseString];
-//				
-//				if ([extension isEqualToString:@"png"] || [extension isEqualToString:@"jpeg"] || [extension isEqualToString:@"jpg"]){
-//					//[photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:[[item.contents objectAtIndex:0] objectForKey:@"url"]]]];
-//					//[itms addObject:item];
-//				}
-//				else {
-//					//[photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:[[item.thumbnails objectAtIndex:0] objectForKey:@"url"]]]];
-//					//[itms addObject:item];
-//				}
-//			}
-//	}
-	
-	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    [_tableView reloadData];
-    [_searchController.searchResultsTableView reloadData];
-}
-
-- (void)feedParser:(MWFeedParser *)parser didFailWithError:(NSError *)error {
-    if (_searchIsEnabled) {
-        _searchData = [NSArray array];
-    }
-    else {
-        _data = [NSArray array];
-    }
-	
-	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-}
-
-
 
 
 @end

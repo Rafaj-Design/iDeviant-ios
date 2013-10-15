@@ -71,7 +71,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (tableView == self.searchController.searchResultsTableView) {
-        MWFeedItem *item = [self.searchData objectAtIndex:indexPath.row];
+        FTMediaRSSParserFeedItem *item = [self.searchData objectAtIndex:indexPath.row];
         [self showDetailFor:item inDataSet:self.searchData];
     }
     else {
@@ -84,7 +84,7 @@
             [self.navigationController pushViewController:c animated:YES];
         }
         else {
-            MWFeedItem *item = [self.data objectAtIndex:indexPath.row];
+            FTMediaRSSParserFeedItem *item = [self.data objectAtIndex:indexPath.row];
             [super showDetailFor:item inDataSet:self.data];
         }
     }

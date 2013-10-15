@@ -97,7 +97,7 @@
 
 - (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers {
     _selectedIndex = [_items indexOfObject:[(FTDetailBasicViewController *)pendingViewControllers.lastObject item]];
-    MWFeedItem *item = [_items objectAtIndex:_selectedIndex];
+    FTMediaRSSParserFeedItem *item = [_items objectAtIndex:_selectedIndex];
     [self setTitle:item.title];
 }
 

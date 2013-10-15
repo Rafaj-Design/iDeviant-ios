@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "FTArtCell.h"
-#import "MWFeedParser.h"
+#import "FTMediaRSSParser.h"
 
 
-@interface FTViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate, MWFeedParserDelegate>
+@interface FTViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
 
 @property (nonatomic, strong) UIPopoverController *popover;
 
@@ -50,7 +50,7 @@
 - (void)createTableView;
 - (void)fillData;
 
-- (void)showDetailFor:(MWFeedItem *)item inDataSet:(NSArray *)data;
+- (void)showDetailFor:(FTMediaRSSParserFeedItem *)item inDataSet:(NSArray *)data;
 
 - (void)createAllElements;
 

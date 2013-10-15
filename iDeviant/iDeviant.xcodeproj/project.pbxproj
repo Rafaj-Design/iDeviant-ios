@@ -58,20 +58,6 @@
 		15B1758217F379D8007F480B /* FTHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1758017F379D8007F480B /* FTHomeCell.m */; };
 		15B1758517F382CE007F480B /* kitten.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 15B1758417F382CE007F480B /* kitten.jpg */; };
 		15B1758917F48426007F480B /* FTArtCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1758817F48426007F480B /* FTArtCell.m */; };
-		15B1759E17F49B9E007F480B /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759017F49B9E007F480B /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		15B1759F17F49B9E007F480B /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759017F49B9E007F480B /* GTMNSString+HTML.m */; };
-		15B175A017F49B9E007F480B /* MWFeedInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759217F49B9E007F480B /* MWFeedInfo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		15B175A117F49B9E007F480B /* MWFeedInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759217F49B9E007F480B /* MWFeedInfo.m */; };
-		15B175A217F49B9E007F480B /* MWFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759417F49B9E007F480B /* MWFeedItem.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		15B175A317F49B9E007F480B /* MWFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759417F49B9E007F480B /* MWFeedItem.m */; };
-		15B175A417F49B9E007F480B /* MWFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759617F49B9E007F480B /* MWFeedParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		15B175A517F49B9E007F480B /* MWFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759617F49B9E007F480B /* MWFeedParser.m */; };
-		15B175A617F49B9E007F480B /* NSDate+InternetDateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759917F49B9E007F480B /* NSDate+InternetDateTime.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		15B175A717F49B9E007F480B /* NSDate+InternetDateTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759917F49B9E007F480B /* NSDate+InternetDateTime.m */; };
-		15B175A817F49B9E007F480B /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759B17F49B9E007F480B /* NSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		15B175A917F49B9E007F480B /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759B17F49B9E007F480B /* NSString+HTML.m */; };
-		15B175AA17F49B9E007F480B /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759D17F49B9E007F480B /* NSString+XMLEntities.m */; };
-		15B175AB17F49B9E007F480B /* NSString+XMLEntities.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1759D17F49B9E007F480B /* NSString+XMLEntities.m */; };
 		15B175AE17F56113007F480B /* FTImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175AD17F56113007F480B /* FTImageCache.m */; };
 		15B175AF17F56113007F480B /* FTImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175AD17F56113007F480B /* FTImageCache.m */; };
 		15B175B517F56186007F480B /* FTImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175B417F56186007F480B /* FTImageView.m */; };
@@ -216,21 +202,6 @@
 		15B1758417F382CE007F480B /* kitten.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kitten.jpg; sourceTree = "<group>"; };
 		15B1758717F48426007F480B /* FTArtCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTArtCell.h; sourceTree = "<group>"; };
 		15B1758817F48426007F480B /* FTArtCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTArtCell.m; sourceTree = "<group>"; };
-		15B1758F17F49B9E007F480B /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
-		15B1759017F49B9E007F480B /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
-		15B1759117F49B9E007F480B /* MWFeedInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedInfo.h; sourceTree = "<group>"; };
-		15B1759217F49B9E007F480B /* MWFeedInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFeedInfo.m; sourceTree = "<group>"; };
-		15B1759317F49B9E007F480B /* MWFeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedItem.h; sourceTree = "<group>"; };
-		15B1759417F49B9E007F480B /* MWFeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFeedItem.m; sourceTree = "<group>"; };
-		15B1759517F49B9E007F480B /* MWFeedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedParser.h; sourceTree = "<group>"; };
-		15B1759617F49B9E007F480B /* MWFeedParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFeedParser.m; sourceTree = "<group>"; };
-		15B1759717F49B9E007F480B /* MWFeedParser_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFeedParser_Private.h; sourceTree = "<group>"; };
-		15B1759817F49B9E007F480B /* NSDate+InternetDateTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+InternetDateTime.h"; sourceTree = "<group>"; };
-		15B1759917F49B9E007F480B /* NSDate+InternetDateTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+InternetDateTime.m"; sourceTree = "<group>"; };
-		15B1759A17F49B9E007F480B /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
-		15B1759B17F49B9E007F480B /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
-		15B1759C17F49B9E007F480B /* NSString+XMLEntities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+XMLEntities.h"; sourceTree = "<group>"; };
-		15B1759D17F49B9E007F480B /* NSString+XMLEntities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+XMLEntities.m"; sourceTree = "<group>"; };
 		15B175AC17F56113007F480B /* FTImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTImageCache.h; sourceTree = "<group>"; };
 		15B175AD17F56113007F480B /* FTImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTImageCache.m; sourceTree = "<group>"; };
 		15B175B317F56186007F480B /* FTImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTImageView.h; sourceTree = "<group>"; };
@@ -670,32 +641,9 @@
 				15C5187E1806F3E100ADDF15 /* AFNetworking */,
 				15B175D517F5A46A007F480B /* MBProgressHUD */,
 				15B175B617F5623E007F480B /* GCNetworkReachability */,
-				15B1758E17F49B9E007F480B /* MWFeedParser */,
 			);
 			path = Thirdparty;
 			sourceTree = SOURCE_ROOT;
-		};
-		15B1758E17F49B9E007F480B /* MWFeedParser */ = {
-			isa = PBXGroup;
-			children = (
-				15B1758F17F49B9E007F480B /* GTMNSString+HTML.h */,
-				15B1759017F49B9E007F480B /* GTMNSString+HTML.m */,
-				15B1759117F49B9E007F480B /* MWFeedInfo.h */,
-				15B1759217F49B9E007F480B /* MWFeedInfo.m */,
-				15B1759317F49B9E007F480B /* MWFeedItem.h */,
-				15B1759417F49B9E007F480B /* MWFeedItem.m */,
-				15B1759517F49B9E007F480B /* MWFeedParser.h */,
-				15B1759617F49B9E007F480B /* MWFeedParser.m */,
-				15B1759717F49B9E007F480B /* MWFeedParser_Private.h */,
-				15B1759817F49B9E007F480B /* NSDate+InternetDateTime.h */,
-				15B1759917F49B9E007F480B /* NSDate+InternetDateTime.m */,
-				15B1759A17F49B9E007F480B /* NSString+HTML.h */,
-				15B1759B17F49B9E007F480B /* NSString+HTML.m */,
-				15B1759C17F49B9E007F480B /* NSString+XMLEntities.h */,
-				15B1759D17F49B9E007F480B /* NSString+XMLEntities.m */,
-			);
-			path = MWFeedParser;
-			sourceTree = "<group>";
 		};
 		15B175B617F5623E007F480B /* GCNetworkReachability */ = {
 			isa = PBXGroup;
@@ -1084,17 +1032,13 @@
 				15B175C017F581AD007F480B /* FTDeviationsViewController.m in Sources */,
 				15B175AE17F56113007F480B /* FTImageCache.m in Sources */,
 				15C519191806F3E100ADDF15 /* AFURLSessionManager.m in Sources */,
-				15B175A417F49B9E007F480B /* MWFeedParser.m in Sources */,
 				15C519DA180DA82E00ADDF15 /* FTMediaRSSParserFeedItemContent.m in Sources */,
 				15C5190B1806F3E100ADDF15 /* AFHTTPRequestOperationManager.m in Sources */,
 				15B1763117F5C483007F480B /* FTPopularViewController.m in Sources */,
-				15B175A817F49B9E007F480B /* NSString+HTML.m in Sources */,
 				15C5190F1806F3E100ADDF15 /* AFNetworkReachabilityManager.m in Sources */,
 				15B175D417F5A3A4007F480B /* FTDetailTextViewController.m in Sources */,
 				15C519091806F3E100ADDF15 /* AFHTTPRequestOperation.m in Sources */,
 				15C519891806F3E100ADDF15 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
-				15B175A217F49B9E007F480B /* MWFeedItem.m in Sources */,
-				15B175A017F49B9E007F480B /* MWFeedInfo.m in Sources */,
 				15B1754C17F357A9007F480B /* FTDownload.m in Sources */,
 				15C519871806F3E100ADDF15 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				15B1755E17F357B5007F480B /* UIColor+Tools.m in Sources */,
@@ -1114,7 +1058,6 @@
 				15B1756417F357B5007F480B /* NSString+URLTools.m in Sources */,
 				15B1762917F5C41C007F480B /* FTDailyDeviationsViewController.m in Sources */,
 				15B1754417F35765007F480B /* FTView.m in Sources */,
-				15B1759E17F49B9E007F480B /* GTMNSString+HTML.m in Sources */,
 				15B1758117F379D8007F480B /* FTHomeCell.m in Sources */,
 				15B175B517F56186007F480B /* FTImageView.m in Sources */,
 				15B174FB17F35504007F480B /* FTViewController.m in Sources */,
@@ -1126,10 +1069,8 @@
 				15C519D5180DA76F00ADDF15 /* FTMediaRSSParserFeedInfo.m in Sources */,
 				15C519911806F3E100ADDF15 /* UIProgressView+AFNetworking.m in Sources */,
 				15B1762217F5C3BC007F480B /* FTFavoritesViewController.m in Sources */,
-				15B175AA17F49B9E007F480B /* NSString+XMLEntities.m in Sources */,
 				15B1754117F35748007F480B /* FTBasicCell.m in Sources */,
 				15B1761417F5A46A007F480B /* MBProgressHUD.m in Sources */,
-				15B175A617F49B9E007F480B /* NSDate+InternetDateTime.m in Sources */,
 				15B1753817F356CB007F480B /* FTHomeViewController.m in Sources */,
 				15C519151806F3E100ADDF15 /* AFURLRequestSerialization.m in Sources */,
 				15C519A81806F69900ADDF15 /* FTDADataObject.m in Sources */,
@@ -1152,13 +1093,9 @@
 				15B175AF17F56113007F480B /* FTImageCache.m in Sources */,
 				15C5198C1806F3E100ADDF15 /* UIAlertView+AFNetworking.m in Sources */,
 				15C5191A1806F3E100ADDF15 /* AFURLSessionManager.m in Sources */,
-				15B175A517F49B9E007F480B /* MWFeedParser.m in Sources */,
 				15C519BE180845EB00ADDF15 /* FTMediaRSSParser.m in Sources */,
-				15B175A317F49B9E007F480B /* MWFeedItem.m in Sources */,
-				15B175A717F49B9E007F480B /* NSDate+InternetDateTime.m in Sources */,
 				15C519121806F3E100ADDF15 /* AFSecurityPolicy.m in Sources */,
 				15C5190A1806F3E100ADDF15 /* AFHTTPRequestOperation.m in Sources */,
-				15B175A917F49B9E007F480B /* NSString+HTML.m in Sources */,
 				15B1755B17F357B5007F480B /* NSData+Base64.m in Sources */,
 				15C519A91806F69900ADDF15 /* FTDADataObject.m in Sources */,
 				15C519881806F3E100ADDF15 /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -1166,13 +1103,10 @@
 				15B1754917F35796007F480B /* FTKeychainObject.m in Sources */,
 				15B1755D17F357B5007F480B /* UIImage+Tools.m in Sources */,
 				15C519941806F3E100ADDF15 /* UIWebView+AFNetworking.m in Sources */,
-				15B1759F17F49B9E007F480B /* GTMNSString+HTML.m in Sources */,
 				15C5198A1806F3E100ADDF15 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				15B175BB17F5623E007F480B /* GCNetworkReachability.m in Sources */,
 				15C5190E1806F3E100ADDF15 /* AFHTTPSessionManager.m in Sources */,
-				15B175A117F49B9E007F480B /* MWFeedInfo.m in Sources */,
 				15B1756317F357B5007F480B /* UIView+Layout.m in Sources */,
-				15B175AB17F49B9E007F480B /* NSString+XMLEntities.m in Sources */,
 				15C5190C1806F3E100ADDF15 /* AFHTTPRequestOperationManager.m in Sources */,
 				15B1757917F358B5007F480B /* FTLang.m in Sources */,
 				15C519A41806F47100ADDF15 /* FTXMLConnector.m in Sources */,
