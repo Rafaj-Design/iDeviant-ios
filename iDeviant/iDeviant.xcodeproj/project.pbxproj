@@ -129,6 +129,12 @@
 		15C519B01808446100ADDF15 /* data.xml in Resources */ = {isa = PBXBuildFile; fileRef = 15C519AE1808446100ADDF15 /* data.xml */; };
 		15C519BD180845EB00ADDF15 /* FTMediaRSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519BC180845EB00ADDF15 /* FTMediaRSSParser.m */; };
 		15C519BE180845EB00ADDF15 /* FTMediaRSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519BC180845EB00ADDF15 /* FTMediaRSSParser.m */; };
+		15C519CD180DA70E00ADDF15 /* FTMediaRSSParserFeedItemThumbnail.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519CC180DA70E00ADDF15 /* FTMediaRSSParserFeedItemThumbnail.m */; };
+		15C519D1180DA73A00ADDF15 /* FTMediaRSSParserFeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519D0180DA73A00ADDF15 /* FTMediaRSSParserFeedItem.m */; };
+		15C519D5180DA76F00ADDF15 /* FTMediaRSSParserFeedInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519D4180DA76F00ADDF15 /* FTMediaRSSParserFeedInfo.m */; };
+		15C519DA180DA82E00ADDF15 /* FTMediaRSSParserFeedItemContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519D9180DA82E00ADDF15 /* FTMediaRSSParserFeedItemContent.m */; };
+		15C519DE180DAA2800ADDF15 /* FTMediaRSSParserFeedCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519DD180DAA2800ADDF15 /* FTMediaRSSParserFeedCategory.m */; };
+		15C519E2180DAACD00ADDF15 /* FTMediaRSSParserFeedItemCredit.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519E1180DAACD00ADDF15 /* FTMediaRSSParserFeedItemCredit.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -296,6 +302,18 @@
 		15C519AE1808446100ADDF15 /* data.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = data.xml; sourceTree = "<group>"; };
 		15C519BB180845EB00ADDF15 /* FTMediaRSSParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMediaRSSParser.h; sourceTree = "<group>"; };
 		15C519BC180845EB00ADDF15 /* FTMediaRSSParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTMediaRSSParser.m; sourceTree = "<group>"; };
+		15C519CB180DA70E00ADDF15 /* FTMediaRSSParserFeedItemThumbnail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMediaRSSParserFeedItemThumbnail.h; sourceTree = "<group>"; };
+		15C519CC180DA70E00ADDF15 /* FTMediaRSSParserFeedItemThumbnail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTMediaRSSParserFeedItemThumbnail.m; sourceTree = "<group>"; };
+		15C519CF180DA73A00ADDF15 /* FTMediaRSSParserFeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMediaRSSParserFeedItem.h; sourceTree = "<group>"; };
+		15C519D0180DA73A00ADDF15 /* FTMediaRSSParserFeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTMediaRSSParserFeedItem.m; sourceTree = "<group>"; };
+		15C519D3180DA76F00ADDF15 /* FTMediaRSSParserFeedInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMediaRSSParserFeedInfo.h; sourceTree = "<group>"; };
+		15C519D4180DA76F00ADDF15 /* FTMediaRSSParserFeedInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTMediaRSSParserFeedInfo.m; sourceTree = "<group>"; };
+		15C519D8180DA82E00ADDF15 /* FTMediaRSSParserFeedItemContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMediaRSSParserFeedItemContent.h; sourceTree = "<group>"; };
+		15C519D9180DA82E00ADDF15 /* FTMediaRSSParserFeedItemContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTMediaRSSParserFeedItemContent.m; sourceTree = "<group>"; };
+		15C519DC180DAA2800ADDF15 /* FTMediaRSSParserFeedCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMediaRSSParserFeedCategory.h; sourceTree = "<group>"; };
+		15C519DD180DAA2800ADDF15 /* FTMediaRSSParserFeedCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTMediaRSSParserFeedCategory.m; sourceTree = "<group>"; };
+		15C519E0180DAACD00ADDF15 /* FTMediaRSSParserFeedItemCredit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMediaRSSParserFeedItemCredit.h; sourceTree = "<group>"; };
+		15C519E1180DAACD00ADDF15 /* FTMediaRSSParserFeedItemCredit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTMediaRSSParserFeedItemCredit.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -868,10 +886,78 @@
 		15C519B1180845BE00ADDF15 /* FTMediaRSSParser */ = {
 			isa = PBXGroup;
 			children = (
+				15C519D2180DA76300ADDF15 /* Info */,
+				15C519CE180DA72F00ADDF15 /* Item */,
 				15C519BB180845EB00ADDF15 /* FTMediaRSSParser.h */,
 				15C519BC180845EB00ADDF15 /* FTMediaRSSParser.m */,
 			);
 			path = FTMediaRSSParser;
+			sourceTree = "<group>";
+		};
+		15C519CA180DA6FA00ADDF15 /* Media types */ = {
+			isa = PBXGroup;
+			children = (
+				15C519DF180DAAB000ADDF15 /* Credit */,
+				15C519D7180DA80F00ADDF15 /* Content */,
+				15C519D6180DA7CA00ADDF15 /* Thumbnail */,
+			);
+			name = "Media types";
+			sourceTree = "<group>";
+		};
+		15C519CE180DA72F00ADDF15 /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				15C519DB180DAA0F00ADDF15 /* Categories */,
+				15C519CA180DA6FA00ADDF15 /* Media types */,
+				15C519CF180DA73A00ADDF15 /* FTMediaRSSParserFeedItem.h */,
+				15C519D0180DA73A00ADDF15 /* FTMediaRSSParserFeedItem.m */,
+			);
+			name = Item;
+			sourceTree = "<group>";
+		};
+		15C519D2180DA76300ADDF15 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				15C519D3180DA76F00ADDF15 /* FTMediaRSSParserFeedInfo.h */,
+				15C519D4180DA76F00ADDF15 /* FTMediaRSSParserFeedInfo.m */,
+			);
+			name = Info;
+			sourceTree = "<group>";
+		};
+		15C519D6180DA7CA00ADDF15 /* Thumbnail */ = {
+			isa = PBXGroup;
+			children = (
+				15C519CB180DA70E00ADDF15 /* FTMediaRSSParserFeedItemThumbnail.h */,
+				15C519CC180DA70E00ADDF15 /* FTMediaRSSParserFeedItemThumbnail.m */,
+			);
+			name = Thumbnail;
+			sourceTree = "<group>";
+		};
+		15C519D7180DA80F00ADDF15 /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				15C519D8180DA82E00ADDF15 /* FTMediaRSSParserFeedItemContent.h */,
+				15C519D9180DA82E00ADDF15 /* FTMediaRSSParserFeedItemContent.m */,
+			);
+			name = Content;
+			sourceTree = "<group>";
+		};
+		15C519DB180DAA0F00ADDF15 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				15C519DC180DAA2800ADDF15 /* FTMediaRSSParserFeedCategory.h */,
+				15C519DD180DAA2800ADDF15 /* FTMediaRSSParserFeedCategory.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		15C519DF180DAAB000ADDF15 /* Credit */ = {
+			isa = PBXGroup;
+			children = (
+				15C519E0180DAACD00ADDF15 /* FTMediaRSSParserFeedItemCredit.h */,
+				15C519E1180DAACD00ADDF15 /* FTMediaRSSParserFeedItemCredit.m */,
+			);
+			name = Credit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -992,12 +1078,14 @@
 				15B175CA17F59632007F480B /* FTDetailImageViewController.m in Sources */,
 				15B174F217F35504007F480B /* FTAppDelegate.m in Sources */,
 				15C519131806F3E100ADDF15 /* AFURLConnectionOperation.m in Sources */,
+				15C519DE180DAA2800ADDF15 /* FTMediaRSSParserFeedCategory.m in Sources */,
 				15B1763517F5C498007F480B /* FTSettingsViewController.m in Sources */,
 				15B175CF17F598FB007F480B /* FTDetailBasicViewController.m in Sources */,
 				15B175C017F581AD007F480B /* FTDeviationsViewController.m in Sources */,
 				15B175AE17F56113007F480B /* FTImageCache.m in Sources */,
 				15C519191806F3E100ADDF15 /* AFURLSessionManager.m in Sources */,
 				15B175A417F49B9E007F480B /* MWFeedParser.m in Sources */,
+				15C519DA180DA82E00ADDF15 /* FTMediaRSSParserFeedItemContent.m in Sources */,
 				15C5190B1806F3E100ADDF15 /* AFHTTPRequestOperationManager.m in Sources */,
 				15B1763117F5C483007F480B /* FTPopularViewController.m in Sources */,
 				15B175A817F49B9E007F480B /* NSString+HTML.m in Sources */,
@@ -1030,9 +1118,12 @@
 				15B1758117F379D8007F480B /* FTHomeCell.m in Sources */,
 				15B175B517F56186007F480B /* FTImageView.m in Sources */,
 				15B174FB17F35504007F480B /* FTViewController.m in Sources */,
+				15C519D1180DA73A00ADDF15 /* FTMediaRSSParserFeedItem.m in Sources */,
 				15C5198D1806F3E100ADDF15 /* UIButton+AFNetworking.m in Sources */,
 				15C519931806F3E100ADDF15 /* UIWebView+AFNetworking.m in Sources */,
+				15C519E2180DAACD00ADDF15 /* FTMediaRSSParserFeedItemCredit.m in Sources */,
 				15C5190D1806F3E100ADDF15 /* AFHTTPSessionManager.m in Sources */,
+				15C519D5180DA76F00ADDF15 /* FTMediaRSSParserFeedInfo.m in Sources */,
 				15C519911806F3E100ADDF15 /* UIProgressView+AFNetworking.m in Sources */,
 				15B1762217F5C3BC007F480B /* FTFavoritesViewController.m in Sources */,
 				15B175AA17F49B9E007F480B /* NSString+XMLEntities.m in Sources */,
@@ -1042,6 +1133,7 @@
 				15B1753817F356CB007F480B /* FTHomeViewController.m in Sources */,
 				15C519151806F3E100ADDF15 /* AFURLRequestSerialization.m in Sources */,
 				15C519A81806F69900ADDF15 /* FTDADataObject.m in Sources */,
+				15C519CD180DA70E00ADDF15 /* FTMediaRSSParserFeedItemThumbnail.m in Sources */,
 				15B1755A17F357B5007F480B /* NSData+Base64.m in Sources */,
 				15C519171806F3E100ADDF15 /* AFURLResponseSerialization.m in Sources */,
 				15B1756017F357B5007F480B /* UIView+Effects.m in Sources */,

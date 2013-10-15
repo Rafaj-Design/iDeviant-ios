@@ -1,6 +1,4 @@
-
 <?xml version="1.0" encoding="utf-8"?>
-
 <rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:creativeCommons="http://backend.userland.com/creativeCommonsRssModule">
     <channel>
         <title>deviantART: Popular Frogs Drawings</title>
@@ -874,8 +872,13 @@
             <media:category label="Other">digitalart/drawings/other</media:category>
             <media:credit role="author" scheme="urn:ebu">cuson</media:credit>
             <media:credit role="author" scheme="urn:ebu">http://a.deviantart.net/avatars/c/u/cuson.png?2</media:credit>
-            <media:copyright url="http://cuson.deviantart.com">Copyright 2008-2013 cuson</media:copyright>            <media:description type="html"><![CDATA[ there should be a shop like this somewhere in tokyo... ]]></media:description>            <media:thumbnail url="http://th02.deviantart.net/fs25/150/i/2008/083/6/0/frog_shop_by_cuson.jpg" height="111" width="150"/>            <media:thumbnail url="http://th04.deviantart.net/fs25/300W/i/2008/083/6/0/frog_shop_by_cuson.jpg" height="223" width="300"/>            <media:content url="http://fc02.deviantart.net/fs25/i/2008/083/6/0/frog_shop_by_cuson.jpg" height="445" width="600" medium="image"/>
-            <description><![CDATA[ there should be a shop like this somewhere in tokyo...<br /><div><img src="http://th04.deviantart.net/fs25/300W/i/2008/083/6/0/frog_shop_by_cuson.jpg" alt="thumbnail" /></div> ]]></description>            </item>
+            <media:copyright url="http://cuson.deviantart.com">Copyright 2008-2013 cuson</media:copyright>
+            <media:description type="html"><![CDATA[ there should be a shop like this somewhere in tokyo... ]]></media:description>
+            <media:thumbnail url="http://th02.deviantart.net/fs25/150/i/2008/083/6/0/frog_shop_by_cuson.jpg" height="111" width="150"/>
+            <media:thumbnail url="http://th04.deviantart.net/fs25/300W/i/2008/083/6/0/frog_shop_by_cuson.jpg" height="223" width="300"/>
+            <media:content url="http://fc02.deviantart.net/fs25/i/2008/083/6/0/frog_shop_by_cuson.jpg" height="445" width="600" medium="image"/>
+            <description><![CDATA[ there should be a shop like this somewhere in tokyo...<br /><div><img src="http://th04.deviantart.net/fs25/300W/i/2008/083/6/0/frog_shop_by_cuson.jpg" alt="thumbnail" /></div> ]]></description>
+        </item>
         <item>
             <title>Marriage proposal from frog</title>
             <link>http://izumiyou.deviantart.com/art/Marriage-proposal-from-frog-288902862</link>

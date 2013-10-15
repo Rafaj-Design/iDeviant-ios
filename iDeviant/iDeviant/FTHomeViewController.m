@@ -9,6 +9,7 @@
 #import "FTHomeViewController.h"
 #import "FTDeviationsViewController.h"
 #import "FTHomeCell.h"
+#import "FTMediaRSSParser.h"
 
 
 @interface FTHomeViewController ()
@@ -35,9 +36,14 @@
 - (void)createAllElements {
     [super createAllElements];
     
-    [super createTableView];
-    [self createSearchBar];
-    [self createSearchController];
+    NSString *data = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"data" ofType:@"xml"] encoding:NSUTF8StringEncoding error:nil];    
+    [FTMediaRSSParser parseString:data withCompletionHandler:^(FTMediaRSSParserFeedInfo *info, NSArray *items, NSError *error) {
+        
+    }];
+    
+//    [super createTableView];
+//    [self createSearchBar];
+//    [self createSearchController];
 }
 
 #pragma mark Initialization
