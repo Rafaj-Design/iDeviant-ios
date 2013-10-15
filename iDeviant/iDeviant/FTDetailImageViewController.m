@@ -65,7 +65,6 @@
         });
     } progress:^(CGFloat progress) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"Progress: %f", progress);
             [super setPreloaderValue:progress];
         });
     }];
