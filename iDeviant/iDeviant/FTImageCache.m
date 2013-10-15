@@ -11,14 +11,14 @@
 
 
 static inline NSString *FTImageCacheDirectory() {
-	static NSString *_FTImageCacheDirectory;
+	static NSString *shared;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
 		NSString *cachesDirectory = [paths objectAtIndex:0];
-		_FTImageCacheDirectory = [cachesDirectory stringByAppendingPathComponent:@"FTImageCache"];
+		shared = [cachesDirectory stringByAppendingPathComponent:@"FTImageCache"];
 	});
-	return _FTImageCacheDirectory;
+	return shared;
 }
 
 inline static NSString *keyForURL(NSURL *url) {
@@ -29,6 +29,7 @@ static inline NSString *cachePathForKey(NSString *key) {
     return [FTDownload fileForUrlString:key andCacheLifetime:FTDownloadCacheLifetimeForever];
 }
 
+
 @interface FTImageCache()
 
 @property (strong, nonatomic) NSOperationQueue *diskOperationQueue;
@@ -38,20 +39,19 @@ static inline NSString *cachePathForKey(NSString *key) {
 
 @end
 
+
 @implementation FTImageCache
 
 
 #pragma mark - Object lifecycle
 
 + (FTImageCache *)sharedCache {
-    static FTImageCache *_sharedCache = nil;
+    static FTImageCache *shared = nil;
 	static dispatch_once_t onceToken;
-    
 	dispatch_once(&onceToken, ^{
-		_sharedCache = [[FTImageCache alloc] init];
+		shared = [[FTImageCache alloc] init];
 	});
-    
-	return _sharedCache;
+	return shared;
 }
 
 - (id)init {

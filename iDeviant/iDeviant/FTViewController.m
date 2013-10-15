@@ -8,6 +8,7 @@
 
 #import "FTViewController.h"
 #import "FTDetailViewController.h"
+#import "FTDownloader.h"
 #import "FTImageCache.h"
 #import "FTBasicCell.h"
 
@@ -82,32 +83,36 @@
 #pragma mark Data
 
 - (void)getDataForParams:(NSString *)params {
-//	NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@", params] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//	NSURL *feedURL = [NSURL URLWithString:url];
-    
-    NSData *data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"data" ofType:@"xml"]];
-    [FTMediaRSSParser parseData:data withCompletionHandler:^(FTMediaRSSParserFeedInfo *info, NSArray *items, NSError *error) {
-        _data = items;
+	NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@", params] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [FTDownloader downloadFileWithUrl:url withProgressBlock:^(CGFloat progress) {
+        NSLog(@"Download progress: %.2f", progress);
+    } andSuccessBlock:^(NSData *data, NSError *error) {
+        [FTMediaRSSParser parseData:data withCompletionHandler:^(FTMediaRSSParserFeedInfo *info, NSArray *items, NSError *error) {
+            _data = items;
+            [_tableView reloadData];
+        }];
     }];
 }
 
 - (void)getDataForSearchString:(NSString *)search andCategory:(NSString *)category {
 	//[IDAdultCheck checkForUnlock:search];
-//	NSString *searchString = @"";
-//	if (search) searchString = [NSString stringWithFormat:@"+%@", search];
-//	NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=boost:popular%@", searchString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//    
-//	NSString *categoryString = @"";
-//	if (category && (![category isEqualToString:@""])) {
-//		categoryString = [NSString stringWithFormat:@"+in:%@+sort:time", category];
-//		url = [url stringByAppendingString:categoryString];
-//	}
-//	
-//	NSURL *feedURL = [NSURL URLWithString:url];
+	NSString *searchString = @"";
+	if (search) searchString = [NSString stringWithFormat:@"+%@", search];
+	NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=boost:popular%@", searchString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
-    NSData *data = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"data" ofType:@"xml"]];
-    [FTMediaRSSParser parseData:data withCompletionHandler:^(FTMediaRSSParserFeedInfo *info, NSArray *items, NSError *error) {
-        _searchData = items;
+	NSString *categoryString = @"";
+	if (category && (![category isEqualToString:@""])) {
+		categoryString = [NSString stringWithFormat:@"+in:%@+sort:time", category];
+		url = [url stringByAppendingString:categoryString];
+	}
+	
+	[FTDownloader downloadSingleFileWithUrl:url withProgressBlock:^(CGFloat progress) {
+        NSLog(@"Download progress: %.2f", progress);
+    } andSuccessBlock:^(NSData *data, NSError *error) {
+        [FTMediaRSSParser parseData:data withCompletionHandler:^(FTMediaRSSParserFeedInfo *info, NSArray *items, NSError *error) {
+            _searchData = items;
+            [_searchController.searchResultsTableView reloadData];
+        }];
     }];
 }
 
@@ -356,6 +361,7 @@
         [self getDataForSearchString:searchString andCategory:_categoryCode];
     }
     else {
+        _searchData = nil;
         [_searchController.searchResultsTableView reloadData];
     }
     return YES;
