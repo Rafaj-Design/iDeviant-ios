@@ -11,6 +11,7 @@
 #import "FTDownloader.h"
 #import "FTImageCache.h"
 #import "FTBasicCell.h"
+#import "FTNoResultsCell.h"
 
 
 @interface FTViewController ()
@@ -95,7 +96,6 @@
 }
 
 - (void)getDataForSearchString:(NSString *)search andCategory:(NSString *)category {
-	//[IDAdultCheck checkForUnlock:search];
 	NSString *searchString = @"";
 	if (search) searchString = [NSString stringWithFormat:@"+%@", search];
 	NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=boost:popular%@", searchString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -110,8 +110,11 @@
         NSLog(@"Download progress: %.2f", progress);
     } andSuccessBlock:^(NSData *data, NSError *error) {
         [FTMediaRSSParser parseData:data withCompletionHandler:^(FTMediaRSSParserFeedInfo *info, NSArray *items, NSError *error) {
-            _searchData = items;
-            [_searchController.searchResultsTableView reloadData];
+            if (_searchBar.text.length >= 3) {
+                _searchData = items;
+                [_searchController.searchResultsTableView reloadData];
+                [_searchController.searchResultsTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+            }
         }];
     }];
 }
@@ -145,6 +148,7 @@
 
 - (void)createSearchController {
     _searchController = [[UISearchDisplayController alloc] initWithSearchBar:_searchBar contentsController:self];
+    [_searchController.searchResultsTableView setBackgroundColor:[UIColor colorWithHexString:@"D6E0D4"]];
     [_searchController setDelegate:self];
     [_searchController setSearchResultsDataSource:self];
     [_searchController setSearchResultsDelegate:self];
@@ -242,8 +246,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView == _searchController.searchResultsTableView) {
-        if (_searchData) return _searchData.count;
-        else return 0;
+        return (_searchData.count > 0) ? _searchData.count : 1;
     }
     else {
         return _data.count;
@@ -262,20 +265,22 @@
     FTMediaRSSParserFeedItem *item = [(_searchIsEnabled ? _searchData : _data) objectAtIndex:indexPath.row];
     [cell.textLabel setText:item.title];
     [cell.detailTextLabel setText:item.descriptionText];
-    [cell.cellImageView setImage:nil];
     
     if ([item.thumbnails count] > 0) {
         NSString *url = [(FTMediaRSSParserFeedItemThumbnail *)[item.thumbnails lastObject] urlString];
-        [[FTImageCache sharedCache] imageForURL:[NSURL URLWithString:url] success:^(UIImage *image) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [cell.cellImageView setImage:image];
-                [cell setNeedsLayout];
-            });
-        } failure:^(NSError *error) {
-            
-        } progress:^(CGFloat progress) {
-            
-        }];
+        UIImage *image = [[FTImageCache sharedCache] localImageForURL:[NSURL URLWithString:url]];
+        [cell.cellImageView setImage:image];
+        if (!image) {
+            [[FTImageCache sharedCache] imageForURL:[NSURL URLWithString:url] success:^(UIImage *image) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+                });
+            } failure:^(NSError *error) {
+                
+            } progress:^(CGFloat progress) {
+                
+            }];
+        }
     }
 }
 
@@ -313,7 +318,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView == _searchController.searchResultsTableView) {
-        return [self artCellForTableView:tableView withIndexPath:indexPath];
+        if (_searchData.count == 0) {
+            return [FTNoResultsCell noResultCellForTable:tableView];
+        }
+        else return [self artCellForTableView:tableView withIndexPath:indexPath];
     }
     else {
         return [self basicCellForTableView:tableView];

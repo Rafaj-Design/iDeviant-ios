@@ -121,6 +121,8 @@
 		15C519E8180DE1C300ADDF15 /* FTFeedDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519E7180DE1C300ADDF15 /* FTFeedDownloadOperation.m */; };
 		15C519E9180DE1C300ADDF15 /* FTFeedDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519E7180DE1C300ADDF15 /* FTFeedDownloadOperation.m */; };
 		15C519EB180DE1D800ADDF15 /* FTDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519E4180DC87100ADDF15 /* FTDownloader.m */; };
+		15C519EF180E033100ADDF15 /* FTNoResultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519EE180E033100ADDF15 /* FTNoResultsCell.m */; };
+		15C519F0180E033100ADDF15 /* FTNoResultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519EE180E033100ADDF15 /* FTNoResultsCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -285,6 +287,8 @@
 		15C519E4180DC87100ADDF15 /* FTDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDownloader.m; sourceTree = "<group>"; };
 		15C519E6180DE1C300ADDF15 /* FTFeedDownloadOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTFeedDownloadOperation.h; sourceTree = "<group>"; };
 		15C519E7180DE1C300ADDF15 /* FTFeedDownloadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTFeedDownloadOperation.m; sourceTree = "<group>"; };
+		15C519ED180E033100ADDF15 /* FTNoResultsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTNoResultsCell.h; sourceTree = "<group>"; };
+		15C519EE180E033100ADDF15 /* FTNoResultsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTNoResultsCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -553,6 +557,7 @@
 		15B1753D17F35725007F480B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				15C519EC180E031700ADDF15 /* No results */,
 				15B1757E17F36449007F480B /* Home */,
 				15B1758617F48372007F480B /* Art */,
 				15B1753E17F35733007F480B /* Basic */,
@@ -908,6 +913,15 @@
 			name = Operations;
 			sourceTree = "<group>";
 		};
+		15C519EC180E031700ADDF15 /* No results */ = {
+			isa = PBXGroup;
+			children = (
+				15C519ED180E033100ADDF15 /* FTNoResultsCell.h */,
+				15C519EE180E033100ADDF15 /* FTNoResultsCell.m */,
+			);
+			name = "No results";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1050,6 +1064,7 @@
 				15B1756217F357B5007F480B /* UIView+Layout.m in Sources */,
 				15B1762E17F5C471007F480B /* FTLoginViewController.m in Sources */,
 				15B174EE17F35504007F480B /* main.m in Sources */,
+				15C519EF180E033100ADDF15 /* FTNoResultsCell.m in Sources */,
 				15C519BD180845EB00ADDF15 /* FTMediaRSSParser.m in Sources */,
 				15C5198F1806F3E100ADDF15 /* UIImageView+AFNetworking.m in Sources */,
 				15C5198B1806F3E100ADDF15 /* UIAlertView+AFNetworking.m in Sources */,
@@ -1087,6 +1102,7 @@
 			files = (
 				15C519161806F3E100ADDF15 /* AFURLRequestSerialization.m in Sources */,
 				15C519141806F3E100ADDF15 /* AFURLConnectionOperation.m in Sources */,
+				15C519F0180E033100ADDF15 /* FTNoResultsCell.m in Sources */,
 				15B1758217F379D8007F480B /* FTHomeCell.m in Sources */,
 				15C519901806F3E100ADDF15 /* UIImageView+AFNetworking.m in Sources */,
 				15B1754D17F357A9007F480B /* FTDownload.m in Sources */,

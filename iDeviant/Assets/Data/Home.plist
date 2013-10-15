@@ -34,20 +34,6 @@
 	</dict>
 	<dict>
 		<key>controller</key>
-		<string></string>
-		<key>FVRT</key>
-		<true/>
-		<key>description</key>
-		<string>autodownloaddesc</string>
-		<key>icon</key>
-		<string>DA_icon2.png</string>
-		<key>name</key>
-		<string>autodownload</string>
-		<key>detail</key>
-		<false/>
-	</dict>
-	<dict>
-		<key>controller</key>
 		<string>FTDailyDeviationsViewController</string>
 		<key>description</key>
 		<string>dailydeviationsdesc</string>
@@ -73,22 +59,6 @@
 		<true/>
 		<key>detail</key>
 		<true/>
-	</dict>
-	<dict>
-		<key>controller</key>
-		<string>FTLoginViewController</string>
-		<key>description</key>
-		<string>logindesc</string>
-		<key>icon</key>
-		<string>DA_icon5.png</string>
-		<key>name</key>
-		<string>login</string>
-		<key>requiresConnection</key>
-		<true/>
-		<key>detail</key>
-		<true/>
-		<key>type</key>
-		<string>modal</string>
 	</dict>
 </array>
 </plist>

@@ -19,6 +19,7 @@ typedef enum _FTImageCacheDiskEvictionPolicy {
 
 + (FTImageCache *)sharedCache;
 - (void)imageForURL:(NSURL *)url success:(void (^)(UIImage *image))successBlock failure:(void (^)(NSError* error))failureBlock progress:(void (^)(CGFloat progress))progressBlock;
+- (UIImage *)localImageForURL:(NSURL *)url;
 - (void)removeAllImagesOnCompletion:(void (^)(BOOL success))completionBlock;
 - (void)removeImageForURL:(NSURL *)url onCompletion:(void (^)(BOOL success))completionBlock;
 

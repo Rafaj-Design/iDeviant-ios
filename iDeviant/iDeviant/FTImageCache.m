@@ -132,6 +132,9 @@ static inline NSString *cachePathForKey(NSString *key) {
     }
 }
 
+- (UIImage *)localImageForURL:(NSURL *)url {
+    return [self cachedImageForKey:keyForURL(url)];
+}
 
 #pragma mark - Helper methods
 
