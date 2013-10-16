@@ -7,6 +7,7 @@
 //
 
 #import "FTDeviationsViewController.h"
+#import "FTDeviationsHeaderView.h"
 
 
 @interface FTDeviationsViewController ()
@@ -17,15 +18,24 @@
 @implementation FTDeviationsViewController
 
 
-#pragma mark - Creating elements
+#pragma mark Creating elements
+
+- (void)createReloadButton {
+    UIBarButtonItem *reload = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
+    [self.navigationItem setRightBarButtonItem:reload];
+}
 
 - (void)createAllElements {
     [super createAllElements];
-    
     [super createTableView];
+    [super createSearchBar];
+    [super createSearchController];
+    [super createRefreshView];
+    
+    [self createReloadButton];
 }
 
-#pragma mark - Settings
+#pragma mark Settings
 
 - (void)setCategoryData:(NSArray *)categoryData {
     [super setCategoryData:categoryData];
@@ -37,7 +47,13 @@
     [super getDataForCategory:categoryCode];
 }
 
-#pragma mark - Table view delegate & datasource methods
+#pragma mark Actions
+
+- (void)refresh {
+    
+}
+
+#pragma mark Table view delegate & datasource methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return (self.categoryData.count > 0) ? 2 : 1;
@@ -56,6 +72,46 @@
             return self.data.count;
         }
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (self.categoryData.count > 0) {
+        return 56;
+    }
+    else return 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0 && self.categoryData.count > 0) {
+        return 44;
+    }
+    return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return nil;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    NSString *withItems = [NSString stringWithFormat:@"%@ %@", FTLangGet(@"Deviations from"), self.title];
+    NSString *items = ((self.categoryCode.length <= 1) ? FTLangGet(@"Deviations") : withItems);
+    FTDeviationsHeaderView *dh = [[FTDeviationsHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.width, 56)];
+    if (self.categoryData.count > 0) {
+        if (self.categoryCode.length <= 1) {
+            if (section == 0) {
+                [dh setTitle:FTLangGet(@"Subcategories")];
+            }
+        }
+        else {
+            if (section == 0) {
+                [dh setTitle:[NSString stringWithFormat:@"%@ %@", FTLangGet(@"Subcategories in"), self.title]];
+            }
+        }
+    }
+    if (!dh.title) {
+        [dh setTitle:items];
+    }
+    return dh;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

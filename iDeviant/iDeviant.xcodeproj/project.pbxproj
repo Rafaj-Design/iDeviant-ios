@@ -123,6 +123,10 @@
 		15C519EB180DE1D800ADDF15 /* FTDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519E4180DC87100ADDF15 /* FTDownloader.m */; };
 		15C519EF180E033100ADDF15 /* FTNoResultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519EE180E033100ADDF15 /* FTNoResultsCell.m */; };
 		15C519F0180E033100ADDF15 /* FTNoResultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519EE180E033100ADDF15 /* FTNoResultsCell.m */; };
+		15C519F5180EB15300ADDF15 /* FTHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519F4180EB15300ADDF15 /* FTHeaderView.m */; };
+		15C519F6180EB15300ADDF15 /* FTHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519F4180EB15300ADDF15 /* FTHeaderView.m */; };
+		15C519FA180EB16F00ADDF15 /* FTDeviationsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519F9180EB16F00ADDF15 /* FTDeviationsHeaderView.m */; };
+		15C519FB180EB16F00ADDF15 /* FTDeviationsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519F9180EB16F00ADDF15 /* FTDeviationsHeaderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -289,6 +293,10 @@
 		15C519E7180DE1C300ADDF15 /* FTFeedDownloadOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTFeedDownloadOperation.m; sourceTree = "<group>"; };
 		15C519ED180E033100ADDF15 /* FTNoResultsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTNoResultsCell.h; sourceTree = "<group>"; };
 		15C519EE180E033100ADDF15 /* FTNoResultsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTNoResultsCell.m; sourceTree = "<group>"; };
+		15C519F3180EB15300ADDF15 /* FTHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTHeaderView.h; sourceTree = "<group>"; };
+		15C519F4180EB15300ADDF15 /* FTHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTHeaderView.m; sourceTree = "<group>"; };
+		15C519F8180EB16F00ADDF15 /* FTDeviationsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDeviationsHeaderView.h; sourceTree = "<group>"; };
+		15C519F9180EB16F00ADDF15 /* FTDeviationsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDeviationsHeaderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -509,6 +517,7 @@
 		15B1753917F356CF007F480B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				15C519F1180EB13100ADDF15 /* Headers */,
 				15B1754517F35769007F480B /* Basic */,
 			);
 			name = Views;
@@ -922,6 +931,33 @@
 			name = "No results";
 			sourceTree = "<group>";
 		};
+		15C519F1180EB13100ADDF15 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				15C519F7180EB15600ADDF15 /* Deviations */,
+				15C519F2180EB13800ADDF15 /* Basic */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		15C519F2180EB13800ADDF15 /* Basic */ = {
+			isa = PBXGroup;
+			children = (
+				15C519F3180EB15300ADDF15 /* FTHeaderView.h */,
+				15C519F4180EB15300ADDF15 /* FTHeaderView.m */,
+			);
+			name = Basic;
+			sourceTree = "<group>";
+		};
+		15C519F7180EB15600ADDF15 /* Deviations */ = {
+			isa = PBXGroup;
+			children = (
+				15C519F8180EB16F00ADDF15 /* FTDeviationsHeaderView.h */,
+				15C519F9180EB16F00ADDF15 /* FTDeviationsHeaderView.m */,
+			);
+			name = Deviations;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1040,6 +1076,7 @@
 				15B175CA17F59632007F480B /* FTDetailImageViewController.m in Sources */,
 				15B174F217F35504007F480B /* FTAppDelegate.m in Sources */,
 				15C519131806F3E100ADDF15 /* AFURLConnectionOperation.m in Sources */,
+				15C519F5180EB15300ADDF15 /* FTHeaderView.m in Sources */,
 				15C519DE180DAA2800ADDF15 /* FTMediaRSSParserFeedCategory.m in Sources */,
 				15B1763517F5C498007F480B /* FTSettingsViewController.m in Sources */,
 				15B175CF17F598FB007F480B /* FTDetailBasicViewController.m in Sources */,
@@ -1089,6 +1126,7 @@
 				15B1761417F5A46A007F480B /* MBProgressHUD.m in Sources */,
 				15B1753817F356CB007F480B /* FTHomeViewController.m in Sources */,
 				15C519151806F3E100ADDF15 /* AFURLRequestSerialization.m in Sources */,
+				15C519FA180EB16F00ADDF15 /* FTDeviationsHeaderView.m in Sources */,
 				15C519CD180DA70E00ADDF15 /* FTMediaRSSParserFeedItemThumbnail.m in Sources */,
 				15B1755A17F357B5007F480B /* NSData+Base64.m in Sources */,
 				15C519171806F3E100ADDF15 /* AFURLResponseSerialization.m in Sources */,
@@ -1117,6 +1155,7 @@
 				15C519921806F3E100ADDF15 /* UIProgressView+AFNetworking.m in Sources */,
 				15B1754917F35796007F480B /* FTKeychainObject.m in Sources */,
 				15B1755D17F357B5007F480B /* UIImage+Tools.m in Sources */,
+				15C519F6180EB15300ADDF15 /* FTHeaderView.m in Sources */,
 				15C519941806F3E100ADDF15 /* UIWebView+AFNetworking.m in Sources */,
 				15C5198A1806F3E100ADDF15 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				15C519EB180DE1D800ADDF15 /* FTDownloader.m in Sources */,
@@ -1124,6 +1163,7 @@
 				15B175BB17F5623E007F480B /* GCNetworkReachability.m in Sources */,
 				15C5190E1806F3E100ADDF15 /* AFHTTPSessionManager.m in Sources */,
 				15B1756317F357B5007F480B /* UIView+Layout.m in Sources */,
+				15C519FB180EB16F00ADDF15 /* FTDeviationsHeaderView.m in Sources */,
 				15C5190C1806F3E100ADDF15 /* AFHTTPRequestOperationManager.m in Sources */,
 				15B1757917F358B5007F480B /* FTLang.m in Sources */,
 				15B1756517F357B5007F480B /* NSString+URLTools.m in Sources */,

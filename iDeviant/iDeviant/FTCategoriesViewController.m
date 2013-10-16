@@ -31,8 +31,6 @@
 
 - (void)createAllElements {
     [super createAllElements];
-    [super createSearchBar];
-    [super createSearchController];
 }
 
 

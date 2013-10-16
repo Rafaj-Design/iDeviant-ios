@@ -12,6 +12,7 @@
 #import "FTImageCache.h"
 #import "FTBasicCell.h"
 #import "FTNoResultsCell.h"
+#import "GCNetworkReachability.h"
 
 
 @interface FTViewController ()
@@ -83,6 +84,17 @@
 
 #pragma mark Data
 
+- (void)loadFakeData:(NSError *)error {
+    if (error && ![[GCNetworkReachability reachabilityForInternetConnection] isReachable]) {
+        NSString *testFilePath = [[NSBundle mainBundle] pathForResource:@"data" ofType:@"xml"];
+        NSData *data = [NSData dataWithContentsOfFile:testFilePath];
+        [FTMediaRSSParser parseData:data withCompletionHandler:^(FTMediaRSSParserFeedInfo *info, NSArray *items, NSError *error) {
+            _data = items;
+            [_tableView reloadData];
+        }];
+    }
+}
+
 - (void)getDataForParams:(NSString *)params {
 	NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@", params] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [FTDownloader downloadFileWithUrl:url withProgressBlock:^(CGFloat progress) {
@@ -92,6 +104,9 @@
             _data = items;
             [_tableView reloadData];
         }];
+#if (TARGET_IPHONE_SIMULATOR)
+        [self loadFakeData:error];
+#endif
     }];
 }
 
@@ -116,6 +131,9 @@
                 [_searchController.searchResultsTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
             }
         }];
+#if (TARGET_IPHONE_SIMULATOR)
+        [self loadFakeData:error];
+#endif
     }];
 }
 
@@ -140,6 +158,7 @@
     if (searchOptions) {
         [_searchBar setScopeButtonTitles:searchOptions];
     }
+    
 }
 
 - (void)createSearchBar {
@@ -161,9 +180,16 @@
     
     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     [_tableView setAutoresizingWidthAndHeight];
+    [_tableView setBackgroundView:nil];
+    [_tableView setBackgroundColor:[UIColor colorWithHexString:@"C0CDBF"]];
     [_tableView setDataSource:self];
     [_tableView setDelegate:self];
     [self.view addSubview:_tableView];
+}
+
+- (void)createRefreshView {
+    _refreshControl = [[UIRefreshControl alloc] init];
+    [_tableView addSubview:_refreshControl];
 }
 
 - (void)createAllElements {

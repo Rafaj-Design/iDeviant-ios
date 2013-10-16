@@ -22,6 +22,17 @@
     NSDictionary *attr = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil];
     [[UINavigationBar appearance] setTitleTextAttributes:attr];
     
+    // Navigation bar appearance (background ant title)
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil]];
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithHexString:@"D0DE00"]];
+    
+    // Navigation bar buttons appearance
+    
+    //[[UISearchBar appearance] set]
+    
+    //[[UIBarButtonItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor purpleColor], NSForegroundColorAttributeName, [UIColor blueColor], NSShadowAttributeName, nil]];
+
+    
     _window.rootViewController = nc;
     [_window makeKeyAndVisible];
     return YES;

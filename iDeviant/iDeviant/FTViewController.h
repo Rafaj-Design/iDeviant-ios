@@ -17,6 +17,7 @@
 
 @property (nonatomic, readonly) BOOL isLandscape;
 
+@property (nonatomic, readonly) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *data;
 @property (nonatomic, strong) NSArray *categoryData;
@@ -48,6 +49,7 @@
 - (void)createSearchController;
 
 - (void)createTableView;
+- (void)createRefreshView;
 - (void)fillData;
 
 - (void)showDetailFor:(FTMediaRSSParserFeedItem *)item inDataSet:(NSArray *)data;
