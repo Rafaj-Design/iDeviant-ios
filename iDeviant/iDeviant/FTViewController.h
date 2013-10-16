@@ -17,6 +17,8 @@
 
 @property (nonatomic, readonly) BOOL isLandscape;
 
+@property (nonatomic, readonly) NSString *dataSorting;
+
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *data;

@@ -129,11 +129,12 @@
     if (!_dataUrl) {
         NSString *searchString = @"";
         if (search) searchString = [NSString stringWithFormat:@"+%@", search];
-        _dataUrl = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=boost:popular%@", searchString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        _dataUrl = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@", searchString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         
         NSString *categoryString = @"";
         if (category && (![category isEqualToString:@""])) {
-            categoryString = [NSString stringWithFormat:@"+in:%@+sort:time", category];
+#warning Finish boost / sort parameter
+            categoryString = [NSString stringWithFormat:@"in:%@+%@", category, _dataSorting];
             _dataUrl = [_dataUrl stringByAppendingString:categoryString];
         }
 	}
@@ -237,6 +238,8 @@
 
 - (void)setupView {
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"EFEFF4"]];
+    
+    _dataSorting = @"boost:popular";
 }
 
 - (id)init {

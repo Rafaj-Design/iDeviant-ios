@@ -29,8 +29,21 @@
 
 #pragma mark Creating elements
 
+- (void)createSegmentedDataSortingSelector {
+    UISegmentedControl *seg = [[UISegmentedControl alloc] initWithItems:@[FTLangGet(@"Popular"), FTLangGet(@"Newest")]];
+    [seg setFrame:CGRectMake(5, 7, (self.view.width - 10), 24)];
+    [seg setAutoresizingWidth];
+    
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 38)];
+    [v setBackgroundColor:[UIColor colorWithHexString:@"D6E0D4"]];
+    [v addSubview:seg];
+    [self.tableView setTableHeaderView:v];
+}
+
 - (void)createAllElements {
     [super createAllElements];
+    
+    [self createSegmentedDataSortingSelector];
     
     [super.refreshControl removeFromSuperview];
     [self.navigationItem setRightBarButtonItem:nil];
@@ -61,6 +74,18 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     return nil;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *category = [self.categoryData objectAtIndex:indexPath.row];
+    static NSString *cellId = @"cellId";
+    FTBasicCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (!cell) {
+        cell = [[FTBasicCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
+        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    }
+    [cell.textLabel setText:[category objectForKey:@"name"]];
+    return cell;
 }
 
 

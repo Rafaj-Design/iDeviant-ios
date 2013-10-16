@@ -146,6 +146,7 @@
 		15C51A5F180EE43100ADDF15 /* FTDeviationsListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C51A5D180EE43100ADDF15 /* FTDeviationsListingViewController.m */; };
 		15C51A63180EF4DA00ADDF15 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C51A62180EF4DA00ADDF15 /* UIImage+animatedGIF.m */; };
 		15C51A65180EF4F200ADDF15 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C51A64180EF4F200ADDF15 /* ImageIO.framework */; };
+		15C51A69180F1D2400ADDF15 /* FTLatestCategoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C51A68180F1D2400ADDF15 /* FTLatestCategoriesViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -336,6 +337,8 @@
 		15C51A61180EF4DA00ADDF15 /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+animatedGIF.h"; path = "uiimage-from-animated-gif/UIImage+animatedGIF.h"; sourceTree = "<group>"; };
 		15C51A62180EF4DA00ADDF15 /* UIImage+animatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+animatedGIF.m"; path = "uiimage-from-animated-gif/UIImage+animatedGIF.m"; sourceTree = "<group>"; };
 		15C51A64180EF4F200ADDF15 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		15C51A67180F1D2400ADDF15 /* FTLatestCategoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLatestCategoriesViewController.h; sourceTree = "<group>"; };
+		15C51A68180F1D2400ADDF15 /* FTLatestCategoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLatestCategoriesViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -533,11 +536,12 @@
 		15B1753417F35613007F480B /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				15B1761F17F5C3AC007F480B /* Popular categories */,
+				15C51A66180F1CE500ADDF15 /* Latest categories */,
 				15B1763217F5C48B007F480B /* Settings */,
 				15B1762B17F5C463007F480B /* Login */,
 				15B1762A17F5C45D007F480B /* Popular */,
 				15B1762617F5C405007F480B /* Daily deviations */,
-				15B1761F17F5C3AC007F480B /* Categories */,
 				15B1761E17F5C39E007F480B /* Favorites */,
 				15B1753617F356CB007F480B /* FTHomeViewController.h */,
 				15B1753717F356CB007F480B /* FTHomeViewController.m */,
@@ -786,14 +790,14 @@
 			name = Favorites;
 			sourceTree = "<group>";
 		};
-		15B1761F17F5C3AC007F480B /* Categories */ = {
+		15B1761F17F5C3AC007F480B /* Popular categories */ = {
 			isa = PBXGroup;
 			children = (
 				15C51A5B180EE40700ADDF15 /* Listing */,
 				15B1762317F5C3F8007F480B /* FTCategoriesViewController.h */,
 				15B1762417F5C3F8007F480B /* FTCategoriesViewController.m */,
 			);
-			name = Categories;
+			name = "Popular categories";
 			sourceTree = "<group>";
 		};
 		15B1762617F5C405007F480B /* Daily deviations */ = {
@@ -1098,6 +1102,15 @@
 			path = "uiimage-from-animated-gif";
 			sourceTree = "<group>";
 		};
+		15C51A66180F1CE500ADDF15 /* Latest categories */ = {
+			isa = PBXGroup;
+			children = (
+				15C51A67180F1D2400ADDF15 /* FTLatestCategoriesViewController.h */,
+				15C51A68180F1D2400ADDF15 /* FTLatestCategoriesViewController.m */,
+			);
+			name = "Latest categories";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1255,6 +1268,7 @@
 				15B1762917F5C41C007F480B /* FTDailyDeviationsViewController.m in Sources */,
 				15B1754417F35765007F480B /* FTView.m in Sources */,
 				15C51A0A180ECA5200ADDF15 /* FTCategoryCell.m in Sources */,
+				15C51A69180F1D2400ADDF15 /* FTLatestCategoriesViewController.m in Sources */,
 				15B1758117F379D8007F480B /* FTHomeCell.m in Sources */,
 				15B175B517F56186007F480B /* FTImageView.m in Sources */,
 				15C519E8180DE1C300ADDF15 /* FTFeedDownloadOperation.m in Sources */,

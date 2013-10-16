@@ -20,6 +20,22 @@
 	</dict>
 	<dict>
 		<key>controller</key>
+		<string>FTLatestCategoriesViewController</string>
+		<key>description</key>
+		<string>categorieslatestdesc</string>
+		<key>icon</key>
+		<string>DA_icon3.png</string>
+		<key>name</key>
+		<string>categorieslatest</string>
+		<key>requiresConnection</key>
+		<true/>
+		<key>detail</key>
+		<false/>
+		<key>path</key>
+		<string>/</string>
+	</dict>
+	<dict>
+		<key>controller</key>
 		<string>FTFavoritesViewController</string>
 		<key>FVRT</key>
 		<true/>

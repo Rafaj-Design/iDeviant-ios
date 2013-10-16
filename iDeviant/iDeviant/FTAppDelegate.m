@@ -31,6 +31,8 @@
     //[[UISearchBar appearance] set]
     
     //[[UIBarButtonItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor purpleColor], NSForegroundColorAttributeName, [UIColor blueColor], NSShadowAttributeName, nil]];
+    
+    
 
     
     _window.rootViewController = nc;
