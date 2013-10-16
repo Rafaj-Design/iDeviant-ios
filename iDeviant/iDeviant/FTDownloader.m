@@ -43,7 +43,7 @@
 
 #pragma mark Downloading
 
-- (void)setupOperation:(FTFeedDownloadOperation *)operation forProgressBlock:(void (^)(CGFloat))progressHandler andSuccessBlock:(void (^)(NSData *, NSError *))successHandler {
+- (void)setupOperation:(FTFeedDownloadOperation *)operation forProgressBlock:(void (^)(CGFloat progress))progressHandler andSuccessBlock:(void (^)(id data, NSError *error))successHandler {
     [operation setResponseSerializer:[[AFXMLParserResponseSerializer alloc] init]];
     NSMutableSet *types = [NSMutableSet setWithSet:operation.responseSerializer.acceptableContentTypes];
     [types addObject:@"application/rss+xml"];
@@ -63,17 +63,17 @@
     }
 }
 
-- (void)downloadFileWithUrl:(NSString *)urlString withProgressBlock:(void (^)(CGFloat))progressHandler andSuccessBlock:(void (^)(NSData *, NSError *))successHandler {
+- (void)downloadFileWithUrl:(NSString *)urlString withProgressBlock:(void (^)(CGFloat progress))progressHandler andSuccessBlock:(void (^)(id data, NSError *error))successHandler {
     FTFeedDownloadOperation *operation = [[FTFeedDownloadOperation alloc] initWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
     [self setupOperation:operation forProgressBlock:progressHandler andSuccessBlock:successHandler];
     [_downloadOperationQueue addOperation:operation];
 }
 
-+ (void)downloadFileWithUrl:(NSString *)urlString withProgressBlock:(void (^)(CGFloat))progressHandler andSuccessBlock:(void (^)(NSData *, NSError *))successHandler {
++ (void)downloadFileWithUrl:(NSString *)urlString withProgressBlock:(void (^)(CGFloat progress))progressHandler andSuccessBlock:(void (^)(id data, NSError *error))successHandler {
     [[FTDownloader sharedDownloader] downloadFileWithUrl:urlString withProgressBlock:progressHandler andSuccessBlock:successHandler];
 }
 
-- (void)downloadSingleFileWithUrl:(NSString *)urlString withProgressBlock:(void (^)(CGFloat))progressHandler andSuccessBlock:(void (^)(NSData *, NSError *))successHandler {
+- (void)downloadSingleFileWithUrl:(NSString *)urlString withProgressBlock:(void (^)(CGFloat progress))progressHandler andSuccessBlock:(void (^)(id data, NSError *error))successHandler {
     if (_singleItemOperation) {
         [_singleItemOperation cancel];
         _singleItemOperation = nil;
@@ -83,7 +83,7 @@
     [_singleItemOperation start];
 }
 
-+ (void)downloadSingleFileWithUrl:(NSString *)urlString withProgressBlock:(void (^)(CGFloat))progressHandler andSuccessBlock:(void (^)(NSData *, NSError *))successHandler {
++ (void)downloadSingleFileWithUrl:(NSString *)urlString withProgressBlock:(void (^)(CGFloat progress))progressHandler andSuccessBlock:(void (^)(id data, NSError *error))successHandler {
     [[FTDownloader sharedDownloader] downloadSingleFileWithUrl:urlString withProgressBlock:progressHandler andSuccessBlock:successHandler];
 }
 

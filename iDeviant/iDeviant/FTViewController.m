@@ -99,8 +99,8 @@
 	NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@", params] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     [FTDownloader downloadFileWithUrl:url withProgressBlock:^(CGFloat progress) {
         NSLog(@"Download progress: %.2f", progress);
-    } andSuccessBlock:^(NSData *data, NSError *error) {
-        [FTMediaRSSParser parseData:data withCompletionHandler:^(FTMediaRSSParserFeedInfo *info, NSArray *items, NSError *error) {
+    } andSuccessBlock:^(id data, NSError *error) {
+        [FTMediaRSSParser parse:data withCompletionHandler:^(FTMediaRSSParserFeedInfo *info, NSArray *items, NSError *error) {
             _data = items;
             [_tableView reloadData];
         }];
@@ -123,8 +123,8 @@
 	
 	[FTDownloader downloadSingleFileWithUrl:url withProgressBlock:^(CGFloat progress) {
         NSLog(@"Download progress: %.2f", progress);
-    } andSuccessBlock:^(NSData *data, NSError *error) {
-        [FTMediaRSSParser parseData:data withCompletionHandler:^(FTMediaRSSParserFeedInfo *info, NSArray *items, NSError *error) {
+    } andSuccessBlock:^(id data, NSError *error) {
+        [FTMediaRSSParser parse:data withCompletionHandler:^(FTMediaRSSParserFeedInfo *info, NSArray *items, NSError *error) {
             if (_searchBar.text.length >= 3) {
                 _searchData = items;
                 [_searchController.searchResultsTableView reloadData];

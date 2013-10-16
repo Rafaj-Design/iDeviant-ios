@@ -1306,6 +1306,7 @@
 				GCC_PREFIX_HEADER = "iDeviant/iDeviant-Prefix.pch";
 				INFOPLIST_FILE = "iDeviant/iDeviant-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1320,6 +1321,7 @@
 				GCC_PREFIX_HEADER = "iDeviant/iDeviant-Prefix.pch";
 				INFOPLIST_FILE = "iDeviant/iDeviant-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = AppStore;
@@ -1410,6 +1412,7 @@
 				GCC_PREFIX_HEADER = "iDeviant/iDeviant-Prefix.pch";
 				INFOPLIST_FILE = "iDeviant/iDeviant-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Enterprise;
