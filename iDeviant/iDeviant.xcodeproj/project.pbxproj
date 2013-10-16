@@ -144,6 +144,8 @@
 		15C51A5A180ED1AF00ADDF15 /* FTFavorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C51A58180ED1AF00ADDF15 /* FTFavorites.m */; };
 		15C51A5E180EE43100ADDF15 /* FTDeviationsListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C51A5D180EE43100ADDF15 /* FTDeviationsListingViewController.m */; };
 		15C51A5F180EE43100ADDF15 /* FTDeviationsListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C51A5D180EE43100ADDF15 /* FTDeviationsListingViewController.m */; };
+		15C51A63180EF4DA00ADDF15 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C51A62180EF4DA00ADDF15 /* UIImage+animatedGIF.m */; };
+		15C51A65180EF4F200ADDF15 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C51A64180EF4F200ADDF15 /* ImageIO.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -331,6 +333,9 @@
 		15C51A58180ED1AF00ADDF15 /* FTFavorites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTFavorites.m; sourceTree = "<group>"; };
 		15C51A5C180EE43100ADDF15 /* FTDeviationsListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDeviationsListingViewController.h; sourceTree = "<group>"; };
 		15C51A5D180EE43100ADDF15 /* FTDeviationsListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDeviationsListingViewController.m; sourceTree = "<group>"; };
+		15C51A61180EF4DA00ADDF15 /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+animatedGIF.h"; path = "uiimage-from-animated-gif/UIImage+animatedGIF.h"; sourceTree = "<group>"; };
+		15C51A62180EF4DA00ADDF15 /* UIImage+animatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+animatedGIF.m"; path = "uiimage-from-animated-gif/UIImage+animatedGIF.m"; sourceTree = "<group>"; };
+		15C51A64180EF4F200ADDF15 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -338,6 +343,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15C51A65180EF4F200ADDF15 /* ImageIO.framework in Frameworks */,
 				15B1757517F35833007F480B /* CoreData.framework in Frameworks */,
 				15B1757317F35825007F480B /* CoreText.framework in Frameworks */,
 				15B1757117F3581B007F480B /* MessageUI.framework in Frameworks */,
@@ -387,6 +393,7 @@
 		15B174E017F35504007F480B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				15C51A64180EF4F200ADDF15 /* ImageIO.framework */,
 				15B1757417F35833007F480B /* CoreData.framework */,
 				15B1757217F35825007F480B /* CoreText.framework */,
 				15B1757017F3581B007F480B /* MessageUI.framework */,
@@ -686,6 +693,7 @@
 		15B1758D17F49B9E007F480B /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				15C51A60180EF4C100ADDF15 /* uiimage-from-animated-gif */,
 				15C51A0C180ECDAB00ADDF15 /* ios-fontawesome */,
 				15C519B1180845BE00ADDF15 /* FTMediaRSSParser */,
 				15C5187E1806F3E100ADDF15 /* AFNetworking */,
@@ -1081,6 +1089,15 @@
 			name = Listing;
 			sourceTree = "<group>";
 		};
+		15C51A60180EF4C100ADDF15 /* uiimage-from-animated-gif */ = {
+			isa = PBXGroup;
+			children = (
+				15C51A61180EF4DA00ADDF15 /* UIImage+animatedGIF.h */,
+				15C51A62180EF4DA00ADDF15 /* UIImage+animatedGIF.m */,
+			);
+			path = "uiimage-from-animated-gif";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1253,6 +1270,7 @@
 				15C51A5E180EE43100ADDF15 /* FTDeviationsListingViewController.m in Sources */,
 				15B1762217F5C3BC007F480B /* FTFavoritesViewController.m in Sources */,
 				15B1754117F35748007F480B /* FTBasicCell.m in Sources */,
+				15C51A63180EF4DA00ADDF15 /* UIImage+animatedGIF.m in Sources */,
 				15C51A59180ED1AF00ADDF15 /* FTFavorites.m in Sources */,
 				15B1761417F5A46A007F480B /* MBProgressHUD.m in Sources */,
 				15B1753817F356CB007F480B /* FTHomeViewController.m in Sources */,

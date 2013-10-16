@@ -105,7 +105,8 @@ static inline NSString *cachePathForKey(NSString *key) {
         [self removePersistedImageForKey:keyForURL(url) onCompletion:^(BOOL success) {
             if (completionBlock) completionBlock(success);
         }];
-    } else {
+    }
+    else {
         if (completionBlock) completionBlock(YES);
     }
 }
@@ -155,12 +156,7 @@ static inline NSString *cachePathForKey(NSString *key) {
 
 #pragma mark Network operations
 
-- (void)downloadCacheAndPersistImageForURL:(NSURL *)url
-                                       key:(NSString *)key
-                                   success:(void (^)(UIImage *image))successBlock
-                                   failure:(void (^)(NSError* error))failureBlock
-                                  progress:(void (^)(CGFloat progress))progressBlock {
-    
+- (void)downloadCacheAndPersistImageForURL:(NSURL *)url key:(NSString *)key success:(void (^)(UIImage *image))successBlock failure:(void (^)(NSError* error))failureBlock progress:(void (^)(CGFloat progress))progressBlock {
     FTDownload *imageDownload = [[FTDownload alloc] initWithURL:[url absoluteString] cacheLifetime:FTDownloadCacheLifetimeNone success:^(NSData *data) {
         UIImage *image = [UIImage imageWithData:data];
         if (image && [image isKindOfClass:[UIImage class]]) {
@@ -171,7 +167,7 @@ static inline NSString *cachePathForKey(NSString *key) {
             if (failureBlock) {
                 NSMutableDictionary *errorDetail = [NSMutableDictionary dictionary];
                 [errorDetail setValue:[NSString stringWithFormat:@"Failed to init image with data from for URL: %@", url] forKey:NSLocalizedDescriptionKey];
-                NSError* error = [NSError errorWithDomain:@"FTImageCacheErrorDomain" code:1 userInfo:errorDetail];
+                NSError *error = [NSError errorWithDomain:@"FTImageCacheErrorDomain" code:1 userInfo:errorDetail];
                 failureBlock(error);
             }
         }
@@ -186,7 +182,7 @@ static inline NSString *cachePathForKey(NSString *key) {
 
 #pragma mark Cache operations
 
-- (void) setImage:(UIImage *)image forKey:(NSString *)key {
+- (void)setImage:(UIImage *)image forKey:(NSString *)key {
 	if (image) {
 		[super setObject:image forKey:key];
 	}
@@ -204,7 +200,6 @@ static inline NSString *cachePathForKey(NSString *key) {
     }
     return cachedImageForKey;
 }
-
 
 #pragma mark Disk operations
 

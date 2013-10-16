@@ -13,3 +13,6 @@
 [submodule "iDeviant/Thirdparty/ios-fontawesome"]
 	path = iDeviant/Thirdparty/ios-fontawesome
 	url = git@github.com:alexdrone/ios-fontawesome.git
+[submodule "iDeviant/Thirdparty/uiimage-from-animated-gif"]
+	path = iDeviant/Thirdparty/uiimage-from-animated-gif
+	url = git@github.com:mayoff/uiimage-from-animated-gif.git
