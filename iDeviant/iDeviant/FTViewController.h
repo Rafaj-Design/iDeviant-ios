@@ -17,7 +17,7 @@
 
 @property (nonatomic, readonly) BOOL isLandscape;
 
-@property (nonatomic, readonly) UIRefreshControl *refreshControl;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *data;
 @property (nonatomic, strong) NSArray *categoryData;
@@ -62,6 +62,7 @@
 - (void)getDataForCategory:(NSString *)category;
 - (void)getDataForSearchString:(NSString *)search;
 - (void)getFeedData;
+- (void)reloadData;
 
 // Alerts
 - (void)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message;

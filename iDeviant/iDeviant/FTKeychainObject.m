@@ -78,12 +78,12 @@ static NSString *serviceName = kFTKeychainObjectServiceName;
 #pragma mark Initialization
 
 + (FTKeychainObject *)sharedKeychainObject {
-    static FTKeychainObject *keychain = nil;
+    static FTKeychainObject *object = nil;
     static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-        keychain = [[FTKeychainObject alloc] init];
+        object = [[FTKeychainObject alloc] init];
     });
-    return keychain;
+    return object;
 }
 
 #pragma mark Settings

@@ -31,6 +31,12 @@
 
 - (void)createAllElements {
     [super createAllElements];
+    
+    [super createSearchBar];
+    [super createSearchController];
+    [super createRefreshView];
+    
+    [super getDataForParams:@"boost:popular"];
 }
 
 

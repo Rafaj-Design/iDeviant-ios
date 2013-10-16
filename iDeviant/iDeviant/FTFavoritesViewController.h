@@ -7,7 +7,8 @@
 //
 
 #import "FTDeviationsViewController.h"
+#import "FTFavorites.h"
 
-@interface FTFavoritesViewController : FTDeviationsViewController
+@interface FTFavoritesViewController : FTDeviationsViewController <FTFavoritesDelegate>
 
 @end

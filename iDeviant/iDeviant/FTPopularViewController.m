@@ -20,7 +20,7 @@
 - (void)setupView {
     [super setupView];
     
-    [super getDataForSearchString:@"special%3Apopular&type=deviation"];
+    [super getDataForParams:@"special%3Apopular&type=deviation"];
 }
 
 #pragma mark Creating elements

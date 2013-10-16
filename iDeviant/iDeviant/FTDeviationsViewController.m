@@ -7,6 +7,7 @@
 //
 
 #import "FTDeviationsViewController.h"
+#import "FTDeviationsListingViewController.h"
 #import "FTDeviationsHeaderView.h"
 
 
@@ -28,11 +29,8 @@
 - (void)createAllElements {
     [super createAllElements];
     [super createTableView];
-    [super createSearchBar];
-    [super createSearchController];
-    [super createRefreshView];
     
-    [self createReloadButton];
+    //[self createReloadButton];
 }
 
 #pragma mark Settings
@@ -43,6 +41,7 @@
 }
 
 - (void)setCategoryCode:(NSString *)categoryCode {
+    NSLog(@"Category path: %@", categoryCode);
     [super setCategoryCode:categoryCode];
     [super getDataForCategory:categoryCode];
 }
@@ -133,9 +132,14 @@
     else {
         if (self.categoryData.count > 0 && indexPath.section == 0) {
             NSDictionary *category = [self.categoryData objectAtIndex:indexPath.row];
-            FTDeviationsViewController *c = [[FTDeviationsViewController alloc] init];
+            FTDeviationsListingViewController *c = [[FTDeviationsListingViewController alloc] init];
             [c setTitle:[category objectForKey:@"name"]];
-            [c setCategoryCode:[category objectForKey:@"path"]];
+            if (self.categoryCode) {
+                [c setCategoryCode:[NSString stringWithFormat:@"%@/%@", self.categoryCode, [category objectForKey:@"path"]]];
+            }
+            else {
+                [c setCategoryCode:[category objectForKey:@"path"]];
+            }
             [c setCategoryData:[category objectForKey:@"subcategories"]];
             [self.navigationController pushViewController:c animated:YES];
         }

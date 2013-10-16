@@ -12,12 +12,15 @@
 #import "FTImageCache.h"
 #import "FTBasicCell.h"
 #import "FTNoResultsCell.h"
+#import "FTCategoryCell.h"
 #import "GCNetworkReachability.h"
 
 
 @interface FTViewController ()
 
-@property (nonatomic, strong) NSMutableArray *tempParsedItems;
+@property (nonatomic, readonly) NSMutableArray *tempParsedItems;
+
+@property (nonatomic, readonly) NSString *dataUrl;
 
 @end
 
@@ -84,6 +87,13 @@
 
 #pragma mark Data
 
+- (void)didFinishLoading {
+    [self.navigationItem setRightBarButtonItem:nil animated:YES];
+    if (_refreshControl.isRefreshing) {
+        [_refreshControl endRefreshing];
+    }
+}
+
 - (void)loadFakeData:(NSError *)error {
     if (error && ![[GCNetworkReachability reachabilityForInternetConnection] isReachable]) {
         NSString *testFilePath = [[NSBundle mainBundle] pathForResource:@"data" ofType:@"xml"];
@@ -96,11 +106,15 @@
 }
 
 - (void)getDataForParams:(NSString *)params {
-	NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@", params] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [FTDownloader downloadFileWithUrl:url withProgressBlock:^(CGFloat progress) {
+    [self createLoadingSpinner];
+    if (!_dataUrl) {
+        _dataUrl = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@", params] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    }
+    [FTDownloader downloadFileWithUrl:_dataUrl withProgressBlock:^(CGFloat progress) {
         NSLog(@"Download progress: %.2f", progress);
     } andSuccessBlock:^(id data, NSError *error) {
         [FTMediaRSSParser parse:data withCompletionHandler:^(FTMediaRSSParserFeedInfo *info, NSArray *items, NSError *error) {
+            [self didFinishLoading];
             _data = items;
             [_tableView reloadData];
         }];
@@ -111,20 +125,23 @@
 }
 
 - (void)getDataForSearchString:(NSString *)search andCategory:(NSString *)category {
-	NSString *searchString = @"";
-	if (search) searchString = [NSString stringWithFormat:@"+%@", search];
-	NSString *url = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=boost:popular%@", searchString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-	NSString *categoryString = @"";
-	if (category && (![category isEqualToString:@""])) {
-		categoryString = [NSString stringWithFormat:@"+in:%@+sort:time", category];
-		url = [url stringByAppendingString:categoryString];
+    [self createLoadingSpinner];
+    if (!_dataUrl) {
+        NSString *searchString = @"";
+        if (search) searchString = [NSString stringWithFormat:@"+%@", search];
+        _dataUrl = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=boost:popular%@", searchString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        
+        NSString *categoryString = @"";
+        if (category && (![category isEqualToString:@""])) {
+            categoryString = [NSString stringWithFormat:@"+in:%@+sort:time", category];
+            _dataUrl = [_dataUrl stringByAppendingString:categoryString];
+        }
 	}
-	
-	[FTDownloader downloadSingleFileWithUrl:url withProgressBlock:^(CGFloat progress) {
+	[FTDownloader downloadSingleFileWithUrl:_dataUrl withProgressBlock:^(CGFloat progress) {
         NSLog(@"Download progress: %.2f", progress);
     } andSuccessBlock:^(id data, NSError *error) {
         [FTMediaRSSParser parse:data withCompletionHandler:^(FTMediaRSSParserFeedInfo *info, NSArray *items, NSError *error) {
+            [self didFinishLoading];
             if (_searchBar.text.length >= 3) {
                 _searchData = items;
                 [_searchController.searchResultsTableView reloadData];
@@ -138,7 +155,7 @@
 }
 
 - (void)getDataForCategory:(NSString *)category {
-	[self getDataForSearchString:nil andCategory:category];
+	[self getDataForParams:[NSString stringWithFormat:@"in:%@+boost:popular", category]];
 }
 
 - (void)getDataForSearchString:(NSString *)search {
@@ -149,7 +166,20 @@
 	[self getDataForSearchString:nil];
 }
 
+- (void)reloadData {
+    if (_dataUrl) {
+        [self getDataForParams:nil];
+    }
+}
+
 #pragma mark Creating elements
+
+- (void)createLoadingSpinner {
+    UIActivityIndicatorView *ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    [ai startAnimating];
+    UIBarButtonItem *loading = [[UIBarButtonItem alloc] initWithCustomView:ai];
+    [self.navigationItem setRightBarButtonItem:loading animated:YES];
+}
 
 - (void)createSearchBarWithSearchOptionTitles:(NSArray *)searchOptions {
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
@@ -158,7 +188,6 @@
     if (searchOptions) {
         [_searchBar setScopeButtonTitles:searchOptions];
     }
-    
 }
 
 - (void)createSearchBar {
@@ -189,6 +218,7 @@
 
 - (void)createRefreshView {
     _refreshControl = [[UIRefreshControl alloc] init];
+    [_refreshControl addTarget:self action:@selector(reloadData) forControlEvents:UIControlEventValueChanged];
     [_tableView addSubview:_refreshControl];
 }
 
@@ -298,9 +328,7 @@
         [cell.cellImageView setImage:image];
         if (!image) {
             [[FTImageCache sharedCache] imageForURL:[NSURL URLWithString:url] success:^(UIImage *image) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-                });
+                [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
             } failure:^(NSError *error) {
                 
             } progress:^(CGFloat progress) {
@@ -311,14 +339,8 @@
 }
 
 - (FTBasicCell *)categoryCellForTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellId = @"categoryCellId";
-    FTBasicCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if (!cell) {
-        cell = [[FTBasicCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
-    }
     NSDictionary *category = [_categoryData objectAtIndex:indexPath.row];
-    [cell.textLabel setText:[category objectForKey:@"name"]];
-    return cell;
+    return [FTCategoryCell categoryCellForTable:tableView withTitle:[category objectForKey:@"name"] andData:category];
 }
 
 - (FTArtCell *)artCellForTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath {

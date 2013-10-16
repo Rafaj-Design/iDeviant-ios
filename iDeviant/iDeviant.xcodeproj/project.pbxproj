@@ -127,6 +127,23 @@
 		15C519F6180EB15300ADDF15 /* FTHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519F4180EB15300ADDF15 /* FTHeaderView.m */; };
 		15C519FA180EB16F00ADDF15 /* FTDeviationsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519F9180EB16F00ADDF15 /* FTDeviationsHeaderView.m */; };
 		15C519FB180EB16F00ADDF15 /* FTDeviationsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519F9180EB16F00ADDF15 /* FTDeviationsHeaderView.m */; };
+		15C51A00180EC8F500ADDF15 /* FTButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519FF180EC8F500ADDF15 /* FTButton.m */; };
+		15C51A01180EC8F500ADDF15 /* FTButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519FF180EC8F500ADDF15 /* FTButton.m */; };
+		15C51A05180EC90E00ADDF15 /* FTStarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C51A04180EC90E00ADDF15 /* FTStarButton.m */; };
+		15C51A06180EC90E00ADDF15 /* FTStarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C51A04180EC90E00ADDF15 /* FTStarButton.m */; };
+		15C51A0A180ECA5200ADDF15 /* FTCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C51A09180ECA5200ADDF15 /* FTCategoryCell.m */; };
+		15C51A0B180ECA5200ADDF15 /* FTCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C51A09180ECA5200ADDF15 /* FTCategoryCell.m */; };
+		15C51A46180ECDAB00ADDF15 /* FAImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C51A25180ECDAB00ADDF15 /* FAImageView.m */; };
+		15C51A47180ECDAB00ADDF15 /* FAImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C51A25180ECDAB00ADDF15 /* FAImageView.m */; };
+		15C51A4A180ECDAB00ADDF15 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C51A28180ECDAB00ADDF15 /* NSString+FontAwesome.m */; };
+		15C51A4B180ECDAB00ADDF15 /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C51A28180ECDAB00ADDF15 /* NSString+FontAwesome.m */; };
+		15C51A4E180ECDAB00ADDF15 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15C51A2B180ECDAB00ADDF15 /* FontAwesome.ttf */; };
+		15C51A50180ECDAB00ADDF15 /* UIFont+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C51A2D180ECDAB00ADDF15 /* UIFont+FontAwesome.m */; };
+		15C51A51180ECDAB00ADDF15 /* UIFont+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C51A2D180ECDAB00ADDF15 /* UIFont+FontAwesome.m */; };
+		15C51A59180ED1AF00ADDF15 /* FTFavorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C51A58180ED1AF00ADDF15 /* FTFavorites.m */; };
+		15C51A5A180ED1AF00ADDF15 /* FTFavorites.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C51A58180ED1AF00ADDF15 /* FTFavorites.m */; };
+		15C51A5E180EE43100ADDF15 /* FTDeviationsListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C51A5D180EE43100ADDF15 /* FTDeviationsListingViewController.m */; };
+		15C51A5F180EE43100ADDF15 /* FTDeviationsListingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C51A5D180EE43100ADDF15 /* FTDeviationsListingViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -297,6 +314,23 @@
 		15C519F4180EB15300ADDF15 /* FTHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTHeaderView.m; sourceTree = "<group>"; };
 		15C519F8180EB16F00ADDF15 /* FTDeviationsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDeviationsHeaderView.h; sourceTree = "<group>"; };
 		15C519F9180EB16F00ADDF15 /* FTDeviationsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDeviationsHeaderView.m; sourceTree = "<group>"; };
+		15C519FE180EC8F500ADDF15 /* FTButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTButton.h; sourceTree = "<group>"; };
+		15C519FF180EC8F500ADDF15 /* FTButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTButton.m; sourceTree = "<group>"; };
+		15C51A03180EC90E00ADDF15 /* FTStarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTStarButton.h; sourceTree = "<group>"; };
+		15C51A04180EC90E00ADDF15 /* FTStarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTStarButton.m; sourceTree = "<group>"; };
+		15C51A08180ECA5200ADDF15 /* FTCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCategoryCell.h; sourceTree = "<group>"; };
+		15C51A09180ECA5200ADDF15 /* FTCategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCategoryCell.m; sourceTree = "<group>"; };
+		15C51A24180ECDAB00ADDF15 /* FAImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAImageView.h; sourceTree = "<group>"; };
+		15C51A25180ECDAB00ADDF15 /* FAImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAImageView.m; sourceTree = "<group>"; };
+		15C51A27180ECDAB00ADDF15 /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontAwesome.h"; sourceTree = "<group>"; };
+		15C51A28180ECDAB00ADDF15 /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FontAwesome.m"; sourceTree = "<group>"; };
+		15C51A2B180ECDAB00ADDF15 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		15C51A2C180ECDAB00ADDF15 /* UIFont+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+FontAwesome.h"; sourceTree = "<group>"; };
+		15C51A2D180ECDAB00ADDF15 /* UIFont+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+FontAwesome.m"; sourceTree = "<group>"; };
+		15C51A57180ED1AF00ADDF15 /* FTFavorites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTFavorites.h; sourceTree = "<group>"; };
+		15C51A58180ED1AF00ADDF15 /* FTFavorites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTFavorites.m; sourceTree = "<group>"; };
+		15C51A5C180EE43100ADDF15 /* FTDeviationsListingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDeviationsListingViewController.h; sourceTree = "<group>"; };
+		15C51A5D180EE43100ADDF15 /* FTDeviationsListingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDeviationsListingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -517,6 +551,7 @@
 		15B1753917F356CF007F480B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				15C519FC180EC8C900ADDF15 /* Buttons */,
 				15C519F1180EB13100ADDF15 /* Headers */,
 				15B1754517F35769007F480B /* Basic */,
 			);
@@ -537,9 +572,8 @@
 		15B1753B17F356DA007F480B /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				15C519EA180DE1C800ADDF15 /* Operations */,
-				15C519E3180DC87100ADDF15 /* FTDownloader.h */,
-				15C519E4180DC87100ADDF15 /* FTDownloader.m */,
+				15C51A56180ED18800ADDF15 /* Favorites */,
+				15C51A55180ED17B00ADDF15 /* Feeds */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -566,6 +600,7 @@
 		15B1753D17F35725007F480B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				15C51A07180ECA1600ADDF15 /* Category */,
 				15C519EC180E031700ADDF15 /* No results */,
 				15B1757E17F36449007F480B /* Home */,
 				15B1758617F48372007F480B /* Art */,
@@ -651,6 +686,7 @@
 		15B1758D17F49B9E007F480B /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				15C51A0C180ECDAB00ADDF15 /* ios-fontawesome */,
 				15C519B1180845BE00ADDF15 /* FTMediaRSSParser */,
 				15C5187E1806F3E100ADDF15 /* AFNetworking */,
 				15B175D517F5A46A007F480B /* MBProgressHUD */,
@@ -745,6 +781,7 @@
 		15B1761F17F5C3AC007F480B /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				15C51A5B180EE40700ADDF15 /* Listing */,
 				15B1762317F5C3F8007F480B /* FTCategoriesViewController.h */,
 				15B1762417F5C3F8007F480B /* FTCategoriesViewController.m */,
 			);
@@ -958,6 +995,92 @@
 			name = Deviations;
 			sourceTree = "<group>";
 		};
+		15C519FC180EC8C900ADDF15 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				15C51A02180EC8FE00ADDF15 /* Star button */,
+				15C519FD180EC8D300ADDF15 /* Basic */,
+			);
+			name = Buttons;
+			sourceTree = "<group>";
+		};
+		15C519FD180EC8D300ADDF15 /* Basic */ = {
+			isa = PBXGroup;
+			children = (
+				15C519FE180EC8F500ADDF15 /* FTButton.h */,
+				15C519FF180EC8F500ADDF15 /* FTButton.m */,
+			);
+			name = Basic;
+			sourceTree = "<group>";
+		};
+		15C51A02180EC8FE00ADDF15 /* Star button */ = {
+			isa = PBXGroup;
+			children = (
+				15C51A03180EC90E00ADDF15 /* FTStarButton.h */,
+				15C51A04180EC90E00ADDF15 /* FTStarButton.m */,
+			);
+			name = "Star button";
+			sourceTree = "<group>";
+		};
+		15C51A07180ECA1600ADDF15 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				15C51A08180ECA5200ADDF15 /* FTCategoryCell.h */,
+				15C51A09180ECA5200ADDF15 /* FTCategoryCell.m */,
+			);
+			name = Category;
+			sourceTree = "<group>";
+		};
+		15C51A0C180ECDAB00ADDF15 /* ios-fontawesome */ = {
+			isa = PBXGroup;
+			children = (
+				15C51A24180ECDAB00ADDF15 /* FAImageView.h */,
+				15C51A25180ECDAB00ADDF15 /* FAImageView.m */,
+				15C51A27180ECDAB00ADDF15 /* NSString+FontAwesome.h */,
+				15C51A28180ECDAB00ADDF15 /* NSString+FontAwesome.m */,
+				15C51A2A180ECDAB00ADDF15 /* Resources */,
+				15C51A2C180ECDAB00ADDF15 /* UIFont+FontAwesome.h */,
+				15C51A2D180ECDAB00ADDF15 /* UIFont+FontAwesome.m */,
+			);
+			path = "ios-fontawesome";
+			sourceTree = "<group>";
+		};
+		15C51A2A180ECDAB00ADDF15 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				15C51A2B180ECDAB00ADDF15 /* FontAwesome.ttf */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		15C51A55180ED17B00ADDF15 /* Feeds */ = {
+			isa = PBXGroup;
+			children = (
+				15C519EA180DE1C800ADDF15 /* Operations */,
+				15C519E3180DC87100ADDF15 /* FTDownloader.h */,
+				15C519E4180DC87100ADDF15 /* FTDownloader.m */,
+			);
+			name = Feeds;
+			sourceTree = "<group>";
+		};
+		15C51A56180ED18800ADDF15 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				15C51A57180ED1AF00ADDF15 /* FTFavorites.h */,
+				15C51A58180ED1AF00ADDF15 /* FTFavorites.m */,
+			);
+			name = Favorites;
+			sourceTree = "<group>";
+		};
+		15C51A5B180EE40700ADDF15 /* Listing */ = {
+			isa = PBXGroup;
+			children = (
+				15C51A5C180EE43100ADDF15 /* FTDeviationsListingViewController.h */,
+				15C51A5D180EE43100ADDF15 /* FTDeviationsListingViewController.m */,
+			);
+			name = Listing;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1051,6 +1174,7 @@
 				15B1753117F355F1007F480B /* Localizable.strings in Resources */,
 				15B1753017F355F1007F480B /* ID_fuerte-logo@2x.png in Resources */,
 				15B174EC17F35504007F480B /* InfoPlist.strings in Resources */,
+				15C51A4E180ECDAB00ADDF15 /* FontAwesome.ttf in Resources */,
 				15B1752F17F355F1007F480B /* ID_fuerte-logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1071,11 +1195,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15C51A4A180ECDAB00ADDF15 /* NSString+FontAwesome.m in Sources */,
 				15B1757817F358B5007F480B /* FTLang.m in Sources */,
 				15B1762517F5C3F8007F480B /* FTCategoriesViewController.m in Sources */,
 				15B175CA17F59632007F480B /* FTDetailImageViewController.m in Sources */,
 				15B174F217F35504007F480B /* FTAppDelegate.m in Sources */,
 				15C519131806F3E100ADDF15 /* AFURLConnectionOperation.m in Sources */,
+				15C51A50180ECDAB00ADDF15 /* UIFont+FontAwesome.m in Sources */,
 				15C519F5180EB15300ADDF15 /* FTHeaderView.m in Sources */,
 				15C519DE180DAA2800ADDF15 /* FTMediaRSSParserFeedCategory.m in Sources */,
 				15B1763517F5C498007F480B /* FTSettingsViewController.m in Sources */,
@@ -1105,11 +1231,13 @@
 				15C519BD180845EB00ADDF15 /* FTMediaRSSParser.m in Sources */,
 				15C5198F1806F3E100ADDF15 /* UIImageView+AFNetworking.m in Sources */,
 				15C5198B1806F3E100ADDF15 /* UIAlertView+AFNetworking.m in Sources */,
+				15C51A46180ECDAB00ADDF15 /* FAImageView.m in Sources */,
 				15B175C517F5820D007F480B /* FTDetailViewController.m in Sources */,
 				15B1756417F357B5007F480B /* NSString+URLTools.m in Sources */,
 				15C519E5180DC87100ADDF15 /* FTDownloader.m in Sources */,
 				15B1762917F5C41C007F480B /* FTDailyDeviationsViewController.m in Sources */,
 				15B1754417F35765007F480B /* FTView.m in Sources */,
+				15C51A0A180ECA5200ADDF15 /* FTCategoryCell.m in Sources */,
 				15B1758117F379D8007F480B /* FTHomeCell.m in Sources */,
 				15B175B517F56186007F480B /* FTImageView.m in Sources */,
 				15C519E8180DE1C300ADDF15 /* FTFeedDownloadOperation.m in Sources */,
@@ -1118,11 +1246,14 @@
 				15C5198D1806F3E100ADDF15 /* UIButton+AFNetworking.m in Sources */,
 				15C519931806F3E100ADDF15 /* UIWebView+AFNetworking.m in Sources */,
 				15C519E2180DAACD00ADDF15 /* FTMediaRSSParserFeedItemCredit.m in Sources */,
+				15C51A05180EC90E00ADDF15 /* FTStarButton.m in Sources */,
 				15C5190D1806F3E100ADDF15 /* AFHTTPSessionManager.m in Sources */,
 				15C519D5180DA76F00ADDF15 /* FTMediaRSSParserFeedInfo.m in Sources */,
 				15C519911806F3E100ADDF15 /* UIProgressView+AFNetworking.m in Sources */,
+				15C51A5E180EE43100ADDF15 /* FTDeviationsListingViewController.m in Sources */,
 				15B1762217F5C3BC007F480B /* FTFavoritesViewController.m in Sources */,
 				15B1754117F35748007F480B /* FTBasicCell.m in Sources */,
+				15C51A59180ED1AF00ADDF15 /* FTFavorites.m in Sources */,
 				15B1761417F5A46A007F480B /* MBProgressHUD.m in Sources */,
 				15B1753817F356CB007F480B /* FTHomeViewController.m in Sources */,
 				15C519151806F3E100ADDF15 /* AFURLRequestSerialization.m in Sources */,
@@ -1130,6 +1261,7 @@
 				15C519CD180DA70E00ADDF15 /* FTMediaRSSParserFeedItemThumbnail.m in Sources */,
 				15B1755A17F357B5007F480B /* NSData+Base64.m in Sources */,
 				15C519171806F3E100ADDF15 /* AFURLResponseSerialization.m in Sources */,
+				15C51A00180EC8F500ADDF15 /* FTButton.m in Sources */,
 				15B1756017F357B5007F480B /* UIView+Effects.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1143,10 +1275,14 @@
 				15C519F0180E033100ADDF15 /* FTNoResultsCell.m in Sources */,
 				15B1758217F379D8007F480B /* FTHomeCell.m in Sources */,
 				15C519901806F3E100ADDF15 /* UIImageView+AFNetworking.m in Sources */,
+				15C51A5F180EE43100ADDF15 /* FTDeviationsListingViewController.m in Sources */,
 				15B1754D17F357A9007F480B /* FTDownload.m in Sources */,
+				15C51A06180EC90E00ADDF15 /* FTStarButton.m in Sources */,
 				15B175AF17F56113007F480B /* FTImageCache.m in Sources */,
+				15C51A01180EC8F500ADDF15 /* FTButton.m in Sources */,
 				15C5198C1806F3E100ADDF15 /* UIAlertView+AFNetworking.m in Sources */,
 				15C5191A1806F3E100ADDF15 /* AFURLSessionManager.m in Sources */,
+				15C51A5A180ED1AF00ADDF15 /* FTFavorites.m in Sources */,
 				15C519BE180845EB00ADDF15 /* FTMediaRSSParser.m in Sources */,
 				15C519121806F3E100ADDF15 /* AFSecurityPolicy.m in Sources */,
 				15C5190A1806F3E100ADDF15 /* AFHTTPRequestOperation.m in Sources */,
@@ -1155,12 +1291,16 @@
 				15C519921806F3E100ADDF15 /* UIProgressView+AFNetworking.m in Sources */,
 				15B1754917F35796007F480B /* FTKeychainObject.m in Sources */,
 				15B1755D17F357B5007F480B /* UIImage+Tools.m in Sources */,
+				15C51A4B180ECDAB00ADDF15 /* NSString+FontAwesome.m in Sources */,
 				15C519F6180EB15300ADDF15 /* FTHeaderView.m in Sources */,
+				15C51A47180ECDAB00ADDF15 /* FAImageView.m in Sources */,
 				15C519941806F3E100ADDF15 /* UIWebView+AFNetworking.m in Sources */,
 				15C5198A1806F3E100ADDF15 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				15C519EB180DE1D800ADDF15 /* FTDownloader.m in Sources */,
+				15C51A51180ECDAB00ADDF15 /* UIFont+FontAwesome.m in Sources */,
 				15C519E9180DE1C300ADDF15 /* FTFeedDownloadOperation.m in Sources */,
 				15B175BB17F5623E007F480B /* GCNetworkReachability.m in Sources */,
+				15C51A0B180ECA5200ADDF15 /* FTCategoryCell.m in Sources */,
 				15C5190E1806F3E100ADDF15 /* AFHTTPSessionManager.m in Sources */,
 				15B1756317F357B5007F480B /* UIView+Layout.m in Sources */,
 				15C519FB180EB16F00ADDF15 /* FTDeviationsHeaderView.m in Sources */,

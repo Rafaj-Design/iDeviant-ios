@@ -1,14 +1,15 @@
 //
-//  FTView.m
+//  FTButton.m
+//  iDeviant
 //
-//  Created by Ondrej Rafaj on 30/08/2013.
+//  Created by Ondrej Rafaj on 16/10/2013.
 //  Copyright (c) 2013 Fuerte Innovations. All rights reserved.
 //
 
-#import "FTView.h"
+#import "FTButton.h"
 
 
-@implementation FTView
+@implementation FTButton
 
 
 #pragma mark Environment
