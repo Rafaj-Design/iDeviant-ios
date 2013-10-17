@@ -6,10 +6,10 @@
 //  Copyright (c) 2013 Fuerte Innovations. All rights reserved.
 //
 
-#import "FTView.h"
+#import "FTBlurView.h"
 
 
-@interface FTHeaderView : FTView
+@interface FTHeaderView : FTBlurView
 
 @property (nonatomic, strong) NSString *title;
 

@@ -16,6 +16,3 @@
 [submodule "iDeviant/Thirdparty/uiimage-from-animated-gif"]
 	path = iDeviant/Thirdparty/uiimage-from-animated-gif
 	url = git@github.com:mayoff/uiimage-from-animated-gif.git
-[submodule "iDeviant/Thirdparty/7blur"]
-	path = iDeviant/Thirdparty/7blur
-	url = git@github.com:justinmfischer/7blur.git

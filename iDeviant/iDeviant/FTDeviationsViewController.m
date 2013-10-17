@@ -94,7 +94,8 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     NSString *withItems = [NSString stringWithFormat:@"%@ %@", FTLangGet(@"Deviations from"), self.title];
     NSString *items = ((self.categoryCode.length <= 1) ? FTLangGet(@"Deviations") : withItems);
-    FTDeviationsHeaderView *dh = [[FTDeviationsHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.width, 56)];
+    FTDeviationsHeaderView *dh = [[FTDeviationsHeaderView alloc] initWithFrame:CGRectMake(0, 60, 320, 56)];
+    [dh setBlurTintColor:[UIColor colorWithHexString:@"C0CDBF"]];
     if (self.categoryData.count > 0) {
         if (self.categoryCode.length <= 1) {
             if (section == 0) {
