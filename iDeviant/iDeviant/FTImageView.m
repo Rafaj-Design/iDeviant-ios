@@ -7,23 +7,11 @@
 //
 
 #import "FTImageView.h"
-#import "FTImageCache.h"
+#import "UIImageView+AFNetworking.h"
 
 
 @implementation FTImageView
 
-
-#pragma mark Loading
-
-- (void)loadImage {
-    [[FTImageCache sharedCache] imageForURL:[NSURL URLWithString:_urlString] success:^(UIImage *image) {
-        [self setImage:image];
-    } failure:^(NSError *error) {
-        
-    } progress:^(CGFloat progress) {
-        NSLog(@"Progress: %f", progress);
-    }];
-}
 
 #pragma mark Initialization
 
@@ -68,7 +56,7 @@
 
 - (void)setUrlString:(NSString *)urlString {
     _urlString = urlString;
-    [self loadImage];
+    [self setImageWithURL:[NSURL URLWithString:_urlString]];
 }
 
 

@@ -9,7 +9,6 @@
 #import "FTViewController.h"
 #import "FTDetailViewController.h"
 #import "FTDownloader.h"
-#import "FTImageCache.h"
 #import "FTBasicCell.h"
 #import "FTNoResultsCell.h"
 #import "FTCategoryCell.h"
@@ -327,6 +326,9 @@
     if ([item.thumbnails count] > 0) {
         NSString *url = [(FTMediaRSSParserFeedItemThumbnail *)[item.thumbnails lastObject] urlString];
         [cell.cellImageView setImageWithURL:[NSURL URLWithString:url]];
+    }
+    else {
+        NSLog(@"Item type: %@", item.content);
     }
 }
 

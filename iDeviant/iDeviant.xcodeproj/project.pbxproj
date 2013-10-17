@@ -60,8 +60,6 @@
 		15B1758217F379D8007F480B /* FTHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1758017F379D8007F480B /* FTHomeCell.m */; };
 		15B1758517F382CE007F480B /* kitten.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 15B1758417F382CE007F480B /* kitten.jpg */; };
 		15B1758917F48426007F480B /* FTArtCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1758817F48426007F480B /* FTArtCell.m */; };
-		15B175AE17F56113007F480B /* FTImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175AD17F56113007F480B /* FTImageCache.m */; };
-		15B175AF17F56113007F480B /* FTImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175AD17F56113007F480B /* FTImageCache.m */; };
 		15B175B517F56186007F480B /* FTImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175B417F56186007F480B /* FTImageView.m */; };
 		15B175BA17F5623E007F480B /* GCNetworkReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175B817F5623E007F480B /* GCNetworkReachability.m */; };
 		15B175BB17F5623E007F480B /* GCNetworkReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175B817F5623E007F480B /* GCNetworkReachability.m */; };
@@ -234,8 +232,6 @@
 		15B1758417F382CE007F480B /* kitten.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kitten.jpg; sourceTree = "<group>"; };
 		15B1758717F48426007F480B /* FTArtCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTArtCell.h; sourceTree = "<group>"; };
 		15B1758817F48426007F480B /* FTArtCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTArtCell.m; sourceTree = "<group>"; };
-		15B175AC17F56113007F480B /* FTImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTImageCache.h; sourceTree = "<group>"; };
-		15B175AD17F56113007F480B /* FTImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTImageCache.m; sourceTree = "<group>"; };
 		15B175B317F56186007F480B /* FTImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTImageView.h; sourceTree = "<group>"; };
 		15B175B417F56186007F480B /* FTImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTImageView.m; sourceTree = "<group>"; };
 		15B175B717F5623E007F480B /* GCNetworkReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCNetworkReachability.h; sourceTree = "<group>"; };
@@ -533,6 +529,7 @@
 		15B1753217F35600007F480B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				15B175C217F581FA007F480B /* Detail */,
 				15B1753517F35620007F480B /* Deviations */,
 				15B1753417F35613007F480B /* Home */,
 				15B1753317F3560A007F480B /* Basic */,
@@ -568,7 +565,6 @@
 		15B1753517F35620007F480B /* Deviations */ = {
 			isa = PBXGroup;
 			children = (
-				15B175C217F581FA007F480B /* Detail */,
 				15B175BE17F581AD007F480B /* FTDeviationsViewController.h */,
 				15B175BF17F581AD007F480B /* FTDeviationsViewController.m */,
 			);
@@ -588,7 +584,6 @@
 		15B1753A17F356D4007F480B /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				15B175D117F5A2AE007F480B /* Image cache */,
 				15B1757C17F358DF007F480B /* Keychain */,
 				15B1757B17F358D8007F480B /* Download */,
 				15B1757A17F358D1007F480B /* Languages */,
@@ -779,15 +774,6 @@
 				15B175D317F5A3A4007F480B /* FTDetailTextViewController.m */,
 			);
 			name = Text;
-			sourceTree = "<group>";
-		};
-		15B175D117F5A2AE007F480B /* Image cache */ = {
-			isa = PBXGroup;
-			children = (
-				15B175AC17F56113007F480B /* FTImageCache.h */,
-				15B175AD17F56113007F480B /* FTImageCache.m */,
-			);
-			name = "Image cache";
 			sourceTree = "<group>";
 		};
 		15B175D517F5A46A007F480B /* MBProgressHUD */ = {
@@ -1255,7 +1241,6 @@
 				15B1763517F5C498007F480B /* FTSettingsViewController.m in Sources */,
 				15B175CF17F598FB007F480B /* FTDetailBasicViewController.m in Sources */,
 				15B175C017F581AD007F480B /* FTDeviationsViewController.m in Sources */,
-				15B175AE17F56113007F480B /* FTImageCache.m in Sources */,
 				15C519191806F3E100ADDF15 /* AFURLSessionManager.m in Sources */,
 				15C519DA180DA82E00ADDF15 /* FTMediaRSSParserFeedItemContent.m in Sources */,
 				15C5190B1806F3E100ADDF15 /* AFHTTPRequestOperationManager.m in Sources */,
@@ -1330,7 +1315,6 @@
 				15C51A5F180EE43100ADDF15 /* FTDeviationsListingViewController.m in Sources */,
 				15B1754D17F357A9007F480B /* FTDownload.m in Sources */,
 				15C51A06180EC90E00ADDF15 /* FTStarButton.m in Sources */,
-				15B175AF17F56113007F480B /* FTImageCache.m in Sources */,
 				15C51A01180EC8F500ADDF15 /* FTButton.m in Sources */,
 				15C5198C1806F3E100ADDF15 /* UIAlertView+AFNetworking.m in Sources */,
 				15C5191A1806F3E100ADDF15 /* AFURLSessionManager.m in Sources */,

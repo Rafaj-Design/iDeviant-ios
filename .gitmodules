@@ -6,7 +6,7 @@
 	url = git@github.com:jdg/MBProgressHUD.git
 [submodule "iDeviant/Thirdparty/AFNetworking"]
 	path = iDeviant/Thirdparty/AFNetworking
-	url = git@github.com:AFNetworking/AFNetworking.git
+	url = git@github.com:rafiki270/AFNetworking.git
 [submodule "iDeviant/Thirdparty/FTMediaRSSParser"]
 	path = iDeviant/Thirdparty/FTMediaRSSParser
 	url = git@github.com:rafiki270/FTMediaRSSParser.git

@@ -13,7 +13,7 @@
 #define kFTKeychainObjectUUID                                       @"FTKeychainObjectUUID"
 
 
-#define kFTKeychainObjectServiceName                            @"com.fuerteint.ijenkins"
+#define kFTKeychainObjectServiceName                            @"com.fuerteint.iDeviant"
 
 #define kFTKeychainObjectDebug                                  NO
 #define kFTKeychainObjectDebugFull                              if (kFTKeychainObjectDebug)
