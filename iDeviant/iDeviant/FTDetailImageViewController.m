@@ -68,7 +68,7 @@
         if (totalBytesExpectedToRead > 0 && totalBytesRead <= totalBytesExpectedToRead) {
             progress = (CGFloat) totalBytesRead / totalBytesExpectedToRead;
         }
-        else {
+        else { 
             progress = (totalBytesRead % 1000000l) / 1000000.0f;
         }
         [super setPreloaderValue:progress];
