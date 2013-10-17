@@ -29,5 +29,11 @@
     [super createAllElements];
 }
 
+#pragma mark Feed settings
+
+- (FTConfigFeedType)feedType {
+    return FTConfigFeedTypeNone;
+}
+
 
 @end

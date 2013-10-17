@@ -16,6 +16,7 @@
     #import <QuartzCore/QuartzCore.h>
     #import <SystemConfiguration/SystemConfiguration.h>
     #import <MobileCoreServices/MobileCoreServices.h>
+    #import "FTConfig.h"
     #import "FTAppDelegate.h"
     #import "FTDownload.h"
     #import "FTLang.h"

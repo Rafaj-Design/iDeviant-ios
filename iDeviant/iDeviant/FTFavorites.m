@@ -11,7 +11,8 @@
 
 @interface FTFavorites ()
 
-@property (nonatomic, readonly) NSMutableArray *favoritesCache;
+@property (nonatomic, readonly) NSMutableArray *popularFavoritesCache;
+@property (nonatomic, readonly) NSMutableArray *newestFavoritesCache;
 
 @end
 
@@ -21,9 +22,9 @@
 
 #pragma mark Filesystem
 
-- (NSString *)pathToFavoritesFile {
+- (NSString *)pathToFavoritesFile:(FTConfigFeedType)feedType {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"favorites.plist"];
+    NSString *path = [[paths objectAtIndex:0] stringByAppendingPathComponent:[NSString stringWithFormat:@"favorites-%ld.plist", feedType]];
     if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
         [[NSArray array] writeToFile:path atomically:YES];
     }
@@ -33,15 +34,16 @@
 #pragma mark Managing Favorites
 
 - (void)save {
-    [_favoritesCache writeToFile:[self pathToFavoritesFile] atomically:YES];
+    [_popularFavoritesCache writeToFile:[self pathToFavoritesFile:FTConfigFeedTypePopular] atomically:YES];
+    [_newestFavoritesCache writeToFile:[self pathToFavoritesFile:FTConfigFeedTypeTimeSorted] atomically:YES];
 }
 
-- (NSArray *)favorites {
-    return _favoritesCache;
+- (NSArray *)favoritesForFeedType:(FTConfigFeedType)feedType {
+    return (feedType == FTConfigFeedTypePopular) ? _popularFavoritesCache : _newestFavoritesCache;
 }
 
-- (BOOL)isCategoryInFavorites:(NSDictionary *)category {
-    for (NSDictionary *cat in _favoritesCache) {
+- (BOOL)isCategoryInFavorites:(NSDictionary *)category forFeedType:(FTConfigFeedType)feedType {
+    for (NSDictionary *cat in [self favoritesForFeedType:feedType]) {
         if ([[category objectForKey:@"path"] isEqualToString:[cat objectForKey:@"path"]]) {
             return YES;
         }
@@ -49,35 +51,35 @@
     return NO;
 }
 
-- (void)addCategoryToFavorites:(NSDictionary *)category {
-    if ([self isCategoryInFavorites:category]) return;
-    [_favoritesCache addObject:category];
+- (void)addCategoryToFavorites:(NSDictionary *)category forFeedType:(FTConfigFeedType)feedType {
+    if ([self isCategoryInFavorites:category forFeedType:feedType]) return;
+    [(NSMutableArray *)[self favoritesForFeedType:feedType] addObject:category];
     [self save];
 }
 
-- (void)removeCategoryFromFavorites:(NSDictionary *)category {
-    if (![self isCategoryInFavorites:category]) return;
-    [_favoritesCache removeObject:category];
+- (void)removeCategoryFromFavorites:(NSDictionary *)category forFeedType:(FTConfigFeedType)feedType {
+    if (![self isCategoryInFavorites:category forFeedType:feedType]) return;
+    [(NSMutableArray *)[self favoritesForFeedType:feedType] removeObject:category];
     [self save];
-    if ([_delegate respondsToSelector:@selector(favorites:didRemoveCategory:)]) {
-        [_delegate favorites:self didRemoveCategory:category];
+    if ([_delegate respondsToSelector:@selector(favorites:didRemoveCategory:withFeedType:)]) {
+        [_delegate favorites:self didRemoveCategory:category withFeedType:feedType];
     }
 }
 
-+ (NSArray *)favorites {
-    return [[FTFavorites sharedFavorites] favorites];
++ (NSArray *)favoritesForFeedType:(FTConfigFeedType)feedType {
+    return [[FTFavorites sharedFavorites] favoritesForFeedType:feedType];
 }
 
-+ (BOOL)isCategoryInFavorites:(NSDictionary *)category {
-    return [[FTFavorites sharedFavorites] isCategoryInFavorites:category];
++ (BOOL)isCategoryInFavorites:(NSDictionary *)category forFeedType:(FTConfigFeedType)feedType {
+    return [[FTFavorites sharedFavorites] isCategoryInFavorites:category forFeedType:feedType];
 }
 
-+ (void)addCategoryToFavorites:(NSDictionary *)category {
-    [[FTFavorites sharedFavorites] addCategoryToFavorites:category];
++ (void)addCategoryToFavorites:(NSDictionary *)category forFeedType:(FTConfigFeedType)feedType {
+    [[FTFavorites sharedFavorites] addCategoryToFavorites:category forFeedType:feedType];
 }
 
-+ (void)removeCategoryFromFavorites:(NSDictionary *)category {
-    [[FTFavorites sharedFavorites] removeCategoryFromFavorites:category];
++ (void)removeCategoryFromFavorites:(NSDictionary *)category forFeedType:(FTConfigFeedType)feedType {
+    [[FTFavorites sharedFavorites] removeCategoryFromFavorites:category forFeedType:feedType];
 }
 
 #pragma mark Initialization
@@ -94,7 +96,8 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _favoritesCache = [NSMutableArray arrayWithContentsOfFile:[self pathToFavoritesFile]];
+        _popularFavoritesCache = [NSMutableArray arrayWithContentsOfFile:[self pathToFavoritesFile:FTConfigFeedTypePopular]];
+        _newestFavoritesCache = [NSMutableArray arrayWithContentsOfFile:[self pathToFavoritesFile:FTConfigFeedTypeTimeSorted]];
     }
     return self;
 }

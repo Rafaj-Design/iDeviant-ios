@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1563DF56180FE133002AE810 /* FTConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 1563DF55180FE133002AE810 /* FTConfig.m */; };
 		15B174E217F35504007F480B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B174E117F35504007F480B /* Foundation.framework */; };
 		15B174E417F35504007F480B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B174E317F35504007F480B /* CoreGraphics.framework */; };
 		15B174E617F35504007F480B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B174E517F35504007F480B /* UIKit.framework */; };
@@ -160,6 +161,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1563DF54180FE133002AE810 /* FTConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTConfig.h; sourceTree = "<group>"; };
+		1563DF55180FE133002AE810 /* FTConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTConfig.m; sourceTree = "<group>"; };
 		15B174DE17F35504007F480B /* iDeviant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iDeviant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15B174E117F35504007F480B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		15B174E317F35504007F480B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -374,6 +377,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1563DF53180FE110002AE810 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				1563DF54180FE133002AE810 /* FTConfig.h */,
+				1563DF55180FE133002AE810 /* FTConfig.m */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
 		15B174D517F35504007F480B = {
 			isa = PBXGroup;
 			children = (
@@ -417,6 +429,7 @@
 			isa = PBXGroup;
 			children = (
 				15B1758D17F49B9E007F480B /* Thirdparty */,
+				1563DF53180FE110002AE810 /* Config */,
 				15B1753C17F356E1007F480B /* Categories */,
 				15B1753B17F356DA007F480B /* Data */,
 				15B1753A17F356D4007F480B /* Libs */,
@@ -1272,6 +1285,7 @@
 				15B1758117F379D8007F480B /* FTHomeCell.m in Sources */,
 				15B175B517F56186007F480B /* FTImageView.m in Sources */,
 				15C519E8180DE1C300ADDF15 /* FTFeedDownloadOperation.m in Sources */,
+				1563DF56180FE133002AE810 /* FTConfig.m in Sources */,
 				15B174FB17F35504007F480B /* FTViewController.m in Sources */,
 				15C519D1180DA73A00ADDF15 /* FTMediaRSSParserFeedItem.m in Sources */,
 				15C5198D1806F3E100ADDF15 /* UIButton+AFNetworking.m in Sources */,

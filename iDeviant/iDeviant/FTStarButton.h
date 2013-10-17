@@ -11,6 +11,7 @@
 
 @interface FTStarButton : FTButton
 
+@property (nonatomic) FTConfigFeedType feedType;
 @property (nonatomic, strong) NSDictionary *categoryData;
 
 

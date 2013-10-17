@@ -39,5 +39,11 @@
     [super getDataForParams:@"boost:popular"];
 }
 
+#pragma mark Getters
+
+- (FTConfigFeedType)feedType {
+    return FTConfigFeedTypePopular;
+}
+
 
 @end

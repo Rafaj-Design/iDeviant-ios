@@ -13,7 +13,7 @@
 
 @protocol FTFavoritesDelegate <NSObject>
 
-- (void)favorites:(FTFavorites *)favorites didRemoveCategory:(NSDictionary *)categoryData;
+- (void)favorites:(FTFavorites *)favorites didRemoveCategory:(NSDictionary *)categoryData withFeedType:(FTConfigFeedType)feedType;
 
 @end
 
@@ -24,10 +24,10 @@
 
 + (FTFavorites *)sharedFavorites;
 
-+ (NSArray *)favorites;
-+ (BOOL)isCategoryInFavorites:(NSDictionary *)category;
-+ (void)addCategoryToFavorites:(NSDictionary *)category;
-+ (void)removeCategoryFromFavorites:(NSDictionary *)category;
++ (NSArray *)favoritesForFeedType:(FTConfigFeedType)feedType;
++ (BOOL)isCategoryInFavorites:(NSDictionary *)category forFeedType:(FTConfigFeedType)feedType;
++ (void)addCategoryToFavorites:(NSDictionary *)category forFeedType:(FTConfigFeedType)feedType;
++ (void)removeCategoryFromFavorites:(NSDictionary *)category forFeedType:(FTConfigFeedType)feedType;
 
 
 @end

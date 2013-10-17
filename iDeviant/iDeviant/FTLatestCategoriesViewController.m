@@ -19,8 +19,8 @@
 
 #pragma mark Getters
 
-- (NSString *)dataSorting {
-    return @"sort:time";
+- (FTConfigFeedType)feedType {
+    return FTConfigFeedTypeTimeSorted;
 }
 
 

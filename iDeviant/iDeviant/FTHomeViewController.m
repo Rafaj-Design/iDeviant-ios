@@ -36,7 +36,7 @@
     [super createAllElements];
     
     [super createTableView];
-    [self createSearchBar];
+    [self createSearchBarWithSearchOptionTitles:@[FTLangGet(@"Popular"), FTLangGet(@"Newest")]];
     [self createSearchController];
 }
 
@@ -51,7 +51,8 @@
 #pragma mark Table view delegate & datasource methods
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 115;
+    if (tableView == self.tableView) return 115;
+    else return [super tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -104,7 +105,17 @@
     }
 }
 
+#pragma mark Feed config
 
+- (FTConfigFeedType)feedType {
+    return [[FTConfig sharedConfig] feedType];
+}
+
+- (void)reloadData {
+    if (self.searchBar.text.length >= 3) {
+        [super getDataForSearchString:self.searchBar.text];
+    }
+}
 
 
 @end

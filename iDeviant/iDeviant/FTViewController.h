@@ -17,7 +17,8 @@
 
 @property (nonatomic, readonly) BOOL isLandscape;
 
-@property (nonatomic, readonly) NSString *dataSorting;
+@property (nonatomic) FTConfigFeedType feedType;
+@property (nonatomic) NSTimeInterval loadingTime;
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) UITableView *tableView;

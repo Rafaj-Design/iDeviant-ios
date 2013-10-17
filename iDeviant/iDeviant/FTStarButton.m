@@ -58,17 +58,17 @@
 
 - (void)setCategoryData:(NSDictionary *)categoryData {
     _categoryData = categoryData;
-    [self setSelected:[FTFavorites isCategoryInFavorites:_categoryData]];
+    [self setSelected:[FTFavorites isCategoryInFavorites:_categoryData forFeedType:_feedType]];
 }
 
 #pragma mark Actions
 
 - (void)didPressButton:(FTStarButton *)sender {
     if (self.selected) {
-        [FTFavorites removeCategoryFromFavorites:_categoryData];
+        [FTFavorites removeCategoryFromFavorites:_categoryData forFeedType:_feedType];
     }
     else {
-        [FTFavorites addCategoryToFavorites:_categoryData];
+        [FTFavorites addCategoryToFavorites:_categoryData forFeedType:_feedType];
     }
 
     [self setSelected:!self.selected];

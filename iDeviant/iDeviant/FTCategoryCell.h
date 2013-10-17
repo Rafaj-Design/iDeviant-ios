@@ -17,6 +17,8 @@ typedef NS_ENUM(NSInteger, FTCategoryCellStatus) {
 
 @interface FTCategoryCell : FTBasicCell
 
+
+@property (nonatomic) FTConfigFeedType feedType;
 @property (nonatomic, strong) NSDictionary *categoryData;
 
 + (FTCategoryCell *)categoryCellForTable:(UITableView *)tableView withTitle:(NSString *)title andData:(NSDictionary *)categoryData;

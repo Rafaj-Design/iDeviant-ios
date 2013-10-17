@@ -9,11 +9,14 @@
 "search"="Search";
 "searchdesc"="Search for Deviations";
 
-"categories"="Categories";
+"categories"="Popular categories";
 "categoriesdesc"="Dig in Deviantart";
 
-"favorites"="Favorites";
-"favoritesdesc"="Your Favourites Collection";
+"categorieslatest"="Newest in categories";
+"categorieslatestdesc"="Dig in Deviantart";
+
+"favorites"="Favorite categories";
+"favoritesdesc"="Your Favourite Categories Collection";
 
 "dailydeviations"="Daily deviations";
 "dailydeviationsdesc"="Newest Deviations";

@@ -38,6 +38,11 @@
 
 - (void)setCategoryData:(NSDictionary *)categoryData {
     _categoryData = categoryData;
+}
+
+- (void)setFeedType:(FTConfigFeedType)feedType {
+    _feedType = feedType;
+    [_starButton setFeedType:_feedType];
     [_starButton setCategoryData:_categoryData];
 }
 

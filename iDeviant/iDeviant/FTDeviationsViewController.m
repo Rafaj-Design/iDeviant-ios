@@ -133,6 +133,7 @@
         if (self.categoryData.count > 0 && indexPath.section == 0) {
             NSDictionary *category = [self.categoryData objectAtIndex:indexPath.row];
             FTDeviationsListingViewController *c = [[FTDeviationsListingViewController alloc] init];
+            [c setFeedType:self.feedType];
             [c setTitle:[category objectForKey:@"name"]];
             if (self.categoryCode) {
                 [c setCategoryCode:[NSString stringWithFormat:@"%@/%@", self.categoryCode, [category objectForKey:@"path"]]];

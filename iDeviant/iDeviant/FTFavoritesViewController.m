@@ -17,12 +17,19 @@
 @implementation FTFavoritesViewController
 
 
+#pragma mark Data
+
+- (void)reloadData {
+    [super setCategoryData:[FTFavorites favoritesForFeedType:[FTConfig sharedConfig].favoritesFeedType]];
+    [self.tableView reloadData];
+}
+
 #pragma mark Initialization
 
 - (void)setupView {
     [super setupView];
     
-    [super setCategoryData:[FTFavorites favorites]];
+    [super setCategoryData:[FTFavorites favoritesForFeedType:[FTConfig sharedConfig].favoritesFeedType]];
     
     [[FTFavorites sharedFavorites] setDelegate:self];
 }
@@ -31,6 +38,8 @@
 
 - (void)createSegmentedDataSortingSelector {
     UISegmentedControl *seg = [[UISegmentedControl alloc] initWithItems:@[FTLangGet(@"Popular"), FTLangGet(@"Newest")]];
+    [seg addTarget:self action:@selector(didSwitchFeedSelector:) forControlEvents:UIControlEventValueChanged];
+    [seg setSelectedSegmentIndex:[FTConfig sharedConfig].favoritesFeedType];
     [seg setFrame:CGRectMake(5, 7, (self.view.width - 10), 24)];
     [seg setAutoresizingWidth];
     
@@ -49,9 +58,16 @@
     [self.navigationItem setRightBarButtonItem:nil];
 }
 
+#pragma mark Actions
+
+- (void)didSwitchFeedSelector:(UISegmentedControl *)sender {
+    [[FTConfig sharedConfig] setFavoritesFeedType:sender.selectedSegmentIndex];
+    [self reloadData];
+}
+
 #pragma mark Favorites delegate
 
-- (void)favorites:(FTFavorites *)favorites didRemoveCategory:(NSDictionary *)categoryData {
+- (void)favorites:(FTFavorites *)favorites didRemoveCategory:(NSDictionary *)categoryData withFeedType:(FTConfigFeedType)feedType {
     NSMutableArray *cats = [NSMutableArray arrayWithArray:super.categoryData];
     [cats removeObject:categoryData];
     [super setCategoryData:cats];

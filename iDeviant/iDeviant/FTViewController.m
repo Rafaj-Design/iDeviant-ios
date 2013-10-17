@@ -85,8 +85,6 @@
     
 }
 
-#pragma mark Data
-
 - (void)didFinishLoading {
     [self.navigationItem setRightBarButtonItem:nil animated:YES];
     if (_refreshControl.isRefreshing) {
@@ -108,11 +106,13 @@
 - (void)getDataForParams:(NSString *)params {
     [self createLoadingSpinner];
     if (!_dataUrl) {
-        _dataUrl = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@", params] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        _dataUrl = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@%@", params, [FTConfig sortStringForFeedType:self.feedType]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     }
+    NSDate *startTime = [NSDate date];
     [FTDownloader downloadFileWithUrl:_dataUrl withProgressBlock:^(CGFloat progress) {
         NSLog(@"Download progress: %.2f", progress);
     } andSuccessBlock:^(id data, NSError *error) {
+        _loadingTime = [[NSDate date] timeIntervalSinceDate:startTime];
         [FTMediaRSSParser parse:data withCompletionHandler:^(FTMediaRSSParserFeedInfo *info, NSArray *items, NSError *error) {
             [self didFinishLoading];
             _data = items;
@@ -127,20 +127,18 @@
 - (void)getDataForSearchString:(NSString *)search andCategory:(NSString *)category {
     [self createLoadingSpinner];
     if (!_dataUrl) {
-        NSString *searchString = @"";
-        if (search) searchString = [NSString stringWithFormat:@"+%@", search];
-        _dataUrl = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@", searchString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        
+        _dataUrl = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@%@", search, [FTConfig sortStringForFeedType:self.feedType]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSString *categoryString = @"";
         if (category && (![category isEqualToString:@""])) {
-#warning Finish boost / sort parameter
-            categoryString = [NSString stringWithFormat:@"in:%@+%@", category, _dataSorting];
+            categoryString = [NSString stringWithFormat:@"+in:%@", category];
             _dataUrl = [_dataUrl stringByAppendingString:categoryString];
         }
 	}
+    NSDate *startTime = [NSDate date];
 	[FTDownloader downloadSingleFileWithUrl:_dataUrl withProgressBlock:^(CGFloat progress) {
         NSLog(@"Download progress: %.2f", progress);
     } andSuccessBlock:^(id data, NSError *error) {
+        _loadingTime = [[NSDate date] timeIntervalSinceDate:startTime];
         [FTMediaRSSParser parse:data withCompletionHandler:^(FTMediaRSSParserFeedInfo *info, NSArray *items, NSError *error) {
             [self didFinishLoading];
             if (_searchBar.text.length >= 3) {
@@ -239,7 +237,7 @@
 - (void)setupView {
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"EFEFF4"]];
     
-    _dataSorting = @"boost:popular";
+    _feedType = FTConfigFeedTypePopular;
 }
 
 - (id)init {
@@ -343,7 +341,9 @@
 
 - (FTBasicCell *)categoryCellForTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *category = [_categoryData objectAtIndex:indexPath.row];
-    return [FTCategoryCell categoryCellForTable:tableView withTitle:[category objectForKey:@"name"] andData:category];
+    FTCategoryCell *cell = [FTCategoryCell categoryCellForTable:tableView withTitle:[category objectForKey:@"name"] andData:category];
+    [cell setFeedType:self.feedType];
+    return cell;
 }
 
 - (FTArtCell *)artCellForTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath {
@@ -415,6 +415,7 @@
 #pragma mark Search controller delegate methods
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
+    _dataUrl = nil;
     _searchIsEnabled = YES;
     if (searchString.length >= 3) {
         [self getDataForSearchString:searchString andCategory:_categoryCode];
@@ -427,7 +428,9 @@
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption {
-    NSLog(@"Search option: %ld", (long)searchOption);
+    _dataUrl = nil;
+    [[FTConfig sharedConfig] setFeedType:searchOption];
+    [self reloadData];
     return YES;
 }
 
