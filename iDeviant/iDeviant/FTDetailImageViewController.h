@@ -8,6 +8,6 @@
 
 #import "FTDetailBasicViewController.h"
 
-@interface FTDetailImageViewController : FTDetailBasicViewController
+@interface FTDetailImageViewController : FTDetailBasicViewController <UIScrollViewDelegate>
 
 @end

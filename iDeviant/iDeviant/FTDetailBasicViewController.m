@@ -40,11 +40,11 @@
 #pragma mark Settings
 
 - (void)setPreloaderValue:(CGFloat)value {
-    [_progressView setProgress:(value / 100)];
+    [_progressView setProgress:value];
     if (_progressView.isHidden) {
         [self showPreloader];
     }
-    if (value == 100) {
+    if (value >= 1) {
         [self hidePreloader];
     }
 }
@@ -67,6 +67,14 @@
     } completion:^(BOOL finished) {
         [_progressView setHidden:YES];
     }];
+}
+
+#pragma mark Initialization
+
+- (void)setupView {
+    [super setupView];
+    
+    [self.view setBackgroundColor:[UIColor blackColor]];
 }
 
 
