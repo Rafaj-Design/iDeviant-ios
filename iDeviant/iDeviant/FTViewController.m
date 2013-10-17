@@ -14,6 +14,7 @@
 #import "FTNoResultsCell.h"
 #import "FTCategoryCell.h"
 #import "GCNetworkReachability.h"
+#import "UIImageView+AFNetworking.h"
 
 
 @interface FTViewController ()
@@ -325,17 +326,7 @@
     
     if ([item.thumbnails count] > 0) {
         NSString *url = [(FTMediaRSSParserFeedItemThumbnail *)[item.thumbnails lastObject] urlString];
-        UIImage *image = [[FTImageCache sharedCache] localImageForURL:[NSURL URLWithString:url]];
-        [cell.cellImageView setImage:image];
-        if (!image) {
-            [[FTImageCache sharedCache] imageForURL:[NSURL URLWithString:url] success:^(UIImage *image) {
-                [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
-            } failure:^(NSError *error) {
-                
-            } progress:^(CGFloat progress) {
-                
-            }];
-        }
+        [cell.cellImageView setImageWithURL:[NSURL URLWithString:url]];
     }
 }
 
