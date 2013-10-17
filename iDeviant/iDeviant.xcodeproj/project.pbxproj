@@ -386,6 +386,13 @@
 			name = Config;
 			sourceTree = "<group>";
 		};
+		1563DF5718101ED4002AE810 /* 7blur */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 7blur;
+			sourceTree = "<group>";
+		};
 		15B174D517F35504007F480B = {
 			isa = PBXGroup;
 			children = (
@@ -710,6 +717,7 @@
 		15B1758D17F49B9E007F480B /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				1563DF5718101ED4002AE810 /* 7blur */,
 				15C51A60180EF4C100ADDF15 /* uiimage-from-animated-gif */,
 				15C51A0C180ECDAB00ADDF15 /* ios-fontawesome */,
 				15C519B1180845BE00ADDF15 /* FTMediaRSSParser */,
