@@ -7,7 +7,7 @@
 //
 
 #import "FTViewController.h"
-#import "FTDetailViewController.h"
+//#import "FTDetailViewController.h"
 #import "FTDownloader.h"
 #import "FTBasicCell.h"
 #import "FTNoResultsCell.h"
@@ -373,11 +373,17 @@
 }
 
 - (void)showDetailFor:(FTMediaRSSParserFeedItem *)item inDataSet:(NSArray *)data {
-    FTDetailViewController *c = [[FTDetailViewController alloc] init];
-    [c setTitle:item.title];
-    [c setItems:data];
-    [c setSelectedIndex:[data indexOfObject:item]];
-    [self.navigationController pushViewController:c animated:YES];
+    NSInteger index = [(_searchIsEnabled ? _searchData : _data) indexOfObject:item];
+    NSLog(@"Current: %ld", (long)index);
+    MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+    [browser setCurrentPhotoIndex:index];
+    [browser setDelegate:self];
+    [browser setDisplayActionButton:YES];
+    [browser setDisplayNavArrows:YES];
+    [browser setZoomPhotosToFill:YES];
+    [browser setCurrentPhotoIndex:1];
+    [browser setCurrentPhotoIndex:index];
+    [self.navigationController pushViewController:browser animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -387,6 +393,32 @@
         FTMediaRSSParserFeedItem *item = [_searchData objectAtIndex:indexPath.row];
         [self showDetailFor:item inDataSet:_searchData];
     }
+}
+
+#pragma mark MWPhotoBrowser delegate methods
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    return (_searchIsEnabled ? _searchData.count : _data.count);
+}
+
+- (id<MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    FTMediaRSSParserFeedItem *item = [(_searchIsEnabled ? _searchData : _data) objectAtIndex:index];
+    return [MWPhoto photoWithURL:[NSURL URLWithString:item.content.urlString]];
+}
+
+- (MWCaptionView *)photoBrowser:(MWPhotoBrowser *)photoBrowser captionViewForPhotoAtIndex:(NSUInteger)index {
+    //FTMediaRSSParserFeedItem *item = [(_searchIsEnabled ? _searchData : _data) objectAtIndex:index];
+    return nil;
+}
+
+- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
+//    UITableView *table = (_searchIsEnabled ? _tableView : _searchController.searchResultsTableView);
+//    NSInteger section = (_searchIsEnabled ? 0 : ((_searchData.count > 0) ? 1 : 0));
+//    [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:section] atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+}
+
+- (void)photoBrowser:(MWPhotoBrowser *)photoBrowser actionButtonPressedForPhotoAtIndex:(NSUInteger)index {
+    
 }
 
 #pragma mark Search bar delegate methods

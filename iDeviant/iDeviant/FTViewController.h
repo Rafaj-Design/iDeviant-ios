@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "FTArtCell.h"
 #import "FTMediaRSSParser.h"
+#import "MWPhotoBrowser.h"
 
 
-@interface FTViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
+@interface FTViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchDisplayDelegate, UISearchBarDelegate, MWPhotoBrowserDelegate>
 
 @property (nonatomic, strong) UIPopoverController *popover;
 
