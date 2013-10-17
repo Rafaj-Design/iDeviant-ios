@@ -72,9 +72,7 @@
             progress = (totalBytesRead % 1000000l) / 1000000.0f;
         }
         [super setPreloaderValue:progress];
-        NSLog(@"Progress: %f", progress);
     } success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        NSLog(@"Success");
         [weakSelf setImage:image];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         NSLog(@"Fail");
