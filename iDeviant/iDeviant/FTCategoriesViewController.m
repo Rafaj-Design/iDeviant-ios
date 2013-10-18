@@ -36,7 +36,7 @@
     [super createSearchController];
     [super createRefreshView];
     
-    [super getDataForParams:@"boost:popular"];
+    [super getFeedData];
 }
 
 #pragma mark Getters

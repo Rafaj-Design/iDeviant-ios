@@ -20,7 +20,7 @@
 - (void)setupView {
     [super setupView];
     
-    [super getDataForParams:@"special%3Apopular&type=deviation"];
+    [super getDataForParams:@"special:popular&type=deviation"];
 }
 
 #pragma mark Creating elements

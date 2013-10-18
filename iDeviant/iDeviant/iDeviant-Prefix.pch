@@ -19,7 +19,6 @@
     #import "MWPreprocessor.h"
     #import "FTConfig.h"
     #import "FTAppDelegate.h"
-    #import "FTDownload.h"
     #import "FTLang.h"
     #import "UIView+Layout.h"
     #import "UIColor+Tools.h"

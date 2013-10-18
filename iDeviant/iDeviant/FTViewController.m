@@ -103,48 +103,24 @@
     }
 }
 
-- (void)getDataForParams:(NSString *)params {
-    [self createLoadingSpinner];
-    if (!_dataUrl) {
-        _dataUrl = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@%@", params, [FTConfig sortStringForFeedType:self.feedType]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    }
+- (void)loadData {
     NSDate *startTime = [NSDate date];
     [FTDownloader downloadFileWithUrl:_dataUrl withProgressBlock:^(CGFloat progress) {
-        NSLog(@"Download progress: %.2f", progress);
+        
     } andSuccessBlock:^(id data, NSError *error) {
         _loadingTime = [[NSDate date] timeIntervalSinceDate:startTime];
         [FTMediaRSSParser parse:data withCompletionHandler:^(FTMediaRSSParserFeedInfo *info, NSArray *items, NSError *error) {
             [self didFinishLoading];
-            _data = items;
-            [_tableView reloadData];
-        }];
-#if (TARGET_IPHONE_SIMULATOR)
-        [self loadFakeData:error];
-#endif
-    }];
-}
-
-- (void)getDataForSearchString:(NSString *)search andCategory:(NSString *)category {
-    [self createLoadingSpinner];
-    if (!_dataUrl) {
-        _dataUrl = [[NSString stringWithFormat:@"http://backend.deviantart.com/rss.xml?q=%@%@", search, [FTConfig sortStringForFeedType:self.feedType]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSString *categoryString = @"";
-        if (category && (![category isEqualToString:@""])) {
-            categoryString = [NSString stringWithFormat:@"+in:%@", category];
-            _dataUrl = [_dataUrl stringByAppendingString:categoryString];
-        }
-	}
-    NSDate *startTime = [NSDate date];
-	[FTDownloader downloadSingleFileWithUrl:_dataUrl withProgressBlock:^(CGFloat progress) {
-        NSLog(@"Download progress: %.2f", progress);
-    } andSuccessBlock:^(id data, NSError *error) {
-        _loadingTime = [[NSDate date] timeIntervalSinceDate:startTime];
-        [FTMediaRSSParser parse:data withCompletionHandler:^(FTMediaRSSParserFeedInfo *info, NSArray *items, NSError *error) {
-            [self didFinishLoading];
-            if (_searchBar.text.length >= 3) {
-                _searchData = items;
-                [_searchController.searchResultsTableView reloadData];
-                [_searchController.searchResultsTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+            if (!_searchIsEnabled) {
+                _data = items;
+                [_tableView reloadData];
+            }
+            else {
+                if (_searchBar.text.length >= 3) {
+                    _searchData = items;
+                    [_searchController.searchResultsTableView reloadData];
+                    [_searchController.searchResultsTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+                }
             }
         }];
 #if (TARGET_IPHONE_SIMULATOR)
@@ -153,8 +129,25 @@
     }];
 }
 
+- (void)getDataForParams:(NSString *)params {
+    [self createLoadingSpinner];
+    if (!_dataUrl) {
+        _dataUrl = [FTDownloader urlStringForParams:params andFeedType:self.feedType];
+    }
+    NSLog(@"Data url: %@", _dataUrl);
+    [self loadData];
+}
+
+- (void)getDataForSearchString:(NSString *)search andCategory:(NSString *)category {
+    [self createLoadingSpinner];
+    if (!_dataUrl) {
+        _dataUrl = [FTDownloader urlStringForSearch:search withCategory:category andFeedType:self.feedType];
+	}
+    [self loadData];
+}
+
 - (void)getDataForCategory:(NSString *)category {
-	[self getDataForParams:[NSString stringWithFormat:@"in:%@+boost:popular", category]];
+	[self getDataForParams:[NSString stringWithFormat:@"in:%@", category]];
 }
 
 - (void)getDataForSearchString:(NSString *)search {
@@ -162,7 +155,7 @@
 }
 
 - (void)getFeedData {
-	[self getDataForSearchString:nil];
+	[self getDataForParams:nil];
 }
 
 - (void)reloadData {
@@ -335,6 +328,14 @@
 - (FTBasicCell *)categoryCellForTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *category = [_categoryData objectAtIndex:indexPath.row];
     FTCategoryCell *cell = [FTCategoryCell categoryCellForTable:tableView withTitle:[category objectForKey:@"name"] andData:category];
+    NSString *path = nil;
+    if (_categoryCode) {
+        path = [NSString stringWithFormat:@"%@/%@", _categoryCode, [category objectForKey:@"path"]];
+    }
+    else {
+        path = [category objectForKey:@"path"];
+    }
+    [cell setFullPath:path];
     [cell setFeedType:self.feedType];
     return cell;
 }
@@ -374,7 +375,6 @@
 
 - (void)showDetailFor:(FTMediaRSSParserFeedItem *)item inDataSet:(NSArray *)data {
     NSInteger index = [(_searchIsEnabled ? _searchData : _data) indexOfObject:item];
-    NSLog(@"Current: %ld", (long)index);
     MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
     [browser setCurrentPhotoIndex:index];
     [browser setDelegate:self];

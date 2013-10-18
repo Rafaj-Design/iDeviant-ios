@@ -17,6 +17,8 @@
 		<false/>
 		<key>path</key>
 		<string>/</string>
+		<key>basicQuery</key>
+		<string>boost:popular</string>
 	</dict>
 	<dict>
 		<key>controller</key>
@@ -33,11 +35,13 @@
 		<false/>
 		<key>path</key>
 		<string>/</string>
+		<key>basicQuery</key>
+		<string>sort:time</string>
 	</dict>
 	<dict>
 		<key>controller</key>
 		<string>FTFavoritesViewController</string>
-		<key>FVRT</key>
+		<key>favorites</key>
 		<true/>
 		<key>description</key>
 		<string>favoritesdesc</string>
@@ -61,6 +65,8 @@
 		<true/>
 		<key>detail</key>
 		<true/>
+		<key>basicQuery</key>
+		<string>special:dd</string>
 	</dict>
 	<dict>
 		<key>controller</key>
@@ -75,6 +81,8 @@
 		<true/>
 		<key>detail</key>
 		<true/>
+		<key>basicQuery</key>
+		<string>special:popular&amp;type=deviation</string>
 	</dict>
 </array>
 </plist>

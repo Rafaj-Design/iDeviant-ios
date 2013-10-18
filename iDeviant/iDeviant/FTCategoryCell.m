@@ -43,6 +43,7 @@
 - (void)setFeedType:(FTConfigFeedType)feedType {
     _feedType = feedType;
     [_starButton setFeedType:_feedType];
+    [_starButton setFullPath:_fullPath];
     [_starButton setCategoryData:_categoryData];
 }
 

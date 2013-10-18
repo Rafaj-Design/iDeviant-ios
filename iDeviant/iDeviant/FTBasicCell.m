@@ -30,7 +30,7 @@
     }
     [self.textLabel setTextColor:[UIColor colorWithHexString:@"353535"]];
     [self.detailTextLabel setTextColor:[UIColor colorWithHexString:@"859482"]];
-    [self.textLabel sizeToFit];
+    //[self.textLabel sizeToFit];
 }
 
 - (CGFloat)cellHeight {

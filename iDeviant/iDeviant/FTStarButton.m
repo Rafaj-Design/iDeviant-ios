@@ -47,6 +47,7 @@
         [_starView setDefaultIconIdentifier:@"icon-star"];
     }
     else {
+        
         [_starView.defaultView setTextColor:[UIColor colorWithHexString:@"454545" andAlpha:0.4]];
         [_starView setDefaultIconIdentifier:@"icon-star-empty"];
     }
@@ -58,7 +59,13 @@
 
 - (void)setCategoryData:(NSDictionary *)categoryData {
     _categoryData = categoryData;
-    [self setSelected:[FTFavorites isCategoryInFavorites:_categoryData forFeedType:_feedType]];
+}
+
+- (void)setFullPath:(NSString *)fullPath {
+    _fullPath = fullPath;
+    NSMutableDictionary *d = [NSMutableDictionary dictionaryWithDictionary:_categoryData];
+    [d setValue:_fullPath forKey:@"fullPath"];
+    [self setSelected:[FTFavorites isCategoryInFavorites:d forFeedType:_feedType]];
 }
 
 #pragma mark Actions
@@ -68,7 +75,9 @@
         [FTFavorites removeCategoryFromFavorites:_categoryData forFeedType:_feedType];
     }
     else {
-        [FTFavorites addCategoryToFavorites:_categoryData forFeedType:_feedType];
+        NSMutableDictionary *d = [NSMutableDictionary dictionaryWithDictionary:_categoryData];
+        [d setValue:_fullPath forKey:@"fullPath"];
+        [FTFavorites addCategoryToFavorites:d forFeedType:_feedType];
     }
 
     [self setSelected:!self.selected];

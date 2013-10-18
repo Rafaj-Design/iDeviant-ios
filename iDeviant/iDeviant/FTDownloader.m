@@ -41,6 +41,26 @@
     return self;
 }
 
+#pragma mark Url building
+
++ (NSString *)urlStringForParams:(NSString *)params andFeedType:(FTConfigFeedType)feedType {
+    if (params) {
+        params = [params stringByAppendingString:@"+"];
+    }
+    else params = @"";
+    return [[NSString stringWithFormat:@"%@%@%@", CONFIG_API_URL, params, [FTConfig sortStringForFeedType:feedType]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+}
+
++ (NSString *)urlStringForSearch:(NSString *)searchTerm withCategory:(NSString *)categoryPath andFeedType:(FTConfigFeedType)feedType {
+    NSString *urlString = [[NSString stringWithFormat:@"%@%@+%@", CONFIG_API_URL, searchTerm, [FTConfig sortStringForFeedType:feedType]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *categoryString = @"";
+    if (categoryPath && (![categoryPath isEqualToString:@""])) {
+        categoryString = [NSString stringWithFormat:@"+in:%@", categoryPath];
+        urlString = [urlString stringByAppendingString:categoryString];
+    }
+    return urlString;
+}
+
 #pragma mark Downloading
 
 - (void)setupOperation:(FTFeedDownloadOperation *)operation forProgressBlock:(void (^)(CGFloat progress))progressHandler andSuccessBlock:(void (^)(id data, NSError *error))successHandler {
@@ -50,7 +70,14 @@
     [operation.responseSerializer setAcceptableContentTypes:types];
     if (progressHandler) {
         [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
-            progressHandler(((100.0f * totalBytesRead) * totalBytesExpectedToRead));
+            CGFloat progress;
+            if (totalBytesExpectedToRead > 0 && totalBytesRead <= totalBytesExpectedToRead) {
+                progress = (CGFloat) totalBytesRead / totalBytesExpectedToRead;
+            }
+            else {
+                progress = (totalBytesRead % 1000000l) / 1000000.0f;
+            }
+            progressHandler(progress);
         }];
     }
     if (successHandler) {

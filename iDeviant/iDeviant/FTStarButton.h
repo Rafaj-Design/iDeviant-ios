@@ -13,6 +13,7 @@
 
 @property (nonatomic) FTConfigFeedType feedType;
 @property (nonatomic, strong) NSDictionary *categoryData;
+@property (nonatomic, strong) NSString *fullPath;
 
 
 @end

@@ -13,6 +13,9 @@
 
 + (FTDownloader *)sharedDownloader;
 
++ (NSString *)urlStringForParams:(NSString *)params andFeedType:(FTConfigFeedType)feedType;
++ (NSString *)urlStringForSearch:(NSString *)searchTerm withCategory:(NSString *)categoryPath andFeedType:(FTConfigFeedType)feedType;
+
 + (void)downloadFileWithUrl:(NSString *)urlString withProgressBlock:(void (^)(CGFloat progress))progressHandler andSuccessBlock:(void (^)(id data, NSError *error))successHandler;
 + (void)downloadSingleFileWithUrl:(NSString *)urlString withProgressBlock:(void (^)(CGFloat progress))progressHandler andSuccessBlock:(void (^)(id data, NSError *error))successHandler;
 

@@ -104,5 +104,11 @@
     return cell;
 }
 
+#pragma mark Feed settings
+
+- (FTConfigFeedType)feedType {
+    return [[FTConfig sharedConfig] favoritesFeedType];
+}
+
 
 @end

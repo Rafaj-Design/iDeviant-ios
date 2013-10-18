@@ -44,7 +44,7 @@
 
 - (BOOL)isCategoryInFavorites:(NSDictionary *)category forFeedType:(FTConfigFeedType)feedType {
     for (NSDictionary *cat in [self favoritesForFeedType:feedType]) {
-        if ([[category objectForKey:@"path"] isEqualToString:[cat objectForKey:@"path"]]) {
+        if ([[category objectForKey:@"fullPath"] isEqualToString:[cat objectForKey:@"fullPath"]]) {
             return YES;
         }
     }

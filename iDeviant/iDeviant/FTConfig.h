@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 
+#define CONFIG_API_URL                                  @"http://backend.deviantart.com/rss.xml?q="
+
+
 typedef NS_ENUM(NSInteger, FTConfigFeedType) {
     FTConfigFeedTypePopular,
     FTConfigFeedTypeTimeSorted,

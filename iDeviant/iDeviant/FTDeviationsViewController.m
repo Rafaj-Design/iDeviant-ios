@@ -37,11 +37,9 @@
 
 - (void)setCategoryData:(NSArray *)categoryData {
     [super setCategoryData:categoryData];
-    //[self.tableView reloadData];
 }
 
 - (void)setCategoryCode:(NSString *)categoryCode {
-    NSLog(@"Category path: %@", categoryCode);
     [super setCategoryCode:categoryCode];
     [super getDataForCategory:categoryCode];
 }
@@ -136,11 +134,16 @@
             FTDeviationsListingViewController *c = [[FTDeviationsListingViewController alloc] init];
             [c setFeedType:self.feedType];
             [c setTitle:[category objectForKey:@"name"]];
-            if (self.categoryCode) {
-                [c setCategoryCode:[NSString stringWithFormat:@"%@/%@", self.categoryCode, [category objectForKey:@"path"]]];
+            if ([category objectForKey:@"fullPath"]) {
+                [c setCategoryCode:[category objectForKey:@"fullPath"]];
             }
             else {
-                [c setCategoryCode:[category objectForKey:@"path"]];
+                if (self.categoryCode) {
+                    [c setCategoryCode:[NSString stringWithFormat:@"%@/%@", self.categoryCode, [category objectForKey:@"path"]]];
+                }
+                else {
+                    [c setCategoryCode:[category objectForKey:@"path"]];
+                }
             }
             [c setCategoryData:[category objectForKey:@"subcategories"]];
             [self.navigationController pushViewController:c animated:YES];
