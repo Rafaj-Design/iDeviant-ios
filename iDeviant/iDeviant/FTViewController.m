@@ -81,6 +81,10 @@
 
 #pragma mark Data
 
+- (NSArray *)datasource {
+    return (_searchIsEnabled ? _searchData : _data);
+}
+
 - (void)fillData {
     
 }
@@ -316,20 +320,6 @@
     return 85;
 }
 
-- (void)configureArtCell:(FTArtCell *)cell forIndexPath:(NSIndexPath *)indexPath inTable:(UITableView *)tableView {
-    FTMediaRSSParserFeedItem *item = [(_searchIsEnabled ? _searchData : _data) objectAtIndex:indexPath.row];
-    [cell.textLabel setText:item.title];
-    [cell.detailTextLabel setText:[NSString stringByStrippingHTML:item.descriptionText]];
-    
-    if ([item.thumbnails count] > 0) {
-        NSString *url = [(FTMediaRSSParserFeedItemThumbnail *)[item.thumbnails lastObject] urlString];
-        [cell.cellImageView setImageWithURL:[NSURL URLWithString:url]];
-    }
-    else {
-        NSLog(@"Item type: %@", item.content);
-    }
-}
-
 - (FTBasicCell *)categoryCellForTableView:(UITableView *)tableView withIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *category = [_categoryData objectAtIndex:indexPath.row];
     FTCategoryCell *cell = [FTCategoryCell categoryCellForTable:tableView withTitle:[category objectForKey:@"name"] andData:category];
@@ -351,7 +341,21 @@
     if (!cell) {
         cell = [[FTArtCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
     }
-    [self configureArtCell:cell forIndexPath:indexPath inTable:tableView];
+    
+    FTMediaRSSParserFeedItem *item = [[self datasource] objectAtIndex:indexPath.row];
+    [cell.textLabel setText:item.title];
+    [cell.detailTextLabel setText:[NSString stringByStrippingHTML:item.descriptionText]];
+    [cell.authorLabel setText:[NSString stringWithFormat:@"%@ %@", FTLangGet(@"by"), item.credit.urlString]];
+    
+    if ([item.thumbnails count] > 0) {
+        NSString *url = [(FTMediaRSSParserFeedItemThumbnail *)[item.thumbnails lastObject] urlString];
+        [cell.cellImageView setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"DA_default"]];
+    }
+    else {
+        NSLog(@"Item type: %@", item.content);
+        [cell.cellImageView setImage:[UIImage imageNamed:@"DA_default"]];
+    }
+    
     return cell;
 }
 
@@ -379,7 +383,7 @@
 }
 
 - (void)showDetailFor:(FTMediaRSSParserFeedItem *)item inDataSet:(NSArray *)data {
-    NSInteger index = [(_searchIsEnabled ? _searchData : _data) indexOfObject:item];
+    NSInteger index = [[self datasource] indexOfObject:item];
     MWPhotoBrowser *browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
     [browser setCurrentPhotoIndex:index];
     [browser setDelegate:self];
@@ -407,12 +411,12 @@
 }
 
 - (id<MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
-    FTMediaRSSParserFeedItem *item = [(_searchIsEnabled ? _searchData : _data) objectAtIndex:index];
+    FTMediaRSSParserFeedItem *item = [[self datasource] objectAtIndex:index];
     return [MWPhoto photoWithURL:[NSURL URLWithString:item.content.urlString]];
 }
 
 - (MWCaptionView *)photoBrowser:(MWPhotoBrowser *)photoBrowser captionViewForPhotoAtIndex:(NSUInteger)index {
-    //FTMediaRSSParserFeedItem *item = [(_searchIsEnabled ? _searchData : _data) objectAtIndex:index];
+    //FTMediaRSSParserFeedItem *item = [[self datasource] objectAtIndex:index];
     return nil;
 }
 

@@ -12,6 +12,7 @@
 
 + (NSString *)serializeParams:(NSDictionary *)params;
 + (NSString *)stringByStrippingHTML:(NSString *)inputString;
+- (NSString *)stringByTrimmingLeadingWhitespace;
 
 
 @end

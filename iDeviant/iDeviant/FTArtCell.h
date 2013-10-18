@@ -8,6 +8,11 @@
 
 #import "FTBasicCell.h"
 
+
 @interface FTArtCell : FTBasicCell
+
+@property (nonatomic, strong) UILabel *dateLabel;
+@property (nonatomic, strong) UILabel *authorLabel;
+
 
 @end
