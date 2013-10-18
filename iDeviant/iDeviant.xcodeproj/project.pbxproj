@@ -68,8 +68,8 @@
 		15B1756117F357B5007F480B /* UIView+Effects.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1755517F357B5007F480B /* UIView+Effects.m */; };
 		15B1756217F357B5007F480B /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1755717F357B5007F480B /* UIView+Layout.m */; };
 		15B1756317F357B5007F480B /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1755717F357B5007F480B /* UIView+Layout.m */; };
-		15B1756417F357B5007F480B /* NSString+URLTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1755917F357B5007F480B /* NSString+URLTools.m */; };
-		15B1756517F357B5007F480B /* NSString+URLTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1755917F357B5007F480B /* NSString+URLTools.m */; };
+		15B1756417F357B5007F480B /* NSString+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1755917F357B5007F480B /* NSString+Tools.m */; };
+		15B1756517F357B5007F480B /* NSString+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1755917F357B5007F480B /* NSString+Tools.m */; };
 		15B1756717F357C5007F480B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B1756617F357C5007F480B /* Security.framework */; };
 		15B1756917F357F5007F480B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B1756817F357F5007F480B /* SystemConfiguration.framework */; };
 		15B1756B17F357FE007F480B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B1756A17F357FE007F480B /* MobileCoreServices.framework */; };
@@ -287,8 +287,8 @@
 		15B1755517F357B5007F480B /* UIView+Effects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Effects.m"; sourceTree = "<group>"; };
 		15B1755617F357B5007F480B /* UIView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Layout.h"; sourceTree = "<group>"; };
 		15B1755717F357B5007F480B /* UIView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Layout.m"; sourceTree = "<group>"; };
-		15B1755817F357B5007F480B /* NSString+URLTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLTools.h"; sourceTree = "<group>"; };
-		15B1755917F357B5007F480B /* NSString+URLTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLTools.m"; sourceTree = "<group>"; };
+		15B1755817F357B5007F480B /* NSString+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Tools.h"; sourceTree = "<group>"; };
+		15B1755917F357B5007F480B /* NSString+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Tools.m"; sourceTree = "<group>"; };
 		15B1756617F357C5007F480B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		15B1756817F357F5007F480B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		15B1756A17F357FE007F480B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -788,8 +788,8 @@
 				15B1755517F357B5007F480B /* UIView+Effects.m */,
 				15B1755617F357B5007F480B /* UIView+Layout.h */,
 				15B1755717F357B5007F480B /* UIView+Layout.m */,
-				15B1755817F357B5007F480B /* NSString+URLTools.h */,
-				15B1755917F357B5007F480B /* NSString+URLTools.m */,
+				15B1755817F357B5007F480B /* NSString+Tools.h */,
+				15B1755917F357B5007F480B /* NSString+Tools.m */,
 				157CE99318114C6100B46ACD /* NSArray+Tools.h */,
 				157CE99418114C6100B46ACD /* NSArray+Tools.m */,
 			);
@@ -1456,7 +1456,7 @@
 				15C5198B1806F3E100ADDF15 /* UIAlertView+AFNetworking.m in Sources */,
 				15C51A46180ECDAB00ADDF15 /* FAImageView.m in Sources */,
 				15B175C517F5820D007F480B /* FTDetailViewController.m in Sources */,
-				15B1756417F357B5007F480B /* NSString+URLTools.m in Sources */,
+				15B1756417F357B5007F480B /* NSString+Tools.m in Sources */,
 				15C519E5180DC87100ADDF15 /* FTDownloader.m in Sources */,
 				15B1762917F5C41C007F480B /* FTDailyDeviationsViewController.m in Sources */,
 				15B1754417F35765007F480B /* FTView.m in Sources */,
@@ -1544,7 +1544,7 @@
 				15C519FB180EB16F00ADDF15 /* FTDeviationsHeaderView.m in Sources */,
 				15C5190C1806F3E100ADDF15 /* AFHTTPRequestOperationManager.m in Sources */,
 				15B1757917F358B5007F480B /* FTLang.m in Sources */,
-				15B1756517F357B5007F480B /* NSString+URLTools.m in Sources */,
+				15B1756517F357B5007F480B /* NSString+Tools.m in Sources */,
 				15B1751017F35504007F480B /* iDeviantTests.m in Sources */,
 				15B1756117F357B5007F480B /* UIView+Effects.m in Sources */,
 				15C519101806F3E100ADDF15 /* AFNetworkReachabilityManager.m in Sources */,

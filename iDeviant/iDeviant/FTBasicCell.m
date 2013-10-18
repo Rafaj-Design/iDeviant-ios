@@ -62,6 +62,10 @@
 
 - (void)setupView {
     [self setBackgroundColor:[UIColor colorWithHexString:@"D6E0D4"]];
+    
+    UIView *selectedView = [[UIView alloc] init];
+    [selectedView setBackgroundColor:[UIColor colorWithHexString:@"D1DACF"]];
+    [self setSelectedBackgroundView:selectedView];
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -80,10 +84,6 @@
     if (accessoryType == UITableViewCellAccessoryDisclosureIndicator) {
         [self.accessoryView setAlpha:0.2];
     }
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
 }
 
 

@@ -7,13 +7,13 @@
 //
 
 #import "FTViewController.h"
-//#import "FTDetailViewController.h"
 #import "FTDownloader.h"
 #import "FTBasicCell.h"
 #import "FTNoResultsCell.h"
 #import "FTCategoryCell.h"
 #import "GCNetworkReachability.h"
 #import "UIImageView+AFNetworking.h"
+#import "NSString+Tools.h"
 
 
 @interface FTViewController ()
@@ -86,10 +86,11 @@
 }
 
 - (void)didFinishLoading {
-    [self.navigationItem setRightBarButtonItem:nil animated:YES];
+    [self createReloadButton];
     if (_refreshControl.isRefreshing) {
         [_refreshControl endRefreshing];
     }
+    
 }
 
 - (void)loadFakeData:(NSError *)error {
@@ -134,7 +135,6 @@
     if (!_dataUrl) {
         _dataUrl = [FTDownloader urlStringForParams:params andFeedType:self.feedType];
     }
-    NSLog(@"Data url: %@", _dataUrl);
     [self loadData];
 }
 
@@ -165,6 +165,11 @@
 }
 
 #pragma mark Creating elements
+
+- (void)createReloadButton {
+    UIBarButtonItem *reload = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reloadData)];
+    [self.navigationItem setRightBarButtonItem:reload animated:YES];
+}
 
 - (void)createLoadingSpinner {
     UIActivityIndicatorView *ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
@@ -314,7 +319,7 @@
 - (void)configureArtCell:(FTArtCell *)cell forIndexPath:(NSIndexPath *)indexPath inTable:(UITableView *)tableView {
     FTMediaRSSParserFeedItem *item = [(_searchIsEnabled ? _searchData : _data) objectAtIndex:indexPath.row];
     [cell.textLabel setText:item.title];
-    [cell.detailTextLabel setText:item.descriptionText];
+    [cell.detailTextLabel setText:[NSString stringByStrippingHTML:item.descriptionText]];
     
     if ([item.thumbnails count] > 0) {
         NSString *url = [(FTMediaRSSParserFeedItemThumbnail *)[item.thumbnails lastObject] urlString];

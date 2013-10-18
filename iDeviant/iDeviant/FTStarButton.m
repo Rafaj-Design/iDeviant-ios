@@ -71,12 +71,12 @@
 #pragma mark Actions
 
 - (void)didPressButton:(FTStarButton *)sender {
+    NSMutableDictionary *d = [NSMutableDictionary dictionaryWithDictionary:_categoryData];
+    [d setValue:_fullPath forKey:@"fullPath"];
     if (self.selected) {
-        [FTFavorites removeCategoryFromFavorites:_categoryData forFeedType:_feedType];
+        [FTFavorites removeCategoryFromFavorites:d forFeedType:_feedType];
     }
     else {
-        NSMutableDictionary *d = [NSMutableDictionary dictionaryWithDictionary:_categoryData];
-        [d setValue:_fullPath forKey:@"fullPath"];
         [FTFavorites addCategoryToFavorites:d forFeedType:_feedType];
     }
 

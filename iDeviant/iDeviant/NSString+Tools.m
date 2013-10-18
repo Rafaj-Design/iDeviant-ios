@@ -1,14 +1,14 @@
 //
-//  NSString+URLTools.m
+//  NSString+Tools.m
 //
 //  Created by Ondrej Rafaj on 16/08/2013.
 //  Copyright (c) 2013 Fuerte Innovations. All rights reserved.
 //
 
-#import "NSString+URLTools.h"
+#import "NSString+Tools.h"
 
 
-@implementation NSString (URLTools)
+@implementation NSString (Tools)
 
 + (NSString *)serializeParams:(NSDictionary *)params {
     NSMutableArray *pairs = [NSMutableArray array];
@@ -32,6 +32,20 @@
         }
     }
     return [pairs componentsJoinedByString:@"&"];
+}
+
++ (NSString *)stringByStrippingHTML:(NSString *)inputString {
+    NSMutableString *outString;
+    if (inputString) {
+        outString = [[NSMutableString alloc] initWithString:inputString];
+        if ([inputString length] > 0) {
+            NSRange r;
+            while ((r = [outString rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound) {
+                [outString deleteCharactersInRange:r];
+            }      
+        }
+    }
+    return outString; 
 }
 
 

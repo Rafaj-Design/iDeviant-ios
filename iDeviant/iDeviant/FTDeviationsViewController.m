@@ -21,16 +21,9 @@
 
 #pragma mark Creating elements
 
-- (void)createReloadButton {
-    UIBarButtonItem *reload = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refresh)];
-    [self.navigationItem setRightBarButtonItem:reload];
-}
-
 - (void)createAllElements {
     [super createAllElements];
     [super createTableView];
-    
-    //[self createReloadButton];
 }
 
 #pragma mark Settings

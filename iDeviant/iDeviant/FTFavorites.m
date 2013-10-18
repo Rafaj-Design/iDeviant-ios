@@ -7,6 +7,7 @@
 //
 
 #import "FTFavorites.h"
+#import "NSArray+Tools.h"
 
 
 @interface FTFavorites ()
@@ -66,6 +67,11 @@
     }
 }
 
+- (void)moveCategoryAtIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex forFeedType:(FTConfigFeedType)feedType {
+    [(NSMutableArray *)[self favoritesForFeedType:feedType] moveObjectAtIndex:fromIndex toIndex:toIndex];
+    [self save];
+}
+
 + (NSArray *)favoritesForFeedType:(FTConfigFeedType)feedType {
     return [[FTFavorites sharedFavorites] favoritesForFeedType:feedType];
 }
@@ -80,6 +86,10 @@
 
 + (void)removeCategoryFromFavorites:(NSDictionary *)category forFeedType:(FTConfigFeedType)feedType {
     [[FTFavorites sharedFavorites] removeCategoryFromFavorites:category forFeedType:feedType];
+}
+
++ (void)moveCategoryAtIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex forFeedType:(FTConfigFeedType)feedType {
+    [[FTFavorites sharedFavorites] moveCategoryAtIndex:fromIndex toIndex:toIndex forFeedType:feedType];
 }
 
 #pragma mark Initialization

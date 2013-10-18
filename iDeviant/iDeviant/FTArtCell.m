@@ -20,7 +20,7 @@
     [self.cellImageView setFrame:CGRectMake(6, 6, 73, 73)];
     [self.cellImageView setBackgroundColor:[UIColor lightGrayColor]];
     
-    [self.cellImageView setImage:[UIImage imageNamed:@"kitten.jpg"]];
+    [self.cellImageView setBackgroundColor:[UIColor colorWithHexString:@"B0C2B4" andAlpha:0.1]];
     
     [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 }

@@ -20,6 +20,7 @@
 @interface NSMutableArray (Tools)
 
 - (void)reverse;
+- (void)moveObjectAtIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex;
 
 
 @end

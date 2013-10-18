@@ -43,5 +43,13 @@
     }
 }
 
+#pragma mark Moving
+
+- (void)moveObjectAtIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex {
+    id object = [self objectAtIndex:fromIndex];
+    [self removeObjectAtIndex:fromIndex];
+    [self insertObject:object atIndex:toIndex];
+}
+
 
 @end

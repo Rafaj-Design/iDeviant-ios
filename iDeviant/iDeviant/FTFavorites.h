@@ -28,6 +28,7 @@
 + (BOOL)isCategoryInFavorites:(NSDictionary *)category forFeedType:(FTConfigFeedType)feedType;
 + (void)addCategoryToFavorites:(NSDictionary *)category forFeedType:(FTConfigFeedType)feedType;
 + (void)removeCategoryFromFavorites:(NSDictionary *)category forFeedType:(FTConfigFeedType)feedType;
++ (void)moveCategoryAtIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex forFeedType:(FTConfigFeedType)feedType;
 
 
 @end

@@ -57,9 +57,8 @@
             }
             else {
                 NSDictionary *cat = [arr objectAtIndex:0];
-                url = [FTDownloader urlStringForParams:@"in:photography/darkroom" andFeedType:feedType];
+                url = [FTDownloader urlStringForParams:[NSString stringWithFormat:@"in:%@", [cat objectForKey:@"fullPath"]] andFeedType:feedType];
             }
-            NSLog(@"Url for favorites: %@", url);
         }
         [FTDownloader downloadFileWithUrl:url withProgressBlock:^(CGFloat progress) {
             
