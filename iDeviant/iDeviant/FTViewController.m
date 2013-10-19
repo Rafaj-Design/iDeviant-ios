@@ -14,6 +14,7 @@
 #import "GCNetworkReachability.h"
 #import "UIImageView+AFNetworking.h"
 #import "NSString+Tools.h"
+#import "NSDate+Formatting.h"
 
 
 @interface FTViewController ()
@@ -345,7 +346,8 @@
     FTMediaRSSParserFeedItem *item = [[self datasource] objectAtIndex:indexPath.row];
     [cell.textLabel setText:item.title];
     [cell.detailTextLabel setText:[NSString stringByStrippingHTML:item.descriptionText]];
-    [cell.authorLabel setText:[NSString stringWithFormat:@"%@ %@", FTLangGet(@"by"), item.credit.urlString]];
+    [cell.dateLabel setText:[item.published relativeDate]];
+    [cell.authorLabel setText:[NSString stringWithFormat:@"%@ %@", FTLangGet(@"by"), item.credit.name]];
     
     if ([item.thumbnails count] > 0) {
         NSString *url = [(FTMediaRSSParserFeedItemThumbnail *)[item.thumbnails lastObject] urlString];

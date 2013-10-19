@@ -14,5 +14,8 @@
 + (NSString *)stringByStrippingHTML:(NSString *)inputString;
 - (NSString *)stringByTrimmingLeadingWhitespace;
 
++ (NSDate *)stringDateFromString:(NSString *)string;
++ (NSString *)stringDateFromDate:(NSDate *)date;
+
 
 @end

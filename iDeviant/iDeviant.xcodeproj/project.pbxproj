@@ -33,6 +33,7 @@
 		157CE9911811475700B46ACD /* DA_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 157CE98F1811475700B46ACD /* DA_default.png */; };
 		157CE9921811475700B46ACD /* DA_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 157CE9901811475700B46ACD /* DA_default@2x.png */; };
 		157CE99518114C6100B46ACD /* NSArray+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 157CE99418114C6100B46ACD /* NSArray+Tools.m */; };
+		157CE99818118E9700B46ACD /* NSDate+Formatting.m in Sources */ = {isa = PBXBuildFile; fileRef = 157CE99718118E9700B46ACD /* NSDate+Formatting.m */; };
 		15B174E217F35504007F480B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B174E117F35504007F480B /* Foundation.framework */; };
 		15B174E417F35504007F480B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B174E317F35504007F480B /* CoreGraphics.framework */; };
 		15B174E617F35504007F480B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B174E517F35504007F480B /* UIKit.framework */; };
@@ -236,6 +237,8 @@
 		157CE9901811475700B46ACD /* DA_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DA_default@2x.png"; sourceTree = "<group>"; };
 		157CE99318114C6100B46ACD /* NSArray+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Tools.h"; sourceTree = "<group>"; };
 		157CE99418114C6100B46ACD /* NSArray+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Tools.m"; sourceTree = "<group>"; };
+		157CE99618118E9700B46ACD /* NSDate+Formatting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Formatting.h"; sourceTree = "<group>"; };
+		157CE99718118E9700B46ACD /* NSDate+Formatting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Formatting.m"; sourceTree = "<group>"; };
 		15B174DE17F35504007F480B /* iDeviant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iDeviant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15B174E117F35504007F480B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		15B174E317F35504007F480B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -778,6 +781,8 @@
 		15B1753C17F356E1007F480B /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				157CE99618118E9700B46ACD /* NSDate+Formatting.h */,
+				157CE99718118E9700B46ACD /* NSDate+Formatting.m */,
 				15B1754E17F357B5007F480B /* NSData+Base64.h */,
 				15B1754F17F357B5007F480B /* NSData+Base64.m */,
 				15B1755017F357B5007F480B /* UIImage+Tools.h */,
@@ -1416,6 +1421,7 @@
 				157CE98518109ECD00B46ACD /* SDWebImagePrefetcher.m in Sources */,
 				15B175CA17F59632007F480B /* FTDetailImageViewController.m in Sources */,
 				15B174F217F35504007F480B /* FTAppDelegate.m in Sources */,
+				157CE99818118E9700B46ACD /* NSDate+Formatting.m in Sources */,
 				15C519131806F3E100ADDF15 /* AFURLConnectionOperation.m in Sources */,
 				15C51A50180ECDAB00ADDF15 /* UIFont+FontAwesome.m in Sources */,
 				15C519F5180EB15300ADDF15 /* FTHeaderView.m in Sources */,

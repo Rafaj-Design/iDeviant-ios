@@ -56,5 +56,22 @@
     return [self substringFromIndex:i];
 }
 
++ (NSDateFormatter *)stringDateFormatter {
+    static NSDateFormatter *formatter = nil;
+    if (formatter == nil) {
+        formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss ZZZ"];
+    }
+    return formatter;
+}
+
++ (NSDate *)stringDateFromString:(NSString *)string {
+    return [[NSString stringDateFormatter] dateFromString:string];
+}
+
++ (NSString *)stringDateFromDate:(NSDate *)date {
+    return [[NSString stringDateFormatter] stringFromDate:date];
+}
+
 
 @end
