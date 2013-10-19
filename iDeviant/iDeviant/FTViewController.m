@@ -141,6 +141,7 @@
     if (!_dataUrl) {
         _dataUrl = [FTDownloader urlStringForParams:params andFeedType:self.feedType];
     }
+    NSLog(@"Data url: %@", _dataUrl);
     [self loadData];
 }
 
@@ -149,6 +150,7 @@
     if (!_dataUrl) {
         _dataUrl = [FTDownloader urlStringForSearch:search withCategory:category andFeedType:self.feedType];
 	}
+    NSLog(@"Search url: %@", _dataUrl);
     [self loadData];
 }
 
@@ -355,7 +357,6 @@
         [cell.cellImageView setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"DA_default"]];
     }
     else {
-        NSLog(@"Item type: %@", item.content);
         [cell.cellImageView setImage:[UIImage imageNamed:@"DA_default"]];
     }
     

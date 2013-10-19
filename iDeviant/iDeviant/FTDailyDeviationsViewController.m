@@ -31,5 +31,11 @@
     [super createAllElements];
 }
 
+#pragma mark Getters
+
+- (FTConfigFeedType)feedType {
+    return FTConfigFeedTypeNone;
+}
+
 
 @end

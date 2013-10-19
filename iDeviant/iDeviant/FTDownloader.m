@@ -45,14 +45,17 @@
 
 + (NSString *)urlStringForParams:(NSString *)params andFeedType:(FTConfigFeedType)feedType {
     if (params) {
-        params = [params stringByAppendingString:@"+"];
+        if (feedType != FTConfigFeedTypeNone) {
+            params = [params stringByAppendingString:@"+"];
+        }
     }
     else params = @"";
     return [[NSString stringWithFormat:@"%@%@%@", CONFIG_API_URL, params, [FTConfig sortStringForFeedType:feedType]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
 + (NSString *)urlStringForSearch:(NSString *)searchTerm withCategory:(NSString *)categoryPath andFeedType:(FTConfigFeedType)feedType {
-    NSString *urlString = [[NSString stringWithFormat:@"%@%@+%@", CONFIG_API_URL, searchTerm, [FTConfig sortStringForFeedType:feedType]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *feedTypeString = [FTConfig sortStringForFeedType:feedType];
+    NSString *urlString = [[NSString stringWithFormat:@"%@%@%@", CONFIG_API_URL, searchTerm, feedTypeString] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *categoryString = @"";
     if (categoryPath && (![categoryPath isEqualToString:@""])) {
         categoryString = [NSString stringWithFormat:@"+in:%@", categoryPath];

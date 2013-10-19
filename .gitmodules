@@ -18,7 +18,7 @@
 	url = git@github.com:mayoff/uiimage-from-animated-gif.git
 [submodule "iDeviant/Thirdparty/MWPhotoBrowser"]
 	path = iDeviant/Thirdparty/MWPhotoBrowser
-	url = git@github.com:mwaterfall/MWPhotoBrowser.git
+	url = git@github.com:rafiki270/MWPhotoBrowser.git
 [submodule "iDeviant/Thirdparty/MWFeedParser"]
 	path = iDeviant/Thirdparty/MWFeedParser
 	url = git@github.com:mwaterfall/MWFeedParser.git
