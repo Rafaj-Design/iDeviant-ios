@@ -198,7 +198,6 @@
 		157CE94218109EB200B46ACD /* MWPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWPhotoBrowser.h; sourceTree = "<group>"; };
 		157CE94318109EB200B46ACD /* MWPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWPhotoBrowser.m; sourceTree = "<group>"; };
 		157CE94418109EB200B46ACD /* MWPhotoProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWPhotoProtocol.h; sourceTree = "<group>"; };
-		157CE94518109EB200B46ACD /* MWPreprocessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWPreprocessor.h; sourceTree = "<group>"; };
 		157CE94618109EB200B46ACD /* MWTapDetectingImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWTapDetectingImageView.h; sourceTree = "<group>"; };
 		157CE94718109EB200B46ACD /* MWTapDetectingImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWTapDetectingImageView.m; sourceTree = "<group>"; };
 		157CE94818109EB200B46ACD /* MWTapDetectingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWTapDetectingView.h; sourceTree = "<group>"; };
@@ -486,7 +485,6 @@
 				157CE94218109EB200B46ACD /* MWPhotoBrowser.h */,
 				157CE94318109EB200B46ACD /* MWPhotoBrowser.m */,
 				157CE94418109EB200B46ACD /* MWPhotoProtocol.h */,
-				157CE94518109EB200B46ACD /* MWPreprocessor.h */,
 				157CE94618109EB200B46ACD /* MWTapDetectingImageView.h */,
 				157CE94718109EB200B46ACD /* MWTapDetectingImageView.m */,
 				157CE94818109EB200B46ACD /* MWTapDetectingView.h */,
