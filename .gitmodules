@@ -19,3 +19,6 @@
 [submodule "iDeviant/Thirdparty/MWPhotoBrowser"]
 	path = iDeviant/Thirdparty/MWPhotoBrowser
 	url = git@github.com:mwaterfall/MWPhotoBrowser.git
+[submodule "iDeviant/Thirdparty/MWFeedParser"]
+	path = iDeviant/Thirdparty/MWFeedParser
+	url = git@github.com:mwaterfall/MWFeedParser.git

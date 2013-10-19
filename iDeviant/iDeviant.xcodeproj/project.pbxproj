@@ -34,6 +34,8 @@
 		157CE9921811475700B46ACD /* DA_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 157CE9901811475700B46ACD /* DA_default@2x.png */; };
 		157CE99518114C6100B46ACD /* NSArray+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 157CE99418114C6100B46ACD /* NSArray+Tools.m */; };
 		157CE99818118E9700B46ACD /* NSDate+Formatting.m in Sources */ = {isa = PBXBuildFile; fileRef = 157CE99718118E9700B46ACD /* NSDate+Formatting.m */; };
+		157CE9E61812FF6200B46ACD /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 157CE9E31812FF6200B46ACD /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		157CE9E71812FF6200B46ACD /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 157CE9E51812FF6200B46ACD /* NSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		15B174E217F35504007F480B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B174E117F35504007F480B /* Foundation.framework */; };
 		15B174E417F35504007F480B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B174E317F35504007F480B /* CoreGraphics.framework */; };
 		15B174E617F35504007F480B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B174E517F35504007F480B /* UIKit.framework */; };
@@ -239,6 +241,10 @@
 		157CE99418114C6100B46ACD /* NSArray+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Tools.m"; sourceTree = "<group>"; };
 		157CE99618118E9700B46ACD /* NSDate+Formatting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Formatting.h"; sourceTree = "<group>"; };
 		157CE99718118E9700B46ACD /* NSDate+Formatting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Formatting.m"; sourceTree = "<group>"; };
+		157CE9E21812FF6200B46ACD /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "GTMNSString+HTML.h"; path = "Classes/GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		157CE9E31812FF6200B46ACD /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "GTMNSString+HTML.m"; path = "Classes/GTMNSString+HTML.m"; sourceTree = "<group>"; };
+		157CE9E41812FF6200B46ACD /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+HTML.h"; path = "Classes/NSString+HTML.h"; sourceTree = "<group>"; };
+		157CE9E51812FF6200B46ACD /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+HTML.m"; path = "Classes/NSString+HTML.m"; sourceTree = "<group>"; };
 		15B174DE17F35504007F480B /* iDeviant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iDeviant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15B174E117F35504007F480B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		15B174E317F35504007F480B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -561,6 +567,17 @@
 				157CE9901811475700B46ACD /* DA_default@2x.png */,
 			);
 			path = Default;
+			sourceTree = "<group>";
+		};
+		157CE9E11812FF2B00B46ACD /* MWFeedParser */ = {
+			isa = PBXGroup;
+			children = (
+				157CE9E21812FF6200B46ACD /* GTMNSString+HTML.h */,
+				157CE9E31812FF6200B46ACD /* GTMNSString+HTML.m */,
+				157CE9E41812FF6200B46ACD /* NSString+HTML.h */,
+				157CE9E51812FF6200B46ACD /* NSString+HTML.m */,
+			);
+			path = MWFeedParser;
 			sourceTree = "<group>";
 		};
 		15B174D517F35504007F480B = {
@@ -892,6 +909,7 @@
 		15B1758D17F49B9E007F480B /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				157CE9E11812FF2B00B46ACD /* MWFeedParser */,
 				157CE93C18109E1400B46ACD /* MWPhotoBrowser */,
 				15C51A60180EF4C100ADDF15 /* uiimage-from-animated-gif */,
 				15C51A0C180ECDAB00ADDF15 /* ios-fontawesome */,
@@ -1467,11 +1485,13 @@
 				15B1762917F5C41C007F480B /* FTDailyDeviationsViewController.m in Sources */,
 				15B1754417F35765007F480B /* FTView.m in Sources */,
 				157CE95018109EB200B46ACD /* MWTapDetectingView.m in Sources */,
+				157CE9E71812FF6200B46ACD /* NSString+HTML.m in Sources */,
 				157CE98818109ECD00B46ACD /* UIImage+MultiFormat.m in Sources */,
 				157CE98918109ECD00B46ACD /* UIImage+WebP.m in Sources */,
 				157CE98118109ECD00B46ACD /* SDWebImageDecoder.m in Sources */,
 				15C51A0A180ECA5200ADDF15 /* FTCategoryCell.m in Sources */,
 				15C51A69180F1D2400ADDF15 /* FTLatestCategoriesViewController.m in Sources */,
+				157CE9E61812FF6200B46ACD /* GTMNSString+HTML.m in Sources */,
 				15B1758117F379D8007F480B /* FTHomeCell.m in Sources */,
 				157CE94D18109EB200B46ACD /* MWPhoto.m in Sources */,
 				15B175B517F56186007F480B /* FTImageView.m in Sources */,

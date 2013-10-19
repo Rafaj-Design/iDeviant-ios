@@ -15,6 +15,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "NSString+Tools.h"
 #import "NSDate+Formatting.h"
+#import "NSString+HTML.h"
 
 
 @interface FTViewController ()
@@ -345,7 +346,7 @@
     
     FTMediaRSSParserFeedItem *item = [[self datasource] objectAtIndex:indexPath.row];
     [cell.textLabel setText:item.title];
-    [cell.detailTextLabel setText:[NSString stringByStrippingHTML:item.descriptionText]];
+    [cell.detailTextLabel setText:[[NSString stringByStrippingHTML:item.descriptionText] stringByDecodingHTMLEntities]];
     [cell.dateLabel setText:[item.published relativeDate]];
     [cell.authorLabel setText:[NSString stringWithFormat:@"%@ %@", FTLangGet(@"by"), item.credit.name]];
     
