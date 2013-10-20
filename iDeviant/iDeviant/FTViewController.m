@@ -416,13 +416,20 @@
 
 - (id<MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
     FTMediaRSSParserFeedItem *item = [[self datasource] objectAtIndex:index];
-    return [MWPhoto photoWithURL:[NSURL URLWithString:item.content.urlString]];
+    if (item.thumbnails.count > 0) {
+        MWPhoto *photo = [MWPhoto photoWithURL:[NSURL URLWithString:item.content.urlString]];
+        [photo setCaption:[NSString stringByStrippingHTML:[item.descriptionText stringByDecodingHTMLEntities]]];
+        return photo;
+    }
+    else {
+        return [MWPhoto photoWithHTML:item.descriptionFull];
+    }
 }
 
-- (MWCaptionView *)photoBrowser:(MWPhotoBrowser *)photoBrowser captionViewForPhotoAtIndex:(NSUInteger)index {
-    //FTMediaRSSParserFeedItem *item = [[self datasource] objectAtIndex:index];
-    return nil;
-}
+//- (MWCaptionView *)photoBrowser:(MWPhotoBrowser *)photoBrowser captionViewForPhotoAtIndex:(NSUInteger)index {
+//    //FTMediaRSSParserFeedItem *item = [[self datasource] objectAtIndex:index];
+//    return nil;
+//}
 
 - (void)photoBrowser:(MWPhotoBrowser *)photoBrowser didDisplayPhotoAtIndex:(NSUInteger)index {
 //    UITableView *table = (_searchIsEnabled ? _tableView : _searchController.searchResultsTableView);
