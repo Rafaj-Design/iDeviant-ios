@@ -22,12 +22,10 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    //[self.textLabel setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.4]];
     [self.textLabel setFont:[UIFont systemFontOfSize:17]];
     [self.textLabel setYOrigin:4];
     [self.textLabel setWidth:(self.width - 130)];
     
-    //[self.detailTextLabel setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.4]];
     [self.detailTextLabel setYOrigin:30];
     [self.detailTextLabel setHeight:30];
     [self.detailTextLabel setNumberOfLines:2];
@@ -44,14 +42,12 @@
 
 - (void)createLabels {
     _dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 66, 150, 14)];
-    [_dateLabel setText:@"1 hour ago"];
     [_dateLabel setTextColor:[UIColor colorWithHexString:@"A4B1A2"]];
     [_dateLabel setBackgroundColor:[UIColor clearColor]];
     [_dateLabel setFont:[UIFont systemFontOfSize:10]];
     [self addSubview:_dateLabel];
     
     _authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 66, 150, 14)];
-    [_authorLabel setText:@"by Ondrej \"The\" Cool"];
     [_authorLabel setTextColor:[UIColor colorWithHexString:@"1E6BAC"]];
     [_authorLabel setBackgroundColor:[UIColor clearColor]];
     [_authorLabel setFont:[UIFont systemFontOfSize:10]];

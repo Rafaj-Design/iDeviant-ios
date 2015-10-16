@@ -352,12 +352,17 @@
     [cell.dateLabel setText:[item.published relativeDate]];
     [cell.authorLabel setText:[NSString stringWithFormat:@"%@ %@", FTLangGet(@"by"), item.credit.name]];
     
-    if ([item.thumbnails count] > 0) {
-        NSString *url = [(FTMediaRSSParserFeedItemThumbnail *)[item.thumbnails lastObject] urlString];
-        [cell.cellImageView setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"DA_default"]];
+    if (item.rating == FTMediaRSSParserFeedItemDARatingAdult) {
+        [cell.cellImageView setImage:[UIImage imageNamed:@"DA_adult"]];
     }
     else {
-        [cell.cellImageView setImage:[UIImage imageNamed:@"DA_default"]];
+        if ([item.thumbnails count] > 0) {
+            NSString *url = [(FTMediaRSSParserFeedItemThumbnail *)[item.thumbnails lastObject] urlString];
+            [cell.cellImageView setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"DA_default"]];
+        }
+        else {
+            [cell.cellImageView setImage:[UIImage imageNamed:@"DA_default"]];
+        }
     }
     
     return cell;
@@ -416,13 +421,19 @@
 
 - (id<MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
     FTMediaRSSParserFeedItem *item = [[self datasource] objectAtIndex:index];
-    if (item.thumbnails.count > 0) {
-        MWPhoto *photo = [MWPhoto photoWithURL:[NSURL URLWithString:item.content.urlString]];
-        [photo setCaption:[NSString stringByStrippingHTML:[item.descriptionText stringByDecodingHTMLEntities]]];
-        return photo;
+    if (item.rating == FTMediaRSSParserFeedItemDARatingAdult) {
+        return [MWPhoto photoWithImage:[UIImage imageNamed:@"DA_adult"]];
     }
     else {
-        return [MWPhoto photoWithURL:nil];
+        MWPhoto *photo = nil;
+        if (item.thumbnails.count > 0) {
+            photo = [MWPhoto photoWithURL:[NSURL URLWithString:item.content.urlString]];
+        }
+        else {
+            photo = [MWPhoto photoWithURL:nil];
+        }
+        [photo setCaption:[NSString stringByStrippingHTML:[item.descriptionText stringByDecodingHTMLEntities]]];
+        return photo;
     }
 }
 

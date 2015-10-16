@@ -13,8 +13,6 @@
 		155007001BD10393003BF5B5 /* LUIDataFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 155006FF1BD10393003BF5B5 /* LUIDataFramework.framework */; };
 		1563DF56180FE133002AE810 /* FTConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 1563DF55180FE133002AE810 /* FTConfig.m */; };
 		1563DF61181022E9002AE810 /* FTBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1563DF60181022E9002AE810 /* FTBlurView.m */; };
-		157CE9911811475700B46ACD /* DA_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 157CE98F1811475700B46ACD /* DA_default.png */; };
-		157CE9921811475700B46ACD /* DA_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 157CE9901811475700B46ACD /* DA_default@2x.png */; };
 		157CE99518114C6100B46ACD /* NSArray+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 157CE99418114C6100B46ACD /* NSArray+Tools.m */; };
 		157CE99818118E9700B46ACD /* NSDate+Formatting.m in Sources */ = {isa = PBXBuildFile; fileRef = 157CE99718118E9700B46ACD /* NSDate+Formatting.m */; };
 		157CE9E61812FF6200B46ACD /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 157CE9E31812FF6200B46ACD /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -34,9 +32,6 @@
 		15B1751017F35504007F480B /* iDeviantTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1750F17F35504007F480B /* iDeviantTests.m */; };
 		15B1752D17F355F1007F480B /* Categories.plist in Resources */ = {isa = PBXBuildFile; fileRef = 15B1751B17F355F1007F480B /* Categories.plist */; };
 		15B1752E17F355F1007F480B /* Home.plist in Resources */ = {isa = PBXBuildFile; fileRef = 15B1751C17F355F1007F480B /* Home.plist */; };
-		15B1752F17F355F1007F480B /* ID_fuerte-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B1752017F355F1007F480B /* ID_fuerte-logo.png */; };
-		15B1753017F355F1007F480B /* ID_fuerte-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15B1752117F355F1007F480B /* ID_fuerte-logo@2x.png */; };
-		15B1753117F355F1007F480B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 15B1752317F355F1007F480B /* Localizable.strings */; };
 		15B1753817F356CB007F480B /* FTHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1753717F356CB007F480B /* FTHomeViewController.m */; };
 		15B1754117F35748007F480B /* FTBasicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1754017F35748007F480B /* FTBasicCell.m */; };
 		15B1754417F35765007F480B /* FTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1754317F35765007F480B /* FTView.m */; };
@@ -66,7 +61,6 @@
 		15B1757917F358B5007F480B /* FTLang.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1757717F358B5007F480B /* FTLang.m */; };
 		15B1758117F379D8007F480B /* FTHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1758017F379D8007F480B /* FTHomeCell.m */; };
 		15B1758217F379D8007F480B /* FTHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1758017F379D8007F480B /* FTHomeCell.m */; };
-		15B1758517F382CE007F480B /* kitten.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 15B1758417F382CE007F480B /* kitten.jpg */; };
 		15B1758917F48426007F480B /* FTArtCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1758817F48426007F480B /* FTArtCell.m */; };
 		15B175B517F56186007F480B /* FTImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175B417F56186007F480B /* FTImageView.m */; };
 		15B175BA17F5623E007F480B /* GCNetworkReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B175B817F5623E007F480B /* GCNetworkReachability.m */; };
@@ -83,7 +77,6 @@
 		15B1763117F5C483007F480B /* FTPopularViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1763017F5C483007F480B /* FTPopularViewController.m */; };
 		15B1763517F5C498007F480B /* FTSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1763417F5C498007F480B /* FTSettingsViewController.m */; };
 		15BD0BE81BD10C0500313259 /* LiveUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15BD0BE71BD10C0500313259 /* LiveUI.bundle */; };
-		15C519AF1808446100ADDF15 /* data.xml in Resources */ = {isa = PBXBuildFile; fileRef = 15C519AE1808446100ADDF15 /* data.xml */; };
 		15C519B01808446100ADDF15 /* data.xml in Resources */ = {isa = PBXBuildFile; fileRef = 15C519AE1808446100ADDF15 /* data.xml */; };
 		15C519BD180845EB00ADDF15 /* FTMediaRSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519BC180845EB00ADDF15 /* FTMediaRSSParser.m */; };
 		15C519BE180845EB00ADDF15 /* FTMediaRSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519BC180845EB00ADDF15 /* FTMediaRSSParser.m */; };
@@ -147,8 +140,6 @@
 		1563DF55180FE133002AE810 /* FTConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTConfig.m; sourceTree = "<group>"; };
 		1563DF5F181022E9002AE810 /* FTBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTBlurView.h; sourceTree = "<group>"; };
 		1563DF60181022E9002AE810 /* FTBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTBlurView.m; sourceTree = "<group>"; };
-		157CE98F1811475700B46ACD /* DA_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DA_default.png; sourceTree = "<group>"; };
-		157CE9901811475700B46ACD /* DA_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DA_default@2x.png"; sourceTree = "<group>"; };
 		157CE99318114C6100B46ACD /* NSArray+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Tools.h"; sourceTree = "<group>"; };
 		157CE99418114C6100B46ACD /* NSArray+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Tools.m"; sourceTree = "<group>"; };
 		157CE99618118E9700B46ACD /* NSDate+Formatting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Formatting.h"; sourceTree = "<group>"; };
@@ -158,7 +149,7 @@
 		157CE9E41812FF6200B46ACD /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+HTML.h"; path = "Classes/NSString+HTML.h"; sourceTree = "<group>"; };
 		157CE9E51812FF6200B46ACD /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+HTML.m"; path = "Classes/NSString+HTML.m"; sourceTree = "<group>"; };
 		158815541813DC2600748B70 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
-		158815561813DDCA00748B70 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		158815561813DDCA00748B70 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Images/Images.xcassets; sourceTree = "<group>"; };
 		15B174DE17F35504007F480B /* iDeviant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iDeviant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15B174E117F35504007F480B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		15B174E317F35504007F480B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -178,17 +169,6 @@
 		15B1750F17F35504007F480B /* iDeviantTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iDeviantTests.m; sourceTree = "<group>"; };
 		15B1751B17F355F1007F480B /* Categories.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Categories.plist; sourceTree = "<group>"; };
 		15B1751C17F355F1007F480B /* Home.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Home.plist; sourceTree = "<group>"; };
-		15B1752017F355F1007F480B /* ID_fuerte-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ID_fuerte-logo.png"; sourceTree = "<group>"; };
-		15B1752117F355F1007F480B /* ID_fuerte-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ID_fuerte-logo@2x.png"; sourceTree = "<group>"; };
-		15B1752417F355F1007F480B /* af */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = af; path = af.lproj/Localizable.strings; sourceTree = "<group>"; };
-		15B1752517F355F1007F480B /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
-		15B1752617F355F1007F480B /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		15B1752717F355F1007F480B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		15B1752817F355F1007F480B /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
-		15B1752917F355F1007F480B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		15B1752A17F355F1007F480B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
-		15B1752B17F355F1007F480B /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
-		15B1752C17F355F1007F480B /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Localizable.strings; sourceTree = "<group>"; };
 		15B1753617F356CB007F480B /* FTHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTHomeViewController.h; sourceTree = "<group>"; };
 		15B1753717F356CB007F480B /* FTHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTHomeViewController.m; sourceTree = "<group>"; };
 		15B1753F17F35748007F480B /* FTBasicCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTBasicCell.h; sourceTree = "<group>"; };
@@ -197,8 +177,6 @@
 		15B1754317F35765007F480B /* FTView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTView.m; sourceTree = "<group>"; };
 		15B1754617F35796007F480B /* FTKeychainObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTKeychainObject.h; sourceTree = "<group>"; };
 		15B1754717F35796007F480B /* FTKeychainObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTKeychainObject.m; sourceTree = "<group>"; };
-		15B1754A17F357A9007F480B /* FTDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDownload.h; sourceTree = "<group>"; };
-		15B1754B17F357A9007F480B /* FTDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDownload.m; sourceTree = "<group>"; };
 		15B1754E17F357B5007F480B /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		15B1754F17F357B5007F480B /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		15B1755017F357B5007F480B /* UIImage+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Tools.h"; sourceTree = "<group>"; };
@@ -223,7 +201,6 @@
 		15B1757717F358B5007F480B /* FTLang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLang.m; sourceTree = "<group>"; };
 		15B1757F17F379D8007F480B /* FTHomeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTHomeCell.h; sourceTree = "<group>"; };
 		15B1758017F379D8007F480B /* FTHomeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTHomeCell.m; sourceTree = "<group>"; };
-		15B1758417F382CE007F480B /* kitten.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kitten.jpg; sourceTree = "<group>"; };
 		15B1758717F48426007F480B /* FTArtCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTArtCell.h; sourceTree = "<group>"; };
 		15B1758817F48426007F480B /* FTArtCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTArtCell.m; sourceTree = "<group>"; };
 		15B175B317F56186007F480B /* FTImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTImageView.h; sourceTree = "<group>"; };
@@ -357,24 +334,6 @@
 			name = Config;
 			sourceTree = "<group>";
 		};
-		157CE98D1811351D00B46ACD /* Download */ = {
-			isa = PBXGroup;
-			children = (
-				15B1754A17F357A9007F480B /* FTDownload.h */,
-				15B1754B17F357A9007F480B /* FTDownload.m */,
-			);
-			name = Download;
-			sourceTree = "<group>";
-		};
-		157CE98E1811475700B46ACD /* Default */ = {
-			isa = PBXGroup;
-			children = (
-				157CE98F1811475700B46ACD /* DA_default.png */,
-				157CE9901811475700B46ACD /* DA_default@2x.png */,
-			);
-			path = Default;
-			sourceTree = "<group>";
-		};
 		157CE9E11812FF2B00B46ACD /* MWFeedParser */ = {
 			isa = PBXGroup;
 			children = (
@@ -485,11 +444,10 @@
 		15B1751917F355F1007F480B /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				158815561813DDCA00748B70 /* Images.xcassets */,
 				15B1758317F382CE007F480B /* Test */,
 				15B1751A17F355F1007F480B /* Data */,
 				15B1751D17F355F1007F480B /* Fonts */,
-				15B1751E17F355F1007F480B /* Images */,
-				15B1752217F355F1007F480B /* Localization */,
 			);
 			path = Assets;
 			sourceTree = SOURCE_ROOT;
@@ -508,33 +466,6 @@
 			children = (
 			);
 			path = Fonts;
-			sourceTree = "<group>";
-		};
-		15B1751E17F355F1007F480B /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				158815561813DDCA00748B70 /* Images.xcassets */,
-				157CE98E1811475700B46ACD /* Default */,
-				15B1751F17F355F1007F480B /* Fuerte */,
-			);
-			path = Images;
-			sourceTree = "<group>";
-		};
-		15B1751F17F355F1007F480B /* Fuerte */ = {
-			isa = PBXGroup;
-			children = (
-				15B1752017F355F1007F480B /* ID_fuerte-logo.png */,
-				15B1752117F355F1007F480B /* ID_fuerte-logo@2x.png */,
-			);
-			path = Fuerte;
-			sourceTree = "<group>";
-		};
-		15B1752217F355F1007F480B /* Localization */ = {
-			isa = PBXGroup;
-			children = (
-				15B1752317F355F1007F480B /* Localizable.strings */,
-			);
-			path = Localization;
 			sourceTree = "<group>";
 		};
 		15B1753217F35600007F480B /* Controllers */ = {
@@ -679,7 +610,6 @@
 		15B1757B17F358D8007F480B /* Download */ = {
 			isa = PBXGroup;
 			children = (
-				157CE98D1811351D00B46ACD /* Download */,
 				15C51A55180ED17B00ADDF15 /* Feeds */,
 			);
 			name = Download;
@@ -706,7 +636,6 @@
 		15B1758317F382CE007F480B /* Test */ = {
 			isa = PBXGroup;
 			children = (
-				15B1758417F382CE007F480B /* kitten.jpg */,
 				15C519AE1808446100ADDF15 /* data.xml */,
 			);
 			path = Test;
@@ -1175,19 +1104,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15B1758517F382CE007F480B /* kitten.jpg in Resources */,
-				157CE9911811475700B46ACD /* DA_default.png in Resources */,
 				15BD0BE81BD10C0500313259 /* LiveUI.bundle in Resources */,
 				15B1752E17F355F1007F480B /* Home.plist in Resources */,
 				158815571813DDCA00748B70 /* Images.xcassets in Resources */,
-				15C519AF1808446100ADDF15 /* data.xml in Resources */,
-				157CE9921811475700B46ACD /* DA_default@2x.png in Resources */,
 				15B1752D17F355F1007F480B /* Categories.plist in Resources */,
-				15B1753117F355F1007F480B /* Localizable.strings in Resources */,
-				15B1753017F355F1007F480B /* ID_fuerte-logo@2x.png in Resources */,
 				15B174EC17F35504007F480B /* InfoPlist.strings in Resources */,
 				15C51A4E180ECDAB00ADDF15 /* FontAwesome.ttf in Resources */,
-				15B1752F17F355F1007F480B /* ID_fuerte-logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1415,22 +1337,6 @@
 				15B1750D17F35504007F480B /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		15B1752317F355F1007F480B /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				15B1752417F355F1007F480B /* af */,
-				15B1752517F355F1007F480B /* cs */,
-				15B1752617F355F1007F480B /* de */,
-				15B1752717F355F1007F480B /* en */,
-				15B1752817F355F1007F480B /* es */,
-				15B1752917F355F1007F480B /* fr */,
-				15B1752A17F355F1007F480B /* it */,
-				15B1752B17F355F1007F480B /* nl */,
-				15B1752C17F355F1007F480B /* sv */,
-			);
-			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
