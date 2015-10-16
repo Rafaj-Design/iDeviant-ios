@@ -235,7 +235,7 @@
 }
 
 - (BOOL)isExecuting {
-    return _executing;
+    return self.executing;
 }
 
 - (BOOL)isFinished {

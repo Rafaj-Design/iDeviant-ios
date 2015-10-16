@@ -35,11 +35,11 @@
 + (NSString *)sortStringForFeedType:(FTConfigFeedType)feedType {
     switch (feedType) {
         case FTConfigFeedTypePopular:
-            return @"boost:popular";
+            return @"&boost:popular";
             break;
             
         case FTConfigFeedTypeTimeSorted:
-            return @"sort:time";
+            return @"&sort:time";
             break;
             
         default:

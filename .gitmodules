@@ -4,9 +4,6 @@
 [submodule "iDeviant/Thirdparty/MBProgressHUD"]
 	path = iDeviant/Thirdparty/MBProgressHUD
 	url = git@github.com:jdg/MBProgressHUD.git
-[submodule "iDeviant/Thirdparty/AFNetworking"]
-	path = iDeviant/Thirdparty/AFNetworking
-	url = git@github.com:rafiki270/AFNetworking.git
 [submodule "iDeviant/Thirdparty/FTMediaRSSParser"]
 	path = iDeviant/Thirdparty/FTMediaRSSParser
 	url = git@github.com:rafiki270/FTMediaRSSParser.git
@@ -16,9 +13,6 @@
 [submodule "iDeviant/Thirdparty/uiimage-from-animated-gif"]
 	path = iDeviant/Thirdparty/uiimage-from-animated-gif
 	url = git@github.com:mayoff/uiimage-from-animated-gif.git
-[submodule "iDeviant/Thirdparty/MWPhotoBrowser"]
-	path = iDeviant/Thirdparty/MWPhotoBrowser
-	url = git@github.com:rafiki270/MWPhotoBrowser.git
 [submodule "iDeviant/Thirdparty/MWFeedParser"]
 	path = iDeviant/Thirdparty/MWFeedParser
 	url = git@github.com:mwaterfall/MWFeedParser.git

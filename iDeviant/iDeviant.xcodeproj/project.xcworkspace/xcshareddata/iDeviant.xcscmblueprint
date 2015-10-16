@@ -1,0 +1,79 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "20AA4223771B8C71847EA0A2F21F969DDE1BF85E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "D1BF2177069EA0E1B2979BF22292AECF69A93D8E" : 0,
+    "4182765C525509B305166AB949D5935FD5C85212" : 0,
+    "11E4A14DE657962E959580CFD90EA146D53DDF28" : 0,
+    "86EB77D24CACF76270C96E7C76D968A24A278BEB" : 0,
+    "9F9B14DA276794D9192F387F0CC62561009373D0" : 0,
+    "64127EE10B69291112F13290A6171F82E24A7B9B" : 0,
+    "19C70487B7737C94F884B8824084C9DE92091D44" : 0,
+    "20AA4223771B8C71847EA0A2F21F969DDE1BF85E" : 0,
+    "DD20A1A48C66B5213E0FEBB87A95EF51D6C6F3E8" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "370F151F-0356-46AD-B65A-8F2785B94F00",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "D1BF2177069EA0E1B2979BF22292AECF69A93D8E" : "iDeviantiDeviant\/Thirdparty\/MWFeedParser",
+    "4182765C525509B305166AB949D5935FD5C85212" : "iDeviantiDeviant\/Thirdparty\/MBProgressHUD",
+    "11E4A14DE657962E959580CFD90EA146D53DDF28" : "iDeviantiDeviant\/Thirdparty\/ios-fontawesome",
+    "86EB77D24CACF76270C96E7C76D968A24A278BEB" : "iDeviantiDeviant\/Thirdparty\/GCNetworkReachability",
+    "9F9B14DA276794D9192F387F0CC62561009373D0" : "iDeviantiDeviant\/Thirdparty\/MWPhotoBrowser",
+    "64127EE10B69291112F13290A6171F82E24A7B9B" : "iDeviantiDeviant\/Thirdparty\/uiimage-from-animated-gif",
+    "19C70487B7737C94F884B8824084C9DE92091D44" : "iDeviantiDeviant\/Thirdparty\/FTMediaRSSParser",
+    "20AA4223771B8C71847EA0A2F21F969DDE1BF85E" : "iDeviant",
+    "DD20A1A48C66B5213E0FEBB87A95EF51D6C6F3E8" : "iDeviantiDeviant\/Thirdparty\/AFNetworking"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "iDeviant",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "iDeviant\/iDeviant.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:alexdrone\/ios-fontawesome.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "11E4A14DE657962E959580CFD90EA146D53DDF28"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:rafiki270\/FTMediaRSSParser.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "19C70487B7737C94F884B8824084C9DE92091D44"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:FuerteInternational\/iDeviant.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "20AA4223771B8C71847EA0A2F21F969DDE1BF85E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:jdg\/MBProgressHUD.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4182765C525509B305166AB949D5935FD5C85212"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:mayoff\/uiimage-from-animated-gif.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "64127EE10B69291112F13290A6171F82E24A7B9B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:GlennChiu\/GCNetworkReachability.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "86EB77D24CACF76270C96E7C76D968A24A278BEB"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:rafiki270\/MWPhotoBrowser.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9F9B14DA276794D9192F387F0CC62561009373D0"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:mwaterfall\/MWFeedParser.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D1BF2177069EA0E1B2979BF22292AECF69A93D8E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:rafiki270\/AFNetworking.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DD20A1A48C66B5213E0FEBB87A95EF51D6C6F3E8"
+    }
+  ]
+}

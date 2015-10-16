@@ -10,53 +10,61 @@
 	<string>iDeviant</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>201ED3FE-EDD5-4BAA-80AE-04CA56193D48</key>
-		<string>ssh://github.com/FuerteInternational/iDeviant.git</string>
-		<key>2F0AF343-656D-42C6-B35D-19572056B3CF</key>
-		<string>ssh://github.com/mayoff/uiimage-from-animated-gif.git</string>
-		<key>3B82D48C-C758-4A45-9DED-E305D5FD7955</key>
-		<string>ssh://github.com/jdg/MBProgressHUD.git</string>
-		<key>56957E28-8F68-48D0-BF2D-0D907DC9C6B9</key>
-		<string>ssh://github.com/GlennChiu/GCNetworkReachability.git</string>
-		<key>9C4A84A2-476C-4267-BFE9-FC821138D01C</key>
-		<string>ssh://github.com/rafiki270/FTMediaRSSParser.git</string>
-		<key>B027AA4D-1192-4037-91E8-CA8AC06D19CD</key>
-		<string>ssh://github.com/alexdrone/ios-fontawesome.git</string>
-		<key>FDB45EB7-E82F-4DE7-826D-F887B004BF1E</key>
-		<string>ssh://github.com/rafiki270/AFNetworking.git</string>
+		<key>11E4A14DE657962E959580CFD90EA146D53DDF28</key>
+		<string>github.com:alexdrone/ios-fontawesome.git</string>
+		<key>19C70487B7737C94F884B8824084C9DE92091D44</key>
+		<string>github.com:rafiki270/FTMediaRSSParser.git</string>
+		<key>20AA4223771B8C71847EA0A2F21F969DDE1BF85E</key>
+		<string>github.com:FuerteInternational/iDeviant.git</string>
+		<key>4182765C525509B305166AB949D5935FD5C85212</key>
+		<string>github.com:jdg/MBProgressHUD.git</string>
+		<key>64127EE10B69291112F13290A6171F82E24A7B9B</key>
+		<string>github.com:mayoff/uiimage-from-animated-gif.git</string>
+		<key>86EB77D24CACF76270C96E7C76D968A24A278BEB</key>
+		<string>github.com:GlennChiu/GCNetworkReachability.git</string>
+		<key>9F9B14DA276794D9192F387F0CC62561009373D0</key>
+		<string>github.com:rafiki270/MWPhotoBrowser.git</string>
+		<key>D1BF2177069EA0E1B2979BF22292AECF69A93D8E</key>
+		<string>github.com:mwaterfall/MWFeedParser.git</string>
+		<key>DD20A1A48C66B5213E0FEBB87A95EF51D6C6F3E8</key>
+		<string>github.com:rafiki270/AFNetworking.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>iDeviant/iDeviant.xcodeproj/project.xcworkspace</string>
+	<string>iDeviant/iDeviant.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>201ED3FE-EDD5-4BAA-80AE-04CA56193D48</key>
+		<key>11E4A14DE657962E959580CFD90EA146D53DDF28</key>
+		<string>../../..iDeviant/Thirdparty/ios-fontawesome/</string>
+		<key>19C70487B7737C94F884B8824084C9DE92091D44</key>
+		<string>../../..iDeviant/Thirdparty/FTMediaRSSParser/</string>
+		<key>20AA4223771B8C71847EA0A2F21F969DDE1BF85E</key>
 		<string>../../..</string>
-		<key>2F0AF343-656D-42C6-B35D-19572056B3CF</key>
-		<string>../../Thirdparty/uiimage-from-animated-gif</string>
-		<key>3B82D48C-C758-4A45-9DED-E305D5FD7955</key>
-		<string>../../Thirdparty/MBProgressHUD</string>
-		<key>56957E28-8F68-48D0-BF2D-0D907DC9C6B9</key>
-		<string>../../Thirdparty/GCNetworkReachability</string>
-		<key>9C4A84A2-476C-4267-BFE9-FC821138D01C</key>
-		<string>../../Thirdparty/FTMediaRSSParser</string>
-		<key>B027AA4D-1192-4037-91E8-CA8AC06D19CD</key>
-		<string>../../Thirdparty/ios-fontawesome</string>
-		<key>FDB45EB7-E82F-4DE7-826D-F887B004BF1E</key>
-		<string>../../Thirdparty/AFNetworking</string>
+		<key>4182765C525509B305166AB949D5935FD5C85212</key>
+		<string>../../..iDeviant/Thirdparty/MBProgressHUD/</string>
+		<key>64127EE10B69291112F13290A6171F82E24A7B9B</key>
+		<string>../../..iDeviant/Thirdparty/uiimage-from-animated-gif/</string>
+		<key>86EB77D24CACF76270C96E7C76D968A24A278BEB</key>
+		<string>../../..iDeviant/Thirdparty/GCNetworkReachability/</string>
+		<key>9F9B14DA276794D9192F387F0CC62561009373D0</key>
+		<string>../../..iDeviant/Thirdparty/MWPhotoBrowser/</string>
+		<key>D1BF2177069EA0E1B2979BF22292AECF69A93D8E</key>
+		<string>../../..iDeviant/Thirdparty/MWFeedParser/</string>
+		<key>DD20A1A48C66B5213E0FEBB87A95EF51D6C6F3E8</key>
+		<string>../../..iDeviant/Thirdparty/AFNetworking/</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/FuerteInternational/iDeviant.git</string>
+	<string>github.com:FuerteInternational/iDeviant.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>201ED3FE-EDD5-4BAA-80AE-04CA56193D48</string>
+	<string>20AA4223771B8C71847EA0A2F21F969DDE1BF85E</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>FDB45EB7-E82F-4DE7-826D-F887B004BF1E</string>
+			<string>DD20A1A48C66B5213E0FEBB87A95EF51D6C6F3E8</string>
 			<key>IDESourceControlWCCName</key>
 			<string>AFNetworking</string>
 		</dict>
@@ -64,7 +72,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>9C4A84A2-476C-4267-BFE9-FC821138D01C</string>
+			<string>19C70487B7737C94F884B8824084C9DE92091D44</string>
 			<key>IDESourceControlWCCName</key>
 			<string>FTMediaRSSParser</string>
 		</dict>
@@ -72,7 +80,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>56957E28-8F68-48D0-BF2D-0D907DC9C6B9</string>
+			<string>86EB77D24CACF76270C96E7C76D968A24A278BEB</string>
 			<key>IDESourceControlWCCName</key>
 			<string>GCNetworkReachability</string>
 		</dict>
@@ -80,7 +88,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>201ED3FE-EDD5-4BAA-80AE-04CA56193D48</string>
+			<string>20AA4223771B8C71847EA0A2F21F969DDE1BF85E</string>
 			<key>IDESourceControlWCCName</key>
 			<string>iDeviant</string>
 		</dict>
@@ -88,7 +96,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>B027AA4D-1192-4037-91E8-CA8AC06D19CD</string>
+			<string>11E4A14DE657962E959580CFD90EA146D53DDF28</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ios-fontawesome</string>
 		</dict>
@@ -96,7 +104,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>3B82D48C-C758-4A45-9DED-E305D5FD7955</string>
+			<string>4182765C525509B305166AB949D5935FD5C85212</string>
 			<key>IDESourceControlWCCName</key>
 			<string>MBProgressHUD</string>
 		</dict>
@@ -104,7 +112,23 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>2F0AF343-656D-42C6-B35D-19572056B3CF</string>
+			<string>D1BF2177069EA0E1B2979BF22292AECF69A93D8E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MWFeedParser</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9F9B14DA276794D9192F387F0CC62561009373D0</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MWPhotoBrowser</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>64127EE10B69291112F13290A6171F82E24A7B9B</string>
 			<key>IDESourceControlWCCName</key>
 			<string>uiimage-from-animated-gif</string>
 		</dict>

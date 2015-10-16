@@ -126,7 +126,7 @@
                 if (_searchBar.text.length >= 3) {
                     _searchData = items;
                     [_searchController.searchResultsTableView reloadData];
-                    [_searchController.searchResultsTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+                    //[_searchController.searchResultsTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
                 }
             }
         }];
@@ -422,7 +422,7 @@
         return photo;
     }
     else {
-        return [MWPhoto photoWithHTML:item.descriptionFull];
+        return [MWPhoto photoWithURL:nil];
     }
 }
 

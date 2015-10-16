@@ -7,8 +7,8 @@
 //
 
 #import "FTDetailImageViewController.h"
-#import "UIImageView+AFNetworking.h"
-#import "FTDownload.h"
+#import <UIImageView+AFNetworking.h>
+//#import "FTDownload.h"
 
 
 @interface FTDetailImageViewController ()
@@ -63,20 +63,27 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.item.content.urlString]];
     
     __weak typeof(self) weakSelf = self;
-    [[[UIImageView alloc] init] setImageWithURLRequest:request placeholderImage:nil progress:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
-        CGFloat progress;
-        if (totalBytesExpectedToRead > 0 && totalBytesRead <= totalBytesExpectedToRead) {
-            progress = (CGFloat) totalBytesRead / totalBytesExpectedToRead;
-        }
-        else {
-            progress = (totalBytesRead % 1000000l) / 1000000.0f;
-        }
-        [super setPreloaderValue:progress];
-    } success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+    
+    [_imageView setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"DA_default"] success:^void(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
         [weakSelf setImage:image];
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        NSLog(@"Fail");
+    } failure:^void(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        
     }];
+    
+//    [[[UIImageView alloc] init] setImageWithURLRequest:request placeholderImage:nil progress:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
+//        CGFloat progress;
+//        if (totalBytesExpectedToRead > 0 && totalBytesRead <= totalBytesExpectedToRead) {
+//            progress = (CGFloat) totalBytesRead / totalBytesExpectedToRead;
+//        }
+//        else {
+//            progress = (totalBytesRead % 1000000l) / 1000000.0f;
+//        }
+//        [super setPreloaderValue:progress];
+//    } success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+//        [weakSelf setImage:image];
+//    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+//        NSLog(@"Fail");
+//    }];
 }
 
 #pragma merk Gesture recognizer delegate methods

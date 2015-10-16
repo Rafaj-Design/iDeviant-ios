@@ -1,0 +1,13 @@
+platform :ios, '7.1'
+target 'iDeviant', :exclusive => true do
+    #link_with 'Avocado-XFM', 'Avocado-CapitalXtra'
+    pod 'MWPhotoBrowser'
+    pod 'AFNetworking'
+end
+
+target 'iDeviantTests', :exclusive => true do
+    #link_with 'AvocadoTests', 'CapitalXtra-KIF', 'AvocadoIntegrationTests'
+
+     pod 'MWPhotoBrowser'
+     pod 'AFNetworking'
+end
