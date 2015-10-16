@@ -7,12 +7,19 @@
 //
 
 #import "FTAppDelegate.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 #import "FTHomeViewController.h"
 
 
 @implementation FTAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [Fabric with:@[[Crashlytics class]]];
+    
+    [[LUIMain sharedInstance] setDebugMode:YES];
+    [[LUIMain sharedInstance] setApiKey:@"F55B4ADE-B286-4B1D-A9CC-542000C43F76"];
+    
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     _viewController = [[FTHomeViewController alloc] init];
     UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:_viewController];

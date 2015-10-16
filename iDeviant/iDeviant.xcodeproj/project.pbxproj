@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1537701D1BD105AF00D486D1 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1537701B1BD105AF00D486D1 /* Fabric.framework */; };
+		1537701E1BD105AF00D486D1 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1537701C1BD105AF00D486D1 /* Crashlytics.framework */; };
+		155006FE1BD10378003BF5B5 /* LUIFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 155006FD1BD10378003BF5B5 /* LUIFramework.framework */; };
+		155007001BD10393003BF5B5 /* LUIDataFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 155006FF1BD10393003BF5B5 /* LUIDataFramework.framework */; };
 		1563DF56180FE133002AE810 /* FTConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 1563DF55180FE133002AE810 /* FTConfig.m */; };
 		1563DF61181022E9002AE810 /* FTBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1563DF60181022E9002AE810 /* FTBlurView.m */; };
 		157CE9911811475700B46ACD /* DA_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 157CE98F1811475700B46ACD /* DA_default.png */; };
@@ -78,6 +82,7 @@
 		15B1762E17F5C471007F480B /* FTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1762D17F5C471007F480B /* FTLoginViewController.m */; };
 		15B1763117F5C483007F480B /* FTPopularViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1763017F5C483007F480B /* FTPopularViewController.m */; };
 		15B1763517F5C498007F480B /* FTSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B1763417F5C498007F480B /* FTSettingsViewController.m */; };
+		15BD0BE81BD10C0500313259 /* LiveUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 15BD0BE71BD10C0500313259 /* LiveUI.bundle */; };
 		15C519AF1808446100ADDF15 /* data.xml in Resources */ = {isa = PBXBuildFile; fileRef = 15C519AE1808446100ADDF15 /* data.xml */; };
 		15C519B01808446100ADDF15 /* data.xml in Resources */ = {isa = PBXBuildFile; fileRef = 15C519AE1808446100ADDF15 /* data.xml */; };
 		15C519BD180845EB00ADDF15 /* FTMediaRSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C519BC180845EB00ADDF15 /* FTMediaRSSParser.m */; };
@@ -134,6 +139,10 @@
 
 /* Begin PBXFileReference section */
 		039ECA9320E65B8DBA93107A /* libPods-iDeviantTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iDeviantTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1537701B1BD105AF00D486D1 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		1537701C1BD105AF00D486D1 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		155006FD1BD10378003BF5B5 /* LUIFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LUIFramework.framework; sourceTree = "<group>"; };
+		155006FF1BD10393003BF5B5 /* LUIDataFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LUIDataFramework.framework; sourceTree = "<group>"; };
 		1563DF54180FE133002AE810 /* FTConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTConfig.h; sourceTree = "<group>"; };
 		1563DF55180FE133002AE810 /* FTConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTConfig.m; sourceTree = "<group>"; };
 		1563DF5F181022E9002AE810 /* FTBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTBlurView.h; sourceTree = "<group>"; };
@@ -243,6 +252,7 @@
 		15B1763017F5C483007F480B /* FTPopularViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPopularViewController.m; sourceTree = "<group>"; };
 		15B1763317F5C498007F480B /* FTSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSettingsViewController.h; sourceTree = "<group>"; };
 		15B1763417F5C498007F480B /* FTSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSettingsViewController.m; sourceTree = "<group>"; };
+		15BD0BE71BD10C0500313259 /* LiveUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LiveUI.bundle; sourceTree = SOURCE_ROOT; };
 		15C519AE1808446100ADDF15 /* data.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = data.xml; sourceTree = "<group>"; };
 		15C519BB180845EB00ADDF15 /* FTMediaRSSParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMediaRSSParser.h; sourceTree = "<group>"; };
 		15C519BC180845EB00ADDF15 /* FTMediaRSSParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTMediaRSSParser.m; sourceTree = "<group>"; };
@@ -307,13 +317,17 @@
 				15C51A65180EF4F200ADDF15 /* ImageIO.framework in Frameworks */,
 				15B1757517F35833007F480B /* CoreData.framework in Frameworks */,
 				15B1757317F35825007F480B /* CoreText.framework in Frameworks */,
+				1537701D1BD105AF00D486D1 /* Fabric.framework in Frameworks */,
 				15B1757117F3581B007F480B /* MessageUI.framework in Frameworks */,
 				15B1756F17F3580D007F480B /* Social.framework in Frameworks */,
 				15B1756D17F35806007F480B /* QuartzCore.framework in Frameworks */,
 				15B1756B17F357FE007F480B /* MobileCoreServices.framework in Frameworks */,
+				1537701E1BD105AF00D486D1 /* Crashlytics.framework in Frameworks */,
+				155007001BD10393003BF5B5 /* LUIDataFramework.framework in Frameworks */,
 				15B1756917F357F5007F480B /* SystemConfiguration.framework in Frameworks */,
 				15B1756717F357C5007F480B /* Security.framework in Frameworks */,
 				15B174E417F35504007F480B /* CoreGraphics.framework in Frameworks */,
+				155006FE1BD10378003BF5B5 /* LUIFramework.framework in Frameworks */,
 				15B174E617F35504007F480B /* UIKit.framework in Frameworks */,
 				15B174E217F35504007F480B /* Foundation.framework in Frameworks */,
 				808433D2E25947F36B6E4461 /* libPods-iDeviant.a in Frameworks */,
@@ -396,6 +410,10 @@
 		15B174E017F35504007F480B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1537701B1BD105AF00D486D1 /* Fabric.framework */,
+				1537701C1BD105AF00D486D1 /* Crashlytics.framework */,
+				155006FF1BD10393003BF5B5 /* LUIDataFramework.framework */,
+				155006FD1BD10378003BF5B5 /* LUIFramework.framework */,
 				15C51A64180EF4F200ADDF15 /* ImageIO.framework */,
 				15B1757417F35833007F480B /* CoreData.framework */,
 				15B1757217F35825007F480B /* CoreText.framework */,
@@ -435,6 +453,7 @@
 		15B174E817F35504007F480B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				15BD0BE71BD10C0500313259 /* LiveUI.bundle */,
 				15B1751917F355F1007F480B /* Assets */,
 				15B174E917F35504007F480B /* iDeviant-Info.plist */,
 				15B174EA17F35504007F480B /* InfoPlist.strings */,
@@ -1077,6 +1096,8 @@
 				15B174DB17F35504007F480B /* Frameworks */,
 				15B174DC17F35504007F480B /* Resources */,
 				857EB55515B9C9A526505D8A /* Copy Pods Resources */,
+				15BD0BE61BD10B3700313259 /* LiveUI assets update */,
+				1537701A1BD1056D00D486D1 /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -1156,6 +1177,7 @@
 			files = (
 				15B1758517F382CE007F480B /* kitten.jpg in Resources */,
 				157CE9911811475700B46ACD /* DA_default.png in Resources */,
+				15BD0BE81BD10C0500313259 /* LiveUI.bundle in Resources */,
 				15B1752E17F355F1007F480B /* Home.plist in Resources */,
 				158815571813DDCA00748B70 /* Images.xcassets in Resources */,
 				15C519AF1808446100ADDF15 /* data.xml in Resources */,
@@ -1195,6 +1217,34 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iDeviantTests/Pods-iDeviantTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		1537701A1BD1056D00D486D1 /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Crashlytics;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run fdad57f5fd93d14410334446675bff03d3a3f996 718bb4804b7397ffca9550527a28d9dd77a37ec037e726d45a8078b310c8e7f4";
+		};
+		15BD0BE61BD10B3700313259 /* LiveUI assets update */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "LiveUI assets update";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./LUIFramework.framework/Update \"F55B4ADE-B286-4B1D-A9CC-542000C43F76\"";
 		};
 		857EB55515B9C9A526505D8A /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1404,6 +1454,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1443,6 +1494,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1468,6 +1520,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Projects/iOS/iDeviant/iDeviant/Thirdparty,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iDeviant/iDeviant-Prefix.pch";
@@ -1494,6 +1547,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Projects/iOS/iDeviant/iDeviant/Thirdparty,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iDeviant/iDeviant-Prefix.pch";
@@ -1566,6 +1620,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1591,6 +1646,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Projects/iOS/iDeviant/iDeviant/Thirdparty,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iDeviant/iDeviant-Prefix.pch";

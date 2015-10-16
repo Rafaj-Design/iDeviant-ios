@@ -1,0 +1,15 @@
+{
+  "data" : {
+    "TestColor" : {
+      "id" : 0,
+      "value" : "FF0000",
+      "alpha" : 100
+    }
+  },
+  "app" : {
+    "name" : "iDeviant",
+    "production" : true
+  },
+  "apiId" : "colors",
+  "daylight" : "1"
+}

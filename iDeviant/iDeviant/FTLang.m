@@ -11,7 +11,7 @@
 @implementation FTLang
 
 + (NSString *)get:(NSString *)key {
-    return NSLocalizedString(key, nil);
+    return LUILocalizedString(key, nil);
 }
 
 

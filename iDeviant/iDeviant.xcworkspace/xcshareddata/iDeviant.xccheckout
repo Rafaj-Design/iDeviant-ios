@@ -32,21 +32,21 @@
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>11E4A14DE657962E959580CFD90EA146D53DDF28</key>
-		<string>../..iDeviant/Thirdparty/ios-fontawesome/</string>
+		<string>../..iDeviant/Thirdparty/ios-fontawesome</string>
 		<key>19C70487B7737C94F884B8824084C9DE92091D44</key>
-		<string>../..iDeviant/Thirdparty/FTMediaRSSParser/</string>
+		<string>../..iDeviant/Thirdparty/FTMediaRSSParser</string>
 		<key>20AA4223771B8C71847EA0A2F21F969DDE1BF85E</key>
 		<string>../..</string>
 		<key>4182765C525509B305166AB949D5935FD5C85212</key>
-		<string>../..iDeviant/Thirdparty/MBProgressHUD/</string>
+		<string>../..iDeviant/Thirdparty/MBProgressHUD</string>
 		<key>64127EE10B69291112F13290A6171F82E24A7B9B</key>
-		<string>../..iDeviant/Thirdparty/uiimage-from-animated-gif/</string>
+		<string>../..iDeviant/Thirdparty/uiimage-from-animated-gif</string>
 		<key>86EB77D24CACF76270C96E7C76D968A24A278BEB</key>
-		<string>../..iDeviant/Thirdparty/GCNetworkReachability/</string>
+		<string>../..iDeviant/Thirdparty/GCNetworkReachability</string>
 		<key>D1BF2177069EA0E1B2979BF22292AECF69A93D8E</key>
-		<string>../..iDeviant/Thirdparty/MWFeedParser/</string>
+		<string>../..iDeviant/Thirdparty/MWFeedParser</string>
 		<key>DD20A1A48C66B5213E0FEBB87A95EF51D6C6F3E8</key>
-		<string>../..iDeviant/Thirdparty/AFNetworking/</string>
+		<string>../..iDeviant/Thirdparty/AFNetworking</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>github.com:FuerteInternational/iDeviant.git</string>
